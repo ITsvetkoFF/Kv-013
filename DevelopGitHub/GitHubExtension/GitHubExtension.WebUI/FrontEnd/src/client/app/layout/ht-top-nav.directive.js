@@ -5,7 +5,6 @@
         .module('app.layout')
         .directive('htTopNav', htTopNav);
 
-    htTopNav.$in
     /* @ngInject */
     function htTopNav () {
         var directive = {
@@ -39,8 +38,6 @@
                 });
             }
         }
-
-
 
         return directive;
     }

@@ -25,25 +25,21 @@
             githubData.getRepos(vm.user).then(onRepos, onError);
         };
 
-        var onRepos = function (data) {
-
+        function onRepos (data) {
             vm.repos = data;
+        }
 
-        };
-
-        var onError = function (reason) {
-            vm.error = "Could not fetch the data.";
-        };
+        function onError (reason) {
+            vm.error = 'Could not fetch the data.';
+        }
 
         vm.search = function (username) {
             githubData.getUser(username).then(onUserComplete, onError);
         };
 
-
-        vm.username = "angular";
-        vm.message = "GithubViewer";
-        vm.repoSortOrder = "-stargazers_count";
-    };
-
+        vm.username = 'angular';
+        vm.message = 'GithubViewer';
+        vm.repoSortOrder = '-stargazers_count';
+    }
 
 }());

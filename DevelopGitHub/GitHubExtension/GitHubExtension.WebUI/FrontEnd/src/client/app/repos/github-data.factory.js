@@ -9,16 +9,16 @@
     /* @ngInject */
     function githubData($http) {
 
-        var getUser = function (username) {
+        function getUser (username) {
 
-            return $http.get("https://api.github.com/users/" + username)
+            return $http.get('https://api.github.com/users/' + username)
                         .then(function (response) {
                             return response.data;
                         });
-        };
+        }
 
-        var getRepos = function (user) {
-            return $http.get(user.repos_url)
+        function getRepos (user) {
+            return $http.get(user['repos_url'])
                   .then(function (response) {
                       return response.data;
                   });
@@ -29,8 +29,6 @@
             getRepos: getRepos
         };
 
-    };
-
-    
+    }
 
 }());
