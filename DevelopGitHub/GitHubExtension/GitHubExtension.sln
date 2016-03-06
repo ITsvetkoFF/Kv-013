@@ -5,13 +5,15 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.WebApi", "GitHubExtension.WebApi\GitHubExtension.WebApi.csproj", "{01977A9B-C618-4FED-912A-5BB6BFD00E76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.WebUI", "GitHubExtension.WebUI\GitHubExtension.WebUI.csproj", "{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.DAL", "GitHubExtension.Domain\GitHubExtension.DAL.csproj", "{4C795499-B2B5-4EA9-8237-11187425F867}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Entities", "GitHubExtension.Entities\GitHubExtension.Entities.csproj", "{BA7870BB-9CE2-45EA-8EF3-41DB0C7CD2AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Tests", "GitHubExtension.Tests\GitHubExtension.Tests.csproj", "{2E0A3DAB-5A5B-44AD-AFEF-8354D5D6D574}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.WebUI", "GitHubExtension.WebUI\GitHubExtension.WebUI.csproj", "{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Models.StorageModels", "GitHubExtension.Models.StorageModels\GitHubExtension.Models.StorageModels.csproj", "{38B14075-AF0F-4588-912F-D000C37346CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.DAL.Security", "GitHubExtension.DAL.Security\GitHubExtension.DAL.Security.csproj", "{4C795499-B2B5-4EA9-8237-11187425F867}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +25,6 @@ Global
 		{01977A9B-C618-4FED-912A-5BB6BFD00E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01977A9B-C618-4FED-912A-5BB6BFD00E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01977A9B-C618-4FED-912A-5BB6BFD00E76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C795499-B2B5-4EA9-8237-11187425F867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C795499-B2B5-4EA9-8237-11187425F867}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C795499-B2B5-4EA9-8237-11187425F867}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C795499-B2B5-4EA9-8237-11187425F867}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA7870BB-9CE2-45EA-8EF3-41DB0C7CD2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA7870BB-9CE2-45EA-8EF3-41DB0C7CD2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA7870BB-9CE2-45EA-8EF3-41DB0C7CD2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +33,18 @@ Global
 		{2E0A3DAB-5A5B-44AD-AFEF-8354D5D6D574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E0A3DAB-5A5B-44AD-AFEF-8354D5D6D574}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E0A3DAB-5A5B-44AD-AFEF-8354D5D6D574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38B14075-AF0F-4588-912F-D000C37346CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38B14075-AF0F-4588-912F-D000C37346CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B14075-AF0F-4588-912F-D000C37346CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38B14075-AF0F-4588-912F-D000C37346CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C795499-B2B5-4EA9-8237-11187425F867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C795499-B2B5-4EA9-8237-11187425F867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C795499-B2B5-4EA9-8237-11187425F867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C795499-B2B5-4EA9-8237-11187425F867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

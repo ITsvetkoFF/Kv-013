@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GitHubExtension.Domain
+namespace GitHubExtension.Models.StorageModels.Identity
 {
-    public class Class1
+    public class ApplicationRole
     {
     }
 }
