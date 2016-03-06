@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.DAL.Securit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Identity", "GitHubExtension.Identity\GitHubExtension.Identity.csproj", "{1B4ECDC4-EC27-4C43-AABB-FD01AAFDEBAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.IoCManager", "GitHubExtension.IoCManager\GitHubExtension.IoCManager.csproj", "{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1B4ECDC4-EC27-4C43-AABB-FD01AAFDEBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B4ECDC4-EC27-4C43-AABB-FD01AAFDEBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B4ECDC4-EC27-4C43-AABB-FD01AAFDEBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
