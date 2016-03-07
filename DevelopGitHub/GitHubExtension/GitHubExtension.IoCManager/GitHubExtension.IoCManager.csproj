@@ -127,6 +127,14 @@
       <Project>{4C795499-B2B5-4EA9-8237-11187425F867}</Project>
       <Name>GitHubExtension.DAL.Security</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Identity\GitHubExtension.Identity.csproj">
+      <Project>{1B4ECDC4-EC27-4C43-AABB-FD01AAFDEBAD}</Project>
+      <Name>GitHubExtension.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Models.StorageModels\GitHubExtension.Models.StorageModels.csproj">
+      <Project>{38B14075-AF0F-4588-912F-D000C37346CD}</Project>
+      <Name>GitHubExtension.Models.StorageModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

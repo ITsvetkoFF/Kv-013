@@ -3,6 +3,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using GitHubExtension.Domain;
 using GitHubExtension.Domain.Interfaces;
+using GitHubExtension.Models.StorageModels.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using SimpleInjector;
 
 namespace GitHubExtension.IoCManager.App_Start
@@ -24,6 +27,8 @@ namespace GitHubExtension.IoCManager.App_Start
             var lifestyle = Lifestyle.Singleton;
 
             container.Register<ISecurityDbContext, SecurityDbContext>(lifestyle);
+            container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(BuildContainer().GetInstance<SecurityDbContext>()));
+
 
             container.Verify();
 

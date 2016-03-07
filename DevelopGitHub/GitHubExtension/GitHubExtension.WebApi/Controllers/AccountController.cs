@@ -31,8 +31,7 @@ namespace GitHubExtension.WebApi.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
-        public AccountController(ApplicationUserManager userManager/*,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat*/)
+        public AccountController(ApplicationUserManager userManager)
         {
             _userManager = userManager;
             //AccessTokenFormat = accessTokenFormat;
@@ -214,7 +213,7 @@ namespace GitHubExtension.WebApi.Controllers
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
-        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        public async Task<IHttpActionResult> RegisterExternal(string model)
         {
             if (!ModelState.IsValid)
             {
@@ -227,7 +226,7 @@ namespace GitHubExtension.WebApi.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model};
 
             IdentityResult result = await _userManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -242,6 +241,7 @@ namespace GitHubExtension.WebApi.Controllers
             }
             return Ok();
         }
+
 
         protected override void Dispose(bool disposing)
         {

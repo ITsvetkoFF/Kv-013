@@ -21,8 +21,18 @@
             logger.info('Activated Authorization View');
         }
 
-        function authorizationFormHandler() {
-            AuthorizationService.signIn(vm.user).then(successFn, errorFn);
+       function authorizationFormHandler() {
+           var data = new Object();
+           data.Email = vm.user.username;
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:50859/api/Account/RegisterExternal',
+                data: data,
+                dataType: 'json'
+            }).done(function (data) {
+                self.result("Done!");
+            });
         }
 
         function successFn(response) {
