@@ -60,8 +60,6 @@
     <Content Include="bin\GitHubExtension.WebUI.dll.config" />
     <Content Include="FrontEnd\.bowerrc" />
     <Content Include="FrontEnd\.editorconfig" />
-    <Content Include="FrontEnd\.idea\.name" />
-    <Content Include="FrontEnd\.idea\GitHubExtension.iml" />
     <Content Include="FrontEnd\.jscsrc" />
     <Content Include="FrontEnd\.jshintrc" />
     <Content Include="FrontEnd\bower.json" />
@@ -79,12 +77,6 @@
     <Content Include="bin\GitHubExtension.WebUI.dll" />
     <Content Include="bin\GitHubExtension.WebUI.pdb" />
     <Content Include="FrontEnd\.gitignore" />
-    <Content Include="FrontEnd\.idea\encodings.xml" />
-    <Content Include="FrontEnd\.idea\jsLibraryMappings.xml" />
-    <Content Include="FrontEnd\.idea\libraries\GitHubExtension_node_modules.xml" />
-    <Content Include="FrontEnd\.idea\misc.xml" />
-    <Content Include="FrontEnd\.idea\modules.xml" />
-    <Content Include="FrontEnd\.idea\workspace.xml" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />
     <Content Include="FrontEnd\gulpfile.js" />
