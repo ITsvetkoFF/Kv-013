@@ -4,7 +4,7 @@
 namespace GitHubExtension.Security.WebApi.Models
 {
     [NotMapped]
-    public class UserDto
+    public class GitHubUserModel
     {
         public string Login { get; set; }
 

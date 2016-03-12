@@ -183,6 +183,7 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Converters\RepositoryConverter.cs" />
+    <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Exceptions\UnsuccessfullRequestException.cs" />
     <Compile Include="Models\CollaboratorDto.cs" />
     <Compile Include="Models\CreateRoleBindingModel.cs" />

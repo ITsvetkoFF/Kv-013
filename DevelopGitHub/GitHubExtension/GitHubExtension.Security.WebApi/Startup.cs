@@ -1,11 +1,16 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using GithubExtension.Security.DAL.Context;
+using Microsoft.Owin;
+using Newtonsoft.Json.Serialization;
 using Owin;
+using System;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
-using GitHubExtension.Security.DAL.Context;
+using GitHubExtension.Security.DAL.Entities;
 using GitHubExtension.Security.DAL.Infrastructure;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.Cookies;
 namespace GithubExtension.Security.WebApi
 {
     public class Startup
@@ -24,9 +29,46 @@ namespace GithubExtension.Security.WebApi
             ConfigureWebApi(httpConfig);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+                Provider = GetMyCookieAuthenticationProvider(),
+            });
             app.UseWebApi(httpConfig);
 
+        }
+
+        private static CookieAuthenticationProvider GetMyCookieAuthenticationProvider()
+        {
+            var cookieAuthenticationProvider = new CookieAuthenticationProvider
+            {
+                OnValidateIdentity = async context =>
+                {
+                    // execute default cookie validation function
+                    var cookieValidatorFunc = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, User>(
+                        TimeSpan.FromMinutes(10),
+                        (manager, user) =>
+                        {
+                            var identity = manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                            return identity;
+                        });
+                    await cookieValidatorFunc.Invoke(context);
+
+                    // sanity checks
+                    if (context.Identity == null || !context.Identity.IsAuthenticated)
+                    {
+                        return;
+                    }
+
+                    var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+                    var claimsToAdd = await userManager.GetClaimsAsync(context.Identity.GetUserId());
+
+                    // get your claim from your DB or other source
+                    context.Identity.AddClaims(claimsToAdd);
+                }
+            };
+            return cookieAuthenticationProvider;
         }
 
         //private void ConfigureOAuthTokenConsumption(IAppBuilder app)
@@ -52,9 +94,9 @@ namespace GithubExtension.Security.WebApi
         //private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         //{
         //    // Configure the db context and user manager to use a single instance per request
-           
 
-  
+
+
         //    OAuthAuthorizationServerOptions oAuthServerOptions = new OAuthAuthorizationServerOptions()
         //    {
         //        //For Dev enviroment only (on production should be AllowInsecureHttp = false)

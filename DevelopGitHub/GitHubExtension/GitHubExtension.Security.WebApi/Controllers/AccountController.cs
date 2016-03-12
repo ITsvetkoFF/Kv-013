@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using GitHubExtension.Security.DAL.Context;
+using GithubExtension.Security.DAL.Context;
+using GithubExtension.Security.WebApi.Converters;
 using GitHubExtension.Security.DAL.Entities;
 using GitHubExtension.Security.WebApi.Attributes;
 using GitHubExtension.Security.WebApi.Converters;
@@ -24,6 +26,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
     {
         private IGithubService _githubService;
 
+        private IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
+        }
+
         private SecurityContext Context
         {
             get
@@ -34,8 +41,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         public AccountsController()
         {
-            //Context = new SecurityContext();
-
             _githubService = new GithubService();
         }
 
@@ -79,37 +84,40 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [HttpPut]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int reposId, [FromUri] string userId, [FromBody] string roleToAssign)
         {
-            
             var appUser = await ApplicationUserManager.FindByIdAsync(userId);
-
             if (appUser == null)
-            {
                 return NotFound();
-            }
-          
+
             var role = await Context.SecurityRoles.FirstOrDefaultAsync(r => r.Name == roleToAssign);
             if (role == null)
             {
-                ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", roleToAssign));
+                ModelState.AddModelError("role", string.Format("Roles '{0}' does not exists in the system", roleToAssign));
                 return BadRequest(ModelState);
             }
 
             var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == reposId);
             if (repositoryRole != null)
                 appUser.UserRepositoryRoles.Remove(repositoryRole);
-            appUser.UserRepositoryRoles.Add(new UserRepositoryRole() { RepositoryId = reposId, SecurityRoleId = role.Id});
-            
-            //Refreshing claim cookie need to check it
-            var identity = await appUser.GenerateUserIdentityAsync(ApplicationUserManager, DefaultAuthenticationTypes.ApplicationCookie);
-            identity.AddClaim(new Claim("Role", roleToAssign, reposId.ToString()));
-            HttpContext.Current.GetOwinContext().Authentication.AuthenticationResponseGrant = new AuthenticationResponseGrant(identity, new AuthenticationProperties { IsPersistent = true });
 
+
+            appUser.UserRepositoryRoles.Add(new UserRepositoryRole() { RepositoryId = reposId, SecurityRoleId = role.Id });
             IdentityResult updateResult = await ApplicationUserManager.UpdateAsync(appUser);
-
 
             if (!updateResult.Succeeded)
             {
-                ModelState.AddModelError("", "Failed to remove user roles");
+                ModelState.AddModelError("Role", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+
+            var claimsIdentity = await appUser.GenerateUserIdentityAsync(ApplicationUserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == reposId.ToString());
+            if (existingClaim != null)
+                ApplicationUserManager.RemoveClaim(appUser.Id, existingClaim);
+            var addClaimResult = await ApplicationUserManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, reposId.ToString()));
+
+            if (!addClaimResult.Succeeded)
+            {
+                ModelState.AddModelError("Role", "Failed to remove user roles");
                 return BadRequest(ModelState);
             }
 
@@ -121,30 +129,32 @@ namespace GitHubExtension.Security.WebApi.Controllers
         //[Authorize]
         public async Task<IHttpActionResult> CreateUser(string token)
         {
-            UserDto userDto = await _githubService.GetUserAsync(token);
-            List<RepositoryDto> repos = await _githubService.GetReposAsync(userDto.Login, token);
-
-            // TODO: ceck exists
             var role = await Context.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
-            var repositoriesToAdd = repos.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role}).ToList();
-            
-            //TODO: Use converter
-            var user = new User()
-            {
-                Email = userDto.Email,
-                UserName = userDto.Login,
-                Token = token,
-                ProviderId = userDto.GitHubId,
-                UserRepositoryRoles = repositoriesToAdd
-            };
+            if (role == null)
+                return InternalServerError();
+
+            GitHubUserModel gitHubUserModel = await _githubService.GetUserAsync(token);
+            List<RepositoryDto> repos = await _githubService.GetReposAsync(gitHubUserModel.Login, token);
+
+            var repositoriesToAdd = repos.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
+            var user = gitHubUserModel.ToUserEntity();
+            user.Token = token;
+            user.UserRepositoryRoles = repositoriesToAdd;
 
             IdentityResult addUserResult = await ApplicationUserManager.CreateAsync(user);
             if (!addUserResult.Succeeded)
-            {
                 return GetErrorResult(addUserResult);
+
+            if (repos.Any(repo => !ApplicationUserManager.AddClaim(user.Id,
+                new Claim(role.Name, repo.GitHubId.ToString())).Succeeded))
+            {
+                return BadRequest();
             }
 
-            
+            var identity = await user.GenerateUserIdentityAsync(ApplicationUserManager, DefaultAuthenticationTypes.ApplicationCookie);
+            Authentication.SignOut();
+            Authentication.SignIn(new AuthenticationProperties() { IsPersistent = true }, identity);
+
             // Change identity user to app user
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
             return Created(locationHeader, TheModelFactory.Create(user));

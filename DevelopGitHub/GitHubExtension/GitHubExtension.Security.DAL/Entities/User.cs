@@ -10,6 +10,7 @@ namespace GitHubExtension.Security.DAL.Entities
     {
         public string Token { get; set; }
         public int ProviderId { get; set; }
+        public string GitHubUrl { get; set; }
 
         public virtual ICollection<UserRepositoryRole> UserRepositoryRoles { get; set; }
 

@@ -24,7 +24,7 @@ namespace GitHubExtension.Security.WebApi.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<UserDto> GetUserAsync(string token)
+        public async Task<GitHubUserModel> GetUserAsync(string token)
         {
             // TODO: Incapsulate all requestUri
             var requestUri = string.Format("https://api.github.com/user?access_token={0}", token);
@@ -35,7 +35,7 @@ namespace GitHubExtension.Security.WebApi.Services
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullRequestException();
             
-            var dto = JsonConvert.DeserializeObject<UserDto>(await response.Content.ReadAsStringAsync());
+            var dto = JsonConvert.DeserializeObject<GitHubUserModel>(await response.Content.ReadAsStringAsync());
             dto.Email = dto.Email ?? await GetPrimaryEmailForUser(token);
 
             return dto;
