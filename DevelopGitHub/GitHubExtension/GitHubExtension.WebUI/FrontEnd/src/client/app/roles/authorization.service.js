@@ -5,7 +5,7 @@
 (function() {
     'use strict';
 
-    angular.module('app.authorization').factory('Authorization', Authorization);
+    angular.module('app.roles').factory('Authorization', Authorization);
 
     Authorization.$inject = ['$http'];
 
@@ -106,7 +106,6 @@
                 url     : 'https://api.github.com/user',
                 headers : {'Authorization': 'Basic ' + credentials}
             });
-            
         }
     }
 })();

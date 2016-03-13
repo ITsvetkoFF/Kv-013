@@ -1,0 +1,22 @@
+﻿<table>
+    <thead>
+        <tr>
+            <th>Login</th>
+            <th>Roles to assign</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="collaborator in vmRoles.collaborators">
+            <td>{{collaborator.login}}</td>
+            <td>
+                <select>
+                    <option disabled selected>Select a role</option>
+                    <option value="-developer">Developer</option>
+                    <option value="+reviewer">Reviewer</option>
+                </select>
+            </td>
+            <td><button class="btn btn-lg btn-success btn-block" type="submit">Add Role</button></td>
+        </tr>
+    </tbody>
+</table>

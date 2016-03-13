@@ -1,0 +1,25 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{message}}</h1>
+                    <div>{{error}}</div>
+                    <form class="authorization-form" ng-submit="vmRoles.submit()" novalidate>
+                        <h2>Enter your GitHub credentials</h2>
+                        <div class="form-group">
+                            <label class="sr-only" for="login">Username or email address:</label>
+                            <input class="form-control" id="login" placeholder="Username" type="text" ng-model="vmRoles.user.username">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="password">Password:</label>
+                            <input class="form-control" id="password" placeholder="Password" type="password" ng-model="vmRoles.user.password">
+                        </div>
+                        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+                    </form>
+                    <div ng-include="'app/roles/collaboratorsdetails.html'" ng-show="vmRoles.signedIn"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
