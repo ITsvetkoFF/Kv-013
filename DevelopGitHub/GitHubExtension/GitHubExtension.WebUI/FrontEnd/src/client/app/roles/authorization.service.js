@@ -1,4 +1,4 @@
-///**
+//**
 // * Created by Vladyslav on 26.02.2016.
 // */
 //
@@ -107,8 +107,7 @@
 //                url     : 'https://api.github.com/user',
 //                headers : {'Authorization': 'Basic ' + credentials}
 //            });
-//        }
-//
+//        }//
 //        function getRepos(user) {
 //            return $http({
 //                method  : 'GET',
