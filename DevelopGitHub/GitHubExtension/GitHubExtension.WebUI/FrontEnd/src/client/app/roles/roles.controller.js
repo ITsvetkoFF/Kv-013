@@ -16,7 +16,9 @@
 
 
         vm.user = {};
+        vm.reponame;
         vm.submit = authorizationFormHandler;
+        vm.teammembers = searchCollaborators;
         activate();
 
         function activate() {
@@ -30,11 +32,20 @@
         function successFn(response) {
             logger.success('You are successfully signed in as ' + response.data.login);
             vm.signedIn = true;
-            githubCollaborators.getCollaborators(vm.user.username).then(onGetCollaborators, onError);
+            authorizationService.getRepos(vm.user).then(onGetRepos, onError);
         }
+
+        function searchCollaborators() {
+            githubCollaborators.getCollaborators(vm.user, vm.reponame).then(onGetCollaborators, onError);
+        };
         var onGetCollaborators = function (data) {
-            logger.info('Succeded');
+            logger.info('Collaborators Loaded');
             vm.collaborators = data;
+        } 
+
+        var onGetRepos = function (data) {
+            logger.info('Repos Succeded');
+            vm.repositories = data;
         };
 
         function errorFn(response) {

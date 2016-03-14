@@ -17,7 +17,8 @@
                         </div>
                         <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
                     </form>
-                    <div ng-include="'app/roles/collaboratorsdetails.html'" ng-show="vmRoles.signedIn"></div>
+                    <div ng-include="'app/roles/reposdetails.html'" ng-show="vmRoles.signedIn"></div>
+                    <div ng-include="'app/roles/collaboratorsdetails.html'" ng-show="vmRoles.reponame"></div>
                 </div>
             </div>
         </div>
