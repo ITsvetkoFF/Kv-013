@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using GithubExtension.Security.DAL.Context;

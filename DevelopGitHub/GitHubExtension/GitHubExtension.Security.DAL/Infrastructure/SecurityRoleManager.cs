@@ -9,11 +9,6 @@ namespace GitHubExtension.Security.DAL.Infrastructure
 {
     public class SecurityRoleManager : RoleManager<IdentityRole>
     {
-        //public SecurityRoleManager(RoleStore<SecurityRole> store)
-        //    : base(store)
-        //{
-        //}
-
         // Check why we need IRoleStore<SecurityRole, string>
         public SecurityRoleManager(IRoleStore<IdentityRole, string> store)
             : base(store)
