@@ -18,7 +18,6 @@ using GitHubExtension.Security.WebApi.Services;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
-
 namespace GitHubExtension.Security.WebApi.Controllers
 {
     [RoutePrefix("api/accounts")]

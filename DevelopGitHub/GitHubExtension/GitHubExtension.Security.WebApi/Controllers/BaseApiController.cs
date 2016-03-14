@@ -11,22 +11,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
     {
         private ModelFactory _modelFactory;
         private ApplicationUserManager _AppUserManager = null;
-        private SecurityRoleManager _SecurityRoleManager = null;
 
         protected ApplicationUserManager ApplicationUserManager
         {
             get
             {
                 return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
-
-
-        protected SecurityRoleManager SecurityRoleManager
-        {
-            get
-            {
-                return _SecurityRoleManager ?? Request.GetOwinContext().GetUserManager<SecurityRoleManager>();
             }
         }
 
