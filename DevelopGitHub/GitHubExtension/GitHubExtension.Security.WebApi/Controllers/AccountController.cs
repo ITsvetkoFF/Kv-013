@@ -79,12 +79,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return NotFound();
         }
 
-        [ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
-        [Route("user/{userId:guid}/roles")]
-        [HttpPut]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int reposId, [FromUri] string userId, [FromBody] string roleToAssign)
+        //Commented intentinaly, need to be tested with authorization logic
+        //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
+        [Route("api/repos/{repoId}/collaborators/{gitHubId}")]
+        [HttpPatch]
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
-            var appUser = await ApplicationUserManager.FindByIdAsync(userId);
+            var appUser = await ApplicationUserManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
                 return NotFound();
 
@@ -95,12 +96,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == reposId);
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
             if (repositoryRole != null)
                 appUser.UserRepositoryRoles.Remove(repositoryRole);
 
 
-            appUser.UserRepositoryRoles.Add(new UserRepositoryRole() { RepositoryId = reposId, SecurityRoleId = role.Id });
+            appUser.UserRepositoryRoles.Add(new UserRepositoryRole() { RepositoryId = repoId, SecurityRoleId = role.Id });
             IdentityResult updateResult = await ApplicationUserManager.UpdateAsync(appUser);
 
             if (!updateResult.Succeeded)
@@ -110,10 +111,10 @@ namespace GitHubExtension.Security.WebApi.Controllers
             }
 
             var claimsIdentity = await appUser.GenerateUserIdentityAsync(ApplicationUserManager, DefaultAuthenticationTypes.ApplicationCookie);
-            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == reposId.ToString());
+            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
             if (existingClaim != null)
                 ApplicationUserManager.RemoveClaim(appUser.Id, existingClaim);
-            var addClaimResult = await ApplicationUserManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, reposId.ToString()));
+            var addClaimResult = await ApplicationUserManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
 
             if (!addClaimResult.Succeeded)
             {

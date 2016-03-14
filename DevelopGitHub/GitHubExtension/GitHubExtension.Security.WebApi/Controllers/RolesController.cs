@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using GithubExtension.Security.DAL.Context;
+using GitHubExtension.Security.WebApi.Converters;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using GitHubExtension.Security.WebApi.Models;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace GitHubExtension.Security.WebApi.Controllers
 {
@@ -11,6 +16,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
     [RoutePrefix("api/roles")]
     public class RolesController : BaseApiController
     {
+        private SecurityContext Context
+        {
+            get
+            {
+                return HttpContext.Current.GetOwinContext().Get<SecurityContext>();
+            }
+        }
 
         [Route("{id:guid}", Name = "GetRoleById")]
         public async Task<IHttpActionResult> GetRole(string Id)
@@ -26,11 +38,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         }
 
-        [Route("", Name = "GetAllRoles")]
+        [Route("")]
+        [AllowAnonymous]
         public IHttpActionResult GetAllRoles()
         {
-            var roles = SecurityRoleManager.Roles;
-
+            var roles = Context.SecurityRoles.AsEnumerable().Select(r => r.ToRoleViewModel());
+            
             return Ok(roles);
         }
 
