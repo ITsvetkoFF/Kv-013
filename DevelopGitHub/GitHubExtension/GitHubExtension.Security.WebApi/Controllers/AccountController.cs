@@ -101,8 +101,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (repositoryRole != null)
                 appUser.UserRepositoryRoles.Remove(repositoryRole);
 
-
-            appUser.UserRepositoryRoles.Add(new UserRepositoryRole() { RepositoryId = repoId, SecurityRoleId = role.Id });
+           
+            appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
+            {
+                RepositoryId = repoId,
+                SecurityRoleId = role.Id
+            });
             IdentityResult updateResult = await ApplicationUserManager.UpdateAsync(appUser);
 
             if (!updateResult.Succeeded)
@@ -110,7 +114,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 ModelState.AddModelError("Role", "Failed to remove user roles");
                 return BadRequest(ModelState);
             }
-
+            
             var claimsIdentity = await appUser.GenerateUserIdentityAsync(ApplicationUserManager, DefaultAuthenticationTypes.ApplicationCookie);
             var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
             if (existingClaim != null)

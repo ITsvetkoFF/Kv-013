@@ -50,7 +50,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         public async Task<IHttpActionResult> GetReposForCurrentUser()
         {
             //var userId = User.Identity.GetUserId();
-            var userId = "0d7c8801-b009-45a3-8e17-3fc4b7f56aca";
+            var userId = "8f28fd3a-85a1-42c1-936d-d9361472a2c1";
             var role = await Context.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
                 return NotFound();
@@ -65,7 +65,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route("api/repos/{repoName}/collaborators")]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
-            var userId = "0d7c8801-b009-45a3-8e17-3fc4b7f56aca";
+            var userId = "8f28fd3a-85a1-42c1-936d-d9361472a2c1";
             var user = await ApplicationUserManager.FindByIdAsync(userId);
             //var userName = User.Identity.GetUserName();
             
