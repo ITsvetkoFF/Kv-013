@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using GithubExtension.Security.DAL.Context;
 using GithubExtension.Security.WebApi.Converters;
 using GitHubExtension.Security.DAL.Entities;
@@ -21,7 +22,8 @@ using Microsoft.Owin.Security;
 
 namespace GitHubExtension.Security.WebApi.Controllers
 {
-    [RoutePrefix("api/accounts")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
         private IGithubService _githubService;
@@ -81,6 +83,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         //Commented intentinaly, need to be tested with authorization logic
         //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
+        
         [Route("api/repos/{repoId}/collaborators/{gitHubId}")]
         [HttpPatch]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
@@ -125,7 +128,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok();
         }
 
-        [Route("create")]
+        [Route("api/account/register")]
         [HttpPost]
         //[Authorize]
         public async Task<IHttpActionResult> CreateUser(string token)

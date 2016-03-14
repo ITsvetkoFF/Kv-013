@@ -6,10 +6,12 @@ using System;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using GitHubExtension.Security.DAL.Entities;
 using GitHubExtension.Security.DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.Cookies;
 namespace GithubExtension.Security.WebApi
 {
@@ -25,10 +27,10 @@ namespace GithubExtension.Security.WebApi
             //ConfigureOAuthTokenGeneration(app);
 
             //ConfigureOAuthTokenConsumption(app);
-
+//            app.UseCors(CorsOptions.AllowAll);
             ConfigureWebApi(httpConfig);
 
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
@@ -113,7 +115,9 @@ namespace GithubExtension.Security.WebApi
 
         private void ConfigureWebApi(HttpConfiguration config)
         {
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.MapHttpAttributeRoutes();
+            
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

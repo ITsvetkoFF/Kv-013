@@ -1,4 +1,4 @@
-﻿<table>
+﻿<table class="table table-condensed">
     <thead>
         <tr>
             <th>Login</th>
@@ -10,13 +10,11 @@
         <tr ng-repeat="collaborator in vmRoles.collaborators">
             <td>{{collaborator.login}}</td>
             <td>
-                <select>
+                <select ng-model="vmRoles.roleName[$index]" ng-options="role.name for role in vmRoles.roles.data" ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
                     <option disabled selected>Select a role</option>
-                    <option value="-developer">Developer</option>
-                    <option value="+reviewer">Reviewer</option>
                 </select>
             </td>
-            <td><button class="btn btn-lg btn-success btn-block" type="submit">Add Role</button></td>
+            <td>
         </tr>
     </tbody>
 </table>

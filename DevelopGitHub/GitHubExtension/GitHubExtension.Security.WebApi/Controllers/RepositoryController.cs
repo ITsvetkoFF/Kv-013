@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Controllers
 {
-    [System.Web.Mvc.RoutePrefix("api/repos")]
+    //[System.Web.Mvc.RoutePrefix("api")]
     public class RepositoryController : BaseApiController
     {
         private IGithubService _guGithubService;
@@ -36,7 +36,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         // GET: api/repos/:id
         // id is a GitHub id of a repo
-        [Route("{id}")]
+        [Route("repos/{id}")]
         public async Task<IHttpActionResult> GetById(int id)
         {
             var repository = await Context.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
@@ -46,11 +46,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok(repository.ToRepositoryViewModel());
         }
 
-        [Authorize]
-        [Route("")]
+        //[Authorize]
+        [Route("api/user/repos")]
         public async Task<IHttpActionResult> GetReposForCurrentUser()
         {
-            var userId = User.Identity.GetUserId();
+            //var userId = User.Identity.GetUserId();
+            var userId = "0d7c8801-b009-45a3-8e17-3fc4b7f56aca";
             var role = await Context.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
                 return NotFound();
@@ -62,13 +63,15 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         //[Authorize]
-        [Route("{repoName}/collaborators")]
-        public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName, string token, string username)
+        [Route("api/repos/{repoName}/collaborators")]
+        public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
+            var userId = "0d7c8801-b009-45a3-8e17-3fc4b7f56aca";
+            var user = await ApplicationUserManager.FindByIdAsync(userId);
             //var userName = User.Identity.GetUserName();
             
 
-            var gitHubCollaborators = await _guGithubService.GetCollaboratorsForRepo(username, repoName, token);
+            var gitHubCollaborators = await _guGithubService.GetCollaboratorsForRepo(user.UserName, repoName, user.Token);
 
             return Ok(gitHubCollaborators);
         }

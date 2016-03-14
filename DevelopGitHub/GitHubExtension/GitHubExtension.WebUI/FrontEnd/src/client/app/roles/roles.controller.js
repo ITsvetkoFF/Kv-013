@@ -6,51 +6,72 @@
      .module('app.roles')
      .controller('RolesController', RolesController);
 
-    RolesController.$inject = ['githubCollaborators', 'Authorization', 'logger'];
+//    RolesController.$inject = ['githubCollaborators', 'Authorization', 'logger'];
+
+    RolesController.$inject = ['githubCollaborators', 'logger'];
 
     /* @ngInject */
-    function RolesController(githubCollaborators, authorizationService, logger) {
-
+    function RolesController(githubCollaborators, logger) {
         var vm = this;
         vm.title = 'Roles';
-
-
-        vm.user = {};
-        vm.reponame;
-        vm.submit = authorizationFormHandler;
+        vm.repo = '';
+        vm.roleName = [];
         vm.teammembers = searchCollaborators;
         activate();
 
         function activate() {
             logger.info('Activated Roles View');
+            githubCollaborators.getRepos().then(onGetRepos, onError);
+            githubCollaborators.getRoles().then(onGetRoles, onError)
         }
 
-        function authorizationFormHandler() {
-            authorizationService.signIn(vm.user).then(successFn, errorFn);
-        }
+//        function authorizationFormHandler() {
+//            authorizationService.signIn(vm.user).then(successFn, errorFn);
+//        }
 
-        function successFn(response) {
-            logger.success('You are successfully signed in as ' + response.data.login);
-            vm.signedIn = true;
-            authorizationService.getRepos(vm.user).then(onGetRepos, onError);
-        }
+//        function successFn(response) {
+//            logger.success('You are successfully signed in as ' + response.data.login);
+//            vm.signedIn = true;
+//            githubCollaborators.getRepos().then(onGetRepos, onError);
+//                        authorizationService.getRepos().then(onGetRepos, onError);
+//        }
 
         function searchCollaborators() {
-            githubCollaborators.getCollaborators(vm.user, vm.reponame).then(onGetCollaborators, onError);
+            githubCollaborators.getCollaborators(vm.repo).then(onGetCollaborators, onError);
         };
+
+//        function searchRepos() {
+//            githubCollaborators.getRepos().then(onGetRepos, onError);
+//        };
+
         var onGetCollaborators = function (data) {
             logger.info('Collaborators Loaded');
             vm.collaborators = data;
         } 
 
-        var onGetRepos = function (data) {
+        function onGetRepos(response) {
             logger.info('Repos Succeded');
-            vm.repositories = data;
+            vm.repositories = response.data;
         };
 
-        function errorFn(response) {
-            logger.error('Sing in operation failed, check your username and password and try again');
+        function onGetRoles(data) {
+            logger.info('Roles Succeded');
+            vm.roles = data;
+        };
+        /**
+         * 
+         * @param {} colaborator
+         * @param {object} role  
+         */
+        vm.assignRole = function (colaborator, role) {
+            console.log(vm.repo);
+            console.log(arguments);
+            githubCollaborators.assignRole(vm.repo, colaborator, role);
         }
+
+//        function errorFn(response) {
+//            logger.error('Sing in operation failed, check your username and password and try again');
+//        }
 
         function onError(reason) {
             vm.error = 'Could not get collaborators.';
