@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using GitHubExtension.Domain.Services;
-using GitHubExtension.Identity.Results;
+
 using GitHubExtension.WebApi.Models;
+using GitHubExtension.WebApi.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -124,13 +127,13 @@ namespace GitHubExtension.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            /*var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
-            if (verifiedAccessToken == null)
+            var userId = await GetUserGitHubId(model.Provider, model.ExternalAccessToken);
+            if (userId == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
-            }*/
+            }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, model.UserName));
+            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, userId));
 
             bool hasRegistered = user != null;
 
@@ -176,13 +179,13 @@ namespace GitHubExtension.WebApi.Controllers
                 return BadRequest("Provider or external access token is not sent");
             }
 
-            var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalAccessToken);
-            if (verifiedAccessToken == null)
+            var userId = await GetUserGitHubId(provider, externalAccessToken);
+            if (userId == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(provider, userId));
 
             bool hasRegistered = user != null;
 
@@ -272,11 +275,6 @@ namespace GitHubExtension.WebApi.Controllers
                 return string.Format("Client_id '{0}' is not registered in the system.", clientId);
             }
 
-            /*if (!string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
-            {
-                return string.Format("The given URL is not allowed by Client_id '{0}' configuration.", clientId);
-            }*/
-
             redirectUriOutput = redirectUri.AbsoluteUri;
 
             return string.Empty;
@@ -296,44 +294,25 @@ namespace GitHubExtension.WebApi.Controllers
             return match.Value;
         }
 
-        private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
+        private async Task<string> GetUserGitHubId(string provider, string accessToken)
         {
-            ParsedExternalAccessToken parsedToken = null;
+           string user_id = null;
 
-            var verifyTokenEndPoint = "";
-
-            if (provider == "GitHub")
-            {
-                verifyTokenEndPoint =
-                    "https://api.github.com/user?access_token=f6731cbc27a6559725040e099fe1a5d0e8190a18";
-            }
-            else
-            {
-                return null;
-            }
-
-            var client = new HttpClient();
-            var uri = new Uri(verifyTokenEndPoint);
-            var response = await client.GetAsync(uri);
-
+            var verifyTokenEndPoint = string.Format("https://api.github.com/user?access_token={0}", accessToken);
+            
+            var message = new HttpRequestMessage(HttpMethod.Get, verifyTokenEndPoint);
+            message.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36");
+            var httpClient = new HttpClient();
+            var response = await httpClient.SendAsync(message);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-
                 dynamic jObj = (JObject)Newtonsoft.Json.JsonConvert.DeserializeObject(content);
-
-                parsedToken = new ParsedExternalAccessToken();
-
-                if (provider == "GitHub")
-                {
-                    parsedToken.user_id = jObj["id"];
-                    parsedToken.app_id = "c04e00dfe8db05cf8807";
-                }
-
-            }
-
-            return parsedToken;
+                user_id = jObj["id"];}
+            
+            return user_id;
         }
+        
 
         private JObject GenerateLocalAccessTokenResponse(string userName)
         {
@@ -398,9 +377,8 @@ namespace GitHubExtension.WebApi.Controllers
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
                     UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    ExternalAccessToken = Startup.dontReadThisFieldNeverEver
+                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken")
                 };
-                Startup.dontReadThisFieldNeverEver = "";
                 return result;
             }
         }

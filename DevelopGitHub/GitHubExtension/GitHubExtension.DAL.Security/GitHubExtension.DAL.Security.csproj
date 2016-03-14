@@ -58,9 +58,9 @@
   <ItemGroup>
     <Compile Include="Helper.cs" />
     <Compile Include="Interfaces\ISecurityDbContext.cs" />
-    <Compile Include="Migrations\201603132041463_Migration.cs" />
-    <Compile Include="Migrations\201603132041463_Migration.Designer.cs">
-      <DependentUpon>201603132041463_Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201603140049456_Migration.cs" />
+    <Compile Include="Migrations\201603140049456_Migration.Designer.cs">
+      <DependentUpon>201603140049456_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SecurityDbContext.cs" />
@@ -82,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603132041463_Migration.resx">
-      <DependentUpon>201603132041463_Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603140049456_Migration.resx">
+      <DependentUpon>201603140049456_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

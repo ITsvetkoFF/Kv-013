@@ -9,6 +9,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using Owin.Security.Providers.ArcGISOnline.Provider;
 using Owin.Security.Providers.GitHub;
 
 
@@ -20,7 +21,6 @@ namespace GitHubExtension.WebApi
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static GitHubAuthenticationOptions gitHubAuthOptions { get; private set; }
-        public static string dontReadThisFieldNeverEver { get; set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -52,30 +52,16 @@ namespace GitHubExtension.WebApi
 
             // Token Generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
-           app.UseOAuthBearerAuthentication(OAuthBearerOptions);
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
             gitHubAuthOptions = new GitHubAuthenticationOptions()
             {
                 ClientId = "c04e00dfe8db05cf8807",
                 ClientSecret = "eed4fa1adf3f8e8633919df736bf51c750471dab",
-                Provider = new GitHubAuthenticationProvider
-                {
-                    OnAuthenticated = async context =>
-                    {
-                        // Retrieve the OAuth access token to store for subsequent API calls
-                        string accessToken = dontReadThisFieldNeverEver = context.AccessToken;
-
-                        // Retrieve the username
-                        string gitHubUserName = context.UserName;
-
-                        // Retrieve the user's email address
-                        string gitHubEmailAddress = context.Email;
-
-                        // You can even retrieve the full JSON-serialized user
-                        var serializedUser = context.User;
-                    }
-                }
+                Provider = new GitHubAuthProvider()
             };
+
+            gitHubAuthOptions.Scope.Add("user,repo");
             app.UseGitHubAuthentication(gitHubAuthOptions);
 
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(DependencyConfig.BuildContainer());//register container

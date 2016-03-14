@@ -10,7 +10,7 @@ namespace GitHubExtension.Domain.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<SecurityDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<GitHubExtension.Domain.SecurityDbContext>
     {
         public Configuration()
         {
