@@ -57,7 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\GitHubExtension.WebUI.dll.config" />
     <Content Include="FrontEnd\.bowerrc" />
     <Content Include="FrontEnd\.editorconfig" />
     <Content Include="FrontEnd\.jscsrc" />
@@ -74,8 +73,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\GitHubExtension.WebUI.dll" />
-    <Content Include="bin\GitHubExtension.WebUI.pdb" />
     <Content Include="FrontEnd\.gitignore" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />

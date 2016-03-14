@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Domain.Interfaces;
-using GitHubExtension.Models.StorageModels.Identity;
+using GitHubExtension.WebApi.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Domain
 {
-    public class SecurityDbContext : IdentityDbContext<ApplicationUser>, ISecurityDbContext
+    public class SecurityDbContext : IdentityDbContext<IdentityUser>, ISecurityDbContext
     {
         public SecurityDbContext()
-            : base("SecurityDataBase", throwIfV1Schema: false) { }
+            : base("SecurityDataBase1") { }
 
-        public static SecurityDbContext Create()
-        {
-            return new SecurityDbContext();
-        }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
     }
 }

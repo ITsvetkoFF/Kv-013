@@ -3,14 +3,12 @@ using System.Web.Http;
 using System.Web.Mvc;
 using GitHubExtension.Domain;
 using GitHubExtension.Domain.Interfaces;
-using GitHubExtension.Models.StorageModels.Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using SimpleInjector;
+using SimpleInjector.Integration.Web;
 
 namespace GitHubExtension.IoCManager.App_Start
 {
-    [assembly: PreApplicationStartMethod(typeof(GitHubExtension.IoCManager.App_Start.DependencyConfig), "Initialize")]
+    [assembly: PreApplicationStartMethod(typeof(DependencyConfig), "Initialize")]
     public static class DependencyConfig
     {
         public static void Initialize()
@@ -23,12 +21,21 @@ namespace GitHubExtension.IoCManager.App_Start
 
         public static Container BuildContainer()
         {
+            AreaRegistration.RegisterAllAreas();
+            // Optionally verify the container's configuration.
             var container = new Container();
-            var lifestyle = Lifestyle.Singleton;
 
-            container.Register<ISecurityDbContext, SecurityDbContext>(lifestyle);
-            container.Register<IUserStore<ApplicationUser>>(() => new UserStore<ApplicationUser>(BuildContainer().GetInstance<SecurityDbContext>()));
+            // Select the scoped lifestyle that is appropriate for the application
+            // you are building. For instance:
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
+            //Allow registration for type IEnumerable<Exception Logger>
+            container.Options.ResolveUnregisteredCollections = true;
+
+            // DisposableService implements IDisposable
+            container.Register<ISecurityDbContext, SecurityDbContext>(Lifestyle.Scoped);
+
+            container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 
             container.Verify();
 

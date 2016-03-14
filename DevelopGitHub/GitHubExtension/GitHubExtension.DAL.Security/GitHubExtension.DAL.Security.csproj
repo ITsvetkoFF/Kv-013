@@ -56,28 +56,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
     <Compile Include="Interfaces\ISecurityDbContext.cs" />
-    <Compile Include="Migrations\201603052343027_DataMigration.cs" />
-    <Compile Include="Migrations\201603052343027_DataMigration.Designer.cs">
-      <DependentUpon>201603052343027_DataMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201603132041463_Migration.cs" />
+    <Compile Include="Migrations\201603132041463_Migration.Designer.cs">
+      <DependentUpon>201603132041463_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SecurityDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
+      <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
+      <Name>GitHubExtension.Models.CommunicationModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.StorageModels\GitHubExtension.Models.StorageModels.csproj">
       <Project>{38B14075-AF0F-4588-912F-D000C37346CD}</Project>
       <Name>GitHubExtension.Models.StorageModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603052343027_DataMigration.resx">
-      <DependentUpon>201603052343027_DataMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603132041463_Migration.resx">
+      <DependentUpon>201603132041463_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
