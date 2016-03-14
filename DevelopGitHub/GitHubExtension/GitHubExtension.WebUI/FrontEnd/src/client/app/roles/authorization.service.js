@@ -95,7 +95,8 @@
         };
 
         return {
-            signIn: signIn
+            signIn: signIn,
+            getRepos: getRepos
         };
 
         function signIn(user) {
@@ -106,6 +107,16 @@
                 url     : 'https://api.github.com/user',
                 headers : {'Authorization': 'Basic ' + credentials}
             });
+        }
+
+        function getRepos(user) {
+            var credentials = Base64.encode(user.username + ':' + user.password);
+
+            return $http({
+                method  : 'GET',
+                url: 'https://api.github.com/user/repos',
+                headers : {'Authorization': 'Basic ' + credentials}
+            }).then(function (response) { return response.data;});
         }
     }
 })();
