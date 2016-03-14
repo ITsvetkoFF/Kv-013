@@ -17,5 +17,16 @@ namespace GitHubExtension.Security.WebApi.Converters
 
             return repositoryEntity;
         }
+
+        public static RepositoryViewModel ToRepositoryViewModel(this Repository repository)
+        {
+            return new RepositoryViewModel()
+            {
+                GitHubId = repository.GitHubId,
+                Id = repository.Id,
+                Name = repository.Name,
+                Url = repository.Url
+            };
+        }
     }
 }
