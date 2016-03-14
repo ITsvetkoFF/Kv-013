@@ -192,8 +192,6 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Exceptions\UnsuccessfullRequestException.cs" />
     <Compile Include="Models\CollaboratorDto.cs" />
-    <Compile Include="Models\CreateRoleBindingModel.cs" />
-    <Compile Include="Models\CreateUserBindingModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
     <Compile Include="Models\RepositoryDto.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />

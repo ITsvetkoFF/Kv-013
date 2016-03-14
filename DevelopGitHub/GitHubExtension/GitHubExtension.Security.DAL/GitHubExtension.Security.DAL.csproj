@@ -90,7 +90,6 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRepositoryRole.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
-    <Compile Include="Infrastructure\Configuration.cs" />
     <Compile Include="Infrastructure\SecurityRoleManager.cs" />
     <Compile Include="Migrations\201603141106182_InitialSecurityMigration.cs" />
     <Compile Include="Migrations\201603141106182_InitialSecurityMigration.Designer.cs">

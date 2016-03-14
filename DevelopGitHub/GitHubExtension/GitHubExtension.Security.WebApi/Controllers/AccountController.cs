@@ -12,13 +12,11 @@ using System.Web.Http.Cors;
 using GithubExtension.Security.DAL.Context;
 using GithubExtension.Security.WebApi.Converters;
 using GitHubExtension.Security.DAL.Entities;
-using GitHubExtension.Security.WebApi.Attributes;
 using GitHubExtension.Security.WebApi.Converters;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Services;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-
 
 namespace GitHubExtension.Security.WebApi.Controllers
 {
