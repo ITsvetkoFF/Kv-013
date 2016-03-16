@@ -13,7 +13,7 @@ namespace GitHubExtension.Domain
     public class SecurityDbContext : IdentityDbContext<IdentityUser>, ISecurityDbContext
     {
         public SecurityDbContext()
-            : base("SecurityDataBase1") { }
+            : base("SecurityDataBaseLast") { }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }

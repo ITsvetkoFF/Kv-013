@@ -153,7 +153,7 @@ namespace GitHubExtension.WebApi.Controllers
             var info = new ExternalLoginInfo()
             {
                 DefaultUserName = model.UserName,
-                Login = new UserLoginInfo(model.Provider, model.UserName)
+                Login = new UserLoginInfo(model.Provider, userId)
             };
 
             result = await _repo.AddLoginAsync(user.Id, info.Login);
