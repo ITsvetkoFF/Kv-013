@@ -10,7 +10,8 @@
         'app.authorization',
         'app.repos',
         'app.roles',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'LocalStorageModule',
+        'app.login'
     ]);
-
 })();

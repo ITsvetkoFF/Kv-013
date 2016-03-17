@@ -57,7 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\GitHubExtension.WebUI.dll.config" />
     <Content Include="FrontEnd\.bowerrc" />
     <Content Include="FrontEnd\.editorconfig" />
     <Content Include="FrontEnd\.jscsrc" />
@@ -71,7 +70,6 @@
     <Content Include="FrontEnd\src\client\app\repos\repos.module.js" />
     <Content Include="FrontEnd\src\client\app\repos\repos.route.js" />
     <Content Include="FrontEnd\src\client\app\repos\userdetails.html" />
-    <Content Include="FrontEnd\src\client\app\roles\authorization.service.js" />
     <Content Include="FrontEnd\src\client\app\roles\collaboratorsdetails.html" />
     <Content Include="FrontEnd\src\client\app\roles\github-collaborators.factory.js" />
     <Content Include="FrontEnd\src\client\app\roles\reposdetails.html" />
@@ -88,8 +86,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\GitHubExtension.WebUI.dll" />
-    <Content Include="bin\GitHubExtension.WebUI.pdb" />
     <Content Include="FrontEnd\.gitignore" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />
@@ -128,17 +124,17 @@
     <Content Include="FrontEnd\src\client\app\dashboard\dashboard.module.js" />
     <Content Include="FrontEnd\src\client\app\dashboard\dashboard.route.js" />
     <Content Include="FrontEnd\src\client\app\dashboard\dashboard.route.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.directive.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.html" />
-    <Content Include="FrontEnd\src\client\app\layout\layout.module.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.controller.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.html" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\ht-sidebar.directive.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\ht-sidebar.directive.spec.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\ht-top-nav.directive.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\ht-top-nav.html" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\layout.module.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\shell.controller.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\shell.controller.spec.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\shell.html" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\sidebar.controller.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\sidebar.controller.spec.js" />
+    <Content Include="FrontEnd\src\client\app\widgets\layout\sidebar.html" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />

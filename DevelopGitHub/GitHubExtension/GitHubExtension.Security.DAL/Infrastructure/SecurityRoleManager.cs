@@ -1,4 +1,4 @@
-﻿using GithubExtension.Security.DAL.Context;
+﻿using GitHubExtension.Security.DAL.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

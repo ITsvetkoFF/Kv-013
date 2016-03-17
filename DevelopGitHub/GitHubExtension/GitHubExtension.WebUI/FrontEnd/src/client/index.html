@@ -26,19 +26,20 @@
     <!-- endbuild -->
 </head>
 <body>
-    <div>
-        <div ng-include="'app/layout/shell.html'"></div>
-        <div id="splash-page" ng-show="showSplash">
-            <div class="page-splash">
-                <div class="page-splash-message">
-                    GitHubExtension
-                </div>
-                <div class="progress progress-striped active page-progress-bar">
-                    <div class="bar"></div>
-                </div>
+<div>
+    <div ng-include="'app/layout/shell.html'"></div>
+    <div id="splash-page" ng-show="showSplash">
+        <div class="page-splash">
+            <div class="page-splash-message">
+                GitHubExtension
+            </div>
+            <div class="progress progress-striped active page-progress-bar">
+                <div class="bar"></div>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- build:js js/lib.js -->
     <!-- bower:js -->
@@ -54,8 +55,10 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js js/app.js -->
-    <!-- inject:js -->
+    <script src="/src/client/scripts/angular-local-storage.min.js"></script>
+<!-- build:js js/app.js -->
+    <script src="/src/client/app/app.module.js"></script>
+<!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/admin/admin.module.js"></script>
     <script src="/src/client/app/authorization/authorization.module.js"></script>
@@ -65,6 +68,7 @@
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/dashboard/dashboard.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/login/login.module.js"></script>
     <script src="/src/client/app/repos/repos.module.js"></script>
     <script src="/src/client/app/roles/roles.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
@@ -84,9 +88,14 @@
     <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
     <script src="/src/client/app/dashboard/dashboard.route.js"></script>
     <script src="/src/client/app/layout/ht-sidebar.directive.js"></script>
+    <script src="/src/client/app/layout/ht-to-nav.controller.js"></script>
     <script src="/src/client/app/layout/ht-top-nav.directive.js"></script>
     <script src="/src/client/app/layout/shell.controller.js"></script>
     <script src="/src/client/app/layout/sidebar.controller.js"></script>
+    <script src="/src/client/app/login/associate.controller.js"></script>
+    <script src="/src/client/app/login/auth.service.js"></script>
+    <script src="/src/client/app/login/authComplete.js"></script>
+    <script src="/src/client/app/login/login.controller.js"></script>
     <script src="/src/client/app/repos/github-data.factory.js"></script>
     <script src="/src/client/app/repos/repos.controller.js"></script>
     <script src="/src/client/app/repos/repos.route.js"></script>
@@ -98,6 +107,8 @@
     <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
     <!-- endinject -->
 
+
+    <script src="/src/client/scripts/angular-local-storage.min.js"></script>s
     <!-- inject:templates:js -->
     <!-- endinject -->
     <!-- endbuild -->

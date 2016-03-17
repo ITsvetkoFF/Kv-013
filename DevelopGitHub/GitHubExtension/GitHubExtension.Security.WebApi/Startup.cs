@@ -1,36 +1,100 @@
-﻿using GithubExtension.Security.DAL.Context;
-using Microsoft.Owin;
-using Newtonsoft.Json.Serialization;
-using Owin;
-using System;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using GitHubExtension.Security.DAL.Entities;
+using System.Web.Mvc;
+using GitHubExtension.Domain.Interfaces;
+using GitHubExtension.IoCManager;
+using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.DAL.Migrations;
+using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.WebApi.Library.Provider;
+using GitHubExtension.Security.WebApi.Library.Services;
+using GitHubExtension.WebApi.Providers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Cors;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-namespace GithubExtension.Security.WebApi
+using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Serialization;
+using Owin;
+using Owin.Security.Providers.GitHub;
+using SimpleInjector;
+using SimpleInjector.Integration.Web;
+
+namespace GitHubExtension.Security.WebApi
 {
     public class Startup
     {
+        private readonly AuthService _authService;
+
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        public static GitHubAuthenticationOptions gitHubAuthOptions { get; private set; }
+
+
         public void Configuration(IAppBuilder app)
         {
+            //use a cookie to temporarily store information about a user logging in with a third party login provider
+            app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
+            OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            {
+
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
+                Provider = new SimpleAuthorizationServerProvider(_authService),
+            };
+
+            // Token Generation
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
+
+            gitHubAuthOptions = new GitHubAuthenticationOptions()
+            {
+                ClientId = "c04e00dfe8db05cf8807",
+                ClientSecret = "eed4fa1adf3f8e8633919df736bf51c750471dab",
+                Provider = new GitHubAuthProvider()
+            };
+
+            gitHubAuthOptions.Scope.Add("user,repo");
+            app.UseGitHubAuthentication(gitHubAuthOptions);
+
+           // GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(DependencyConfig.BuildContainer());//register container
+
+            var container = new Container();
+
+            // Select the scoped lifestyle that is appropriate for the application
+            // you are building. For instance:
+            container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+
+            //Allow registration for type IEnumerable<Exception Logger>
+            container.Options.ResolveUnregisteredCollections = true;
+
+            // DisposableService implements IDisposable
+            container.Register<ISecurityContext, SecurityContext>(Lifestyle.Scoped);
+
+
+            container.Verify();
+
+
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(container);
+
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
             HttpConfiguration httpConfig = new HttpConfiguration();
             app.CreatePerOwinContext(SecurityContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<SecurityRoleManager>(SecurityRoleManager.Create);
 
-            //ConfigureOAuthTokenGeneration(app);
-
-            //ConfigureOAuthTokenConsumption(app);
-//            app.UseCors(CorsOptions.AllowAll);
             ConfigureWebApi(httpConfig);
 
-            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
@@ -38,6 +102,12 @@ namespace GithubExtension.Security.WebApi
                 Provider = GetMyCookieAuthenticationProvider(),
             });
             app.UseWebApi(httpConfig);
+
+            HttpConfiguration config = new HttpConfiguration();
+
+            WebApiConfig.Register(config);
+            app.UseWebApi(config);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, Configuration>());
 
         }
 
@@ -73,52 +143,14 @@ namespace GithubExtension.Security.WebApi
             return cookieAuthenticationProvider;
         }
 
-        //private void ConfigureOAuthTokenConsumption(IAppBuilder app)
-        //{
-
-        //    var issuer = "http://localhost:59822";
-        //    string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
-        //    byte[] audienceSecret = TextEncodings.Base64Url.Decode(ConfigurationManager.AppSettings["as:AudienceSecret"]);
-
-        //    // Api controllers with an [Authorize] attribute will be validated with JWT
-        //    app.UseJwtBearerAuthentication(
-        //        new JwtBearerAuthenticationOptions
-        //        {
-        //            AuthenticationMode = AuthenticationMode.Active,
-        //            AllowedAudiences = new[] {audienceId},
-        //            IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
-        //            {
-        //                new SymmetricKeyIssuerSecurityTokenProvider(issuer, audienceSecret)
-        //            }
-        //        });
-        //}
-
-        //private void ConfigureOAuthTokenGeneration(IAppBuilder app)
-        //{
-        //    // Configure the db context and user manager to use a single instance per request
-
-
-
-        //    OAuthAuthorizationServerOptions oAuthServerOptions = new OAuthAuthorizationServerOptions()
-        //    {
-        //        //For Dev enviroment only (on production should be AllowInsecureHttp = false)
-        //        AllowInsecureHttp = true,
-        //        TokenEndpointPath = new PathString("/oauth/token"),
-        //        AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-        //        Provider = new CustomOAuthProvider(),
-        //        AccessTokenFormat = new CustomJwtFormat("http://localhost:59822")
-        //    };
-
-        //    // OAuth 2.0 Bearer Access Token Generation
-        //    app.UseOAuthAuthorizationServer(oAuthServerOptions);
-        //}
-
         private void ConfigureWebApi(HttpConfiguration config)
         {
+
+
+
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.MapHttpAttributeRoutes();
             
-
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;

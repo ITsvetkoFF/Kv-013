@@ -45,6 +45,5 @@
             getRoles: getRoles,
             assignRole: assignRole
         };
-
     }
 })();

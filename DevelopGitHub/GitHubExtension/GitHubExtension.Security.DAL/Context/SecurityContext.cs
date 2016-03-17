@@ -1,24 +1,16 @@
 ﻿using System.Data.Entity;
+using GitHubExtension.Domain.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
-using GitHubExtension.Security.DAL.Entities;
+using GitHubExtension.Security.StorageModels.Identity;
 
-namespace GithubExtension.Security.DAL.Context
+namespace GitHubExtension.Security.DAL.Context
 {
-    // TODO: Check internal
-    public interface ISecurityContext
-    {
-        IDbSet<Repository> Repositories { get; set; }
-        IDbSet<SecurityRole> SecurityRoles { get; set; }
-        IDbSet<IdentityUserClaim> Claims { get; set; }
-        IDbSet<User> Users { get; set; }
-        IDbSet<IdentityRole> Roles { get; set; }
-    }
-
     public class SecurityContext : IdentityDbContext<User>, ISecurityContext
     {
         public IDbSet<Repository> Repositories { get; set; }
         public IDbSet<SecurityRole> SecurityRoles { get; set; }
         public IDbSet<IdentityUserClaim> Claims { get; set; }
+        public IDbSet<Client> Clients { get; set; }
 
         public SecurityContext()
             : base("GitHubExtension")
