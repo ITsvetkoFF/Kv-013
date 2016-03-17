@@ -3,10 +3,13 @@
 # top-most EditorConfig file
 root = true
 
-# Don't use tabs for indentation.
 [*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
 indent_style = space
-# (Please don't specify an indent_size here; that has too many unintended consequences.)
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 # Code files
 [*.cs,*.csx,*.vb,*.vbx]
