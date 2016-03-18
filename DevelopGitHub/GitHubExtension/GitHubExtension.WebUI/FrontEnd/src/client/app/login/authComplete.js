@@ -1,5 +1,4 @@
-﻿
-window.common = (function () {
+﻿window.common = (function () {
     var common = {};
 
     common.getFragment = function getFragment() {
