@@ -1,6 +1,6 @@
 ﻿(function () {
     'use.strict';
-    var serviceBase = 'http://localhost:26264/';
+    var serviceBase = 'http://localhost:50859/';
     angular.module('app.login', [
         'LocalStorageModule'
     ])
