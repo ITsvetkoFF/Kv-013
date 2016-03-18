@@ -1,0 +1,3 @@
+﻿<select ng-model="vmRoles.repo" ng-options="repo as repo.name for repo in vmRoles.repositories" ng-change="vmRoles.teammembers()">
+    <option>Select repo to manage</option>
+</select>
