@@ -1,0 +1,14 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <StringProperty Name="LinkedSettingsFile">..\Settings.StyleCop</StringProperty>
+    <StringProperty Name="MergeSettingsFiles">Linked</StringProperty>
+  </GlobalSettings>
+  <SourceFileList>
+    <SourceFile>AssemblyInfo.cs</SourceFile>
+    <Settings>
+    <GlobalSettings>
+      <BooleanProperty Name="RulesEnabledByDefault">False</BooleanProperty>
+    </GlobalSettings>
+    </Settings>
+  </SourceFileList>
+</StyleCopSettings>
