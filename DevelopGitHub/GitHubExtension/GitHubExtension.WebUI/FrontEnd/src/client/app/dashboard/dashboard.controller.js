@@ -5,10 +5,14 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$q', 'dataservice', 'logger'];
+    DashboardController.$inject = ['$q', 'dataservice', 'logger', 'i18n'];
     /* @ngInject */
-    function DashboardController($q, dataservice, logger) {
+    function DashboardController($q, dataservice, logger, i18n) {
         var vm = this;
+
+        // add localization
+        vm.i18n = i18n;
+
         vm.news = {
             title: 'GitHubExtension',
             description: 'Hot Towel Angular is a SPA template for Angular developers.'

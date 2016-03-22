@@ -8,8 +8,7 @@
         'app.dashboard',
         'app.layout',
         'app.authorization',
-        'app.repos',
         'ui.bootstrap'
     ]);
-
 })();
+

@@ -8,13 +8,13 @@
             .module('app.authorization')
             .run(appRun);
 
-        appRun.$inject = ['routerHelper'];
+        appRun.$inject = ['routerHelper', 'i18n'];
         /* @ngInject */
-        function appRun(routerHelper) {
-            routerHelper.configureStates(getStates());
+        function appRun(routerHelper, i18n) {
+            routerHelper.configureStates(getStates(i18n));
         }
 
-        function getStates() {
+        function getStates(i18n) {
             return [
                 {
                     state: 'authorization',
@@ -26,7 +26,7 @@
                         title: 'Authorization',
                         settings: {
                             topNav: 1,
-                            content: 'Authorization'
+                            content: i18n.message.AUTHORIZATION
                         }
                     }
                 }

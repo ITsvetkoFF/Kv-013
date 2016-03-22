@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app.repos', [
+    angular.module('blocks.localization', [
         'app.core',
         'app.widgets'
     ]);
