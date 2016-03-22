@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -6,7 +6,7 @@
         .directive('htTopNav', htTopNav);
 
     /* @ngInject */
-    function htTopNav () {
+    function htTopNav() {
         var directive = {
             bindToController: true,
             controller: TopNavController,
@@ -18,10 +18,14 @@
             templateUrl: 'app/layout/ht-top-nav.html'
         };
 
-        TopNavController.$inject = ['$state', 'routerHelper'];
+        TopNavController.$inject = ['i18n', '$state', 'routerHelper'];
         /* @ngInject */
-        function TopNavController($state, routerHelper) {
+        function TopNavController(i18n, $state, routerHelper) {
             var vm = this;
+
+            // add i18n for localization
+            vm.i18n = i18n;
+
             var states = routerHelper.getStates();
 
             activate();
@@ -31,14 +35,13 @@
             }
 
             function getNavRoutes() {
-                vm.navRoutes = states.filter(function(r) {
+                vm.navRoutes = states.filter(function (r) {
                     return r.settings && r.settings.topNav;
-                }).sort(function(r1, r2) {
+                }).sort(function (r1, r2) {
                     return r1.settings.topNav - r2.settings.topNav;
                 });
             }
         }
-
         return directive;
     }
 })();
