@@ -10,7 +10,7 @@
     <div class="navbar-collapse collapse">
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right">
-                <button ng-click="vm.i18n.setLanguage(language)" ng-repeat="language in vm.i18n.validLanguages">{{language}}</button>
+                <button class="btn btn-primary" ng-click="vm.i18n.setLanguage(language)" ng-repeat="language in vm.i18n.validLanguages">{{language}}</button>
                 <li ng-repeat="r in vm.navRoutes">
                     <a ui-sref="{{r.name}}"
                        ng-bind-html="r.settings.content">

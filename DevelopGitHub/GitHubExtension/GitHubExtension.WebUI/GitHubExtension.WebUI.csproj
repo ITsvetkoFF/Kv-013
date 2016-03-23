@@ -67,10 +67,10 @@
     <Content Include="FrontEnd\bower.json" />
     <Content Include="FrontEnd\package.json" />
     <Content Include="FrontEnd\README.md" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\i18nMessages.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\Service.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\translation.html" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\translation.module.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\gulpfile.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\i18n-messages.constant.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\i18n.factory.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\localization.module.js" />
     <Content Include="FrontEnd\src\client\styles\styles.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
