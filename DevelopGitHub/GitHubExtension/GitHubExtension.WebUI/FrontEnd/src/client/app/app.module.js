@@ -9,7 +9,9 @@
         'app.layout',
         'app.authorization',
         'app.repos',
-        'ui.bootstrap'
+        'app.roles',
+        'ui.bootstrap',
+        'LocalStorageModule',
+        'app.login'
     ]);
-
 })();

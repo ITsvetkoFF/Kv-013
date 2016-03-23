@@ -7,6 +7,7 @@
 
     ShellController.$inject = ['$rootScope', '$timeout', 'config', 'logger'];
     /* @ngInject */
+
     function ShellController($rootScope, $timeout, config, logger) {
         var vm = this;
         vm.busyMessage = 'Please wait ...';

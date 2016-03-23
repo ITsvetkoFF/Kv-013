@@ -106,6 +106,7 @@
                 url     : 'https://api.github.com/user',
                 headers : {'Authorization': 'Basic ' + credentials}
             });
+            
         }
     }
 })();
