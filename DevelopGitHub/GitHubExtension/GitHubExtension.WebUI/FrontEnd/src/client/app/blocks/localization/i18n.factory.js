@@ -16,7 +16,9 @@
         return service;
 
         function setLanguage(newValue) {
+            console.log(newValue);
             service.currentLanguage = newValue;
+            console.log(i18nMessages[newValue]);
             service.message = i18nMessages[newValue];
         }
     }
