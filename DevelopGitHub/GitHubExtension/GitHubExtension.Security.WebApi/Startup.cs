@@ -20,8 +20,8 @@ using Owin;
 using Owin.Security.Providers.GitHub;
 using SimpleInjector.Integration.WebApi;
 
-[assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
-namespace GitHubExtension.Security.WebApi
+[assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Library.Startup))]
+namespace GitHubExtension.Security.WebApi.Library
 {
     public class Startup
     {

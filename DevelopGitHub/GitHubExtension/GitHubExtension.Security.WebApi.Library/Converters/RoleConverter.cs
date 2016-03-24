@@ -3,7 +3,7 @@ using System.Linq;
 using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.StorageModels.Identity;
 
-namespace GitHubExtension.Security.WebApi.Converters
+namespace GitHubExtension.Security.WebApi.Library.Converters
 {
     public static class RoleConverter
     {

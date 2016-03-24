@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GitHubExtension.Security.WebApi
+namespace GitHubExtension.Security.WebApi.Library
 {
     class SimpleInjectorContainer
     {
