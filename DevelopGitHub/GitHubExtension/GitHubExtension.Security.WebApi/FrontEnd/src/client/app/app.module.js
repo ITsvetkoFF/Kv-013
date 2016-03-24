@@ -11,7 +11,6 @@
         'app.repos',
         'app.roles',
         'ui.bootstrap',
-        'LocalStorageModule',
         'app.login'
     ]);
 })();
