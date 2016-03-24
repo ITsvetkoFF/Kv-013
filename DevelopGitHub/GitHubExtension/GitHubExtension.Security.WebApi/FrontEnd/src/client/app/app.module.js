@@ -7,7 +7,6 @@
         'app.admin',
         'app.dashboard',
         'app.layout',
-        'app.authorization',
         'app.repos',
         'app.roles',
         'ui.bootstrap',
