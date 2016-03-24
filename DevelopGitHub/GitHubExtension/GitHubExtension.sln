@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.WebUI", "GitHubExtension.WebUI\GitHubExtension.WebUI.csproj", "{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.DAL", "GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj", "{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.WebApi", "GitHubExtension.Security.WebApi\GitHubExtension.Security.WebApi.csproj", "{B5F77285-E213-4564-BD65-CAA3242F9F5B}"
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CD74A6D-F23D-491C-9B00-DF10A2C8F7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU

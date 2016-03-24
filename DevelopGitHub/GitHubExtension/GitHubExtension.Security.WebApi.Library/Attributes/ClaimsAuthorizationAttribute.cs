@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace GitHubExtension.Security.WebApi.Attributes
+namespace GitHubExtension.Security.WebApi.Library.Attributes
 {
     public class ClaimsAuthorizationAttribute : AuthorizationFilterAttribute
     {
