@@ -21,14 +21,16 @@
 
     core.config(configure);
 
-    configure.$inject = ['$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
+    configure.$inject = ['$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider', '$httpProvider'];
     /* @ngInject */
-    function configure($logProvider, routerHelperProvider, exceptionHandlerProvider) {
+    function configure($logProvider, routerHelperProvider, exceptionHandlerProvider, $httpProvider) {
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
         exceptionHandlerProvider.configure(config.appErrorPrefix);
-        routerHelperProvider.configure({docTitle: config.appTitle + ': '});
+        routerHelperProvider.configure({ docTitle: config.appTitle + ': ' });
+        //enable sending cookies with every request 
+        $httpProvider.defaults.withCredentials = true;
     }
 
 })();
