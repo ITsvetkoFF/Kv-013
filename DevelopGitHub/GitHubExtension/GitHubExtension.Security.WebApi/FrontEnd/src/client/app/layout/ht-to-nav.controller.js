@@ -2,14 +2,14 @@
     'use.strict';
 
     angular.module('app')
-    .controller('topNavController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
+    .controller('topNavController', ['$cookies', '$scope', '$location', 'authService', function ($cookies, $scope, $location, authService) {
 
         $scope.logOut = function () {
             authService.logOut();
-            $location.path('/roles');
         }
 
-        $scope.authentication = authService.authentication;
+        $scope.userName = $cookies.get('userName');
+        $scope.isAuth=$cookies.get('isAuth');
 
-    }]);
+        }]);
 })();

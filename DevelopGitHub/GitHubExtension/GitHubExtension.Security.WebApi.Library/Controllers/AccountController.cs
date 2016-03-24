@@ -182,6 +182,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             }
 
             HttpContext.Current.GetOwinContext().Authentication.SignIn(await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie));
+            // TODO Need method for cookies in the future?
+            HttpContext.Current.Response.Cookies["userName"].Value = user.UserName;
+            HttpContext.Current.Response.Cookies["isAuth"].Value = "true";
             return Redirect("http://localhost:3000/");
         }
     }
