@@ -4,15 +4,11 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using GitHubExtension.Domain.Interfaces;
-using GitHubExtension.IoCManager;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
-using GitHubExtension.Security.WebApi.Library.Services;
-using GitHubExtension.WebApi.Providers;
+using GitHubExtension.Security.WebApi.Library.Provider;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -22,7 +18,6 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Owin.Security.Providers.GitHub;
-using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 
 [assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
@@ -30,7 +25,6 @@ namespace GitHubExtension.Security.WebApi
 {
     public class Startup
     {
-        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static GitHubAuthenticationOptions gitHubAuthOptions { get; private set; }
 
         public void Configuration(IAppBuilder app)
@@ -44,8 +38,9 @@ namespace GitHubExtension.Security.WebApi
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
-                AuthenticationMode =  AuthenticationMode.Active
+                LoginPath = new PathString("/api/Account/ExternalLogin"),
+                AuthenticationMode =  AuthenticationMode.Active,
+
             });
 
             #endregion
@@ -103,6 +98,7 @@ namespace GitHubExtension.Security.WebApi
 
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.MapHttpAttributeRoutes();
+            //config.SuppressDefaultHostAuthentication();
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

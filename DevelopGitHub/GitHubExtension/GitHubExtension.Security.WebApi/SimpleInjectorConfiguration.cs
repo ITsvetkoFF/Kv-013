@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using GitHubExtension.Domain.Interfaces;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;

@@ -216,10 +216,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitHubExtension.IoCManager\GitHubExtension.IoCManager.csproj">
-      <Project>{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}</Project>
-      <Name>GitHubExtension.IoCManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>

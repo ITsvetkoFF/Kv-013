@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\SecurityContext.cs" />
-    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\GitHubRoleStore.cs" />
     <Compile Include="Infrastructure\GitHubUserStore.cs" />
@@ -99,6 +98,10 @@
     <Compile Include="Migrations\201603211855481_RemoveToken.cs" />
     <Compile Include="Migrations\201603211855481_RemoveToken.Designer.cs">
       <DependentUpon>201603211855481_RemoveToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603232153571_removedClientEntity.cs" />
+    <Compile Include="Migrations\201603232153571_removedClientEntity.Designer.cs">
+      <DependentUpon>201603232153571_removedClientEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603211855481_RemoveToken.resx">
       <DependentUpon>201603211855481_RemoveToken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603232153571_removedClientEntity.resx">
+      <DependentUpon>201603232153571_removedClientEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
