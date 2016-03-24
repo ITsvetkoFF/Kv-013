@@ -241,10 +241,7 @@
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
-    <Content Include="FrontEnd\src\client\app\login\associate.controller.js" />
-    <Content Include="FrontEnd\src\client\app\login\associate.html" />
     <Content Include="FrontEnd\src\client\app\login\auth.service.js" />
-    <Content Include="FrontEnd\src\client\app\login\authComplete.js" />
     <Content Include="FrontEnd\src\client\app\login\login.controller.js" />
     <Content Include="FrontEnd\src\client\app\login\login.html" />
     <Content Include="FrontEnd\src\client\app\login\login.module.js" />
