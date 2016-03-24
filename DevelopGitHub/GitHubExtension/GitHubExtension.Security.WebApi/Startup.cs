@@ -7,6 +7,7 @@ using System.Web.Http.Cors;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.WebApi.Library;
 using GitHubExtension.Security.WebApi.Library.Provider;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,12 +21,12 @@ using Owin;
 using Owin.Security.Providers.GitHub;
 using SimpleInjector.Integration.WebApi;
 
-[assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Library.Startup))]
-namespace GitHubExtension.Security.WebApi.Library
+[assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
+namespace GitHubExtension.Security.WebApi
 {
     public class Startup
     {
-        public static GitHubAuthenticationOptions gitHubAuthOptions { get; private set; }
+        public static GitHubAuthenticationOptions GitHubAuthOptions { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -123,7 +124,7 @@ namespace GitHubExtension.Security.WebApi.Library
             // Token Generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
 
-            gitHubAuthOptions = new GitHubAuthenticationOptions()
+            GitHubAuthOptions = new GitHubAuthenticationOptions()
             {
                 //ClientId = "c04e00dfe8db05cf8807",
                 //ClientSecret = "eed4fa1adf3f8e8633919df736bf51c750471dab",
@@ -132,8 +133,8 @@ namespace GitHubExtension.Security.WebApi.Library
                 Provider = new GitHubAuthProvider()
             };
 
-            gitHubAuthOptions.Scope.Add("user,repo");
-            app.UseGitHubAuthentication(gitHubAuthOptions);
+            GitHubAuthOptions.Scope.Add("user,repo");
+            app.UseGitHubAuthentication(GitHubAuthOptions);
         }
     }
 }
