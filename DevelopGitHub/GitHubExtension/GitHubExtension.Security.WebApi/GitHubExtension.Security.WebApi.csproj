@@ -203,11 +203,6 @@
     <Content Include="FrontEnd\src\client\app\admin\admin.route.js" />
     <Content Include="FrontEnd\src\client\app\admin\admin.route.spec.js" />
     <Content Include="FrontEnd\src\client\app\app.module.js" />
-    <Content Include="FrontEnd\src\client\app\authorization\authorization.controller.js" />
-    <Content Include="FrontEnd\src\client\app\authorization\authorization.html" />
-    <Content Include="FrontEnd\src\client\app\authorization\authorization.module.js" />
-    <Content Include="FrontEnd\src\client\app\authorization\authorization.route.js" />
-    <Content Include="FrontEnd\src\client\app\authorization\authorization.service.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.spec.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception.js" />
