@@ -10,7 +10,7 @@ using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.StorageModels.Identity;
-using GitHubExtension.Security.WebApi.Library.Converters;
+using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Exceptions;
 using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;

@@ -179,9 +179,9 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Converters\RepositoryConverter.cs" />
-    <Compile Include="Converters\RoleConverter.cs" />
-    <Compile Include="Converters\UserMapper.cs" />
+    <Compile Include="Mappers\RepositoryMapper.cs" />
+    <Compile Include="Mappers\RoleMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Exceptions\TokenNotFoundException.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

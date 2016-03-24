@@ -5,7 +5,7 @@ using System.Web.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
 using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.WebApi.Library.Converters;
+using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 

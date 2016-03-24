@@ -1,10 +1,5 @@
-﻿using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using GitHubExtension.Models.CommunicationModels;
-using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.WebApi.Library.Converters;
-using Microsoft.AspNet.Identity.Owin;
 
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers

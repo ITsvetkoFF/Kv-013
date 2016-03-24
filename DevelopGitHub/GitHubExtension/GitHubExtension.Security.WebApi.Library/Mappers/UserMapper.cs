@@ -1,7 +1,7 @@
 ﻿using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.StorageModels.Identity;
 
-namespace GitHubExtension.Security.WebApi.Library.Converters
+namespace GitHubExtension.Security.WebApi.Library.Mappers
 {
     public static class UserMapper
     {

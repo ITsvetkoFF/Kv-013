@@ -3,9 +3,9 @@ using System.Linq;
 using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.StorageModels.Identity;
 
-namespace GitHubExtension.Security.WebApi.Library.Converters
+namespace GitHubExtension.Security.WebApi.Library.Mappers
 {
-    public static class RoleConverter
+    public static class RoleMapper
     {
         public static RoleViewModel ToRoleViewModel(this SecurityRole role)
         {
