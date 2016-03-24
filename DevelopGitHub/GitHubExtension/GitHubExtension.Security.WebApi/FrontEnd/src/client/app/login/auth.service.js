@@ -3,7 +3,7 @@
 
     angular
     .module('app.login')
-    .factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+    .factory('authService', ['$cookies', '$http', '$q', 'localStorageService', 'ngAuthSettings', function ($cookies, $http, $q, localStorageService, ngAuthSettings) {
 
         var serviceBase = ngAuthSettings.apiServiceBaseUri;
         var authServiceFactory = {};
@@ -21,10 +21,9 @@
 
         var _logOut = function () {
 
-            localStorageService.remove('authorizationData');
-
-            _authentication.isAuth = false;
-            _authentication.userName = "";
+            $cookies.remove('userName');
+            $cookies.remove('isAuth');
+            window.location.reload();
 
         };
 
