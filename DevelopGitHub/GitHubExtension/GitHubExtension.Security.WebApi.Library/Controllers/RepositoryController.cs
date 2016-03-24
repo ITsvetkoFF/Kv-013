@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Converters;
 using GitHubExtension.Security.WebApi.Library.Services;
@@ -10,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*", SupportsCredentials = true)]
     public class RepositoryController : BaseApiController
     {
         private IGithubService _guGithubService;
