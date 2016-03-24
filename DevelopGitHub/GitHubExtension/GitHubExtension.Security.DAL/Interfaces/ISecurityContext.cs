@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using GitHubExtension.Security.StorageModels.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace GitHubExtension.Domain.Interfaces
+namespace GitHubExtension.Security.DAL.Interfaces
 {
     public interface ISecurityContext
     {
@@ -16,6 +11,5 @@ namespace GitHubExtension.Domain.Interfaces
         IDbSet<IdentityUserClaim> Claims { get; set; }
         IDbSet<User> Users { get; set; }
         IDbSet<IdentityRole> Roles { get; set; }
-        IDbSet<Client> Clients { get; set; }
     }
 }

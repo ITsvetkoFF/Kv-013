@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Models.CommunicationModels", "GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj", "{58240CBE-3BD5-41BA-8B46-8464748580F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.IoCManager", "GitHubExtension.IoCManager\GitHubExtension.IoCManager.csproj", "{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.WebApi.Library", "GitHubExtension.Security.WebApi.Library\GitHubExtension.Security.WebApi.Library.csproj", "{7E05EAF8-B822-493D-81E7-50A054BD5CE4}"
 EndProject
 Global
@@ -49,10 +47,6 @@ Global
 		{58240CBE-3BD5-41BA-8B46-8464748580F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58240CBE-3BD5-41BA-8B46-8464748580F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58240CBE-3BD5-41BA-8B46-8464748580F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F55ADDE-B2A0-40FB-8ECB-D722BD98130F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU

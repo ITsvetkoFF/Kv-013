@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Owin.Security.Providers.GitHub;
 
-namespace GitHubExtension.WebApi.Providers
+namespace GitHubExtension.Security.WebApi.Library.Provider
 {
     public class GitHubAuthProvider : GitHubAuthenticationProvider
     {

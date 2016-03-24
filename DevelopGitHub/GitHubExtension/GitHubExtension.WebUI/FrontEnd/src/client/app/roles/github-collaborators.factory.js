@@ -8,25 +8,25 @@
 
     /* @ngInject */
     function githubCollaborators($http) {
-
+        var baseUrl = 'http://localhost:50859/api';
         function getCollaborators(repo) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:51382/api/repos/' + repo.name + '/collaborators'
+                url: baseUrl + '/repos/' + repo.name + '/collaborators'
             }).then(function (response) { return response.data; });
         }
 
         function getRepos() {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:51382/api/user/repos'
+                url: baseUrl + '/user/repos'
             });
         }
 
         function getRoles() {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:51382/api/roles'
+                url: baseUrl + '/roles'
             });
         }
 
@@ -34,7 +34,7 @@
             return $http({
                 method: 'PATCH',
                 dataType: 'string',
-                url: 'http://localhost:51382/api/repos/' + repository.id + '/collaborators/' + collaborator.id,
+                url: baseUrl + '/repos/' + repository.id + '/collaborators/' + collaborator.id,
                 data: '"' + role.name + '"'
             });
         }
