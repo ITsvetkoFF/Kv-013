@@ -7,13 +7,13 @@ namespace GitHubExtension.Security.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RemoveToken : IMigrationMetadata
+    public sealed partial class Remove_Client : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveToken));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Remove_Client));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603211855481_RemoveToken"; }
+            get { return "201603251526147_Remove_Client."; }
         }
         
         string IMigrationMetadata.Source

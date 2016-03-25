@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Identity\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Identity\Repository.cs" />
     <Compile Include="Identity\SecurityRole.cs" />
