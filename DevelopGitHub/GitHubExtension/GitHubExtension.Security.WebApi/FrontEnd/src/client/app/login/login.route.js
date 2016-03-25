@@ -20,16 +20,6 @@
                     controllerAs: 'vmLogin',
                     title: 'Login'
                 }
-            },
-            {
-                state: 'associate',
-                config: {
-                    url: '/associate',
-                    templateUrl: 'app/login/associate.html',
-                    controller: 'associateController',
-                    controllerAs: 'vmAssociate',
-                    title: 'Repo list'
-                }
             }
         ];
     }
