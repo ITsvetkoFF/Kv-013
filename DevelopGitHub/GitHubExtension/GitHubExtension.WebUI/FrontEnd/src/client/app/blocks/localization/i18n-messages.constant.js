@@ -2,7 +2,7 @@
     'use strict';
     angular.module("blocks.localization")  .constant("i18nMessages",
         {
-	"en": {
+	"en-US": {
 		"DASHBOARD": "Dashboard",
 		"ADMIN": "Admin",
 		"REPOS": "Repositories",
@@ -10,7 +10,7 @@
 		"MESSAGES": "Messages",
 		"AUTHORIZATION": "Authorization"
 	},
-	"ua": {
+	"uk": {
 		"DASHBOARD": "Панель управління",
 		"ADMIN": "Адміністратор",
 		"REPOS": "Сховища",
