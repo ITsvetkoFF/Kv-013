@@ -74,6 +74,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             {
                 return Ok(user.ToUserReturnModel());
             }
+            
 
             return NotFound();
         }

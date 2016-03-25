@@ -1,5 +1,6 @@
 ﻿using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.StorageModels.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Security.WebApi.Library.Mappers
 {
@@ -24,7 +25,7 @@ namespace GitHubExtension.Security.WebApi.Library.Mappers
             {
                 Id = user.Id,
                 Email = user.Email,
-                GitHubId = user.ProviderId,
+                GitHubId = (user as User).ProviderId,
                 UserName =  user.UserName
             };
 
