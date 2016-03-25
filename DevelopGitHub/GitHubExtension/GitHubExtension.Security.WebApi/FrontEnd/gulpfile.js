@@ -29,7 +29,6 @@ var port = process.env.PORT || config.defaultPort;
  */
 
 
-
 gulp.task('buildLocalizations', function () {
     log('building localization files');
 
