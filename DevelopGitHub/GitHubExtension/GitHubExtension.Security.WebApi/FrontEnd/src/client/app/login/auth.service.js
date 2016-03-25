@@ -1,12 +1,11 @@
 ﻿(function () {
-    'use.strict';
+    'use strict';
 
     angular
     .module('app.login')
     .factory('authService', ['$cookies', function ($cookies) {
 
         var authServiceFactory = {};
-        
         var _logOut = function () {
 
             $cookies.remove('userName');
@@ -16,7 +15,7 @@
         };
 
         authServiceFactory.logOut = _logOut;
-        
+
         return authServiceFactory;
     }]);
 })();
