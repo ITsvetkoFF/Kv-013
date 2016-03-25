@@ -91,17 +91,9 @@
     <Compile Include="Infrastructure\IApplicationUserManager.cs" />
     <Compile Include="Infrastructure\SecurityRoleManager.cs" />
     <Compile Include="Interfaces\ISecurityContext.cs" />
-    <Compile Include="Migrations\201603201510294_Migration.cs" />
-    <Compile Include="Migrations\201603201510294_Migration.Designer.cs">
-      <DependentUpon>201603201510294_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603211855481_RemoveToken.cs" />
-    <Compile Include="Migrations\201603211855481_RemoveToken.Designer.cs">
-      <DependentUpon>201603211855481_RemoveToken.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603232153571_removedClientEntity.cs" />
-    <Compile Include="Migrations\201603232153571_removedClientEntity.Designer.cs">
-      <DependentUpon>201603232153571_removedClientEntity.cs</DependentUpon>
+    <Compile Include="Migrations\201603251526147_Remove_Client..cs" />
+    <Compile Include="Migrations\201603251526147_Remove_Client..Designer.cs">
+      <DependentUpon>201603251526147_Remove_Client..cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,14 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603201510294_Migration.resx">
-      <DependentUpon>201603201510294_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603211855481_RemoveToken.resx">
-      <DependentUpon>201603211855481_RemoveToken.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603232153571_removedClientEntity.resx">
-      <DependentUpon>201603232153571_removedClientEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603251526147_Remove_Client..resx">
+      <DependentUpon>201603251526147_Remove_Client..cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -192,7 +192,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />
     <Content Include="FrontEnd\gulpfile.js" />
@@ -270,9 +269,6 @@
     <Content Include="FrontEnd\src\server\favicon.ico" />
     <Content Include="FrontEnd\src\server\routes.js" />
     <Content Include="FrontEnd\src\server\utils\404.js" />
-    <Content Include="index.html" />
-    <Content Include="js\app-97da876334.js" />
-    <Content Include="js\lib-ce1042a6a9.js" />
     <Content Include="packages.config" />
     <Content Include="FrontEnd\.bowerrc" />
     <Content Include="FrontEnd\.editorconfig" />
@@ -283,11 +279,6 @@
     <Content Include="FrontEnd\package.json" />
     <Content Include="FrontEnd\README.md" />
     <Content Include="FrontEnd\src\client\styles\styles.less" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -296,8 +287,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="styles\app-e0c8e1cdc7.css" />
-    <Content Include="styles\lib-bd72d1f310.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
