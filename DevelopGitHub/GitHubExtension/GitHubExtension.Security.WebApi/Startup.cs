@@ -8,6 +8,7 @@ using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.WebApi.Library;
+using GitHubExtension.Security.WebApi.Library.ActionFilters;
 using GitHubExtension.Security.WebApi.Library.Provider;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -105,6 +106,7 @@ namespace GitHubExtension.Security.WebApi
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Filters.Add(new LoggingFilterAttribute());
 
             return config;
         }
