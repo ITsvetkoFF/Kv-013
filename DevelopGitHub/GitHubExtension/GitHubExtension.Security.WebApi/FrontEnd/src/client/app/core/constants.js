@@ -5,5 +5,8 @@
     angular
         .module('app.core')
         .constant('toastr', toastr)
-        .constant('moment', moment);
+        .constant('moment', moment)
+        .constant('apiURLs', {
+            apiLoginUrl: 'http://localhost:50859/api/Account/ExternalLogin'
+        });
 })();
