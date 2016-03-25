@@ -1,15 +1,15 @@
 ﻿(function () {
-    'use.strict';
+    'use strict';
 
     angular.module('app')
     .controller('topNavController', ['$cookies', '$scope', 'authService', function ($cookies, $scope, authService) {
 
-            $scope.logOut = function() {
+        $scope.logOut = function() {
                 authService.logOut();
             };
 
         $scope.userName = $cookies.get('userName');
-        $scope.isAuth=$cookies.get('isAuth');
+        $scope.isAuth = $cookies.get('isAuth');
 
     }]);
 })();
