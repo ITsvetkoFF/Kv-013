@@ -1,14 +1,19 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('app.layout')
         .controller('ShellController', ShellController);
 
-    ShellController.$inject = ['$rootScope', '$timeout', 'config', 'logger'];
+    ShellController.$inject = ['$rootScope', '$timeout', 'config', 'logger', 'i18n'];
     /* @ngInject */
-    function ShellController($rootScope, $timeout, config, logger) {
+
+    function ShellController($rootScope, $timeout, config, logger, i18n) {
         var vm = this;
+
+        // add i18n for localization
+        vm.i18n = i18n;
+
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         $rootScope.showSplash = true;
@@ -27,7 +32,7 @@
 
         function hideSplash() {
             //Force a 1 second delay so we can see the splash.
-            $timeout(function() {
+            $timeout(function () {
                 $rootScope.showSplash = false;
             }, 1000);
         }
