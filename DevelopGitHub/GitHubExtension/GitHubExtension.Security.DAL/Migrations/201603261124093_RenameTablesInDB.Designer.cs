@@ -7,13 +7,13 @@ namespace GitHubExtension.Security.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Remove_Client : IMigrationMetadata
+    public sealed partial class RenameTablesInDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Remove_Client));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RenameTablesInDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603251526147_Remove_Client."; }
+            get { return "201603261124093_RenameTablesInDB"; }
         }
         
         string IMigrationMetadata.Source

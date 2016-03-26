@@ -3,21 +3,21 @@ namespace GitHubExtension.Security.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Remove_Client : DbMigration
+    public partial class RenameTablesInDB : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.AspNetUserClaims",
+                "dbo.UserClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(maxLength: 128),
                         ClaimType = c.String(),
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -43,7 +43,7 @@ namespace GitHubExtension.Security.DAL.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Repositories", t => t.RepositoryId, cascadeDelete: true)
                 .ForeignKey("dbo.SecurityRoles", t => t.SecurityRoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .ForeignKey("dbo.Users", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.RepositoryId)
                 .Index(t => t.SecurityRoleId);
@@ -58,13 +58,13 @@ namespace GitHubExtension.Security.DAL.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUsers",
+                "dbo.Users",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         ProviderId = c.Int(nullable: false),
                         GitHubUrl = c.String(),
-                        Email = c.String(maxLength: 256),
+                        Email = c.String(),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
@@ -74,74 +74,72 @@ namespace GitHubExtension.Security.DAL.Migrations
                         LockoutEndDateUtc = c.DateTime(),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
+                        UserName = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
+                "dbo.UserLogins",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
+                        LoginProvider = c.String(),
+                        ProviderKey = c.String(),
+                        User_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.UserId)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
                         RoleId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        IdentityRole_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .PrimaryKey(t => new { t.RoleId, t.UserId })
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.IdentityRole_Id)
                 .Index(t => t.UserId)
-                .Index(t => t.RoleId);
+                .Index(t => t.IdentityRole_Id);
             
             CreateTable(
-                "dbo.AspNetRoles",
+                "dbo.Roles",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
+                        Name = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.UserRepositoryRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserRoles", "IdentityRole_Id", "dbo.Roles");
+            DropForeignKey("dbo.UserRepositoryRoles", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserLogins", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserRepositoryRoles", "SecurityRoleId", "dbo.SecurityRoles");
             DropForeignKey("dbo.UserRepositoryRoles", "RepositoryId", "dbo.Repositories");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.UserRoles", new[] { "IdentityRole_Id" });
+            DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.UserLogins", new[] { "User_Id" });
             DropIndex("dbo.UserRepositoryRoles", new[] { "SecurityRoleId" });
             DropIndex("dbo.UserRepositoryRoles", new[] { "RepositoryId" });
             DropIndex("dbo.UserRepositoryRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUsers");
+            DropIndex("dbo.UserClaims", new[] { "UserId" });
+            DropTable("dbo.Roles");
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.UserLogins");
+            DropTable("dbo.Users");
             DropTable("dbo.SecurityRoles");
             DropTable("dbo.UserRepositoryRoles");
             DropTable("dbo.Repositories");
-            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.UserClaims");
         }
     }
 }

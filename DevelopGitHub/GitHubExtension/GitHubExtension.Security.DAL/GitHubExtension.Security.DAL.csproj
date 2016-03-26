@@ -34,6 +34,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Tables\RolesConfiguration.cs" />
+    <Compile Include="Configuration\Tables\UserClaimsConfiguration.cs" />
+    <Compile Include="Configuration\Tables\UserConfiguration.cs" />
+    <Compile Include="Configuration\Tables\UserLoginsConfiguration.cs" />
+    <Compile Include="Configuration\Tables\UserRoleConfiguration.cs" />
     <Compile Include="Context\SecurityContext.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\GitHubRoleStore.cs" />
@@ -78,9 +87,9 @@
     <Compile Include="Infrastructure\IApplicationUserManager.cs" />
     <Compile Include="Infrastructure\SecurityRoleManager.cs" />
     <Compile Include="Interfaces\ISecurityContext.cs" />
-    <Compile Include="Migrations\201603251526147_Remove_Client..cs" />
-    <Compile Include="Migrations\201603251526147_Remove_Client..Designer.cs">
-      <DependentUpon>201603251526147_Remove_Client..cs</DependentUpon>
+    <Compile Include="Migrations\201603261124093_RenameTablesInDB.cs" />
+    <Compile Include="Migrations\201603261124093_RenameTablesInDB.Designer.cs">
+      <DependentUpon>201603261124093_RenameTablesInDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,8 +105,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603251526147_Remove_Client..resx">
-      <DependentUpon>201603251526147_Remove_Client..cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603261124093_RenameTablesInDB.resx">
+      <DependentUpon>201603261124093_RenameTablesInDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
