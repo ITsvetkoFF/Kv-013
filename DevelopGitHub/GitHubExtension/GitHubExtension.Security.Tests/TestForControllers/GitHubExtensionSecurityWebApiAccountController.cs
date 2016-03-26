@@ -7,20 +7,18 @@ using NSubstitute;
 using Xunit;
 using GitHubExtension.Security.DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
-//using GitHubExtension.Security.StorageModels;
 using GitHubExtension.Security.StorageModels.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using GitHubExtension.Security.WebApi.Library.Converters;
 using GitHubExtension.Models.CommunicationModels;
-using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Library.Services;
 using GitHubExtension.Security.DAL.Interfaces;
 using System.Web.Http;
 using System.Web.Http.Results;
+using GitHubExtension.Security.WebApi.Library.Controllers;
 
 
 
-namespace GitHubExtension.Security.Tests
+namespace GitHubExtension.Security.Tests.Te
 {
     public class TestGitHubExtensionSecurityWebApiAccountController
     {
@@ -63,11 +61,11 @@ namespace GitHubExtension.Security.Tests
                 Substitute.For<IRoleStore<IdentityRole, string>>());
 
             IHttpActionResult result = controller.GetUser(idToFind).Result;
+
             Assert.IsType<System.Web.Http.Results.OkNegotiatedContentResult<UserReturnModel>>(result);
-            //var identityUser = Substitute.For<>();
-            //identityUser//.ToUserReturnModel().//..ToUserReturnModel().
-            //Assert.Equels();
         }
+
+
         
     }
 }
