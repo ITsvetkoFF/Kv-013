@@ -65,6 +65,48 @@ namespace GitHubExtension.Security.Tests.Te
             Assert.IsType<System.Web.Http.Results.OkNegotiatedContentResult<UserReturnModel>>(result);
         }
 
+        [Fact]
+        public void GetUserByNameCheckStatusCodeIfNotFound()
+        {
+            string NameToFind = "nonexistentUser";
+            User user = null;
+            var store = Substitute.For<IUserStore<User>>();
+            var userManager = Substitute.For<ApplicationUserManager>(store);
+            userManager.FindByNameAsync(NameToFind).Returns(user);
+
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                Substitute.For<ISecurityContext>(), Substitute.For<IAuthService>(), userManager, store,
+                Substitute.For<IRoleStore<IdentityRole, string>>());
+
+            //Act
+            IHttpActionResult NullUser = controller.GetUserByName(NameToFind).Result;
+
+            //Assert
+            Assert.IsType<NotFoundResult>(NullUser);
+        }
+
+        [Fact]
+        public void GetUserByNameCheckStatusCodeIfUserFound()
+        {
+            string NameToFind = "ExsistedUser";
+            User user = new User
+            {
+                ProviderId = 35,
+                GitHubUrl = "GitHubUrl",
+                UserName="ExsistedUser",
+            };
+            var store = Substitute.For<IUserStore<User>>();
+            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
+            userManager.FindByNameAsync(NameToFind).Returns(user);
+
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                Substitute.For<ISecurityContext>(), Substitute.For<IAuthService>(), userManager, store,
+                Substitute.For<IRoleStore<IdentityRole, string>>());
+
+            IHttpActionResult result = controller.GetUserByName(NameToFind).Result;
+
+            Assert.IsType<System.Web.Http.Results.OkNegotiatedContentResult<UserReturnModel>>(result);
+        }
 
         
     }
