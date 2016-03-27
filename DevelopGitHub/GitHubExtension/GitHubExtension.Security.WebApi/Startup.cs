@@ -40,9 +40,7 @@ namespace GitHubExtension.Security.WebApi
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/api/Account/ExternalLogin"),
                 AuthenticationMode =  AuthenticationMode.Active,
-
             });
 
             #endregion

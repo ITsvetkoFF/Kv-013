@@ -15,39 +15,28 @@ using GitHubExtension.Security.WebApi.Library.Exceptions;
 using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : BaseApiController
     {
         #region private fields
         private readonly IGithubService _githubService;
         private readonly ISecurityContext _securityContext;
-        private readonly IAuthService _authService;
         private readonly ApplicationUserManager _userManager;
-        private readonly IUserStore<User> _userStore;
-        private readonly IRoleStore<IdentityRole, string> _rolestore;
 
         #endregion
 
         public AccountController(
             IGithubService githubService,
             ISecurityContext securityContext,
-            IAuthService authService,
-            ApplicationUserManager userManager,
-            IUserStore<User> userStore,
-            IRoleStore<IdentityRole, string> rolestore)
+            ApplicationUserManager userManager)
         {
-            _userStore = userStore;
-            _rolestore = rolestore;
             _githubService = githubService;
             _securityContext = securityContext;
-            _authService = authService;
             _userManager = userManager;
-            
         }
 
         [Authorize(Roles = "Admin")]
@@ -150,9 +139,11 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             if (user == null)
             {
                 // if result is not null we have an error occured
-                IHttpActionResult registrationResult = await RegisterUser(tokenClaim.Value);
+                user = userReadModel.ToUserEntity();
+                IHttpActionResult registrationResult = await RegisterUser(user, tokenClaim.Value);
                 if (registrationResult != null)
                     return registrationResult;
+
             }
 
             ClaimsIdentity localIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
@@ -169,17 +160,25 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Redirect("http://localhost:3000/");
         }
 
-        private async Task<IHttpActionResult> RegisterUser(string token)
+        [Route("logout")]
+        [HttpPost]
+        public IHttpActionResult LogOut()
+        {
+            var authentication = HttpContext.Current.GetOwinContext().Authentication;
+            authentication.SignOut();
+
+            return Ok();
+        }
+
+        private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             SecurityRole role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
                 return InternalServerError();
 
-            GitHubUserModel gitHubUserModel = await _githubService.GetUserAsync(token);
             List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
             
             var repositoriesToAdd = repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
-            User user = gitHubUserModel.ToUserEntity();
             user.UserRepositoryRoles = repositoriesToAdd;
 
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
