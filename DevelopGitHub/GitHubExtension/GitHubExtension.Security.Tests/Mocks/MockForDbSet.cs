@@ -26,10 +26,6 @@ namespace GitHubExtension.Security.Tests.Mocks
             return data.GetEnumerator();
         }
 
-        //IEnumerator GetEnumerator()
-        //{
-        //    return GetEnumerator();
-        //}
 
         public Type ElementType
         {
