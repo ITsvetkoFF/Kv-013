@@ -104,9 +104,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestForControllers\GitHubExtensionSecurityWebApiAccountController.cs" />
+    <Compile Include="Mocks\MockForDbSet.cs" />
+    <Compile Include="Mocks\MockForEnumerableQuery.cs" />
+    <Compile Include="TestForControllers\TestGitHubExtensionSecurityWebApiAccountControllerAssignRolesToUser.cs" />
+    <Compile Include="TestForControllers\TestGitHubExtensionSecurityWebApiAccountControllerGetUserById.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestExtensions\TestUserMapper.cs" />
+    <Compile Include="TestForControllers\TestGitHubExtensionSecurityWebApiAccountControllerGetUserByName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
