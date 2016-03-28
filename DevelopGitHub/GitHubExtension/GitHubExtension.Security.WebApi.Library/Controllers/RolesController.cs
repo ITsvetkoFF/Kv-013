@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 
