@@ -40,7 +40,7 @@ namespace GitHubExtension.Security.WebApi
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                AuthenticationMode =  AuthenticationMode.Active,
+                AuthenticationMode =  AuthenticationMode.Active
             });
 
             #endregion
@@ -97,8 +97,7 @@ namespace GitHubExtension.Security.WebApi
             HttpConfiguration config = new HttpConfiguration();
 
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
-            config.MapHttpAttributeRoutes();
-            //config.SuppressDefaultHostAuthentication();
+            config.MapHttpAttributeRoutes();           
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -126,8 +125,6 @@ namespace GitHubExtension.Security.WebApi
 
             GitHubAuthOptions = new GitHubAuthenticationOptions()
             {
-                //ClientId = "c04e00dfe8db05cf8807",
-                //ClientSecret = "eed4fa1adf3f8e8633919df736bf51c750471dab",
                 ClientId = "eea12517d7846310f98b",
                 ClientSecret = "7652a3a398fe09eedaa1a19ae749db7b1bfa85ab",
                 Provider = new GitHubAuthProvider()
