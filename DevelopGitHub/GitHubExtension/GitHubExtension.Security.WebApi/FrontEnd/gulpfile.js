@@ -6,11 +6,12 @@ var glob = require('glob');
 var gulp = require('gulp');
 var path = require('path');
 var _ = require('lodash');
-var $ = require('gulp-load-plugins')({ lazy: true });
+var $ = require('gulp-load-plugins')({lazy: true});
 // BEGIN: Localization dependencies
 var ngConstant = require('gulp-ng-constant');
 var extend = require('gulp-extend');
 var wrap = require('gulp-wrap');
+var replace = require('gulp-replace');
 // END: Localization dependencies
 
 var colors = $.util.colors;
@@ -28,7 +29,6 @@ var port = process.env.PORT || config.defaultPort;
  * --startServers: Will start servers for midway tests on the test task.
  */
 
-
 gulp.task('buildLocalizations', function () {
     log('building localization files');
 
@@ -43,8 +43,8 @@ gulp.task('buildLocalizations', function () {
           ],
           templatePath: config.localizationPath + '/template.ejs'
       }))
-      // Writes config.js to dist/ folder 
-      .pipe(gulp.dest(config.localizationPath));
+     .pipe(replace(/"/g, '\''))
+     .pipe(gulp.dest(config.localizationPath));
 });
 
 /**

@@ -26,8 +26,9 @@
             service.message = i18nMessages[lang];
 
             // if we haven't json file with language constants that we needed, we use en-US by default
-            if (!service.message)
+            if (!service.message) {
                 service.message = i18nMessages['en-US'];
+            }
         }
     }
 })();
