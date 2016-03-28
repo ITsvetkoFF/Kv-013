@@ -1,8 +1,11 @@
 ﻿using System.Data.Entity;
+using System.Linq;
+using GitHubExtension.Security.DAL;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.DAL.Interfaces;
+using GitHubExtension.Security.DAL.Package;
 using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.WebApi.Library.Package;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -15,23 +18,21 @@ namespace GitHubExtension.Security.WebApi.Library
     {
         public static Container ConfigurationSimpleInjector()
         {
-            var container = new Container();
-
+            Container container = new Container();
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
-            // DisposableService implements IDisposable
-            container.Register<ISecurityContext>(() => new SecurityContext(), Lifestyle.Scoped);
-            container.Register<IGithubService, GithubService>(Lifestyle.Singleton);
+            return RegisterPackages(container);
+        }
 
-            container.Register<ApplicationUserManager>(Lifestyle.Scoped);
-            container.Register<SecurityRoleManager>(Lifestyle.Scoped);
-
-            container.Register<IUserStore<User>, GitHubUserStore>(Lifestyle.Scoped);
-            container.Register<IRoleStore<IdentityRole, string>, GitHubRoleStore>(Lifestyle.Scoped);
-
-            container.Register<IAuthService, AuthService>(Lifestyle.Scoped);
-
+        public static Container RegisterPackages(Container container)
+        {
+            container.RegisterPackages(new[]
+            {
+                typeof(DALPackage).Assembly,
+                typeof(WebApiLibraryPackage).Assembly
+            });
             container.Verify();
+
             return container;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GitHubExtension.Models.CommunicationModels;
+using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.StorageModels.Identity;

@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Cors;
+using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
