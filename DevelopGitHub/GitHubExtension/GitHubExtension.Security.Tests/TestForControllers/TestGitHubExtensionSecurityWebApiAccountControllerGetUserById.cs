@@ -15,15 +15,17 @@ using GitHubExtension.Security.DAL.Interfaces;
 using System.Web.Http;
 using System.Web.Http.Results;
 using GitHubExtension.Security.WebApi.Library.Controllers;
+using System.Data.Entity.Infrastructure;
+using GitHubExtension.Security.Tests.Mocks;
 
 
 
 namespace GitHubExtension.Security.Tests.Te
 {
-    public class TestGitHubExtensionSecurityWebApiAccountController
+    public class TestGitHubExtensionSecurityWebApiAccountControllerGetUserById
     {
         [Fact]
-        public void GetUserByIdCheckStatusCodeIfNotFound()
+        public void CheckStatusCodeIfNotFound()
         {
             //Arrange
             string idToFind ="34";
@@ -44,7 +46,7 @@ namespace GitHubExtension.Security.Tests.Te
         }
 
         [Fact]
-        public void GetUserByIdCheckStatusCodeIfUserFound()
+        public void CheckStatusCodeIfUserFound()
         {
             string idToFind = "35";
             User user = new User
@@ -62,52 +64,8 @@ namespace GitHubExtension.Security.Tests.Te
 
             IHttpActionResult result = controller.GetUser(idToFind).Result;
 
-            Assert.IsType<System.Web.Http.Results.OkNegotiatedContentResult<UserReturnModel>>(result);
+            Assert.IsType<OkNegotiatedContentResult<UserReturnModel>>(result);
         }
 
-        [Fact]
-        public void GetUserByNameCheckStatusCodeIfNotFound()
-        {
-            string NameToFind = "nonexistentUser";
-            User user = null;
-            var store = Substitute.For<IUserStore<User>>();
-            var userManager = Substitute.For<ApplicationUserManager>(store);
-            userManager.FindByNameAsync(NameToFind).Returns(user);
-
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                Substitute.For<ISecurityContext>(), Substitute.For<IAuthService>(), userManager, store,
-                Substitute.For<IRoleStore<IdentityRole, string>>());
-
-            //Act
-            IHttpActionResult NullUser = controller.GetUserByName(NameToFind).Result;
-
-            //Assert
-            Assert.IsType<NotFoundResult>(NullUser);
-        }
-
-        [Fact]
-        public void GetUserByNameCheckStatusCodeIfUserFound()
-        {
-            string NameToFind = "ExsistedUser";
-            User user = new User
-            {
-                ProviderId = 35,
-                GitHubUrl = "GitHubUrl",
-                UserName="ExsistedUser",
-            };
-            var store = Substitute.For<IUserStore<User>>();
-            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            userManager.FindByNameAsync(NameToFind).Returns(user);
-
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                Substitute.For<ISecurityContext>(), Substitute.For<IAuthService>(), userManager, store,
-                Substitute.For<IRoleStore<IdentityRole, string>>());
-
-            IHttpActionResult result = controller.GetUserByName(NameToFind).Result;
-
-            Assert.IsType<System.Web.Http.Results.OkNegotiatedContentResult<UserReturnModel>>(result);
-        }
-
-        
     }
 }

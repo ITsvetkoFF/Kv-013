@@ -25,7 +25,7 @@ namespace GitHubExtension.Security.WebApi.Library.Mappers
             {
                 Id = user.Id,
                 Email = user.Email,
-                GitHubId = (user as User).ProviderId,
+                GitHubId = user.ProviderId,
                 UserName =  user.UserName
             };
 
