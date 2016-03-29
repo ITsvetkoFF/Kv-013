@@ -110,10 +110,6 @@
     <Compile Include="Configuration\Tables\UserLoginsConfiguration.cs" />
     <Compile Include="Configuration\Tables\UserRoleConfiguration.cs" />
     <Compile Include="Context\SecurityContext.cs" />
-    <Compile Include="Migrations\201603290909226_Initial.cs" />
-    <Compile Include="Migrations\201603290909226_Initial.Designer.cs">
-      <DependentUpon>201603290909226_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Package\DALPackage.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\GitHubRoleStore.cs" />
@@ -133,11 +129,6 @@
       <Project>{38B14075-AF0F-4588-912F-D000C37346CD}</Project>
       <Name>GitHubExtension.Security.StorageModels</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603290909226_Initial.resx">
-      <DependentUpon>201603290909226_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

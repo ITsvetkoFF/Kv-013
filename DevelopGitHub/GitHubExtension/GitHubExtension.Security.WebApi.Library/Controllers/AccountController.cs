@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
@@ -19,7 +18,6 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
-    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : BaseApiController
     {
