@@ -160,8 +160,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             // TODO Need method for cookies in the future?
             HttpContext.Current.Response.Cookies["userName"].Value = user.UserName;
             HttpContext.Current.Response.Cookies["isAuth"].Value = "true";
-            
-            return Redirect("http://localhost:3000/");
+
+            return Redirect("http://localhost:50859/");
         }
 
         [Route("logout")]

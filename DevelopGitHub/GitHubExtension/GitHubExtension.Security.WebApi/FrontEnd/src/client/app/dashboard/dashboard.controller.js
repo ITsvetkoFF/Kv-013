@@ -5,43 +5,21 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$q', 'dataservice', 'logger', 'i18n'];
+    DashboardController.$inject = ['$q', 'logger'];
     /* @ngInject */
-    function DashboardController($q, dataservice, logger, i18n) {
+    function DashboardController($q, logger) {
         var vm = this;
-
-        // add localization
-        vm.i18n = i18n;
-
         vm.news = {
             title: 'GitHubExtension',
             description: 'Hot Towel Angular is a SPA template for Angular developers.'
         };
         vm.messageCount = 0;
-        vm.people = [];
         vm.title = 'Dashboard';
 
         activate();
 
         function activate() {
-            var promises = [getMessageCount(), getPeople()];
-            return $q.all(promises).then(function() {
-                logger.info('Activated Dashboard View');
-            });
-        }
-
-        function getMessageCount() {
-            return dataservice.getMessageCount().then(function (data) {
-                vm.messageCount = data;
-                return vm.messageCount;
-            });
-        }
-
-        function getPeople() {
-            return dataservice.getPeople().then(function (data) {
-                vm.people = data;
-                return vm.people;
-            });
+            return logger.info('Activated Dashboard View');
         }
     }
 })();

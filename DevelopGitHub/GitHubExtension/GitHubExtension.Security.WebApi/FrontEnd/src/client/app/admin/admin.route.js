@@ -5,13 +5,13 @@
         .module('app.admin')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'i18n'];
+    appRun.$inject = ['routerHelper'];
     /* @ngInject */
-    function appRun(routerHelper, i18n) {
-        routerHelper.configureStates(getStates(i18n));
+    function appRun(routerHelper) {
+        routerHelper.configureStates(getStates());
     }
 
-    function getStates(i18n) {
+    function getStates() {
         return [
             {
                 state: 'admin',
@@ -23,7 +23,7 @@
                     title: 'Admin',
                     settings: {
                         nav: 2,
-                        content: '<i class="fa fa-lock"></i>' + i18n.message.ADMIN
+                        content: '<i class="fa fa-lock"></i> Admin'
                     }
                 }
             }
