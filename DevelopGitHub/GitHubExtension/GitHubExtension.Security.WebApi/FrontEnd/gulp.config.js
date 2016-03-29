@@ -122,8 +122,7 @@ module.exports = function() {
          * Node settings
          */
         nodeServer: server + 'app.js',
-        defaultPort: '8001',
-        localizationPath :'src/client/app/blocks/localization'
+        defaultPort: '8001'
     };
 
     /**

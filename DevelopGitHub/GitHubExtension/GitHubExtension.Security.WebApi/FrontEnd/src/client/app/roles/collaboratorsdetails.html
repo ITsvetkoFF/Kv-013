@@ -11,7 +11,7 @@
             <td>{{collaborator.login}}</td>
             <td>
                 <select ng-model="vmRoles.roleName[$index]" ng-options="role.name for role in vmRoles.roles.data" ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
-                    <option disabled selected>Select a role</option>
+                    <option value="">---Please select---</option>
                 </select>
             </td>
             <td>

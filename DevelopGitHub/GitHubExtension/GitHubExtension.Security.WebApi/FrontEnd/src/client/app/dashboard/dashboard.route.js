@@ -5,13 +5,13 @@
         .module('app.dashboard')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'i18n'];
+    appRun.$inject = ['routerHelper'];
     /* @ngInject */
-    function appRun(routerHelper, i18n) {
-        routerHelper.configureStates(getStates(i18n));
+    function appRun(routerHelper) {
+        routerHelper.configureStates(getStates());
     }
 
-    function getStates(i18n) {
+    function getStates() {
         return [
             {
                 state: 'dashboard',
@@ -23,7 +23,7 @@
                     title: 'dashboard',
                     settings: {
                         nav: 1,
-                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.DASHBOARD
+                        content: '<i class="fa fa-dashboard"></i> Dashboard'
                     }
                 }
             }
