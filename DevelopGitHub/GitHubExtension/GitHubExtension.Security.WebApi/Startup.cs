@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
@@ -13,7 +12,6 @@ using GitHubExtension.Security.WebApi.Library.Provider;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -44,8 +42,6 @@ namespace GitHubExtension.Security.WebApi
             });
 
             #endregion
-
-            app.UseCors(CorsOptions.AllowAll);
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             config.EnsureInitialized();
@@ -96,7 +92,7 @@ namespace GitHubExtension.Security.WebApi
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
+          
             config.MapHttpAttributeRoutes();           
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
