@@ -188,6 +188,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />
     <Content Include="FrontEnd\gulpfile.js" />
@@ -254,8 +256,6 @@
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
     <Content Include="FrontEnd\src\client\app\widgets\widgets.module.js" />
-    <Content Include="FrontEnd\src\client\images\busy.gif" />
-    <Content Include="FrontEnd\src\client\images\icon.png" />
     <Content Include="FrontEnd\src\client\index.html" />
     <Content Include="FrontEnd\src\client\specs.html" />
     <Content Include="FrontEnd\src\client\test-helpers\bind-polyfill.js" />
@@ -265,6 +265,11 @@
     <Content Include="FrontEnd\src\server\favicon.ico" />
     <Content Include="FrontEnd\src\server\routes.js" />
     <Content Include="FrontEnd\src\server\utils\404.js" />
+    <Content Include="images\busy.gif" />
+    <Content Include="images\icon.png" />
+    <Content Include="index.html" />
+    <Content Include="js\app-52fbe74ff8.js" />
+    <Content Include="js\lib-9245b0de49.js" />
     <Content Include="packages.config" />
     <Content Include="FrontEnd\.bowerrc" />
     <Content Include="FrontEnd\.editorconfig" />
@@ -275,6 +280,15 @@
     <Content Include="FrontEnd\package.json" />
     <Content Include="FrontEnd\README.md" />
     <Content Include="FrontEnd\src\client\styles\styles.less" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,9 +297,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="styles\app-e0c8e1cdc7.css" />
+    <Content Include="styles\lib-bd72d1f310.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -321,7 +342,16 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52004</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50859/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
