@@ -5,6 +5,7 @@ bower_components/
 .idea/
 
 # other
+.118n-messages.constant.js
 .tmp
 build/
 report/

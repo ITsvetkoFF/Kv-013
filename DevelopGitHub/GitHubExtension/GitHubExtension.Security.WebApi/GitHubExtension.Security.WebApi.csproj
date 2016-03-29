@@ -205,6 +205,9 @@
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.spec.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception.module.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\i18n-messages.constant.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\i18n.factory.js" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\localization.module.js" />
     <Content Include="FrontEnd\src\client\app\blocks\logger\logger.js" />
     <Content Include="FrontEnd\src\client\app\blocks\logger\logger.module.js" />
     <Content Include="FrontEnd\src\client\app\blocks\router\router-helper.provider.js" />
@@ -268,7 +271,7 @@
     <Content Include="images\busy.gif" />
     <Content Include="images\icon.png" />
     <Content Include="index.html" />
-    <Content Include="js\app-52fbe74ff8.js" />
+    <Content Include="js\app-48042a042f.js" />
     <Content Include="js\lib-9245b0de49.js" />
     <Content Include="packages.config" />
     <Content Include="FrontEnd\.bowerrc" />
@@ -289,6 +292,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\en-US.json" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\template.ejs" />
+    <Content Include="FrontEnd\src\client\app\blocks\localization\uk.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
