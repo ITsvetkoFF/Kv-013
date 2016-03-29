@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide { display: none!important; }
+    </style>
+    <title ng-bind="title">GitHubExtension</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <base href="/">
+
+    <link rel="stylesheet" href="styles/lib-bd72d1f310.css">
+
+    <link rel="stylesheet" href="styles/app-e0c8e1cdc7.css">
+</head>
+<body>
+<div>
+    <div ng-include="'app/layout/shell.html'"></div>
+    <div id="splash-page" ng-show="showSplash">
+        <div class="page-splash">
+            <div class="page-splash-message">
+                GitHubExtension
+            </div>
+            <div class="progress progress-striped active page-progress-bar">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/lib-9245b0de49.js"></script>
+
+    <script src="js/app-52fbe74ff8.js"></script>
+</div>
+</body>
+</html>
