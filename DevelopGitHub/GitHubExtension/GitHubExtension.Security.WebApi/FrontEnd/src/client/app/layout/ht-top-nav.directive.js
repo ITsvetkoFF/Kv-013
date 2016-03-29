@@ -18,10 +18,13 @@
             templateUrl: 'app/layout/ht-top-nav.html'
         };
 
-        TopNavController.$inject = ['$state', 'routerHelper'];
+        TopNavController.$inject = ['i18n', '$state', 'routerHelper'];
         /* @ngInject */
-        function TopNavController($state, routerHelper) {
+        function TopNavController(i18n, $state, routerHelper) {
             var vm = this;
+
+            // add i18n for localization
+            vm.i18n = i18n;
             var states = routerHelper.getStates();
 
             activate();
