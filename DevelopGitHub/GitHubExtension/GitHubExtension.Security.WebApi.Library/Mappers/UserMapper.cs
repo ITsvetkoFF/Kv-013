@@ -1,5 +1,6 @@
 ﻿using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.StorageModels.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Security.WebApi.Library.Mappers
 {
