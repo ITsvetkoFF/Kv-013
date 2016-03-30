@@ -13,6 +13,7 @@ using GitHubExtension.Security.WebApi.Library.Controllers;
 using System.Data.Entity.Infrastructure;
 using GitHubExtension.Security.Tests.Mocks;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 
 
@@ -50,23 +51,23 @@ namespace GitHubExtension.Security.Tests.TestForControllers
          
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void CheckStatusCodeIfUserNotFound(AccountController controller,string findUserById)
+        public void NotFoundUserTest(AccountController controller,string findUserById)
         {
             Task<IHttpActionResult> NullUser = controller.GetUser(findUserById);
 
             IHttpActionResult result = NullUser.Result;
-            Assert.IsType<NotFoundResult>(result);
+            result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
 
 
         [Theory]
         [MemberData("GetDataForOkResult")]
-        public void CheckStatusCodeIfUserFound(AccountController controller, string findUserById)
+        public void OkResultTest(AccountController controller, string findUserById)
         {
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<OkNegotiatedContentResult<UserReturnModel>>(result);
+            result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }
 
     }
