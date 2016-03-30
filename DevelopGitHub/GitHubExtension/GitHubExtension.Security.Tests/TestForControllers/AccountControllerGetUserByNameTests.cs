@@ -47,7 +47,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void CheckStatusCodeIfUserNotFound(AccountController controller, string nameToFind)
+        public void NotFoundUserTest(AccountController controller, string nameToFind)
         {
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
@@ -57,7 +57,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForOkResult")]
-        public void CheckStatusCodeIfUserFound(AccountController controller, string nameToFind)
+        public void OkResultTest(AccountController controller, string nameToFind)
         {
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 

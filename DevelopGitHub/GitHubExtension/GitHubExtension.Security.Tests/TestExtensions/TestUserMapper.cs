@@ -15,46 +15,25 @@ namespace GitHubExtension.Security.Tests.TestExtensions
 {
     public class UserMapperTests
     {
-        [Fact]
-        public void UserReturnModelTest()
+        public static IEnumerable<object[]> GetData
         {
-            User EntityToUserReturnModelTest = new User
+            get
             {
-                Id = "123",
-                ProviderId = 124,
-                GitHubUrl = "GithubUrl",
-                UserName="UserName",
-            };
-            UserReturnModel expectedUserReturnModel = new UserReturnModel
-            {
-                Id =EntityToUserReturnModelTest.Id,
-                Email = EntityToUserReturnModelTest.Email,
-                GitHubId = EntityToUserReturnModelTest.ProviderId,
-                UserName =  EntityToUserReturnModelTest.UserName
-            };
-            UserReturnModelComparer comparer =new UserReturnModelComparer();
+                yield return new object[]
+                {
+                    new User{ Id="123", ProviderId=124, Email="Email@gamil.com", UserName="Name"},
+                    new UserReturnModel{ Id="123", GitHubId=124, Email="Email@gamil.com", UserName="Name"}
+                };
+            }
+        }
 
+        [Theory]
+        [MemberData("GetData")]
+        public void UserReturnModelTest(User EntityToUserReturnModelTest, UserReturnModel expectedUserReturnModel)
+        {
             UserReturnModel userReturnModel = EntityToUserReturnModelTest.ToUserReturnModel();
-            
-            Assert.Equal<UserReturnModel>(expectedUserReturnModel, userReturnModel, comparer);
-            
-        }
-    }
 
-    public class UserReturnModelComparer : IEqualityComparer<UserReturnModel>
-    {
-        public bool Equals(UserReturnModel x, UserReturnModel y)
-        {
-            if (x.Id != y.Id) return false;
-            if (x.Email != y.Email) return false;
-            if (x.GitHubId != y.GitHubId) return false;
-            if (x.UserName != y.UserName) return false;
-            return true;
-        }
-
-        public int GetHashCode(UserReturnModel obj)
-        {
-            return base.GetHashCode();
+            userReturnModel.ShouldBeEquivalentTo(expectedUserReturnModel); 
         }
     }
 }
