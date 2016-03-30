@@ -38,8 +38,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Admin")]
-        [Route("user/{id:guid}", Name = "GetUserById")]
+        [Authorize(Roles = "Admin")] // It is shit. It is not allowed to use magic strings or numbers. 
+        [Route("user/{id:guid}", Name = "GetUserById")]  // It is shit. It is not allowed to use magic strings or numbers. 
         public async Task<IHttpActionResult> GetUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -52,8 +52,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles = "Admin")]
-        [Route("user/{username}")]
+        [Authorize(Roles = "Admin")]  // It is shit. It is not allowed to use magic strings or numbers. 
+        [Route("user/{username}")]  // It is shit. It is not allowed to use magic strings or numbers. 
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);

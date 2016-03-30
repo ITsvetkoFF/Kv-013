@@ -16,7 +16,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         }
 
         private readonly ISecurityContext _securityContext;
-        
 
         [Route("")]
         [AllowAnonymous]
