@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
+using FluentAssertions;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -52,7 +53,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<NotFoundResult>(result);
+            result.Should().BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database",nameToFind);
         }
 
         [Theory]
@@ -62,7 +63,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<OkNegotiatedContentResult<UserReturnModel>>(result);
+            result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }
     }
 }

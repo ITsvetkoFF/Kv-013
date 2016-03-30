@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
+using FluentAssertions;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -20,6 +21,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
     {
         private const string roleIndex = "role";
         private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
+
         public static IEnumerable<object[]> GetDataForNotFountResult
         {
             get
@@ -88,7 +90,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<NotFoundResult>(result);
+            result.Should().BeOfType<NotFoundResult>("Because user with providerId= {0} doesn't exists in database",gitHubId);
         }
 
         [Theory]
@@ -98,7 +100,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<InvalidModelStateResult>(result);
+            result.Should().BeOfType<InvalidModelStateResult>("Because impossible to assign role = {0} that doesn't exist in database", roleToAssign);
         }
 
         [Theory]
@@ -108,8 +110,8 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
-            InvalidModelStateResult modelStateResult = Assert.IsType<InvalidModelStateResult>(result);
-            Assert.Equal(string.Format(expectedErrorForInvalidRole, roleToAssign), modelStateResult.ModelState[roleIndex].Errors.First().ErrorMessage);
+            result.Should().BeOfType<InvalidModelStateResult>("Because impossible to assign role = {0} that doesn't exist in database", roleToAssign);
+            result.Should().BeOfType<InvalidModelStateResult>().Which.ModelState[roleIndex].Errors.First().ErrorMessage.Should().Be(string.Format(expectedErrorForInvalidRole, roleToAssign));
         }
 
         [Theory]
@@ -119,7 +121,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<OkResult>(result);
+            result.Should().BeOfType<OkResult>();
         }
     }
 }

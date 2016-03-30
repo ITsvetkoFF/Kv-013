@@ -13,6 +13,7 @@ using GitHubExtension.Security.WebApi.Library.Controllers;
 using System.Data.Entity.Infrastructure;
 using GitHubExtension.Security.Tests.Mocks;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 
 
@@ -55,7 +56,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> NullUser = controller.GetUser(findUserById);
 
             IHttpActionResult result = NullUser.Result;
-            Assert.IsType<NotFoundResult>(result);
+            result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
 
 
@@ -66,7 +67,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
             IHttpActionResult result = response.Result;
-            Assert.IsType<OkNegotiatedContentResult<UserReturnModel>>(result);
+            result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }
 
     }
