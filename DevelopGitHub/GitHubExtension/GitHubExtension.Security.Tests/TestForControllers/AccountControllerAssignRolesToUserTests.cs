@@ -13,11 +13,14 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
+using FluentAssertions;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class AccountControllerAssignRolesToUserTests
     {
+        private const string roleIndex = "role";
+        private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
         public static IEnumerable<object[]> GetDataForNotFountResult
         {
             get
@@ -38,7 +41,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance(2, "Admin"), 1, 0, "Admin" };//controller, int gitHubid, int repoId, string roletoAssign)
+                yield return new object[] { GetControllerInstance(2, "Admin"), 1, 0, "Admin" };
             }
         }
 
@@ -54,7 +57,8 @@ namespace GitHubExtension.Security.Tests.TestForControllers
                    new UserRepositoryRole { Id =3 , },
                }
             };
-            List<User> users = new List<User>{
+            List<User> users = new List<User>
+            {
                 new User{ProviderId = 4,},
                 new User{ProviderId = providerId},
                 userToUpdate,
@@ -69,7 +73,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
             userManager.UpdateAsync(userToUpdate).Returns(IdentityResult.Success);
-            userManager.AddClaim(userToUpdate.Id, new Claim(role, repositoryRoleToFind.Id.ToString()));
             userManager.CreateIdentityAsync(userToUpdate, DefaultAuthenticationTypes.ApplicationCookie).Returns(Task.FromResult(new ClaimsIdentity()));
             userManager.AddClaimAsync(userToUpdate.Id, Arg.Any<Claim>()).Returns(IdentityResult.Success);
             var context = Substitute.For<ISecurityContext>();
@@ -81,7 +84,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void UserNotFoundTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void NotFoundUserTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
         {
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
@@ -101,13 +104,13 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForInvalidModelStateResult")]
-        public void ErrorMessageIfRoleNotExistsTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void ErrorMessageForInvalidRoleTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
         {
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
             InvalidModelStateResult modelStateResult = Assert.IsType<InvalidModelStateResult>(result);
-            Assert.Equal(string.Format("Roles '{0}' does not exists in the system", roleToAssign), modelStateResult.ModelState["role"].Errors.First().ErrorMessage);
+            Assert.Equal(string.Format(expectedErrorForInvalidRole, roleToAssign), modelStateResult.ModelState[roleIndex].Errors.First().ErrorMessage);
         }
 
         [Theory]
