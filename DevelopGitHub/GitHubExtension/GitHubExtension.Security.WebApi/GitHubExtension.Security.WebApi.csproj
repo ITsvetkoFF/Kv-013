@@ -344,6 +344,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(ProjectDir)FrontEnd\build\fonts" "$(ProjectDir)fonts" /Y /D
+xcopy "$(ProjectDir)FrontEnd\build\js" "$(ProjectDir)js" /Y /D
+xcopy "$(ProjectDir)FrontEnd\build\styles" "$(ProjectDir)styles" /Y /D
+xcopy "$(ProjectDir)FrontEnd\build" "$(ProjectDir)" /Y /D</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
