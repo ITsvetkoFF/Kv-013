@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Activities.sql" />
-    <Build Include="ActivitiesTypes.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="GitHubExtension.Activity.DB.refactorlog" />

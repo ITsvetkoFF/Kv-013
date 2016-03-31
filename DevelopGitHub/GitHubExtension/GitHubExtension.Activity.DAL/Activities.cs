@@ -12,8 +12,12 @@ namespace GitHubExtension.Activity.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class C__RefactorLog
+    public partial class Activities
     {
-        public System.Guid OperationKey { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int CurrentProjectId { get; set; }
+        public int ActivityType { get; set; }
+        public Nullable<System.DateTime> InvokeTime { get; set; }
     }
 }

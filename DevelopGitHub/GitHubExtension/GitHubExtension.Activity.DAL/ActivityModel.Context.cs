@@ -13,10 +13,10 @@ namespace GitHubExtension.Activity.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ActivityContext : DbContext
+    public partial class ActivityModel : DbContext
     {
-        public ActivityContext()
-            : base("name=GitHubExtensionEntities")
+        public ActivityModel()
+            : base("name=ActivityModel")
         {
         }
     
@@ -25,8 +25,6 @@ namespace GitHubExtension.Activity.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<Activity> Activities { get; set; }
-        public virtual DbSet<ActivityType> ActivitiesTypes { get; set; }
+        public virtual DbSet<Activities> Activities { get; set; }
     }
 }

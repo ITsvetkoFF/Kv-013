@@ -94,7 +94,11 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 RepositoryId = repoId,
                 SecurityRoleId = role.Id
             });
+
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
+
+            // add Activity
+            //_activityService.AddActivity()
 
             if (!updateResult.Succeeded)
             {
