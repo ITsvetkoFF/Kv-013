@@ -21,12 +21,20 @@ namespace GitHubExtension.Security.Tests.TestForControllers
     {
         private const string roleIndex = "role";
         private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
-
+        #region common-data
+       
+        #endregion
         public static IEnumerable<object[]> GetDataForNotFountResult
         {
             get
             {
-                yield return new object[] { GetControllerInstance(2, "UserRole"), 12, 15, "UserRole" };
+                yield return new object[] 
+                { 
+                    new List<User>(),
+                    12, 
+                    15, 
+                    "UserRole" 
+                };
             }
         }
 
@@ -34,7 +42,20 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance(2, "BussinessAnalytics"), 1, 0, "BussinessAnalytics" };
+                yield return new object[] 
+                { 
+                    new List<User>
+                    {
+                        new User { ProviderId = 1},
+                    },
+                    new List<SecurityRole>
+                    {
+                        new SecurityRole { Name = "Admin"}
+                    },
+                    1,
+                    0, 
+                    "BussinessAnalytics" 
+                };
             }
         }
 
@@ -42,51 +63,58 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance(2, "Admin"), 1, 0, "Admin" };
+                yield return new object[]
+                { 
+                    new List<User>
+                    {
+                        new User { ProviderId = 2},
+                    },
+                    new List<SecurityRole>
+                    {
+                        new SecurityRole { Name = "Admin"}
+                    },
+                    new User
+                    {
+                        ProviderId = 1
+                    },
+                    1, 
+                    0, 
+                    "Admin" 
+                };
             }
         }
 
-        private static object GetControllerInstance(int providerId, string role)
+        private ApplicationUserManager MockForUsers(List<User> users)
         {
-            User userToUpdate = new User
-            {
-                Id = "111",
-                ProviderId = 1,
-                UserRepositoryRoles = new List<UserRepositoryRole>
-               {
-                   new UserRepositoryRole { Id =2 , },
-                   new UserRepositoryRole { Id =3 , },
-               }
-            };
-            List<User> users = new List<User>
-            {
-                new User{ProviderId = 4,},
-                new User{ProviderId = providerId},
-                userToUpdate,
-            };
-            IEnumerable<SecurityRole> roles = new List<SecurityRole>
-            {
-                new SecurityRole{ Id = 1, Name = "Admin" },
-                new SecurityRole{ Id = 2, Name = "Developer" },
-                new SecurityRole{ Id = 3, Name = "Reviewer" }
-            };
-            UserRepositoryRole repositoryRoleToFind = new UserRepositoryRole { Id = 12 };
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
+            //userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
+            userManager.Users.Returns(users.AsQueryable());
+            return userManager;
+        }
+
+        private ISecurityContext MockForContext(IEnumerable<SecurityRole> roles)
+        {
+            var context =Substitute.For<ISecurityContext>();
+            context.SecurityRoles.Returns(new MockForDbSet<SecurityRole>(roles));
+            return context;
+        } 
+
+        private ApplicationUserManager MockForAddingClaim(List<User> users, User userToUpdate)
+        {
+            var userManager = MockForUsers(users);
             userManager.UpdateAsync(userToUpdate).Returns(IdentityResult.Success);
             userManager.CreateIdentityAsync(userToUpdate, DefaultAuthenticationTypes.ApplicationCookie).Returns(Task.FromResult(new ClaimsIdentity()));
             userManager.AddClaimAsync(userToUpdate.Id, Arg.Any<Claim>()).Returns(IdentityResult.Success);
-            var context = Substitute.For<ISecurityContext>();
-            context.SecurityRoles.Returns(new MockForDbSet<SecurityRole>(roles));
-
-            return new AccountController(Substitute.For<IGithubService>(),
-                context, userManager);
+            return userManager;
         }
 
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void NotFoundUserTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                Substitute.For<ISecurityContext>(), MockForUsers(users));
+
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
@@ -95,8 +123,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForInvalidModelStateResult")]
-        public void InvalidRoleTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                MockForContext(roles), MockForUsers(users)); 
+
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
@@ -105,8 +136,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForInvalidModelStateResult")]
-        public void ErrorMessageForInvalidRoleTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                MockForContext(roles), MockForUsers(users));
+
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;
@@ -116,8 +150,12 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForOkResult")]
-        public void OkResultTest(AccountController controller, int gitHubId, int repoId, string roleToAssign)
+        public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign)
         {
+            users.Add(userToUpdate);
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+                MockForContext(roles), MockForAddingClaim(users,userToUpdate)); 
+
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
             IHttpActionResult result = response.Result;

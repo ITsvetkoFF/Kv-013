@@ -22,8 +22,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance("UserName1", null), "UserName1" };
-                yield return new object[] { GetControllerInstance("UserName1", null), "UserName2" };
+                yield return new object[] 
+                {
+                    "UserName1", 
+                    null,
+                };
             }
         }
 
@@ -31,8 +34,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance("ExistedUser", new User { ProviderId = 4, UserName = "ExistedUser" }), "ExistedUser" };
-                yield return new object[] { GetControllerInstance("FirstUser", new User { ProviderId = 5, UserName = "FirstUser" }), "FirstUser" };
+                yield return new object[] 
+                { 
+                    "ExistedUser", 
+                    new User { ProviderId = 4, UserName = "ExistedUser" },
+                };
             }
         }
 
@@ -48,8 +54,10 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void NotFoundUserTest(AccountController controller, string nameToFind)
+        public void NotFoundUserTest(string nameToFind, User fakeFoundUser)
         {
+            AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
+
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
             IHttpActionResult result = response.Result;
@@ -58,8 +66,10 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForOkResult")]
-        public void OkResultTest(AccountController controller, string nameToFind)
+        public void OkResultTest(string nameToFind, User fakeFoundUser)
         {
+            AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
+
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
             IHttpActionResult result = response.Result;

@@ -14,6 +14,7 @@ using System.Data.Entity.Infrastructure;
 using GitHubExtension.Security.Tests.Mocks;
 using System.Threading.Tasks;
 using FluentAssertions;
+using System;
 
 
 
@@ -25,8 +26,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance("1", null), "1" };
-                yield return new object[] { GetControllerInstance("2", null), "2" };
+                yield return new object[] 
+                { 
+                    "1", 
+                    null,  
+                };
             }
         }
 
@@ -34,8 +38,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] { GetControllerInstance("4", new User { ProviderId = 4 }), "4" }; 
-                yield return new object[] { GetControllerInstance("5", new User { ProviderId = 5 }), "5" };
+                yield return new object[] 
+                { 
+                    "5", 
+                    new User { ProviderId = 5 },
+                };
             }
         }
 
@@ -51,8 +58,10 @@ namespace GitHubExtension.Security.Tests.TestForControllers
          
         [Theory]
         [MemberData("GetDataForNotFountResult")]
-        public void NotFoundUserTest(AccountController controller,string findUserById)
+        public void NotFoundUserTest(string findUserById, User fakeFoundUser)
         {
+            AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
+
             Task<IHttpActionResult> NullUser = controller.GetUser(findUserById);
 
             IHttpActionResult result = NullUser.Result;
@@ -62,8 +71,10 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("GetDataForOkResult")]
-        public void OkResultTest(AccountController controller, string findUserById)
+        public void OkResultTest(string findUserById, User fakeFoundUser)
         {
+            AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
+
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
             IHttpActionResult result = response.Result;
