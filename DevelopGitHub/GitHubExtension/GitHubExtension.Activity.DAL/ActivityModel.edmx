@@ -23,24 +23,24 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GitHubExtensionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ActivityModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Activities" EntityType="GitHubExtensionModel.Activities" />
+          <EntitySet Name="Activities" EntityType="GitHubExtensionModel.ActivityEvent" />
         </EntityContainer>
-        <EnumType Name="ActivityType">
-          <Member Name="AddRole" />
-          <Member Name="ChangeRole" />
-          <Member Name="JoinToSystem" />
-          <Member Name="Comment" />
-        </EnumType>
-        <EntityType Name="Activities">
+        <EntityType Name="ActivityEvent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CurrentProjectId" Type="Int32" Nullable="false" />
-          <Property Name="ActivityType" Type="Int32" Nullable="false" />
+          <Property Name="ActivityType" Type="GitHubExtensionModel.ActivityType" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EnumType Name="ActivityType">
+          <Member Name="AddRole" />
+          <Member Name="ChangeRole" />
+          <Member Name="JoinToSystem" />
+          <Member Name="Comment" />
+        </EnumType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -48,7 +48,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GitHubExtensionModelStoreContainer" CdmEntityContainer="ActivityModel">
           <EntitySetMapping Name="Activities">
-            <EntityTypeMapping TypeName="GitHubExtensionModel.Activities">
+            <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityEvent">
               <MappingFragment StoreEntitySet="Activities">
                 <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
                 <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />

@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities.cs">
+    <Compile Include="ActivityEvent.cs">
       <DependentUpon>ActivityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ActivityModel.Context.cs">

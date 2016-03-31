@@ -25,6 +25,6 @@ namespace GitHubExtension.Activity.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Activities> Activities { get; set; }
+        public virtual DbSet<ActivityEvent> Activities { get; set; }
     }
 }

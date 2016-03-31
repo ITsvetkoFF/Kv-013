@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1548d9fade4f46d2a703dc78f4a7c123" Name="Diagram1">
-        <EntityTypeShape EntityType="GitHubExtensionModel.Activities" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityEvent" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

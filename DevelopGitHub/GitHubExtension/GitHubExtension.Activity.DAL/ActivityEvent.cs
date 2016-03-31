@@ -12,12 +12,12 @@ namespace GitHubExtension.Activity.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Activities
+    public partial class ActivityEvent
     {
         public int Id { get; set; }
         public string UserId { get; set; }
         public int CurrentProjectId { get; set; }
-        public int ActivityType { get; set; }
+        public ActivityType ActivityType { get; set; }
         public Nullable<System.DateTime> InvokeTime { get; set; }
     }
 }

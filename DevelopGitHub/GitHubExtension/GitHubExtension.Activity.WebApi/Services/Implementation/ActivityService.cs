@@ -11,16 +11,59 @@ namespace GitHubExtension.Activity.WebApi.Services.Implementation
 {
     public class ActivityService : IActivityService
     {
+        private ActivityModel activityModelContext;
+
+        public ActivityService()
+        {
+            activityModelContext = new ActivityModel();
+        }
 
         public bool AddActivity(ActivityType activityType, DateTime invokeTime, string userId, int currentProjectId)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                ActivityEvent activity = new ActivityEvent() 
+                { 
+                  UserId = userId, 
+                  CurrentProjectId = currentProjectId, 
+                  ActivityType = activityType, 
+                  InvokeTime = invokeTime
+                };
 
+                activityModelContext.Activities.Add(activity);
+
+                activityModelContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception) // Create custom exception
+            {
+
+                return false;
+            }
+        }
 
         public bool AddActivity(ActivityType activityType, DateTime invokeTime, string userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ActivityEvent activity = new ActivityEvent()
+                {
+                    UserId = userId,
+                    ActivityType = activityType,
+                    InvokeTime = invokeTime
+                };
+
+                activityModelContext.Activities.Add(activity);
+
+                activityModelContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception) // Create custom exception
+            {
+                return false;
+            }
         }
     }
 }

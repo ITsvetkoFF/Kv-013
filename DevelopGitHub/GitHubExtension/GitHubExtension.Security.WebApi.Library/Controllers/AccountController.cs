@@ -25,18 +25,20 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
     {
         #region private fields
         private readonly IGithubService _githubService;
-        private readonly ISecurityContext _securityContext;
         private readonly IActivityService _activityService;
+        private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
         #endregion
 
         public AccountController(
             IGithubService githubService,
+            IActivityService activityService,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
             _githubService = githubService;
+            _activityService = activityService;
             _securityContext = securityContext;
             _userManager = userManager;
         }
