@@ -14,7 +14,6 @@
         vm.title = 'Roles';
         vm.repo = '';
         vm.roleName = [];
-        vm.teammembers = searchCollaborators;
         activate();
 
         function activate() {
@@ -50,6 +49,9 @@
             githubCollaborators.assignRole(vm.repo, collaborator, role);
         };
 
+        vm.updateCurrentProject = function (repo) {
+            githubCollaborators.updateCurrentProject(repo);
+        };
         //function errorFn(response) {
         //    logger.error('Sing in operation failed, check your username and password and try again');
         //}
