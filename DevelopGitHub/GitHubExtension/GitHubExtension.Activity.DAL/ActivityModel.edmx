@@ -60,7 +60,7 @@
           </Key>
           <Property Name="OperationKey" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="Activities">
+        <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -69,19 +69,19 @@
           <Property Name="CurrentProjectId" Type="Int32" Nullable="false" />
           <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ActivitiesTypes" Relationship="Self.FK_Activities_ActivitiesTypes_Id" FromRole="Activities" ToRole="ActivitiesTypes" />
+          <NavigationProperty Name="ActivityType" Relationship="Self.FK_Activities_ActivitiesTypes_Id" FromRole="Activities" ToRole="ActivitiesTypes" />
         </EntityType>
-        <EntityType Name="ActivitiesTypes">
+        <EntityType Name="ActivityType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_ActivitiesTypes_Id" FromRole="ActivitiesTypes" ToRole="Activities" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activities_ActivitiesTypes_Id" FromRole="ActivitiesTypes" ToRole="Activities" />
         </EntityType>
         <Association Name="FK_Activities_ActivitiesTypes_Id">
-          <End Role="ActivitiesTypes" Type="Self.ActivitiesTypes" Multiplicity="1" />
-          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <End Role="ActivitiesTypes" Type="GitHubExtensionModel.ActivityType" Multiplicity="1" />
+          <End Role="Activities" Type="GitHubExtensionModel.Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ActivitiesTypes">
               <PropertyRef Name="Id" />
@@ -93,8 +93,8 @@
         </Association>
         <EntityContainer Name="GitHubExtensionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
-          <EntitySet Name="Activities" EntityType="Self.Activities" />
-          <EntitySet Name="ActivitiesTypes" EntityType="Self.ActivitiesTypes" />
+          <EntitySet Name="Activities" EntityType="GitHubExtensionModel.Activity" />
+          <EntitySet Name="ActivitiesTypes" EntityType="GitHubExtensionModel.ActivityType" />
           <AssociationSet Name="FK_Activities_ActivitiesTypes_Id" Association="Self.FK_Activities_ActivitiesTypes_Id">
             <End Role="ActivitiesTypes" EntitySet="ActivitiesTypes" />
             <End Role="Activities" EntitySet="Activities" />
@@ -114,7 +114,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Activities">
-            <EntityTypeMapping TypeName="GitHubExtensionModel.Activities">
+            <EntityTypeMapping TypeName="GitHubExtensionModel.Activity">
               <MappingFragment StoreEntitySet="Activities">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -125,7 +125,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ActivitiesTypes">
-            <EntityTypeMapping TypeName="GitHubExtensionModel.ActivitiesTypes">
+            <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityType">
               <MappingFragment StoreEntitySet="ActivitiesTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

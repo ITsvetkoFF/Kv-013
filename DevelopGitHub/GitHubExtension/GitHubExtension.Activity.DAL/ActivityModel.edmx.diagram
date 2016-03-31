@@ -6,8 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="49095f87f93e4875a1de4eba7bef188a" Name="Diagram1">
         <EntityTypeShape EntityType="GitHubExtensionModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GitHubExtensionModel.Activities" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GitHubExtensionModel.ActivitiesTypes" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.Activity" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityType" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="GitHubExtensionModel.FK_Activities_ActivitiesTypes_Id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

@@ -12,14 +12,18 @@ namespace GitHubExtension.Activity.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Activities
+    public partial class ActivityType
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int CurrentProjectId { get; set; }
-        public int ActivityTypeId { get; set; }
-        public Nullable<System.DateTime> InvokeTime { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ActivityType()
+        {
+            this.Activity = new HashSet<Activity>();
+        }
     
-        public virtual ActivitiesTypes ActivitiesTypes { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity> Activity { get; set; }
     }
 }
