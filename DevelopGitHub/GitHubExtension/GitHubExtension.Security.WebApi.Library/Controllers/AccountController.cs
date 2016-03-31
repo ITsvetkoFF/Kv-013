@@ -15,6 +15,7 @@ using GitHubExtension.Security.WebApi.Library.Exceptions;
 using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
+using GitHubExtension.Activity.WebApi.Services.Interfaces;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -24,6 +25,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         #region private fields
         private readonly IGithubService _githubService;
         private readonly ISecurityContext _securityContext;
+        private readonly IActivityService _activityService;
         private readonly ApplicationUserManager _userManager;
 
         #endregion
