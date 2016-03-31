@@ -13,5 +13,7 @@
         'app.userpreferences',
         'ui.bootstrap',
         'ngCookies'
+        'app.login',
+        'app.stats'
     ]);
 })();
