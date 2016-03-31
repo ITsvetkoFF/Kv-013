@@ -14,10 +14,7 @@ namespace GitHubExtension.Security.WebApi.Library.Package
         {
             container.Register<IGithubService, GithubService>(Lifestyle.Singleton);
             container.Register<IAuthService, AuthService>(Lifestyle.Scoped);
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            container.Register(typeof (IValidator<>), assemblies, Lifestyle.Singleton);
-            container.RegisterConditional(typeof (IValidator<>), typeof (NullValidator<>), Lifestyle.Singleton,
-                c => !c.Handled);
+            container.Register(typeof (IValidator<>), new[] {typeof (IValidator<>).Assembly}, Lifestyle.Singleton);
             container.Verify();
         }
     }
