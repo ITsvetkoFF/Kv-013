@@ -248,6 +248,10 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.conntroller.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.html" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.module.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.route.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
