@@ -1,0 +1,6 @@
+diff a/DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi/FrontEnd/src/client/app/stats/stats.controller.js b/DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi/FrontEnd/src/client/app/stats/stats.controller.js	(rejected hunks)
+@@ -0,3 +0,4 @@
+             };
+         }
+     ]);
++})();
