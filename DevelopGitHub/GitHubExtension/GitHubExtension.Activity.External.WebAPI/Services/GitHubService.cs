@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.Activity.External.WebAPI.Services
@@ -17,24 +16,25 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
             { "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" }
         };
 
+        private const string EventsUrl = "https://api.github.com/repos/{0}/{1}/events";
+
         public GitHubService()
         {
             _httpClient = new HttpClient();
         }
 
-        public async void GetGitHubEvents(string owner, string repository, string token)
+        public async Task<IEnumerable<JToken>> GetGitHubEventsAsync(string owner, string repository, string token)
         {
-            var message = CreateMessage(HttpMethod.Get, "");
+            var message = CreateMessage(HttpMethod.Get, string.Format(EventsUrl, owner, repository));
             HttpResponseMessage response = await _httpClient.SendAsync(message);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Unsuccessful github request exception");
 
-            dynamic events = JArray.Parse(await response.Content.ReadAsStringAsync());
-            foreach (var @event in events)
-                Console.WriteLine(@event);
+            JArray events = JArray.Parse(await response.Content.ReadAsStringAsync());
+            var parsedEvents = events.Children().Select(e => e.ParseEvent());
 
-            //JsonReader json = new JsonTextReader(new StreamReader(await response.Content.ReadAsStreamAsync()));
 
+            return parsedEvents;
         }
 
         private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
