@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using FluentValidation;
+﻿using FluentValidation;
 using GitHubExtension.Security.WebApi.Library.Services;
-using GitHubExtension.Security.WebApi.Library.Validators;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
