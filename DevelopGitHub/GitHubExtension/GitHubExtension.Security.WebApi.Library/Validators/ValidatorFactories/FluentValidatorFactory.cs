@@ -15,7 +15,7 @@ namespace GitHubExtension.Security.WebApi.Library.Validators.ValidatorFactories
 
         public override IValidator CreateInstance(Type validatorType)
         {
-            return ((IServiceProvider)_container).GetService(validatorType) as IValidator;
+            return _container.GetInstance(validatorType) as IValidator;
         }
     }
 }
