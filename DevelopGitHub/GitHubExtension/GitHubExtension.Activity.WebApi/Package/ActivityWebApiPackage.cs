@@ -12,7 +12,6 @@ namespace GitHubExtension.Activity.WebApi.Package
 {
     public class ActivityWebApiPackage : IPackage
     {
-
         public void RegisterServices(Container container)
         {
             container.Register<IActivityService, ActivityService>(Lifestyle.Singleton);

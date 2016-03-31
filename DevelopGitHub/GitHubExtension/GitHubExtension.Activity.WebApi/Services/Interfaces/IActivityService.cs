@@ -9,6 +9,7 @@ namespace GitHubExtension.Activity.WebApi.Services.Interfaces
 {
     public interface IActivityService
     {
-        bool AddActivity(ActivityType activityType, DateTime invokeTime, int userId, int currentProjectId);
+        bool AddActivity(ActivityType activityType, DateTime invokeTime, string userId, int currentProjectId);
+        bool AddActivity(ActivityType activityType, DateTime invokeTime, string userId);
     }
 }

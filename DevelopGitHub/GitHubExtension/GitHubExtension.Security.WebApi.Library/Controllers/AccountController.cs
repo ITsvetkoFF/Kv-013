@@ -16,6 +16,7 @@ using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using GitHubExtension.Activity.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -97,8 +98,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
-            // add Activity
-            //_activityService.AddActivity()
+            // add Activity for role assign
+            _activityService.AddActivity(ActivityType.AddRole, System.DateTime.Now, appUser.Id, repoId);
 
             if (!updateResult.Succeeded)
             {
@@ -186,6 +187,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             var repositoriesToAdd = repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
             user.UserRepositoryRoles = repositoriesToAdd;
 
+    
+
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
             if (!addUserResult.Succeeded)
                 return GetErrorResult(addUserResult);
@@ -194,6 +197,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                     .AddClaim(user.Id,
                         new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
+
+            // Add register activity
+            _activityService.AddActivity(ActivityType.JoinToSystem, System.DateTime.Now, user.Id);
 
             return null;
         }
