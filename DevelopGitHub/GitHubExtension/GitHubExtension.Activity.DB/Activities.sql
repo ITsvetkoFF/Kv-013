@@ -9,5 +9,4 @@
 	CONSTRAINT PK_Activities_Id PRIMARY KEY (Id),
 
 	CONSTRAINT FK_Activities_ActivitiesTypes_Id FOREIGN KEY (ActivityTypeId) REFERENCES  ActivitiesTypes (Id)
-
 )

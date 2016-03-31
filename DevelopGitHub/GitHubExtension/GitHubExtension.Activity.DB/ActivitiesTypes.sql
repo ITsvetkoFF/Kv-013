@@ -5,7 +5,5 @@
 
 	CONSTRAINT UN_Name UNIQUE(Name),
 
-	CONSTRAINT PK_ActivitiesType_Id PRIMARY KEY (Id),
-
-
+	CONSTRAINT PK_ActivitiesType_Id PRIMARY KEY (Id)
 )
