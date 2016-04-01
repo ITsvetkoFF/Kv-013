@@ -11,5 +11,6 @@ namespace GitHubExtension.Security.DAL.Interfaces
         IDbSet<IdentityUserClaim> Claims { get; set; }
         IDbSet<User> Users { get; set; }
         IDbSet<IdentityRole> Roles { get; set; }
+        IDbSet<UserRepositoryRole> UserRepository { get; set; }
     }
 }

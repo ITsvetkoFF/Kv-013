@@ -14,7 +14,6 @@
         vm.title = 'Roles';
         vm.repo = '';
         vm.roleName = [];
-        vm.teammembers = searchCollaborators;
         activate();
 
         function activate() {
@@ -48,6 +47,10 @@
          */
         vm.assignRole = function (collaborator, role) {
             githubCollaborators.assignRole(vm.repo, collaborator, role);
+        };
+
+        vm.updateCurrentProject = function (repo) {
+            githubCollaborators.updateCurrentProject(repo);
         };
 
         //function errorFn(response) {
