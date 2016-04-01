@@ -1,0 +1,16 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="topNavController">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+            </button>
+            <a class="navbar-brand">GitHubExtension</a>
+        </div>
+        <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+            <ul class="nav navbar-nav navbar-right">
+                <li data-ng-hide="!isAuth"><a href="#">Welcome {{userName}}</a></li>
+                <li data-ng-hide="!isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
+                <li data-ng-hide="isAuth"> <a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
