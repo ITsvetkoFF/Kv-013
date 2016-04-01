@@ -3,12 +3,14 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using FluentValidation.WebApi;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.WebApi.Library;
 using GitHubExtension.Security.WebApi.Library.ActionFilters;
 using GitHubExtension.Security.WebApi.Library.Provider;
+using GitHubExtension.Security.WebApi.Library.Validators.ValidatorFactories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -49,6 +51,10 @@ namespace GitHubExtension.Security.WebApi
             app.CreatePerOwinContext(() => container.GetInstance<SecurityContext>());
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+
+            FluentValidationModelValidatorProvider
+                .Configure(config,
+                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
 
             app.UseWebApi(config);
 
