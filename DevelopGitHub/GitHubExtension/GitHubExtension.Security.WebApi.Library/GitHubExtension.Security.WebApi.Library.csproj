@@ -201,6 +201,10 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Constant\GitHubExtension.Constant.csproj">
+      <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
+      <Name>GitHubExtension.Constant</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>
