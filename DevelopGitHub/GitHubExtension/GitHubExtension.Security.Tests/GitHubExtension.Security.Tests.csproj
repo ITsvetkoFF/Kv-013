@@ -130,8 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestExtensions\TestUserMapper.cs" />
-    <Compile Include="TestForControllers\TestGitHubExtensionSecurityWebApiAccountControllerGetUserByName.cs" />
     <Compile Include="TestRoutes\AccountTestRoutes.cs" />
     <Compile Include="TestRoutes\RepositoryTestRoutes.cs" />
     <Compile Include="TestRoutes\RolesTestRoutes.cs" />
@@ -142,7 +140,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-
     <ProjectReference Include="..\GitHubExtension.Constant\GitHubExtension.Constant.csproj">
       <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
       <Name>GitHubExtension.Constant</Name>
@@ -159,10 +156,17 @@
       <Project>{7c74e58b-b1d7-4c8f-b0ad-9528e07fc3db}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Security.WebApi.Library\GitHubExtension.Security.WebApi.Library.csproj">
+      <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
+      <Name>GitHubExtension.Security.WebApi.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.WebApi\GitHubExtension.Security.WebApi.csproj">
       <Project>{b5f77285-e213-4564-bd65-caa3242f9f5b}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
