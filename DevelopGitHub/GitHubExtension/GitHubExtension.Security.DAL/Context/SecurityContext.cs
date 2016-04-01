@@ -13,6 +13,7 @@ namespace GitHubExtension.Security.DAL.Context
         public IDbSet<IdentityUserClaim> Claims { get; set; }
         public IDbSet<User> Users { get; set; }
         public IDbSet<IdentityRole> Roles { get; set; }
+        public IDbSet<UserRepositoryRole> UserRepository { get; set; }
 
         public SecurityContext()
             : base("GitHubExtension")
