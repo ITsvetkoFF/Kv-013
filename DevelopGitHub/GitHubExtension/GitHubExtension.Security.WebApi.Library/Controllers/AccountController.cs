@@ -17,6 +17,7 @@ using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using GitHubExtension.Activity.WebApi.Services.Interfaces;
 using GitHubExtension.Activity.DAL;
+using System;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -25,26 +26,26 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
     {
         #region private fields
         private readonly IGithubService _githubService;
-        private readonly IActivityService _activityService;
-        private readonly ISecurityContext _securityContext;
+        private readonly IActivityWriterService _activityWriterService;
+        private readonly ISecurityContext _securityContext; 
         private readonly ApplicationUserManager _userManager;
 
         #endregion
 
         public AccountController(
             IGithubService githubService,
-            IActivityService activityService,
+            IActivityWriterService activityWriterService,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
             _githubService = githubService;
-            _activityService = activityService;
+            _activityWriterService = activityWriterService;
             _securityContext = securityContext;
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Admin")] // It is shit. It is not allowed to use magic strings or numbers. 
-        [Route("user/{id:guid}", Name = "GetUserById")]  // It is shit. It is not allowed to use magic strings or numbers. 
+        //[Authorize(Roles = "Admin")] 
+        [Route("user/{id:guid}", Name = "GetUserById")]  // Must be in constants 
         public async Task<IHttpActionResult> GetUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -57,8 +58,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return NotFound();
         }
 
-        [Authorize(Roles = "Admin")]  // It is shit. It is not allowed to use magic strings or numbers. 
-        [Route("user/{username}")]  // It is shit. It is not allowed to use magic strings or numbers. 
+        //[Authorize(Roles = "Admin")]  
+        [Route("user/{username}")]  // Must be in constants 
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
@@ -73,6 +74,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
         //Commented intentinaly, need to be tested with authorization logic
         //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
+        [AllowAnonymous]
         [Route("api/repos/{repoId}/collaborators/{gitHubId}")]
         [HttpPatch]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
@@ -100,15 +102,12 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
-            // add Activity for role assign
-            _activityService.AddActivity(ActivityType.AddRole, System.DateTime.Now, appUser.Id, repoId);
-
             if (!updateResult.Succeeded)
             {
                 ModelState.AddModelError("Role", "Failed to remove user roles");
                 return BadRequest(ModelState);
-            }
-
+            }       
+            
             var claimsIdentity = await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
             if (existingClaim != null)
@@ -128,6 +127,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [Route("ExternalLogin", Name = "ExternalLogin")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)// The first call, after click login with GitHub, and call when we write a info user
         {
             // if not allready authenticated sending user to GitHub
@@ -157,6 +157,12 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             ClaimsIdentity localIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             localIdentity.AddClaim(tokenClaim);
 
+            // Create activity type Name
+            ActivityType activityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.JoinToSystem);
+
+            // use activity writer service
+            _activityWriterService.AddActivity(new ActivityEvent() { InvokeTime = DateTime.Now, UserId = user.Id, ActivityType = activityType});
+
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
             authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             authentication.SignIn(localIdentity);
@@ -170,6 +176,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
         [Route("logout")]
         [HttpPost]
+        [AllowAnonymous]
         public IHttpActionResult LogOut()
         {
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
@@ -178,6 +185,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             SecurityRole role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
@@ -189,8 +197,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             var repositoriesToAdd = repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
             user.UserRepositoryRoles = repositoriesToAdd;
 
-    
-
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
             if (!addUserResult.Succeeded)
                 return GetErrorResult(addUserResult);
@@ -199,9 +205,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                     .AddClaim(user.Id,
                         new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
-
-            // Add register activity
-            _activityService.AddActivity(ActivityType.JoinToSystem, System.DateTime.Now, user.Id);
 
             return null;
         }

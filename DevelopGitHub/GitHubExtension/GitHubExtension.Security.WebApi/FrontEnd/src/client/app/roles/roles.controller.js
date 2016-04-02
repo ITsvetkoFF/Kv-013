@@ -52,6 +52,10 @@
             }
         }
 
+        vm.updateCurrentProject = function (repo) {
+            githubCollaborators.updateCurrentProject(repo);
+        };
+
         function onError(reason) {
             vm.error = 'Could not get collaborators.';
         }

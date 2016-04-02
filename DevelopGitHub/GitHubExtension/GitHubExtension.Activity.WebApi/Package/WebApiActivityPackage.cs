@@ -9,7 +9,7 @@ namespace GitHubExtension.Activity.WebApi.Package
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IActivityService, ActivityService>(Lifestyle.Singleton);
+            container.Register<IActivityWriterService, ActivityWriterService>(Lifestyle.Singleton);
         }
     }
 }

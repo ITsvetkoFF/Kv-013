@@ -26,5 +26,6 @@ namespace GitHubExtension.Activity.DAL
         }
     
         public virtual DbSet<ActivityEvent> Activities { get; set; }
+        public virtual DbSet<ActivityType> ActivitiesTypes { get; set; }
     }
 }

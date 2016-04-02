@@ -69,6 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityEventDto.cs" />
+    <Compile Include="ActivityEventViewModel.cs" />
     <Compile Include="CollaboratorDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryDto.cs" />

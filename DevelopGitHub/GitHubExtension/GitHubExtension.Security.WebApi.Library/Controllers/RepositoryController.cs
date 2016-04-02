@@ -30,6 +30,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         // GET: api/repos/:id
         // id is a GitHub id of a repo
         [Route("repos/{id}")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetById(int id)
         {
             var repository = await _securityContext.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
@@ -39,7 +40,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repository.ToRepositoryViewModel());
         }
 
-        [Authorize]
+        //[Authorize]
         [Route("api/user/repos")]
         public async Task<IHttpActionResult> GetReposForCurrentUser()
         {
@@ -54,7 +55,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repos);
         }
 
-        [Authorize]
+        //[Authorize]
         [Route("api/repos/{repoName}/collaborators")]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {

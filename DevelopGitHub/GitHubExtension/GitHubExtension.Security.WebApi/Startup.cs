@@ -61,7 +61,6 @@ namespace GitHubExtension.Security.WebApi
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, DAL.Migrations.Configuration>());
         }
 
-
         private static CookieAuthenticationProvider GetMyCookieAuthenticationProvider()
         {
             var cookieAuthenticationProvider = new CookieAuthenticationProvider
@@ -97,7 +96,6 @@ namespace GitHubExtension.Security.WebApi
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
           
             config.MapHttpAttributeRoutes();           
 
@@ -106,6 +104,9 @@ namespace GitHubExtension.Security.WebApi
             jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Filters.Add(new LoggingFilterAttribute());
+
+            // Configure authorization attribute
+            config.Filters.Add(new AuthorizeAttribute());
 
             return config;
         }

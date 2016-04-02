@@ -17,7 +17,9 @@ namespace GitHubExtension.Activity.DAL
         public int Id { get; set; }
         public string UserId { get; set; }
         public int CurrentProjectId { get; set; }
-        public ActivityType ActivityType { get; set; }
+        public int ActivityTypeId { get; set; }
         public Nullable<System.DateTime> InvokeTime { get; set; }
+    
+        public virtual ActivityType ActivityType { get; set; }
     }
 }

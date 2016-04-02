@@ -71,6 +71,7 @@
     <Compile Include="ActivityType.cs">
       <DependentUpon>ActivityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ActivityTypeNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

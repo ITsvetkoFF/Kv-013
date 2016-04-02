@@ -10,13 +10,37 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CurrentProjectId" Type="int" Nullable="false" />
-          <Property Name="ActivityType" Type="int" Nullable="false" />
+          <Property Name="ActivityTypeId" Type="int" Nullable="false" />
           <Property Name="InvokeTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="ActivitiesTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activities_ActivitiesTypes_ActivityTypeId">
+          <End Role="ActivitiesTypes" Type="Self.ActivitiesTypes" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivitiesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ActivityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GitHubExtensionModelStoreContainer">
           <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivitiesTypes" EntityType="Self.ActivitiesTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activities_ActivitiesTypes_ActivityTypeId" Association="Self.FK_Activities_ActivitiesTypes_ActivityTypeId">
+            <End Role="ActivitiesTypes" EntitySet="ActivitiesTypes" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -24,23 +48,43 @@
       <Schema Namespace="GitHubExtensionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ActivityModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Activities" EntityType="GitHubExtensionModel.ActivityEvent" />
+          <EntitySet Name="ActivitiesTypes" EntityType="GitHubExtensionModel.ActivityType" />
+          <AssociationSet Name="FK_Activities_ActivitiesTypes_ActivityTypeId" Association="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId">
+            <End Role="ActivitiesTypes" EntitySet="ActivitiesTypes" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActivityEvent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CurrentProjectId" Type="Int32" Nullable="false" />
-          <Property Name="ActivityType" Type="GitHubExtensionModel.ActivityType" Nullable="false" />
+          <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ActivityType" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId" FromRole="Activities" ToRole="ActivitiesTypes" />
         </EntityType>
-        <EnumType Name="ActivityType">
-          <Member Name="AddRole" />
-          <Member Name="ChangeRole" />
-          <Member Name="JoinToSystem" />
-          <Member Name="Comment" />
-        </EnumType>
+        <EntityType Name="ActivityType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Activities" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId" FromRole="ActivitiesTypes" ToRole="Activities" />
+        </EntityType>
+        <Association Name="FK_Activities_ActivitiesTypes_ActivityTypeId">
+          <End Type="GitHubExtensionModel.ActivityType" Role="ActivitiesTypes" Multiplicity="1" />
+          <End Type="GitHubExtensionModel.ActivityEvent" Role="Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivitiesTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ActivityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -51,9 +95,17 @@
             <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityEvent">
               <MappingFragment StoreEntitySet="Activities">
                 <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
-                <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />
+                <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
                 <ScalarProperty Name="CurrentProjectId" ColumnName="CurrentProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivitiesTypes">
+            <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityType">
+              <MappingFragment StoreEntitySet="ActivitiesTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -10,12 +10,20 @@
 namespace GitHubExtension.Activity.DAL
 {
     using System;
+    using System.Collections.Generic;
     
-    public enum ActivityType : int
+    public partial class ActivityType
     {
-        AddRole = 0,
-        ChangeRole = 1,
-        JoinToSystem = 2,
-        Comment = 3
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ActivityType()
+        {
+            this.Activities = new HashSet<ActivityEvent>();
+        }
+    
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ActivityEvent> Activities { get; set; }
     }
 }
