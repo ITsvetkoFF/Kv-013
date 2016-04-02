@@ -182,6 +182,10 @@
       <Project>{d2adb828-d1e5-40ed-aa12-1643fb5cd11e}</Project>
       <Name>GitHubExtension.Templates</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
+      <Project>{ac64ce56-a38a-4866-82f5-a3be35ef2ea8}</Project>
+      <Name>GitHubExtension.Statistics.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

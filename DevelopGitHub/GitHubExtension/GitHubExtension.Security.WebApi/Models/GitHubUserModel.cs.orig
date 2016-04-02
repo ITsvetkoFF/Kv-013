@@ -1,5 +1,10 @@
+<<<<<<< HEAD:DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi/Models/GitHubUserModel.cs
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using GitHubExtension.Infrastructure.Constants;
+=======
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+>>>>>>> aafcc3f... Add ability to get the commits from the github's repository:DevelopGitHub/GitHubExtension/GitHubExtension.Models.CommunicationModels/UserDTO.cs
 using Newtonsoft.Json;
 
 namespace GitHubExtension.Security.WebApi.Models

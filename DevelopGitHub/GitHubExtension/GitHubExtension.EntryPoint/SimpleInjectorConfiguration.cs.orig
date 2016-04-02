@@ -1,0 +1,57 @@
+<<<<<<< HEAD:DevelopGitHub/GitHubExtension/GitHubExtension.EntryPoint/SimpleInjectorConfiguration.cs
+using GitHubExtension.Activity.External.WebAPI.Package;
+using GitHubExtension.Notes.WebApi.Package;
+using GitHubExtension.Activity.Internal.WebApi.Package;
+using GitHubExtension.Security.WebApi.Package;
+using GitHubExtension.Templates.Package;
+=======
+﻿using System.Data.Entity;
+using System.Linq;
+using GitHubExtension.Security.DAL;
+using GitHubExtension.Security.DAL.Context;
+using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.DAL.Package;
+using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.WebApi.Library.Package;
+using GitHubExtension.Security.WebApi.Library.Services;
+using GitHubExtension.Statistics.WebApi.Package;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+>>>>>>> aafcc3f... Add ability to get the commits from the github's repository:DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi.Library/SimpleInjectorConfiguration.cs
+using SimpleInjector;
+using SimpleInjector.Integration.WebApi;
+
+namespace GitHubExtension.EntryPoint
+{
+    public static class SimpleInjectorConfiguration
+    {
+        public static Container ConfigurationSimpleInjector()
+        {
+            Container container = new Container();
+            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
+
+            return RegisterPackages(container);
+        }
+
+        public static Container RegisterPackages(Container container)
+        {
+            container.RegisterPackages(new[]
+            {
+<<<<<<< HEAD:DevelopGitHub/GitHubExtension/GitHubExtension.EntryPoint/SimpleInjectorConfiguration.cs
+                typeof(ExternalActivityPackage).Assembly,
+                typeof(SecurityPackage).Assembly,
+                typeof(NotesPackage).Assembly,
+                typeof(ActivityPackage).Assembly,
+                typeof(WebApiTemplatesPackage).Assembly
+=======
+                typeof(DALPackage).Assembly,
+                typeof(WebApiLibraryPackage).Assembly,
+                typeof(SecurityWebApiPackage).Assembly
+>>>>>>> aafcc3f... Add ability to get the commits from the github's repository:DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi.Library/SimpleInjectorConfiguration.cs
+            });
+            container.Verify();
+
+            return container;
+        }
+    }
+}
