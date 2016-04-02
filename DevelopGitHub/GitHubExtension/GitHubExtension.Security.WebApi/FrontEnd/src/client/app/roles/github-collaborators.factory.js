@@ -43,9 +43,9 @@
             return $http({
                 method: 'PATCH',
                 dataType: 'json',
-                url: baseUrl + '/user',
+                url: baseUrl + '/repos/current',
                 data: {
-                    repository: repo.id,
+                    Id: repo.id,
                 }
             });
         }
