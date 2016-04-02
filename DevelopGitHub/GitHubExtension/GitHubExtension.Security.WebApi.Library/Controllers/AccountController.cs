@@ -38,8 +38,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             _userManager = userManager;
         }
 
-        //[Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string id)
         {
@@ -49,7 +48,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             {
                 return Ok(user.ToUserReturnModel());
             }
-
             return NotFound();
         }
 
@@ -70,7 +68,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
         //Commented intentinaly, need to be tested with authorization logic
         //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
-        [AllowAnonymous]
         [Route("api/repos/{repoId}/collaborators/{gitHubId}")]
         [HttpPatch]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
