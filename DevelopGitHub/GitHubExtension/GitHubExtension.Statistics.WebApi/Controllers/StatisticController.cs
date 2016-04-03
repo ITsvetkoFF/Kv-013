@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using GitHubExtension.Statistics.WebApi.Models;
+using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Services;
 using Microsoft.AspNet.Identity;
 
@@ -16,7 +15,6 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
             this._gitHubService = gitHubService;
         }
 
-        [Authorize]
         [Route("api/user/commits")]
         public async Task<IHttpActionResult> GetCommitsForUser()
         {
@@ -24,9 +22,9 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
             string token = claims.FindFirstValue("ExternalAccessToken");
             string userName = User.Identity.GetUserName();
 
-            List<CommitDto> repositories = await _gitHubService.GetCommitsForUser(userName,"OnlineStrore.mArker",token);
-            
-            return Ok(repositories);
+            Graph graph = await _gitHubService.GetCommitsForUser(userName, "ManagerPaycheck", token);
+
+            return Ok(graph);
         }
     }
 }
