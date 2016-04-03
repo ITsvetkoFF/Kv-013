@@ -89,11 +89,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CommunicationModels\Graph.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommitDto.cs" />
+    <Compile Include="Models\CommitsFromRepository.cs" />
     <Compile Include="Models\CommitterDto.cs" />
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Package\SecurityWebApiPackage.cs" />
