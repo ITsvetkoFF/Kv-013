@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    var module = angular.module('app.roles');
+    var module = angular.module('app.templates');
 
     module.factory('githubCollaborators', githubCollaborators);
 

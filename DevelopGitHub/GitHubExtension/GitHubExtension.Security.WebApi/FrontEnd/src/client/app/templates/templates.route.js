@@ -3,10 +3,13 @@
     angular.module('app.templates')
     .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper','$cookies'];
     /* @ngInject */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper, $cookies) {
+        var isAuth = $cookies.get('isAuth');
+        if (isAuth) {
+            routerHelper.configureStates(getStates());
+        }
     }
 
     function getStates() {

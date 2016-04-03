@@ -248,6 +248,7 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.factory.js" />
     <Content Include="FrontEnd\src\client\app\templates\templates.conntroller.js" />
     <Content Include="FrontEnd\src\client\app\templates\templates.html" />
     <Content Include="FrontEnd\src\client\app\templates\templates.module.js" />
