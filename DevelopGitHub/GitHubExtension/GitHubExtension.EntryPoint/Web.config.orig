@@ -98,14 +98,7 @@
       </dependentAssembly>
     </assemblyBinding>
   </runtime>
-<system.webServer>
-  <httpProtocol>
-  <customHeaders>
-<!--    <add name="Access-Control-Allow-Origin" value="*" />-->
-<!--    <add name="Access-Control-Allow-Headers" value="Content-Type" />-->
-<!--    <add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, PATCH, DELETE" />-->
-  </customHeaders>
-</httpProtocol>
+<<<<<<< HEAD:DevelopGitHub/GitHubExtension/GitHubExtension.EntryPoint/Web.config
   <system.webServer>
     <rewrite>
       <rules>
@@ -128,6 +121,29 @@
         <!--    <add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, PATCH, DELETE" />-->
       </customHeaders>
     </httpProtocol>
+=======
+<system.webServer>
+  <rewrite>
+        <rules>
+          <rule name="AngularJS" stopProcessing="true">
+            <match url=".*" />
+            <conditions logicalGrouping="MatchAll">
+              <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+              <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+              <add input="{REQUEST_URI}" pattern="^/(api)" negate="true" />
+            </conditions>
+            <action type="Rewrite" url="/" />
+          </rule>
+        </rules>
+      </rewrite>
+  <httpProtocol>
+  <customHeaders>
+<!--    <add name="Access-Control-Allow-Origin" value="*" />-->
+<!--    <add name="Access-Control-Allow-Headers" value="Content-Type" />-->
+<!--    <add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, PATCH, DELETE" />-->
+  </customHeaders>
+</httpProtocol>
+>>>>>>> 9a8233a... Fix bug with routing .:DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi/Web.config
     <handlers>
       <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
       <!--      <remove name="OPTIONSVerbHandler" />-->
