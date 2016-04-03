@@ -70,11 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollaboratorDto.cs" />
+    <Compile Include="GitHubTemplatesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryDto.cs" />
     <Compile Include="RepositoryViewModel.cs" />
     <Compile Include="RoleViewModel.cs" />
-    <Compile Include="UserDTO.cs" />
+    <Compile Include="GitHubUserModel.cs" />
     <Compile Include="UserModel.cs" />
     <Compile Include="UserReturnModel.cs" />
   </ItemGroup>
