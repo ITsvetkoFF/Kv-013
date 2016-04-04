@@ -17,7 +17,7 @@
                 state: 'roles',
                 config: {
                     url: '/roles',
-                    templateUrl: 'app/roles/roles.html',
+                    templateUrl: 'FrontEnd/src/client/app/roles/roles.html',
                     controller: 'RolesController',
                     controllerAs: 'vmRoles',
                     title: 'Collaborators list',

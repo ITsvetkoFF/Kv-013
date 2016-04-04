@@ -10,7 +10,7 @@
 
             $cookies.remove('userName');
             $cookies.remove('isAuth');
-            $http.post('http://localhost:50859/api/Account/logout').finally(function () {
+            $http.post('http://localhost:50859/api/Account/logout', {}).finally(function () {
                 window.location.reload();
             });
         };

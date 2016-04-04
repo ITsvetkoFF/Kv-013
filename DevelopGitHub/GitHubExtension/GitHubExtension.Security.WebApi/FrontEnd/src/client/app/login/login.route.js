@@ -15,7 +15,7 @@
                 state: 'login',
                 config: {
                     url: '/login',
-                    templateUrl: 'app/login/login.html',
+                    templateUrl: 'FrontEnd/src/client/app/login/login.html',
                     controller: 'loginController',
                     controllerAs: 'vmLogin',
                     title: 'Login'

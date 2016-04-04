@@ -1,7 +1,7 @@
 /* jshint -W117, -W030 */
 describe('admin routes', function () {
     describe('state', function () {
-        var view = 'app/admin/admin.html';
+        var view = 'FrontEnd/src/client/app/admin/admin.html';
 
         beforeEach(function() {
             module('app.admin', bard.fakeToastr);

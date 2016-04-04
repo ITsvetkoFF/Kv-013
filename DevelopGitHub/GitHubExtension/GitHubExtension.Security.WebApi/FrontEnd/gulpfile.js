@@ -32,7 +32,7 @@ var port = process.env.PORT || config.defaultPort;
 gulp.task('buildLocalizations', function () {
     log('building localization files');
 
-    gulp.src(config.localizationPath + '/*.json')
+    return gulp.src(config.localizationPath + '/*.json')
        .pipe(extend('i18n-messages.constant.js'))
        .pipe(wrap('{ "i18nMessages" : <%= contents %> }'))
        .pipe(ngConstant({
@@ -152,9 +152,20 @@ gulp.task('wiredep', function() {
     var wiredep = require('wiredep').stream;
     var options = config.getWiredepDefaultOptions();
 
+    //if we are building for vs
+    if (args.vs) {
+        options['fileTypes'] = {
+            'html': {
+                replace: {
+                    js: '<script src="./Frontend{{filePath}}"></script>',
+                    css: '<link rel="stylesheet" href="./Frontend{{filePath}}" />'
+                }
+            }
+        };
+    }
+
     // Only include stubs if flag is enabled
     var js = args.stubs ? [].concat(config.js, config.stubsjs) : config.js;
-
     return gulp
         .src(config.index)
         .pipe(wiredep(options))
@@ -214,7 +225,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['optimize', 'images', 'fonts'], function() {
+gulp.task('build', ['buildLocalizations', 'optimize', 'images', 'fonts'], function() {
     log('Building everything');
 
     var msg = {
@@ -348,7 +359,14 @@ gulp.task('autotest', function(done) {
  * --debug-brk or --debug
  * --nosync
  */
-gulp.task('serve-dev', ['buildLocalizations','inject'], function() {
+gulp.task('serve-dev', ['buildLocalizations', 'inject'], function() {
+    if (args.vs) {
+        log('Preparing project for Visual Studio');
+
+        //copy updated index.html
+        return gulp.src('src/client/index.html').pipe(gulp.dest('../'));
+    }
+
     serve(true /*isDev*/);
 });
 
@@ -425,10 +443,13 @@ function clean(path, done) {
  */
 function inject(src, label, order) {
     var options = {read: false};
+    if (args.vs) {
+        options['relative'] = true;
+        options['addPrefix'] = './FrontEnd/src/client';
+    }
     if (label) {
         options.name = 'inject:' + label;
     }
-
     return $.inject(orderSrc(src, order), options);
 }
 
@@ -514,7 +535,7 @@ function startBrowserSync(isDev, specRunner) {
     log('Starting BrowserSync on port ' + port);
 
     // If build: watches the files, builds, and restarts browser-sync.
-    // If dev: watches less, compiles it to css, browser-sync handles reload
+    // If dev: watches less, compiles it to css, browser-sync handles reload, updates localization
     if (isDev) {
         gulp.watch([config.less], ['styles'])
             .on('change', changeEvent);
