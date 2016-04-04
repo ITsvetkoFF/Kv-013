@@ -24,7 +24,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         #region common-data
        
         #endregion
-        public static IEnumerable<object[]> GetDataForNotFountResult
+        public static IEnumerable<object[]> DataForNotFountResult
         {
             get
             {
@@ -38,7 +38,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             }
         }
 
-        public static IEnumerable<object[]> GetDataForInvalidModelStateResult
+        public static IEnumerable<object[]> DataForInvalidModelStateResult
         {
             get
             {
@@ -59,7 +59,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             }
         }
 
-        public static IEnumerable<object[]> GetDataForOkResult
+        public static IEnumerable<object[]> DataForOkResult
         {
             get
             {

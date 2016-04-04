@@ -22,7 +22,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class AccountControllerGetUserByIdTests
     {
-        public static IEnumerable<object[]> GetDataForNotFountResult
+        public static IEnumerable<object[]> DataForNotFountResult
         {
             get
             {
@@ -34,7 +34,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             }
         }
 
-        public static IEnumerable<object[]> GetDataForOkResult
+        public static IEnumerable<object[]> DataForOkResult
         {
             get
             {
@@ -60,11 +60,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForNotFountResult")]
         public void NotFoundUserTest(string findUserById, User fakeFoundUser)
         {
+            //Arrange
             AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
 
-            Task<IHttpActionResult> NullUser = controller.GetUser(findUserById);
+            //Act
+            Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
-            IHttpActionResult result = NullUser.Result;
+            //Assert
+            IHttpActionResult result = response.Result;
             result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
 
@@ -73,10 +76,13 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForOkResult")]
         public void OkResultTest(string findUserById, User fakeFoundUser)
         {
+            //Arrange
             AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
 
+            //Act
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }

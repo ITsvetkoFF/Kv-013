@@ -11,7 +11,7 @@ namespace GitHubExtension.Security.Tests.TestExtensions
 {
     public class UserToUserReturnModelTests
     {
-        public static IEnumerable<object[]> GetData
+        public static IEnumerable<object[]> DataForUserReturnModelTest
         {
             get
             {

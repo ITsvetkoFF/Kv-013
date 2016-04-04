@@ -18,7 +18,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class AccountControllerGetUserByNameTests
     {
-        public static IEnumerable<object[]> GetDataForNotFountResult
+        public static IEnumerable<object[]> DataForNotFountResult
         {
             get
             {
@@ -30,7 +30,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             }
         }
 
-        public static IEnumerable<object[]> GetDataForOkResult
+        public static IEnumerable<object[]> DataForOkResult
         {
             get
             {
