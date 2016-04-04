@@ -16,7 +16,6 @@
         activate();
         vm.prVar = false;
         vm.iVar = false;
-
         vm.prtoggle = function() {
             vm.prVar = !vm.prVar;
         };
@@ -29,7 +28,6 @@
             logger.info('Activated Templates View');
             githubTemplates.getPullRequestTemplate().then(onGetPullRequestTemplate,onError);
             githubTemplates.getIssueTemplate().then(onGetIssueTemplate,onError);
-
         }
 
         function onError(reason) {

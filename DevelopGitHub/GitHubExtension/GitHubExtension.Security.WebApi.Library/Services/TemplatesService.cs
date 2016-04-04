@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.WebApi.Library.Exceptions;
@@ -35,14 +39,16 @@ namespace GitHubExtension.Security.WebApi.Library.Services
 
             var response = await _httpClient.SendAsync(message);
 
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return "NotFound";
+
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
             var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
-
             var data = Convert.FromBase64String(dto.Content);
-
-            return Encoding.UTF8.GetString(data);
+            var final = Encoding.UTF8.GetString(data);
+            return final;
         }
 
         public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
@@ -52,13 +58,17 @@ namespace GitHubExtension.Security.WebApi.Library.Services
 
             var response = await _httpClient.SendAsync(message);
 
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return "NotFound";
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
+
             var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
             var data = Convert.FromBase64String(dto.Content);
+            var final = Encoding.UTF8.GetString(data);
 
-            return Encoding.UTF8.GetString(data);
+            return final;
         }
 
 
@@ -69,7 +79,7 @@ namespace GitHubExtension.Security.WebApi.Library.Services
             {
                 message.Headers.Add(header.Key, header.Value);
             }
-
+           
             return message;
         }
     }

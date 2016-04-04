@@ -30,13 +30,13 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         }
 
         [Route("pullRequestTemplate")]
-        public async Task<string> GetPullRequestTemplate()
+        public async Task<String> GetPullRequestTemplate()
         {
             var userName = User.Identity.Name;
             var repositoryName = "ForSoftTheme";
             var pathToFile = ".github/PULL_REQUEST_TEMPLATE.md";
             var content = await _templateService.GetPullRequestTemplatesAsync(userName, repositoryName,pathToFile);
-             
+
             return content;
         }
 
