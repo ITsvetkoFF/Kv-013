@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GitHubExtension.Activity.DAL
+namespace GitHubExtension.Activity.Internal.DAL
 {
     using System;
     using System.Data.Entity;

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GitHubExtension.Activity.DAL
+namespace GitHubExtension.Activity.Internal.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace GitHubExtension.Activity.DAL
     {
         public int Id { get; set; }
         public string UserId { get; set; }
-        public int CurrentProjectId { get; set; }
+        public int CurrentRepositoryId { get; set; }
         public int ActivityTypeId { get; set; }
-        public Nullable<System.DateTime> InvokeTime { get; set; }
+        public Nullable<DateTime> InvokeTime { get; set; }
     
         public virtual ActivityType ActivityType { get; set; }
     }

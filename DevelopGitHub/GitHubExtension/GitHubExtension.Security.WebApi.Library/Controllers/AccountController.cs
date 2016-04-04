@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
@@ -15,9 +16,9 @@ using GitHubExtension.Security.WebApi.Library.Exceptions;
 using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
-using GitHubExtension.Activity.WebApi.Services.Interfaces;
-using GitHubExtension.Activity.DAL;
-using System;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.Internal.DAL;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -157,12 +158,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             ClaimsIdentity localIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             localIdentity.AddClaim(tokenClaim);
 
-            // Create activity type Name
-            ActivityType activityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.JoinToSystem);
-
-            // use activity writer service
-            _activityWriterService.AddActivity(new ActivityEvent() { InvokeTime = DateTime.Now, UserId = user.Id, ActivityType = activityType});
-
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
             authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             authentication.SignIn(localIdentity);
@@ -200,6 +195,12 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
             if (!addUserResult.Succeeded)
                 return GetErrorResult(addUserResult);
+
+            // Create activity type Name
+            ActivityType activityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.JoinToSystem);
+
+            // use activity writer service
+            _activityWriterService.AddActivity(new ActivityEvent() { InvokeTime = DateTime.Now, UserId = user.Id, ActivityType = activityType });
 
             if (repositories.Any(r => !_userManager
                     .AddClaim(user.Id,

@@ -1,12 +1,12 @@
-﻿using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.GitHubExtension.Activity.WebApi.Models;
+﻿using GitHubExtension.Activity.Internal.DAL;
+using GitHubExtension.Activity.Internal.WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GitHubExtension.Activity.GitHubExtension.Activity.WebApi.Mappers
+namespace GitHubExtension.Activity.Internal.WebApi.Mappers
 {
     public static class ActivityEventMapper
     {
@@ -16,7 +16,7 @@ namespace GitHubExtension.Activity.GitHubExtension.Activity.WebApi.Mappers
             {
                 Id = activityEvent.Id,
                 UserId = activityEvent.UserId,
-                CurrentProjectId = activityEvent.CurrentProjectId,
+                CurrentRepositoryId = activityEvent.CurrentRepositoryId,
                 ActivityTypeId = activityEvent.ActivityTypeId,
                 InvokeTime = activityEvent.InvokeTime
             };
@@ -30,7 +30,7 @@ namespace GitHubExtension.Activity.GitHubExtension.Activity.WebApi.Mappers
             {
                 Id = activityEvent.Id,
                 UserId = activityEvent.UserId,
-                CurrentProjectId = activityEvent.CurrentProjectId,
+                CurrentRepositoryId = activityEvent.CurrentRepositoryId,
                 ActivityTypeId = activityEvent.ActivityTypeId,
                 InvokeTime = activityEvent.InvokeTime
             };

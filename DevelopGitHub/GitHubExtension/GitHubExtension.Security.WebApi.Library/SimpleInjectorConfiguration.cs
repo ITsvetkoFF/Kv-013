@@ -1,4 +1,4 @@
-﻿using GitHubExtension.Activity.WebApi.Package;
+﻿using GitHubExtension.Activity.Internal.WebApi.Package;
 using GitHubExtension.Security.DAL.Package;
 using GitHubExtension.Security.WebApi.Library.Package;
 using SimpleInjector;

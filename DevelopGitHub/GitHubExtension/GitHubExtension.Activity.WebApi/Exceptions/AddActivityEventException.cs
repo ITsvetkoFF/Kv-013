@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GitHubExtension.Activity.WebApi.Exceptions
+namespace GitHubExtension.Activity.Internal.WebApi.Exceptions
 {
     public class AddActivityEventException : ApplicationException
     {

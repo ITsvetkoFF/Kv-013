@@ -7,8 +7,8 @@
     <ProjectGuid>{0AA7D39B-3A15-49FC-9243-D26392403A78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GitHubExtension.Activity.DAL</RootNamespace>
-    <AssemblyName>GitHubExtension.Activity.DAL</AssemblyName>
+    <RootNamespace>GitHubExtension.Activity.Internal.DAL</RootNamespace>
+    <AssemblyName>GitHubExtension.Activity.Internal.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

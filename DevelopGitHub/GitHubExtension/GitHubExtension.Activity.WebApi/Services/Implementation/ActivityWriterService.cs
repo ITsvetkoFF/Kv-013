@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GitHubExtension.Activity.WebApi;
-using GitHubExtension.Activity.WebApi.Services.Interfaces;
-using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.WebApi.Exceptions;
+using GitHubExtension.Activity.Internal.WebApi;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.Internal.DAL;
 
-namespace GitHubExtension.Activity.WebApi.Services.Implementation
+namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
 {
     public class ActivityWriterService : IActivityWriterService
     {

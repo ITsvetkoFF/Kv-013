@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CurrentProjectId" Type="int" Nullable="false" />
+          <Property Name="CurrentRepositoryId" Type="int" Nullable="false" />
           <Property Name="ActivityTypeId" Type="int" Nullable="false" />
           <Property Name="InvokeTime" Type="datetime" />
         </EntityType>
@@ -60,7 +60,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CurrentProjectId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentRepositoryId" Type="Int32" Nullable="false" />
           <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ActivityType" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId" FromRole="Activities" ToRole="ActivitiesTypes" />
@@ -96,7 +96,7 @@
               <MappingFragment StoreEntitySet="Activities">
                 <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
                 <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
-                <ScalarProperty Name="CurrentProjectId" ColumnName="CurrentProjectId" />
+                <ScalarProperty Name="CurrentRepositoryId" ColumnName="CurrentRepositoryId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

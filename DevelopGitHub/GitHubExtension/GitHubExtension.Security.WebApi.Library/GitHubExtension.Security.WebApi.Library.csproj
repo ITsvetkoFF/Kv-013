@@ -181,7 +181,6 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Mappers\RepositoryMapper.cs" />
@@ -204,13 +203,13 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.DAL.csproj">
+    <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.Internal.DAL.csproj">
       <Project>{0aa7d39b-3a15-49fc-9243-d26392403a78}</Project>
-      <Name>GitHubExtension.Activity.DAL</Name>
+      <Name>GitHubExtension.Activity.Internal.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Activity.WebApi\GitHubExtension.Activity.WebApi.csproj">
+    <ProjectReference Include="..\GitHubExtension.Activity.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
       <Project>{62e49f8a-619e-4726-a806-f9d175379df3}</Project>
-      <Name>GitHubExtension.Activity.WebApi</Name>
+      <Name>GitHubExtension.Activity.Internal.WebApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>

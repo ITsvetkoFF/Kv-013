@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1548d9fade4f46d2a703dc78f4a7c123" Name="Diagram1">
-        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityEvent" Width="1.5" PointX="4.75" PointY="2.25" />
-        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityType" Width="1.5" PointX="2.5" PointY="2.625" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityEvent" Width="1.5" PointX="5.625" PointY="1.875" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityType" Width="1.5" PointX="3.375" PointY="2.25" />
         <AssociationConnector Association="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId" />
       </Diagram>
     </edmx:Diagrams>
