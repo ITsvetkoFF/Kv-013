@@ -39,11 +39,23 @@
             });
         }
 
+        function updateCurrentProject(repo) {
+            return $http({
+                method: 'PATCH',
+                dataType: 'json',
+                url: baseUrl + '/repos/current',
+                data: {
+                    Id: repo.id,
+                }
+            });
+        }
+
         return {
             getCollaborators: getCollaborators,
             getRepos: getRepos,
             getRoles: getRoles,
-            assignRole: assignRole
+            assignRole: assignRole,
+            updateCurrentProject: updateCurrentProject
         };
     }
 })();
