@@ -197,7 +197,9 @@
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IGithubService.cs" />
     <Compile Include="SimpleInjectorConfiguration.cs" />
+    <Compile Include="Validators\Int32Validator.cs" />
     <Compile Include="Validators\NullValidator.cs" />
+    <Compile Include="Validators\StringValidator.cs" />
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
