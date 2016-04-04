@@ -56,10 +56,13 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForNotFountResult")]
         public void NotFoundUserTest(string nameToFind, User fakeFoundUser)
         {
+            //Arrange
             AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
 
+            //Act
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database",nameToFind);
         }
@@ -68,10 +71,13 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForOkResult")]
         public void OkResultTest(string nameToFind, User fakeFoundUser)
         {
+            //Arrange
             AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
 
+            //Act
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }

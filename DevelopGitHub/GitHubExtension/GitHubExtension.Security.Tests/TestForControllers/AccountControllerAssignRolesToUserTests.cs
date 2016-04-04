@@ -87,7 +87,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         private ApplicationUserManager MockForUsers(List<User> users)
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            //userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
             userManager.Users.Returns(users.AsQueryable());
             return userManager;
         }
@@ -112,11 +111,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForNotFountResult")]
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
+            //Arrange
             AccountController controller = new AccountController(Substitute.For<IGithubService>(),
                 Substitute.For<ISecurityContext>(), MockForUsers(users));
 
+            //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<NotFoundResult>("Because user with providerId= {0} doesn't exists in database",gitHubId);
         }
@@ -125,11 +127,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForInvalidModelStateResult")]
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
+            //Arrenge
             AccountController controller = new AccountController(Substitute.For<IGithubService>(),
                 MockForContext(roles), MockForUsers(users)); 
 
+            //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<InvalidModelStateResult>("Because impossible to assign role = {0} that doesn't exist in database", roleToAssign);
         }
@@ -138,11 +143,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForInvalidModelStateResult")]
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
+            //Arrange
             AccountController controller = new AccountController(Substitute.For<IGithubService>(),
                 MockForContext(roles), MockForUsers(users));
 
+            //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<InvalidModelStateResult>("Because impossible to assign role = {0} that doesn't exist in database", roleToAssign);
             result.Should().BeOfType<InvalidModelStateResult>().Which.ModelState[roleIndex].Errors.First().ErrorMessage.Should().Be(string.Format(expectedErrorForInvalidRole, roleToAssign));
@@ -152,12 +160,15 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         [MemberData("GetDataForOkResult")]
         public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign)
         {
+            //Arrange
             users.Add(userToUpdate);
             AccountController controller = new AccountController(Substitute.For<IGithubService>(),
                 MockForContext(roles), MockForAddingClaim(users,userToUpdate)); 
-
+            
+            //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 
+            //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<OkResult>();
         }
