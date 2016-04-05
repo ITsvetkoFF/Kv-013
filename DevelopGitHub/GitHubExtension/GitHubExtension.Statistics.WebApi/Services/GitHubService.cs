@@ -78,6 +78,24 @@ namespace GitHubExtension.Statistics.WebApi.Services
             return months;
         }
 
+        public async Task<int> GetFollowerCount(string owner, string token)
+        {
+            var requestUri = string.Format("https://api.github.com/users/{0}/followers?access_token={1}", owner, token);
+            var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
+            List<GitHubUserModel> followers =
+                JsonConvert.DeserializeObject<List<GitHubUserModel>>(await response.Content.ReadAsStringAsync());   
+            return followers.Count;
+        }
+
+        public async Task<int> GetFolowingCount(string owner, string token)
+        {
+            var requestUri = string.Format("https://api.github.com/users/{0}/following?access_token={1}", owner, token);
+            var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
+            List<GitHubUserModel> listOfFolowing =
+                JsonConvert.DeserializeObject<List<GitHubUserModel>>(await response.Content.ReadAsStringAsync());
+            return listOfFolowing.Count;
+        }
+
         private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
         {
             var message = new HttpRequestMessage(method, requestUri);

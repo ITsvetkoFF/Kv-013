@@ -14,5 +14,7 @@ namespace GitHubExtension.Statistics.WebApi.Services
         Task<Graph> GetCommitsForUser(string owner, string repository, string token);
         Task<List<Repository>> GetRepositories(string owner, string token);
         Task<List<string>> GetMountsFromDateTo(DateTime from, DateTime to);
+        Task<int> GetFollowerCount(string owner, string token);
+        Task<int> GetFolowingCount(string owner, string token);
     }
 }
