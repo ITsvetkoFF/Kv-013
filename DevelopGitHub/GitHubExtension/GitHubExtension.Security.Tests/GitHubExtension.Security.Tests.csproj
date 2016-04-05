@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Mocks\MockForDbSet.cs" />
     <Compile Include="Mocks\MockForEnumerableQuery.cs" />
+    <Compile Include="TestExtensions\UserToUserReturnModelTests.cs" />
     <Compile Include="TestForControllers\AccountControllerAssignRolesToUserTests.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByIdTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
