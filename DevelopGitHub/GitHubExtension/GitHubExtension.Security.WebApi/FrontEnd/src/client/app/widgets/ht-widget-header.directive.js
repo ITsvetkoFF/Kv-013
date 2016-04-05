@@ -20,7 +20,7 @@
                 'rightText': '@',
                 'allowCollapse': '@'
             },
-            templateUrl: 'app/widgets/widget-header.html',
+            templateUrl: 'FrontEnd/src/client/app/widgets/widget-header.html',
             restrict: 'EA'
         };
         return directive;

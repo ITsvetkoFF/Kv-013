@@ -2,7 +2,7 @@
 describe('core', function() {
     describe('state', function() {
         var views = {
-            four0four: 'app/core/404.html'
+            four0four: 'FrontEnd/src/client/app/core/404.html'
         };
 
         beforeEach(function() {

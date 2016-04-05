@@ -17,7 +17,7 @@
                 state: 'repos',
                 config: {
                     url: '/repos',
-                    templateUrl: 'app/repos/repos.html',
+                    templateUrl: 'FrontEnd/src/client/app/repos/repos.html',
                     controller: 'ReposController',
                     controllerAs: 'vmRepos',
                     title: 'Repo list',
