@@ -10,7 +10,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RolesGetTest()
         {
-            url += RouteConstants.apiRoles;
+            url += RouteConstants.ApiRoles;
 
             config.ShouldMap(url)
                 .To<RolesController>(HttpMethod.Get,

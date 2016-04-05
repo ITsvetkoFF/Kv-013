@@ -8,7 +8,7 @@ using GitHubExtension.Constant;
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
     [Authorize(Roles = RoleConstants.Admin)]
-    [RoutePrefix(RouteConstants.apiRoles)]
+    [RoutePrefix(RouteConstants.ApiRoles)]
     public class RolesController : BaseApiController
     {
         public RolesController(ISecurityContext securityContext)

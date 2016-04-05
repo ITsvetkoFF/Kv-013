@@ -9,9 +9,9 @@ namespace GitHubExtension.Constant
     public class RouteConstants
     {
         // route prefixes
-        public const string apiRoles = "api/v1/roles";
-        public const string apiAccount = "api/v1/account";
-        public const string apiRepository = "api/v1/repository";
+        public const string ApiRoles = "api/v1/roles";
+        public const string ApiAccount = "api/v1/account";
+        public const string ApiRepository = "api/v1/repository";
 
         // static segments
         public const string User = "user";

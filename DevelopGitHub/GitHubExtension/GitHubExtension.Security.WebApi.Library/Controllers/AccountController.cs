@@ -19,7 +19,7 @@ using GitHubExtension.Constant;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
-    [RoutePrefix(RouteConstants.apiAccount)]
+    [RoutePrefix(RouteConstants.ApiAccount)]
     public class AccountController : BaseApiController
     {
         #region private fields

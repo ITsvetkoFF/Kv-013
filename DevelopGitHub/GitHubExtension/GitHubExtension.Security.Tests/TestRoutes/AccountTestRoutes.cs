@@ -15,7 +15,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetUserTest()
         {
-            url += RouteConstants.apiAccount +
+            url += RouteConstants.ApiAccount +
                 "/" + Regex.Replace(
                 RouteConstants.GetUser,
                 RouteConstants.Id_guid,
@@ -29,7 +29,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetUserByNameTest()
         {
-            url += RouteConstants.apiAccount +
+            url += RouteConstants.ApiAccount +
                 "/" + Regex.Replace(
                 RouteConstants.GetUserByName,
                 RouteConstants.UserName,
@@ -43,7 +43,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountAssignRolesToUserTest()
         {
-            url += RouteConstants.apiAccount +
+            url += RouteConstants.ApiAccount +
                 "/" + Regex.Replace(
                 Regex.Replace(
                     RouteConstants.AssignRolesToUser,
@@ -60,7 +60,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetExternalLoginTest()
         {
-            url += RouteConstants.apiAccount +
+            url += RouteConstants.ApiAccount +
                 "/" + RouteConstants.GetExternalLogin +
                 "?provider=p&error=e";
 
