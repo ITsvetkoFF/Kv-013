@@ -16,10 +16,10 @@ namespace GitHubExtension.Security.WebApi.Library
 {
     public static class SimpleInjectorConfiguration
     {
-        public static Container ConfigurationSimpleInjector()
+        public static Container ConfigurationSimpleInjector(Container container)
         {
-            Container container = new Container();
-            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
+            // Container container = new Container();
+            // container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
             return RegisterPackages(container);
         }
@@ -31,7 +31,7 @@ namespace GitHubExtension.Security.WebApi.Library
                 typeof(DALPackage).Assembly,
                 typeof(WebApiLibraryPackage).Assembly
             });
-            container.Verify();
+            
 
             return container;
         }

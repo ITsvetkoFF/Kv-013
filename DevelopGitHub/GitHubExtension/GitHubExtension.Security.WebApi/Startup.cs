@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using FluentValidation.WebApi;
+using GitHubExtension.Notes.WebApi;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
-using GitHubExtension.Security.WebApi.Library;
 using GitHubExtension.Security.WebApi.Library.ActionFilters;
 using GitHubExtension.Security.WebApi.Library.Provider;
 using GitHubExtension.Security.WebApi.Library.Validators.ValidatorFactories;
@@ -20,7 +20,9 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Owin.Security.Providers.GitHub;
+using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
+using SimpleInjectorConfiguration = GitHubExtension.Security.WebApi.Library.SimpleInjectorConfiguration;
 
 [assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
 namespace GitHubExtension.Security.WebApi
@@ -31,8 +33,14 @@ namespace GitHubExtension.Security.WebApi
 
         public void Configuration(IAppBuilder app)
         {
-            var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
+            var container = new Container();
+            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
+            SimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
+            GitHubExtension.Notes.WebApi.SimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
+            container.Verify();
             ConfigureOAuth(app);
+
+            MappingConfig.RegisterMaps();
 
             #region config for http
             var config = ConfigureWebApi();
