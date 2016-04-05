@@ -63,7 +63,6 @@ namespace GitHubExtension.Security.WebApi.Library.Services
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
-
             var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
             var data = Convert.FromBase64String(dto.Content);
             var final = Encoding.UTF8.GetString(data);
@@ -75,6 +74,7 @@ namespace GitHubExtension.Security.WebApi.Library.Services
         private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
         {
             var message = new HttpRequestMessage(method, requestUri);
+            
             foreach (var header in DefaultHeaders)
             {
                 message.Headers.Add(header.Key, header.Value);

@@ -5,12 +5,14 @@
                 <div class="col-md-12">
                     <div>
                         <h3>Pull Request Template</h3>
-                        <button ng-click="vmTemplates.prtoggle()" >Show pullRequestTemplate</button>
-                        <pre ng-show="vmTemplates.prVar">{{vmTemplates.pullRequestTemplate}}"</pre>
+                        <button ng-click="vmTemplates.prtoggle()" ng-show="vmTemplates.pullRequestTemplate !== 'NotFound'">Show pullRequestTemplate</button>
+                        <button ng-show="vmTemplates.pullRequestTemplate === 'NotFound'">Add pullRequestTemplate</button>
+                        <pre ng-show="vmTemplates.prVar">{{vmTemplates.pullRequestTemplate}}</pre>
                     </div>
                     <div>
                         <h3>Issue Template</h3>
-                        <button ng-click="vmTemplates.itoggle()">Show issueTemplate</button>
+                        <button ng-click="vmTemplates.itoggle()" ng-show="vmTemplates.issueTemplate !== 'NotFound'">Show issueTemplate</button>
+                        <button ng-show="vmTemplates.issueTemplate === 'NotFound'">Add issueTemplate</button>
                         <pre ng-show="vmTemplates.iVar">{{vmTemplates.issueTemplate}}</pre>
                     </div>
                 </div>

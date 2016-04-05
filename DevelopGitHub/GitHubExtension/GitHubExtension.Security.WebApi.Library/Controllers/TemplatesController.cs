@@ -1,54 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Script.Serialization;
+using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Services;
-using Newtonsoft.Json;
+using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
     [RoutePrefix("api/templates")]
-     public class TemplatesController : BaseApiController
+    public class TemplatesController : BaseApiController
     {
         #region private fields
 
         private readonly ITemplateService _templateService;
+        private readonly ApplicationUserManager _userManager;
+        private readonly ISecurityContext _securityContext;
 
         #endregion
-        
-        public TemplatesController(ITemplateService templateService)
+
+        public TemplatesController(ITemplateService templateService, ApplicationUserManager userManager,
+            ISecurityContext securityContext)
         {
-             _templateService = templateService;
+            _templateService = templateService;
+            _userManager = userManager;
+            _securityContext = securityContext;
         }
 
         [Route("pullRequestTemplate")]
-        public async Task<String> GetPullRequestTemplate()
+        public async Task<IHttpActionResult> GetPullRequestTemplate()
         {
-            var userName = User.Identity.Name;
-            var repositoryName = "ForSoftTheme";
-            var pathToFile = ".github/PULL_REQUEST_TEMPLATE.md";
-            var content = await _templateService.GetPullRequestTemplatesAsync(userName, repositoryName,pathToFile);
+            var currentUserId = User.Identity.GetUserId();
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
+            var claimsIdentity =
+                await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var currentRepoId =
+                Convert.ToInt32(claimsIdentity.Claims.FirstOrDefault(c => c.Type == "CurrentProjectId").Value);
 
-            return content;
+            var repositoryName = _securityContext.Repositories.FirstOrDefault(x => x.Id == currentRepoId).Name;
+            var userName = User.Identity.Name;
+            var pathToFile = ".github/PULL_REQUEST_TEMPLATE.md";
+            var content = await _templateService.GetPullRequestTemplatesAsync(userName, repositoryName, pathToFile);
+
+            return Ok(content);
         }
 
         [Route("issueTemplate")]
-        public async Task<String> GetIssueTemplate()
+        public async Task<IHttpActionResult> GetIssueTemplate()
         {
+            var currentUserId = User.Identity.GetUserId();
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
+            var claimsIdentity =
+                await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var currentRepoId =
+                Convert.ToInt32(claimsIdentity.Claims.FirstOrDefault(c => c.Type == "CurrentProjectId").Value);
+
+            var repositoryName = _securityContext.Repositories.FirstOrDefault(x => x.Id == currentRepoId).Name;
             var userName = User.Identity.Name;
-            var repositoryName = "ForSoftTheme";
             var pathToFile = ".github/ISSUE_TEMPLATE.md";
             var content = await _templateService.GetIssueTemplateAsync(userName, repositoryName, pathToFile);
 
-            return content;
+            return Ok(content);
         }
     }
 }
