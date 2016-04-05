@@ -14,8 +14,8 @@ namespace GitHubExtension.Statistics.WebApi.Services
     {
         #region fields
         private int countWeeksInMonth = 4;
-        private int countDaysInYear = 364;
         private readonly HttpClient _httpClient;
+        private Graph graph;
         #endregion
 
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
@@ -40,14 +40,21 @@ namespace GitHubExtension.Statistics.WebApi.Services
 
             CommitsFromRepository commitsFromRepository = JsonConvert.DeserializeObject<CommitsFromRepository>(await response.Content.ReadAsStringAsync());
 
-            Graph graph = new Graph();
-            for (int i = 0; i < commitsFromRepository.Alls.Count; i += countWeeksInMonth)
+            this.graph = new Graph();
+            //create of the numbers of the month
+            for (int i = 0; i < commitsFromRepository.CommitsOwner.Count; i += countWeeksInMonth)
             {
-                graph.Commits.Add(commitsFromRepository.Alls.Skip(i).Take(countWeeksInMonth).Sum(x => x));
+                graph.Commits.Add(commitsFromRepository.CommitsOwner.Skip(i).Take(countWeeksInMonth).Sum(x => x));
             }
-
-            graph.Months = await GetMountsFromDateTo(DateTime.Now.AddDays(-countDaysInYear), DateTime.Now);
+            
             return graph;
+        }
+
+        public async Task<List<Repository>> GetRepositories(string owner, string token)
+        {
+            var requestUri = string.Format("https://api.github.com/users/{0}/repos?access_token={1}", owner,token);
+            var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
+            return JsonConvert.DeserializeObject<List<Repository>>(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<List<string>> GetMountsFromDateTo(DateTime from, DateTime to)
