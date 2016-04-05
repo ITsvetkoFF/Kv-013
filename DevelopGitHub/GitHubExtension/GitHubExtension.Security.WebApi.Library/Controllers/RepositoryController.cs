@@ -23,9 +23,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             _securityContext = securityContext;
         }
 
-        // GET
         // id is a GitHub id of a repo
-        [Route(RouteConstant.getByIdRepository)]
+        [HttpGet]
+        [Route(RouteConstants.GetByIdRepository)]
         public async Task<IHttpActionResult> GetById(int id)
         {
             var repository = await _securityContext.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
@@ -35,9 +35,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repository.ToRepositoryViewModel());
         }
 
-        // GET
+        [HttpGet]
         [Authorize]
-        [Route(RouteConstant.getRepositoryForCurrentUser)]
+        [Route(RouteConstants.GetRepositoryForCurrentUser)]
         public async Task<IHttpActionResult> GetRepositoryForCurrentUser()
         {
             string userId = User.Identity.GetUserId();
@@ -51,13 +51,12 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repos);
         }
 
-        // GET
+        [HttpGet]
         [Authorize]
-        [Route(RouteConstant.getCollaboratorsForRepository)]
+        [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repositoryName)
         {
-            var claims = User.Identity as ClaimsIdentity;
-            string token = claims.FindFirstValue("ExternalAccessToken");
+            string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             var gitHubCollaborators = await _guGithubService.GetCollaboratorsForRepo(userName, repositoryName, token);

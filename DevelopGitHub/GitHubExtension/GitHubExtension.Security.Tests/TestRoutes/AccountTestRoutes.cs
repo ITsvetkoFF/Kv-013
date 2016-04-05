@@ -15,10 +15,10 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetUserTest()
         {
-            url = "/" + RouteConstant.apiAccount +
+            url += RouteConstants.apiAccount +
                 "/" + Regex.Replace(
-                RouteConstant.getUser,
-                RouteConstant.id_guid,
+                RouteConstants.GetUser,
+                RouteConstants.Id_guid,
                 "644e1dd7-2a7f-18fb-b8ed-ed78c3f92c2b");
 
             config.ShouldMap(url)
@@ -29,10 +29,10 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetUserByNameTest()
         {
-            url = "/" + RouteConstant.apiAccount +
+            url += RouteConstants.apiAccount +
                 "/" + Regex.Replace(
-                RouteConstant.getUserByName,
-                RouteConstant.userName,
+                RouteConstants.GetUserByName,
+                RouteConstants.UserName,
                 "name");
 
             config.ShouldMap(url)
@@ -43,13 +43,13 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountAssignRolesToUserTest()
         {
-            url = "/" + RouteConstant.apiAccount +
+            url += RouteConstants.apiAccount +
                 "/" + Regex.Replace(
                 Regex.Replace(
-                    RouteConstant.assignRolesToUser,
-                    RouteConstant.repositoryId,
+                    RouteConstants.AssignRolesToUser,
+                    RouteConstants.RepositoryId,
                     "5"),
-                RouteConstant.gitHubId,
+                RouteConstants.GitHubId,
                 "6");
 
             config.ShouldMap(url)
@@ -60,8 +60,8 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetExternalLoginTest()
         {
-            url = "/" + RouteConstant.apiAccount +
-                "/" + RouteConstant.getExternalLogin +
+            url += RouteConstants.apiAccount +
+                "/" + RouteConstants.GetExternalLogin +
                 "?provider=p&error=e";
 
             config.ShouldMap(url)

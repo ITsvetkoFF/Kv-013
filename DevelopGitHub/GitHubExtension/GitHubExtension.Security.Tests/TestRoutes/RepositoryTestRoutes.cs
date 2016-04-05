@@ -11,9 +11,9 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetByIdTest()
         {
-            url = "/" + Regex.Replace(
-                RouteConstant.getByIdRepository,
-                RouteConstant.id_int,
+            url += Regex.Replace(
+                RouteConstants.GetByIdRepository,
+                RouteConstants.Id_int,
                 "13");
 
             config.ShouldMap(url)
@@ -24,7 +24,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetReposForCurrentUserTest()
         {
-            url = "/" + RouteConstant.getRepositoryForCurrentUser;
+            url += RouteConstants.GetRepositoryForCurrentUser;
 
             config.ShouldMap(url)
                 .To<RepositoryController>(HttpMethod.Get,
@@ -34,9 +34,9 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetCollaboratorsForRepoTest()
         {
-            url = "/" + Regex.Replace(
-                RouteConstant.getCollaboratorsForRepository,
-                RouteConstant.repositoryName,
+            url += Regex.Replace(
+                RouteConstants.GetCollaboratorsForRepository,
+                RouteConstants.RepositoryName,
                 "myRepository");
 
             config.ShouldMap(url)

@@ -133,6 +133,7 @@
     <Compile Include="TestRoutes\AccountTestRoutes.cs" />
     <Compile Include="TestRoutes\RepositoryTestRoutes.cs" />
     <Compile Include="TestRoutes\RolesTestRoutes.cs" />
+    <Compile Include="TestRoutes\SlashInitializer.cs" />
     <Compile Include="TestRoutes\TestRoutesConfig.cs" />
   </ItemGroup>
   <ItemGroup>
