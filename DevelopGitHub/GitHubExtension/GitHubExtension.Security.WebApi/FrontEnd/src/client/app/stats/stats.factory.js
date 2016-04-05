@@ -7,17 +7,34 @@
     statsFactory.$inject = ['$http'];
 
     function statsFactory($http) {
-        var baseUrl = 'api/user/commits';
+        var baseUrl = 'api/user';
 
-        function getCollaborators() {
+        function getCommitsFromRepos() {
             return $http({
                 method: 'GET',
-                url: baseUrl
+                url: baseUrl + '/commits'
+            });
+        }
+        function getRepos() {
+            return $http({
+                method: 'GET',
+                url: baseUrl + '/repos'
+            });
+        }
+
+        function getCommitsFromCurrentRepo(repo) {
+            console.log(repo);
+            return $http({
+                method: 'GET',
+                dataType: 'string',
+                url: baseUrl + '/commits/' + repo.name
             });
         }
 
         return {
-            getCollaborators: getCollaborators
+            getCommitsFromRepos: getCommitsFromRepos,
+            getRepos: getRepos,
+            getCommitsFromCurrentRepo: getCommitsFromCurrentRepo
         };
     }
 })();
