@@ -24,6 +24,7 @@
                 $scope.barData = [response.data.commits];
                 $scope.eachDate = response.data.commitsForEverRepository;
                 $scope.eachSeries = response.data.repositoriesName;
+                $scope.userInfo = response.data.userInfo;
             });
         }
 
