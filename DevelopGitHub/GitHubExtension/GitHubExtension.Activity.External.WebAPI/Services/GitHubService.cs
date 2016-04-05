@@ -10,6 +10,8 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
     public class GitHubService
     {
         private readonly HttpClient _httpClient;
+        private IEnumerable<string> _lastRequestLinkHeader;
+ 
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
         {
              //Need to set user-agent to access GitHub API, Using Chrome 48
@@ -29,12 +31,35 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
             HttpResponseMessage response = await _httpClient.SendAsync(message);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Unsuccessful github request exception");
+            _lastRequestLinkHeader = response.Headers.GetValues("Link");
 
             JArray events = JArray.Parse(await response.Content.ReadAsStringAsync());
-            var parsedEvents = events.Children().Select(e => e.ParseEvent());
 
+            var parsedEvents = events.Children().Select(e => e.ParseEvent());
+            GetNumberOfPages();
 
             return parsedEvents;
+        }
+
+        /// <summary>
+        /// Used for pagination, gets number of last page from link header of last request
+        /// </summary>
+        /// <returns> int number of pages</returns>
+        public int? GetNumberOfPages()
+        {
+            if (_lastRequestLinkHeader == null)
+                return -1;
+
+            var link = _lastRequestLinkHeader.FirstOrDefault();
+            if (link == null)
+                return -2;
+
+            string[][] parts = link.Split(',').Select(l => l.Split(';')).ToArray();
+            if (parts.Any(p => p.Length != 2))
+                throw new Exception("parts of header can't be split by ;");
+            //parts.FirstOrDefault(p => p.)
+
+            return 0;
         }
 
         private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)

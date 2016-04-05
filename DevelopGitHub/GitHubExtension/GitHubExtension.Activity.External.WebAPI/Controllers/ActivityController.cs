@@ -14,8 +14,8 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
             _gitHubService = new GitHubService();
         }
 
-        [Route("api/activities/external")]
-        public async Task<IHttpActionResult> GetGitHubActivity()
+        [Route("api/activity/external")]
+        public async Task<IHttpActionResult> GetGitHubActivity([FromUri] int page)
         {
             var events = await _gitHubService.GetGitHubEventsAsync("ITsvetkoFF", "Kv-013", "7c021f975ee1e7e3209b9113d9346b7d5bb169f8");
             
