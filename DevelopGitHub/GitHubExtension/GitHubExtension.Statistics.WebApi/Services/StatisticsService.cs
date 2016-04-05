@@ -11,21 +11,26 @@ namespace GitHubExtension.Statistics.WebApi.Services
     {
         private readonly IGitHubService _gitHubService;
         private List<Graph> graphs;
-        private Graph gr;
         int countDaysInYear = 364;
 
         public StatisticsService(IGitHubService gitHubService)
         {
             _gitHubService = gitHubService;
-            graphs = new List<Graph>();
-            gr = new Graph();
         }
 
         public async Task<Graph> GraphCreation(string userName, string token)
         {
             //get repositories
             List<Repository> repositories = await _gitHubService.GetRepositories(userName, token);
-            
+            Graph gr = new Graph();
+            graphs = new List<Graph>();
+
+
+            // use strategy
+            gr.UserInfo.RepositoryCount = repositories.Count; // get count of repositories
+            gr.UserInfo.FollowerCount = await _gitHubService.GetFollowerCount(userName, token); // get count of followers
+            gr.UserInfo.FolowingCount = await _gitHubService.GetFolowingCount(userName, token);
+
             foreach (var repos in repositories)
             {
                 graphs.Add(await _gitHubService.GetCommitsForUser(userName, repos.Name, token));
@@ -46,6 +51,7 @@ namespace GitHubExtension.Statistics.WebApi.Services
             {
                 gr.CommitsForEverRepository.Add(item.Commits);
             }
+
             return gr;
         }
     }
