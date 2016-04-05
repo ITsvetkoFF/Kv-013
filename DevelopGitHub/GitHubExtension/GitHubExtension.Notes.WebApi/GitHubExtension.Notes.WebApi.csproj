@@ -90,7 +90,7 @@
     <Compile Include="ViewModels\AddNoteModel.cs" />
     <Compile Include="Services\INoteService.cs" />
     <Compile Include="Services\NoteService.cs" />
-    <Compile Include="SimpleInjectorConfiguration.cs" />
+    <Compile Include="NoteSimpleInjectorConfiguration.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

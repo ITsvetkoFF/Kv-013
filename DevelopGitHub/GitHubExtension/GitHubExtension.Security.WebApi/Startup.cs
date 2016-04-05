@@ -8,6 +8,7 @@ using GitHubExtension.Notes.WebApi;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.WebApi.Library;
 using GitHubExtension.Security.WebApi.Library.ActionFilters;
 using GitHubExtension.Security.WebApi.Library.Provider;
 using GitHubExtension.Security.WebApi.Library.Validators.ValidatorFactories;
@@ -22,7 +23,6 @@ using Owin;
 using Owin.Security.Providers.GitHub;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
-using SimpleInjectorConfiguration = GitHubExtension.Security.WebApi.Library.SimpleInjectorConfiguration;
 
 [assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
 namespace GitHubExtension.Security.WebApi
@@ -36,7 +36,7 @@ namespace GitHubExtension.Security.WebApi
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
             SimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
-            GitHubExtension.Notes.WebApi.SimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
+            NoteSimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
             container.Verify();
             ConfigureOAuth(app);
 
@@ -60,9 +60,9 @@ namespace GitHubExtension.Security.WebApi
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            FluentValidationModelValidatorProvider
-                .Configure(config,
-                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
+//            FluentValidationModelValidatorProvider
+//                .Configure(config,
+//                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
 
             app.UseWebApi(config);
 

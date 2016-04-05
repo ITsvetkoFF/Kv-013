@@ -4,7 +4,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 namespace GitHubExtension.Notes.WebApi
 {
-    public class SimpleInjectorConfiguration
+    public class NoteSimpleInjectorConfiguration
     {
         public static Container ConfigurationSimpleInjector(Container container)
         {
