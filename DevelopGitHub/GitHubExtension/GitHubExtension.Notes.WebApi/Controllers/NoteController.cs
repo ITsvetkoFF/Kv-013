@@ -2,6 +2,7 @@
 using System.Web.Http;
 using GitHubExtension.Notes.WebApi.Services;
 using GitHubExtension.Notes.WebApi.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Notes.WebApi.Controllers
 {
@@ -30,10 +31,20 @@ namespace GitHubExtension.Notes.WebApi.Controllers
 
         [Route("api/note")]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateNote(AddNoteModel model)
+        public async Task<IHttpActionResult> CreateNote([FromBody]AddNoteModel model)
         {
-            var note = await noteService.AddNote(model);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userId = User.Identity.GetUserId();
 
+            if (model.UserId != userId)
+            {
+                return BadRequest("You can add notes only in your own account");
+            }
+
+            var note = await noteService.AddNote(model);
             if (note == null)
             {
                 return BadRequest("Note not added");

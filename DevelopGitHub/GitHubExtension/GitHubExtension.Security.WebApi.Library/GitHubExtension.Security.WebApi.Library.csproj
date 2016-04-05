@@ -211,6 +211,14 @@
       <Project>{38B14075-AF0F-4588-912F-D000C37346CD}</Project>
       <Name>GitHubExtension.Security.StorageModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
+      <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
+      <Name>GitHubExtension.Notes.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
+      <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
+      <Name>GitHubExtension.Notes.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>

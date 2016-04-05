@@ -8,8 +8,6 @@ namespace GitHubExtension.Notes.DAL.Package
     {
         public void RegisterServices(Container container)
         {
-            //container.Register<INoteContext, NoteContext>(Lifestyle.Scoped);
-
             container.Register<NoteContext>(Lifestyle.Scoped);
         }
     }

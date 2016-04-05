@@ -21,7 +21,6 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Owin.Security.Providers.GitHub;
-using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 
 [assembly: OwinStartup(typeof(GitHubExtension.Security.WebApi.Startup))]
@@ -33,11 +32,7 @@ namespace GitHubExtension.Security.WebApi
 
         public void Configuration(IAppBuilder app)
         {
-            var container = new Container();
-            container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
-            SimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
-            NoteSimpleInjectorConfiguration.ConfigurationSimpleInjector(container);
-            container.Verify();
+            var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
             ConfigureOAuth(app);
 
             MappingConfig.RegisterMaps();
@@ -60,9 +55,9 @@ namespace GitHubExtension.Security.WebApi
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-//            FluentValidationModelValidatorProvider
-//                .Configure(config,
-//                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
+            FluentValidationModelValidatorProvider
+                .Configure(config,
+                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
 
             app.UseWebApi(config);
 
@@ -105,7 +100,6 @@ namespace GitHubExtension.Security.WebApi
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
           
             config.MapHttpAttributeRoutes();           
 
