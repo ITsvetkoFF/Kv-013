@@ -19,7 +19,7 @@ using GitHubExtension.Constant;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
-    [RoutePrefix(RouteConstant.apiAccount)]
+    [RoutePrefix(RouteConstants.apiAccount)]
     public class AccountController : BaseApiController
     {
         #region private fields
@@ -39,9 +39,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             _userManager = userManager;
         }
 
-        // GET
-        [Authorize(Roles = Role.Admin)]
-        [Route(RouteConstant.getUser, Name = "GetUserById")]
+        [HttpGet]
+        [Authorize(Roles = RoleConstants.Admin)]
+        [Route(RouteConstants.GetUser, Name = "GetUserById")]
         public async Task<IHttpActionResult> GetUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -54,9 +54,9 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return NotFound();
         }
 
-        // GET
-        [Authorize(Roles = Role.Admin)]
-        [Route(RouteConstant.getUserByName)]
+        [HttpGet]
+        [Authorize(Roles = RoleConstants.Admin)]
+        [Route(RouteConstants.GetUserByName)]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
@@ -69,13 +69,12 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return NotFound();
         }
 
-        // PATCH
+        
         //Commented intentinaly, need to be tested with authorization logic
         //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
-
-        [AllowAnonymous]
-        [Route(RouteConstant.assignRolesToUser)]
         [HttpPatch]
+        [AllowAnonymous]
+        [Route(RouteConstants.AssignRolesToUser)]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repositoryId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
@@ -121,18 +120,17 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok();
         }
         
-        // GET
+        [HttpGet]
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [Route(RouteConstant.getExternalLogin, Name = "ExternalLogin")]
+        [Route(RouteConstants.GetExternalLogin, Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)// The first call, after click login with GitHub, and call when we write a info user
         {
             // if not allready authenticated sending user to GitHub
             if (!User.Identity.IsAuthenticated)
                 return new ChallengeResult(provider, this);
 
-            var claims = User.Identity as ClaimsIdentity;
-            Claim tokenClaim = claims.FindFirst("ExternalAccessToken");
+            Claim tokenClaim = User.Identity.GetClaim();
 
             //TODO: Log
             if (tokenClaim == null)
@@ -165,8 +163,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Redirect("http://localhost:50859/");
         }
 
-        [Route("logout")]
         [HttpPost]
+        [Route("logout")]        
         public IHttpActionResult LogOut()
         {
             var authentication = HttpContext.Current.GetOwinContext().Authentication;

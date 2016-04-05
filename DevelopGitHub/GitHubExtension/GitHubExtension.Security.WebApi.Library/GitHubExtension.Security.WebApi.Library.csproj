@@ -183,6 +183,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
+    <Compile Include="Mappers\ClaimMapper.cs" />
     <Compile Include="Mappers\RepositoryMapper.cs" />
     <Compile Include="Mappers\RoleMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
