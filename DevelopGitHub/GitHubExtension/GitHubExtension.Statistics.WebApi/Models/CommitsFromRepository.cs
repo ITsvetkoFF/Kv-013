@@ -13,6 +13,6 @@ namespace GitHubExtension.Statistics.WebApi.Models
         public List<int> Alls { get; set; }
         
         [JsonProperty(PropertyName = "owner")]
-        public List<string> CommitsOwner { get; set; } 
+        public List<int> CommitsOwner { get; set; } 
     }
 }

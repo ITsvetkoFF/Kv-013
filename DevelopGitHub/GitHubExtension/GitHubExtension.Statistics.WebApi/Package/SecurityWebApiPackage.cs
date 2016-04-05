@@ -14,6 +14,7 @@ namespace GitHubExtension.Statistics.WebApi.Package
         public void RegisterServices(Container container)
         {
             container.Register<IGitHubService, GitHubService>(Lifestyle.Singleton);
+            container.Register<IStatisticsService, StatisticsService>(Lifestyle.Singleton);
         }
     }
 }
