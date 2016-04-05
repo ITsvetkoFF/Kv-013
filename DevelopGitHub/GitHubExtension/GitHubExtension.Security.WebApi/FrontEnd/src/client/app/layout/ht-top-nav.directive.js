@@ -15,7 +15,7 @@
             scope: {
                 'navline': '='
             },
-            templateUrl: 'app/layout/ht-top-nav.html'
+            templateUrl: 'FrontEnd/src/client/app/layout/ht-top-nav.html'
         };
 
         TopNavController.$inject = ['i18n', '$state', 'routerHelper'];
