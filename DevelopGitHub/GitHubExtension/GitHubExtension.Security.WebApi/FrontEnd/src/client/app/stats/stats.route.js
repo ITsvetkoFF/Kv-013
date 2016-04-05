@@ -19,6 +19,7 @@
                     url: '/stats',
                     templateUrl: 'app/stats/stats.html',
                     controller: 'statsController',
+                    contollerAs: 'vmStats',
                     title: 'Stats',
                     settings: {
                         nav: 4,
