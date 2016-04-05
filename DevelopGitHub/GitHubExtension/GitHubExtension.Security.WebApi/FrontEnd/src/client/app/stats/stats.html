@@ -31,32 +31,21 @@
                     <div class="col-md-3">
                         <div class="blockquote-box blockquote-primary clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-music glyphicon-lg">8</span>
+                                <span class="glyphicon glyphicon-music glyphicon-lg">{{userInfo.repositoryCount}}</span>
                             </div>
                             <h4>
-                                User've 12 repositories
+                                User've {{userInfo.repositoryCount}} repositories
                             </h4>
                             <p>
                                 Lorem ipsum dolor sit
                             </p>
                         </div>
-                        <div class="blockquote-box blockquote-success clearfix">
-                            <div class="square pull-left">
-                                <span class="glyphicon glyphicon-tree-conifer glyphicon-lg">12</span>
-                            </div>
-                            <h4>
-                                Contributions
-                            </h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                            </p>
-                        </div>
                         <div class="blockquote-box blockquote-info clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">6</span>
+                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{userInfo.folowingCount}}</span>
                             </div>
                             <h4>
-                                Following
+                                Following({{userInfo.folowingCount}})
                             </h4>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -64,10 +53,10 @@
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">2</span>
+                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{userInfo.followerCount}}</span>
                             </div>
                             <h4>
-                                Follower
+                                Follower({{userInfo.followerCount}}) 
                             </h4>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
