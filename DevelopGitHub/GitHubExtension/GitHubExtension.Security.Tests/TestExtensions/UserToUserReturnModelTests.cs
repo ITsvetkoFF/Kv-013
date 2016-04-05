@@ -34,7 +34,7 @@ namespace GitHubExtension.Security.Tests.TestExtensions
         }
 
         [Theory]
-        [MemberData("GetData")]
+        [MemberData("DataForUserReturnModelTest")]
         public void UserReturnModelTest(User entityToUserReturnModelTest, UserReturnModel expectedUserReturnModel)
         {
             //Act

@@ -87,7 +87,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         private ApplicationUserManager MockForUsers(List<User> users)
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            userManager.Users.Returns(users.AsQueryable());
+            userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
             return userManager;
         }
 
@@ -108,7 +108,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForNotFountResult")]
+        [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
@@ -124,7 +124,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForInvalidModelStateResult")]
+        [MemberData("DataForInvalidModelStateResult")]
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrenge
@@ -140,7 +140,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForInvalidModelStateResult")]
+        [MemberData("DataForInvalidModelStateResult")]
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
@@ -157,7 +157,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForOkResult")]
+        [MemberData("DataForOkResult")]
         public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange

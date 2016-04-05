@@ -53,7 +53,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForNotFountResult")]
+        [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(string nameToFind, User fakeFoundUser)
         {
             //Arrange
@@ -68,7 +68,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         }
 
         [Theory]
-        [MemberData("GetDataForOkResult")]
+        [MemberData("DataForOkResult")]
         public void OkResultTest(string nameToFind, User fakeFoundUser)
         {
             //Arrange
