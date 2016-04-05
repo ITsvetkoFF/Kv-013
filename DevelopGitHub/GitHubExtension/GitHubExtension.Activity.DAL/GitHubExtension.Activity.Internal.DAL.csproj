@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0AA7D39B-3A15-49FC-9243-D26392403A78}</ProjectGuid>
+    <ProjectGuid>{0EDF4879-A0F3-4D59-902A-630B0966FA25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GitHubExtension.Activity.Internal.DAL</RootNamespace>

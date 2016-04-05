@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using GitHubExtension.Activity.Internal.WebApi.Models;
+using GitHubExtension.Activity.Internal.WebApi.Mappers;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
@@ -20,10 +22,44 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
             _activityReaderService = activityReaderService;
         }
 
-        [Route("user/{id:guid}/{currentRepositoryId}")]  // Must be in constants 
-        public async Task<IHttpActionResult> GetCurrentRepositoryUserActivities(int currentRepositoryId, string userId)
+        [AllowAnonymous]
+        [Route("{userId:guid}/{currentRepositoryId}")]  // Must be in constants 
+        public async Task<IHttpActionResult> GetCurrentRepositoryUserActivities([FromUri]string userId, [FromUri]int currentRepositoryId)
         {
             ICollection<ActivityEvent> userActivitiesForCurrentRepo = _activityReaderService.GetCurrentRepositoryUserActivities(currentRepositoryId, userId);
+
+            ICollection<ActivityEventViewModel> activityViewModels = new List<ActivityEventViewModel>();
+
+            foreach (var userActivity in userActivitiesForCurrentRepo)
+            {
+                activityViewModels.Add(ActivityEventMapper.ToActivityEventViewModel(userActivity));
+            }
+
+            if (activityViewModels != null)
+            {
+                return Ok(activityViewModels);
+            }
+
+            return NotFound();
+        }
+
+        [AllowAnonymous]
+        [Route("{userId:guid}")]  // Must be in constants 
+        public async Task<IHttpActionResult> GetUserActivities([FromUri]string userId)
+        {
+            ICollection<ActivityEvent> userActivities = _activityReaderService.GetUserActivities(userId);
+
+            ICollection<ActivityEventViewModel> activityViewModels = new List<ActivityEventViewModel>();
+
+            foreach (var userActivity in userActivities)
+            {
+                activityViewModels.Add(ActivityEventMapper.ToActivityEventViewModel(userActivity));
+            }
+
+            if (activityViewModels != null)
+            {
+                return Ok(activityViewModels);
+            }
 
             return NotFound();
         } 

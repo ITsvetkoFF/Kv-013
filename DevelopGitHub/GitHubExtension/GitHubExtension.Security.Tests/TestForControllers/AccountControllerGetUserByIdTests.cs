@@ -15,6 +15,7 @@ using GitHubExtension.Security.Tests.Mocks;
 using System.Threading.Tasks;
 using FluentAssertions;
 using System;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 
 
 
@@ -50,7 +51,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
                  Substitute.For<ISecurityContext>(), userManager);
 
             return controller;

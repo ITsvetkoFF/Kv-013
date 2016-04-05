@@ -204,11 +204,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.Internal.DAL.csproj">
-      <Project>{0aa7d39b-3a15-49fc-9243-d26392403a78}</Project>
+      <Project>{0edf4879-a0f3-4d59-902a-630b0966fa25}</Project>
       <Name>GitHubExtension.Activity.Internal.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Activity.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
-      <Project>{62e49f8a-619e-4726-a806-f9d175379df3}</Project>
+      <Project>{5de95c58-2a55-4bac-98f9-3a266df3d4fb}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">

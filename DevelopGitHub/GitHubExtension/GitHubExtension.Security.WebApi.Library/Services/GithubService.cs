@@ -48,6 +48,8 @@ namespace GitHubExtension.Security.WebApi.Library.Services
 
             var response = await _httpClient.SendAsync(message);
 
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                return new List<CollaboratorDto>();
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 

@@ -12,5 +12,5 @@ Post-Deployment Script Template
 USE [GitHubExtension];
 GO
 INSERT INTO ActivitiesTypes
-VALUES ('Join to system'), ('Add role'), ('Comment');
+VALUES ('join to system'), ('repository added to system'), ('add role'), ('comment');
 GO

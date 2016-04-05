@@ -18,7 +18,8 @@ namespace GitHubExtension.Activity.Internal.DAL
         public string UserId { get; set; }
         public int CurrentRepositoryId { get; set; }
         public int ActivityTypeId { get; set; }
-        public Nullable<DateTime> InvokeTime { get; set; }
+        public Nullable<System.DateTime> InvokeTime { get; set; }
+        public string Message { get; set; }
     
         public virtual ActivityType ActivityType { get; set; }
     }

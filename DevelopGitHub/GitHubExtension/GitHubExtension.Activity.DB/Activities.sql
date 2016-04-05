@@ -6,6 +6,7 @@
     [ActivityTypeId] INT NOT NULL, 
     [InvokeTime] DATETIME NULL,
 
-	CONSTRAINT PK_Activities_Id PRIMARY KEY (Id),
+	[Message] NVARCHAR(MAX) NULL, 
+    CONSTRAINT PK_Activities_Id PRIMARY KEY (Id),
 	CONSTRAINT FK_Activities_ActivitiesTypes_ActivityTypeId FOREIGN KEY (ActivityTypeId) REFERENCES ActivitiesTypes(Id)
 )

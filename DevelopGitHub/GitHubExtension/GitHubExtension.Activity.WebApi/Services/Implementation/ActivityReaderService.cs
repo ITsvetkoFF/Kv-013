@@ -31,6 +31,5 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
 
             return userActivities;
         }
-
     }
 }

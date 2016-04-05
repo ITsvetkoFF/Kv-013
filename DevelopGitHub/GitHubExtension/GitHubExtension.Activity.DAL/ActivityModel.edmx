@@ -14,6 +14,7 @@
           <Property Name="CurrentRepositoryId" Type="int" Nullable="false" />
           <Property Name="ActivityTypeId" Type="int" Nullable="false" />
           <Property Name="InvokeTime" Type="datetime" />
+          <Property Name="Message" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ActivitiesTypes">
           <Key>
@@ -63,6 +64,7 @@
           <Property Name="CurrentRepositoryId" Type="Int32" Nullable="false" />
           <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ActivityType" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes_ActivityTypeId" FromRole="Activities" ToRole="ActivitiesTypes" />
         </EntityType>
         <EntityType Name="ActivityType">
@@ -94,6 +96,7 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityEvent">
               <MappingFragment StoreEntitySet="Activities">
+                <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
                 <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
                 <ScalarProperty Name="CurrentRepositoryId" ColumnName="CurrentRepositoryId" />

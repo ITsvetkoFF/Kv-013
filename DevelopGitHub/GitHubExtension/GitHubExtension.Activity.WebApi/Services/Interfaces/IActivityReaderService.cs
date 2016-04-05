@@ -9,7 +9,10 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Interfaces
 {
     public interface IActivityReaderService
     {
+        // get user activities for current repository
         ICollection<ActivityEvent> GetCurrentRepositoryUserActivities(int currenRepsitoryId, string userId);
+
+        // get all user activities
         ICollection<ActivityEvent> GetUserActivities(string userId);
     }
 }

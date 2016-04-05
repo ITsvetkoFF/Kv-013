@@ -10,29 +10,15 @@ namespace GitHubExtension.Activity.Internal.WebApi.Mappers
 {
     public static class ActivityEventMapper
     {
-        public static ActivityEvent ToEntity(this ActivityEventDto activityEvent)
-        {
-            var activityEventEntity = new ActivityEvent()
-            {
-                Id = activityEvent.Id,
-                UserId = activityEvent.UserId,
-                CurrentRepositoryId = activityEvent.CurrentRepositoryId,
-                ActivityTypeId = activityEvent.ActivityTypeId,
-                InvokeTime = activityEvent.InvokeTime
-            };
-
-            return activityEventEntity;
-        }
-
         public static ActivityEventViewModel ToActivityEventViewModel(this ActivityEvent activityEvent)
         {
             return new ActivityEventViewModel()
             {
-                Id = activityEvent.Id,
                 UserId = activityEvent.UserId,
                 CurrentRepositoryId = activityEvent.CurrentRepositoryId,
                 ActivityTypeId = activityEvent.ActivityTypeId,
-                InvokeTime = activityEvent.InvokeTime
+                InvokeTime = activityEvent.InvokeTime,
+                Message = activityEvent.Message
             };
         }
     }

@@ -10,6 +10,7 @@ using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -19,8 +20,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
-        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext,
-            ApplicationUserManager userManager)
+        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext, ApplicationUserManager userManager)
         {
             _guGithubService = guGithubService;
             _securityContext = securityContext;

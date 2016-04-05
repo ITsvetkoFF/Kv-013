@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62E49F8A-619E-4726-A806-F9D175379DF3}</ProjectGuid>
+    <ProjectGuid>{5DE95C58-2A55-4BAC-98F9-3A266DF3D4FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GitHubExtension.Activity.Internal.WebApi</RootNamespace>
@@ -77,7 +77,6 @@
     <Compile Include="Controllers\InternalActivityController.cs" />
     <Compile Include="Exceptions\AddActivityEventException.cs" />
     <Compile Include="Mappers\ActivityEventMapper.cs" />
-    <Compile Include="Models\ActivityEventDto.cs" />
     <Compile Include="Models\ActivityEventViewModel.cs" />
     <Compile Include="Package\WebApiActivityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.Internal.DAL.csproj">
-      <Project>{0aa7d39b-3a15-49fc-9243-d26392403a78}</Project>
+      <Project>{0edf4879-a0f3-4d59-902a-630b0966fa25}</Project>
       <Name>GitHubExtension.Activity.Internal.DAL</Name>
     </ProjectReference>
   </ItemGroup>

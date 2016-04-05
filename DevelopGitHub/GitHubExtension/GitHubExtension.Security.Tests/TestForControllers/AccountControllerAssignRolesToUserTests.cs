@@ -14,6 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
 using FluentAssertions;
+using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -112,7 +113,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
                 Substitute.For<ISecurityContext>(), MockForUsers(users));
 
             //Act
@@ -128,7 +129,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrenge
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
                 MockForContext(roles), MockForUsers(users)); 
 
             //Act
@@ -144,7 +145,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
                 MockForContext(roles), MockForUsers(users));
 
             //Act
@@ -162,7 +163,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             //Arrange
             users.Add(userToUpdate);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
                 MockForContext(roles), MockForAddingClaim(users,userToUpdate)); 
             
             //Act

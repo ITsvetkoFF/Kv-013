@@ -18,7 +18,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
             activityModelContext = new ActivityModel();
         }
 
-        public void AddActivity(ActivityEvent activityEvent)
+        public void AddActivity(ActivityEvent activityEvent) 
         {
             activityModelContext.Activities.Add(activityEvent);
 
