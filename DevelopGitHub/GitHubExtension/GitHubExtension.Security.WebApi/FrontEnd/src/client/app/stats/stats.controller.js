@@ -23,7 +23,9 @@
                 $scope.labels = response.data.months;
                 $scope.barData = [response.data.commits];
                 $scope.eachDate = response.data.commitsForEverRepository;
-                $scope.eachSeries = response.data.repositoriesName;
+                $scope.eachSeries = response.data.repositories.map(function(el) {
+                    return el.name;
+                });
                 $scope.userInfo = response.data.userInfo;
             });
         }
@@ -36,7 +38,7 @@
 
         $scope.getCommitsFromCurrent = function (repo) {
             return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
-                $scope.reposData = [response.data.commits];
+                $scope.reposData = [response.data];
             });
         };
 
