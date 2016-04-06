@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GitHubExtension.Statistics.WebApi.Services;
+﻿using GitHubExtension.Statistics.WebApi.Services.Implementations;
+using GitHubExtension.Statistics.WebApi.Services.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 

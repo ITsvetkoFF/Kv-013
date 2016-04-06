@@ -100,10 +100,10 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Package\SecurityWebApiPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\GitHubService.cs" />
+    <Compile Include="Services\Implementation\GitHubService.cs" />
     <Compile Include="Services\IGitHubService.cs" />
     <Compile Include="Services\IStatisticsService.cs" />
-    <Compile Include="Services\StatisticsService.cs" />
+    <Compile Include="Services\Implementation\StatisticsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 
-namespace GitHubExtension.Statistics.WebApi.Services
+namespace GitHubExtension.Statistics.WebApi.Services.Interfaces
 {
     public interface IStatisticsService
     {
