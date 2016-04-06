@@ -7,6 +7,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
 {
     public static class EventParserHelper
     {
+        #region Event type names
         public const string CommitCommentEvent = "CommitCommentEvent";
         public const string CreateEvent = "CreateEvent";
         public const string DeleteEvent = "DeleteEvent";
@@ -20,8 +21,11 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
         public const string PushEvent = "PushEvent";
         public const string RealiseEvent = "RealiseEvent";
         public const string WatchEvent = "WatchEvent";
+        #endregion
+
         private static readonly Dictionary<string, BaseEventParser> Parsers = new Dictionary<string, BaseEventParser>()
         {
+            //Registering parsers for event types
             { CommitCommentEvent, new CommitCommentEventParser()},
             { CreateEvent, new CreateEventParser()},
             { DeleteEvent, new DeleteEventParser()},
