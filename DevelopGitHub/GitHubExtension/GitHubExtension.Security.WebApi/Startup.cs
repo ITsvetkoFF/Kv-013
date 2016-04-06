@@ -35,8 +35,6 @@ namespace GitHubExtension.Security.WebApi
             var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
             ConfigureOAuth(app);
 
-            MappingConfig.RegisterMaps();
-
             #region config for http
             var config = ConfigureWebApi();
 

@@ -1,9 +1,8 @@
 ﻿using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using GitHubExtension.Notes.DAL.Model;
 using GitHubExtension.Notes.WebApi.ViewModels;
-using AutoMapper.QueryableExtensions;
+using GitHubExtension.Notes.WebApi.Mappers;
 
 namespace GitHubExtension.Notes.WebApi.Services
 {
@@ -18,26 +17,18 @@ namespace GitHubExtension.Notes.WebApi.Services
 
         public async Task<AddNoteModel> GetNote(int noteId)
         {
-            var note = await notesContext.Notes
-                .Where(x => x.Id == noteId)
-                .ProjectTo<AddNoteModel>()
-                .FirstOrDefaultAsync();
-            return note;
+            var query = await notesContext.Notes
+                .FirstOrDefaultAsync(x => x.Id == noteId);
+            var noteModel = query.ToNoteViewModel();
+            return noteModel;
         }
 
         public async Task<Note> AddNote(AddNoteModel addNote)
         {
-            var note = new Note()
-            {
-                UserId = addNote.UserId,
-                CollaboratorId = addNote.CollaboratorId,
-                Body = addNote.Body
-            };
-
-            notesContext.Notes.Add(note);
+            var noteEntity = addNote.ToEntity();
+            notesContext.Notes.Add(noteEntity);
             await notesContext.SaveChangesAsync();
-
-            return note;
+            return noteEntity;
         }
     }
 }
