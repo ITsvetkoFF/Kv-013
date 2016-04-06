@@ -6,7 +6,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
 {
     public interface IGitHubService
     {
-        Task<IEnumerable<JToken>> GetGitHubEventsAsync(string owner, string repository, string token, int page);
+        Task<IEnumerable<JToken>> GetGitHubEventsAsync(string fullRepositoryName, string token, int page);
 
         /// <summary>
         /// Used for pagination, gets number of last page from link header of last request

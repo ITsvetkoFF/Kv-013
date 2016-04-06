@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Activity.External.WebAPI.Services;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.Activity.External.WebAPI.Controllers
@@ -18,19 +20,12 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
         [Route("api/activity/external")]
         public async Task<IHttpActionResult> GetGitHubActivity([FromUri] int page)
         {
-            //This part is moved to extension method in another branch
-//            var claims = User.Identity as ClaimsIdentity;
-//            string token = claims.FindFirstValue("ExternalAccessToken");
-//            string currentProjectName = claims.FindFirstValue("CurrentProjectName");
+            var claimsIdentity = User.Identity as ClaimsIdentity;
 
-//            if (token == null)
-//                throw new TokenNotFoundException();
-
-//            string userName = User.Identity.GetUserName();
-
-//            var events = await _gitHubService.GetGitHubEventsAsync(userName, currentProjectName, token, page);
+            string fullRepositoryName = claimsIdentity.FindFirstValue("CurrentProjectName");
+            
             var events =
-                await _gitHubService.GetGitHubEventsAsync("ITsvetkoff", "Kv-013", "2660337e219b525b1c69cab89b0a0d13b93cb3bb", page);
+                await _gitHubService.GetGitHubEventsAsync(fullRepositoryName, "2660337e219b525b1c69cab89b0a0d13b93cb3bb", page);
             int? numberOfPages = _gitHubService.GetNumberOfPages();
             JObject response = new JObject();
 

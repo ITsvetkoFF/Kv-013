@@ -22,16 +22,16 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
             { "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" }
         };
 
-        private const string EventsUrl = "https://api.github.com/repos/{0}/{1}/events?access_token={2}&page={3}";
+        private const string EventsUrl = "https://api.github.com/repos/{0}/events?access_token={1}&page={2}";
 
         public GitHubService()
         {
             _httpClient = new HttpClient();
         }
 
-        public async Task<IEnumerable<JToken>> GetGitHubEventsAsync(string owner, string repository, string token, int page)
+        public async Task<IEnumerable<JToken>> GetGitHubEventsAsync(string fullRepositoryName, string token, int page)
         {
-            var message = CreateMessage(HttpMethod.Get, string.Format(EventsUrl, owner, repository, token, page));
+            var message = CreateMessage(HttpMethod.Get, string.Format(EventsUrl, fullRepositoryName, token, page));
             HttpResponseMessage response = await _httpClient.SendAsync(message);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Unsuccessful github request exception");
