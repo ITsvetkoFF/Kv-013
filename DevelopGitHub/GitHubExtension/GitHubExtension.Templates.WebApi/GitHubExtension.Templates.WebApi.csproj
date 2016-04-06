@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommunicationModels\GitHubTemplatesModel.cs" />
+    <Compile Include="Constants\RouteConstants.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />

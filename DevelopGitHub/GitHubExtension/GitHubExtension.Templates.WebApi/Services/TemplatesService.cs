@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Templates.WebApi.CommunicationModels;
+using GitHubExtension.Templates.WebApi.Constants;
 using GitHubExtension.Templates.WebApi.Exceptions;
 using Newtonsoft.Json;
 
@@ -31,7 +32,7 @@ namespace GitHubExtension.Templates.WebApi.Services
             public async Task<string> GetPullRequestTemplatesAsync(string userName, string repositoryName,
                 string pathToFile)
             {
-                var requestUri = String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}", userName, repositoryName, pathToFile);
+                var requestUri = String.Format(RouteConstants.RouteToRepository+"{0}/{1}"+RouteConstants.Contents+"{2}", userName, repositoryName, pathToFile);
                 var message = CreateMessage(HttpMethod.Get, requestUri);
 
                 var response = await _httpClient.SendAsync(message);
@@ -50,7 +51,7 @@ namespace GitHubExtension.Templates.WebApi.Services
 
             public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
             {
-                var requestUri = String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}", userName, repositoryName, pathToFile);
+                var requestUri = String.Format(RouteConstants.RouteToRepository+"{0}/{1}"+RouteConstants.Contents+"{2}", userName, repositoryName, pathToFile);
                 var message = CreateMessage(HttpMethod.Get, requestUri);
 
                 var response = await _httpClient.SendAsync(message);

@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
+using GitHubExtension.Templates.WebApi.Constants;
 using GitHubExtension.Templates.WebApi.Services;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Templates.WebApi.Controllers
 {
-        [RoutePrefix("api/templates")]
+        [RoutePrefix(RouteConstants.GetGitHubTemplatesRoute)]
         public class TemplatesController : BaseApiController
         {
             #region private fields
@@ -29,7 +30,7 @@ namespace GitHubExtension.Templates.WebApi.Controllers
                 _securityContext = securityContext;
             }
 
-            [Route("pullRequestTemplate")]
+            [Route(RouteConstants.PullRequestTemplate)]
             public async Task<IHttpActionResult> GetPullRequestTemplate()
             {
                 var currentUserId = User.Identity.GetUserId();
@@ -41,13 +42,12 @@ namespace GitHubExtension.Templates.WebApi.Controllers
 
                 var repositoryName = _securityContext.Repositories.FirstOrDefault(x => x.Id == currentRepoId).Name;
                 var userName = User.Identity.Name;
-                var pathToFile = ".github/PULL_REQUEST_TEMPLATE.md";
-                var content = await _templateService.GetPullRequestTemplatesAsync(userName, repositoryName, pathToFile);
+                var content = await _templateService.GetPullRequestTemplatesAsync(userName, repositoryName, RouteConstants.PathToPullRequestTemplate);
 
                 return Ok(content);
             }
 
-            [Route("issueTemplate")]
+            [Route(RouteConstants.IssueTemplate)]
             public async Task<IHttpActionResult> GetIssueTemplate()
             {
                 var currentUserId = User.Identity.GetUserId();
@@ -59,8 +59,8 @@ namespace GitHubExtension.Templates.WebApi.Controllers
 
                 var repositoryName = _securityContext.Repositories.FirstOrDefault(x => x.Id == currentRepoId).Name;
                 var userName = User.Identity.Name;
-                var pathToFile = ".github/ISSUE_TEMPLATE.md";
-                var content = await _templateService.GetIssueTemplateAsync(userName, repositoryName, pathToFile);
+                
+                var content = await _templateService.GetIssueTemplateAsync(userName, repositoryName, RouteConstants.PathToIssueTemplate);
 
                 return Ok(content);
             }
