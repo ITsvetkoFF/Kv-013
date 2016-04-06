@@ -85,7 +85,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 return BadRequest(ModelState);
             }
 
-            var claimsIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var claimsIdentity = User.Identity as ClaimsIdentity;
             string[] claimTypes = {"CurrentProjectId", "CurrentProjectName"};
             foreach (var type in claimTypes)
             {
