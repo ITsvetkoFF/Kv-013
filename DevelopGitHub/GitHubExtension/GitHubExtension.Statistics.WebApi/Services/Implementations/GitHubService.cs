@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Models;
+using GitHubExtension.Statistics.WebApi.Services.Interfaces;
 using Newtonsoft.Json;
 
 namespace GitHubExtension.Statistics.WebApi.Services.Implementations
@@ -28,26 +29,22 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
             this._httpClient = new HttpClient();
         }
 
-        public Task<GitHubUserModel> GetUserAsync(string token)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Graph> GetCommitsForUser(string owner, string repository, string token)   //for year
+        public async Task<List<int>> GetCommitsForUser(string owner, string repository, string token)   //for year
         {
             var requestUri = string.Format("https://api.github.com/repos/{0}/{1}/stats/participation?access_token={2}", owner, repository, token);
             var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
 
             CommitsFromRepository commitsFromRepository = JsonConvert.DeserializeObject<CommitsFromRepository>(await response.Content.ReadAsStringAsync());
 
-            this.graph = new Graph();
+            List<int> ListofCommits = new List<int>();
+
             //create of the numbers of the month
             for (int i = 0; i < commitsFromRepository.CommitsOwner.Count; i += countWeeksInMonth)
             {
-                graph.Commits.Add(commitsFromRepository.CommitsOwner.Skip(i).Take(countWeeksInMonth).Sum(x => x));
+                ListofCommits.Add(commitsFromRepository.CommitsOwner.Skip(i).Take(countWeeksInMonth).Sum(x => x));
             }
-            
-            return graph;
+
+            return ListofCommits;
         }
 
         public async Task<List<Repository>> GetRepositories(string owner, string token)
@@ -57,7 +54,7 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
             return JsonConvert.DeserializeObject<List<Repository>>(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<List<string>> GetMountsFromDateTo(DateTime from, DateTime to)
+        public List<string> GetMountsFromDateTo(DateTime from, DateTime to)
         {
             List<string> months = new List<string>();
 
