@@ -181,7 +181,6 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Mappers\RepositoryMapper.cs" />
@@ -197,8 +196,6 @@
     <Compile Include="Services\GithubService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IGithubService.cs" />
-    <Compile Include="Services\ITemplateService.cs" />
-    <Compile Include="Services\TemplatesService.cs" />
     <Compile Include="SimpleInjectorConfiguration.cs" />
     <Compile Include="Validators\Int32Validator.cs" />
     <Compile Include="Validators\NullValidator.cs" />
@@ -206,6 +203,10 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\TestTemplates\DevelopGitHub\GitHubExtension\GitHubExtension.Templates.WebApi\GitHubExtension.Templates.WebApi.csproj">
+      <Project>{cbdd17f8-b670-4fb1-8f87-4ea4eb710140}</Project>
+      <Name>GitHubExtension.Templates.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>
@@ -226,6 +227,9 @@
   <ItemGroup>
     <Folder Include="APILog\" />
     <Folder Include="Helpers\Authentication\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
