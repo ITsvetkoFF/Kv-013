@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GitHubExtension.Activity.External.WebAPI.Exceptions;
+using GitHubExtension.Security.WebApi.Library.Exceptions;
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.Activity.External.WebAPI.Services
@@ -33,9 +34,10 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
         {
             var message = CreateMessage(HttpMethod.Get, string.Format(EventsUrl, fullRepositoryName, token, page));
             HttpResponseMessage response = await _httpClient.SendAsync(message);
+
             if (!response.IsSuccessStatusCode)
-                throw new Exception("Unsuccessful github request exception");
-            _lastRequestLinkHeader = response.Headers.GetValues("Link");
+                throw new UnsuccessfullGitHubRequestException();
+            response.Headers.TryGetValues("Link", out _lastRequestLinkHeader);
 
             JArray events = JArray.Parse(await response.Content.ReadAsStringAsync());
 
@@ -47,11 +49,11 @@ namespace GitHubExtension.Activity.External.WebAPI.Services
         /// <summary>
         /// Used for pagination, gets number of last page from link header of last request
         /// </summary>
-        /// <returns> int number of pages or null if we are on last page</returns>
+        /// <returns> int number of pages or null if we are on last page or there are no link </returns>
         public int? GetNumberOfPages()
         {
             if (_lastRequestLinkHeader == null)
-                throw new LinkHeaderMissingException();
+                return null;
 
             string link = _lastRequestLinkHeader.FirstOrDefault();
             if (link == null)
