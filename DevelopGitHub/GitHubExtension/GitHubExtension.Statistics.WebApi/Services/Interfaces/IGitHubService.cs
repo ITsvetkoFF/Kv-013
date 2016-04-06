@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Models;
 
-namespace GitHubExtension.Statistics.WebApi.Services
+namespace GitHubExtension.Statistics.WebApi.Services.Interfaces
 {
     public interface IGitHubService
     {

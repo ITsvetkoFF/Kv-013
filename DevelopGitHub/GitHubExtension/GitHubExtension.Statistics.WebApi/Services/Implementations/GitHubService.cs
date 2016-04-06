@@ -8,7 +8,7 @@ using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Models;
 using Newtonsoft.Json;
 
-namespace GitHubExtension.Statistics.WebApi.Services
+namespace GitHubExtension.Statistics.WebApi.Services.Implementations
 {
     public class GitHubService : IGitHubService
     {
