@@ -101,6 +101,7 @@
     <Compile Include="Package\NotesWebApiPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\AddNoteModelValidator.cs" />
+    <Compile Include="Validators\ValidationConstants.cs" />
     <Compile Include="ViewModels\AddNoteModel.cs" />
     <Compile Include="Services\INoteService.cs" />
     <Compile Include="Services\NoteService.cs" />
