@@ -34,6 +34,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.3.1.2\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging">
+      <HintPath>..\packages\SimpleInjector.Packaging.3.1.2\lib\net40-client\SimpleInjector.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -58,7 +64,10 @@
     <Compile Include="EventParsers\PullRequestReviewCommentEventParser.cs" />
     <Compile Include="EventParsers\RealeaseEventParser.cs" />
     <Compile Include="EventParsers\WatchEventParser.cs" />
+    <Compile Include="Exceptions\LinkHeaderFormatException.cs" />
+    <Compile Include="Exceptions\LinkHeaderMissingException.cs" />
     <Compile Include="Exceptions\ParserNotFoundException.cs" />
+    <Compile Include="Package\ExternalActivityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventParsers\BaseEventParser.cs" />
     <Compile Include="EventParsers\CreateEventParser.cs" />
@@ -67,8 +76,10 @@
     <Compile Include="Services\GitHubService.cs" />
     <Compile Include="EventParsers\GolumEventParser.cs" />
     <Compile Include="EventParsers\PushEventParser.cs" />
+    <Compile Include="Services\IGitHubService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
