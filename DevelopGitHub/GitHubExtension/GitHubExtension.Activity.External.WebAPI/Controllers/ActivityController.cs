@@ -11,7 +11,6 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
     [Authorize]
     public class ActivityController : ApiController
     {
-        public const string GetGitHubActivityRoute = "api/activity/external";
         private IGitHubService _gitHubService;
 
         public ActivityController(IGitHubService gitHubService)
@@ -19,7 +18,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
             _gitHubService = gitHubService;
         }
 
-        [Route(GetGitHubActivityRoute)]
+        [Route(RouteConstants.GetGitHubActivityRoute)]
         public async Task<IHttpActionResult> GetGitHubActivity([FromUri] int page)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
