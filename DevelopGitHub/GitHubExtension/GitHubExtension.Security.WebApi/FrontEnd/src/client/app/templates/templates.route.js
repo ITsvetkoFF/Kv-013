@@ -18,7 +18,7 @@
                 state: 'templates',
                 config: {
                     url: '/templates',
-                    templateUrl: 'app/templates/templates.html',
+                    templateUrl: './FrontEnd/src/client/app/templates/templates.html',
                     controller: 'TemplatesController',
                     controllerAs: 'vmTemplates',
                     title: 'Templates',
