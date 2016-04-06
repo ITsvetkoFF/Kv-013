@@ -11,11 +11,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
 {
     public class ActivityWriterService : IActivityWriterService
     {
-        private ActivityModel activityModelContext;
+        private ActivityModelContext activityModelContext;
 
         public ActivityWriterService()
         {
-            activityModelContext = new ActivityModel();
+            activityModelContext = new ActivityModelContext();
         }
 
         public void AddActivity(ActivityEvent activityEvent) 

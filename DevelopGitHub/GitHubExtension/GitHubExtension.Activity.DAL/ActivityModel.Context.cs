@@ -13,10 +13,10 @@ namespace GitHubExtension.Activity.Internal.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ActivityModel : DbContext
+    public partial class ActivityModelContext : DbContext
     {
-        public ActivityModel()
-            : base("name=ActivityModel")
+        public ActivityModelContext()
+            : base("name=ActivityModelContext")
         {
         }
     

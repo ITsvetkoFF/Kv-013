@@ -10,11 +10,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
 {
     public class ActivityReaderService : IActivityReaderService
     {
-        private ActivityModel activityModelContext;
+        private ActivityModelContext activityModelContext;
 
         public ActivityReaderService()
         {
-            activityModelContext = new ActivityModel();
+            activityModelContext = new ActivityModelContext();
         }
 
         public ICollection<ActivityEvent> GetCurrentRepositoryUserActivities(int currentRepositoryId)
