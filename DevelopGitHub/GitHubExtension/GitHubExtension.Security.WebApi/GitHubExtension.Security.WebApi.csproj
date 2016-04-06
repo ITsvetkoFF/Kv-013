@@ -316,6 +316,10 @@
       <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
       <Name>GitHubExtension.Security.WebApi.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Templates.WebApi\GitHubExtension.Templates.WebApi.csproj">
+      <Project>{cbdd17f8-b670-4fb1-8f87-4ea4eb710140}</Project>
+      <Name>GitHubExtension.Templates.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

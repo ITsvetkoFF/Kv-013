@@ -6,12 +6,13 @@
      .module('app.templates')
      .controller('TemplatesController', TemplatesController);
 
-    TemplatesController.$inject = ['githubTemplates', 'logger'];
+    TemplatesController.$inject = ['githubTemplates', 'logger', 'i18n'];
 
     /* @ngInject */
-    function TemplatesController(githubTemplates,logger) {
+    function TemplatesController(githubTemplates,logger, i18n) {
 
         var vm = this;
+        vm.i18n = i18n;
         vm.title = 'Templates';
         activate();
         vm.prVar = false;

@@ -5,6 +5,14 @@
         "REPOS": "Сховища",
         "COLLABORATORS": "Коллаборатори",
         "MESSAGES": "Повідомлення",
-        "AUTHORIZATION": "Авторизація"
+        "AUTHORIZATION": "Авторизація",
+        "TEMPLATES": "Шаблони",
+        "PULLREQUESTTEMPLATE": "Шаблон Pull Request",
+        "SHOWPULLREQUESTTEMPLATE": "Показати Pull Request template",
+        "ADDPULLREQUESTTEMPLATE": "Додати Pull Request template",
+         "ISSUETEMPLATE": "Шаблон Issue",
+        "SHOWISSUETEMPLATE": "Показати Issue template",
+        "ADDISSUETEMPLATE": "Додати Issue template"
+
     }
 }
