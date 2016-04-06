@@ -6,32 +6,18 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Notes.WebApi.Controllers
 {
-    public class NoteController : ApiController
+    public class NoteModifyController : ApiController
     {
         private INotesService noteService;
 
-        public NoteController(INotesService noteService)
+        public NoteModifyController(INotesService noteService)
         {
             this.noteService = noteService;
         }
 
-        [Route("api/note/{noteId}")]
-        public async Task<IHttpActionResult> GetNote([FromUri] int noteId)
-        {
-            var note = await noteService.GetNote(noteId);
-            if (note == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(note);
-            }
-        }
-
         [Route("api/note")]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateNote([FromBody]AddNoteModel model)
+        public async Task<IHttpActionResult> CreateNote(AddNoteModel model)
         {
             if (!ModelState.IsValid)
             {
