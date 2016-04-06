@@ -12,7 +12,9 @@
         "ADDPULLREQUESTTEMPLATE": "Додати Pull Request template",
          "ISSUETEMPLATE": "Шаблон Issue",
         "SHOWISSUETEMPLATE": "Показати Issue template",
-        "ADDISSUETEMPLATE": "Додати Issue template"
+        "ADDISSUETEMPLATE": "Додати Issue template",
+        "COLLABORATORS": "Співавтори",
+         "REPOSITORY" :  "Репозиторії"
 
     }
 }

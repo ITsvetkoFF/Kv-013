@@ -12,7 +12,9 @@
         "ADDPULLREQUESTTEMPLATE": "Add Pull Request template",
         "ISSUETEMPLATE": "Issue Template",
         "SHOWISSUETEMPLATE": "Show Issue template",
-        "ADDISSUETEMPLATE": "Add Issue template"
+        "ADDISSUETEMPLATE": "Add Issue template",
+        "COLLABORATORS": "Collaborators",
+        "REPOSITORY" :  "Repositories"
 
     }
 }
