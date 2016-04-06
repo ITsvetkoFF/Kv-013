@@ -6,10 +6,11 @@ namespace GitHubExtension.Models.CommunicationModels
     [NotMapped]
     public class RepositoryDto
     {
-        public int Id { get; set; }
         [JsonProperty(PropertyName = "id")]
         public int GitHubId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
+        [JsonProperty(PropertyName = "full_name")]
+        public string FullName { get; set; }
     }
 }
