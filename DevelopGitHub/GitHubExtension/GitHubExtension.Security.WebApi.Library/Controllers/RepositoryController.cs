@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
-using GitHubExtension.Security.DAL.Context;
+using System.Web;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
@@ -70,6 +70,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         [Authorize]
         [Route("api/repos/current")]
         [HttpPatch]
+        //TODO: use DTO
         public async Task<IHttpActionResult> UpdateProject(Repository repo)
         {
             string currentUserId = User.Identity.GetUserId();
@@ -77,25 +78,45 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             if (user == null)
                 return NotFound();
 
-            var repository = _securityContext.UserRepository.FirstOrDefault(r => r.RepositoryId == repo.Id && r.UserId == user.Id);
-            if (repository == null)
+            var userRepositoryRole = _securityContext.UserRepository.FirstOrDefault(r => r.RepositoryId == repo.Id && r.UserId == user.Id);
+            if (userRepositoryRole == null)
             {
                 ModelState.AddModelError("repo", string.Format("user with id '{0}' does not have a repository with id '{1}'", user.Id, repo.Id));
                 return BadRequest(ModelState);
             }
 
             var claimsIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
-            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "CurrentProjectId");
-            if (existingClaim != null)
-                _userManager.RemoveClaim(user.Id, existingClaim);
-
-            var addClaimResult = await _userManager.AddClaimAsync(user.Id, new Claim("CurrentProjectId", repo.Id.ToString()));
-
-            if (!addClaimResult.Succeeded)
+            string[] claimTypes = {"CurrentProjectId", "CurrentProjectName"};
+            foreach (var type in claimTypes)
             {
-                ModelState.AddModelError("CurrentpProject", "Failed to update current project");
+                var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == type);
+                if (existingClaim != null)
+                {
+                    _userManager.RemoveClaim(user.Id, existingClaim);
+                    claimsIdentity.RemoveClaim(existingClaim);
+                }
+            }
+
+            Claim[] claimsToAdd = { new Claim("CurrentProjectId", repo.Id.ToString()), new Claim("CurrentProjectName", userRepositoryRole.Repository.FullName) };
+            IdentityResult[] results = new IdentityResult[claimsToAdd.Length];
+
+            for (int i = 0; i < claimsToAdd.Length; i++)
+            {
+                results[i] = _userManager.AddClaim(user.Id, claimsToAdd[i]);
+                claimsIdentity.AddClaim(claimsToAdd[i]);
+            }
+                
+
+            if (results.Any(r => !r.Succeeded))
+            {
+                ModelState.AddModelError("CurrentProject", "Failed to update current project");
                 return BadRequest(ModelState);
             }
+
+            //Updating claim cookie
+            var authentication = HttpContext.Current.GetOwinContext().Authentication;
+            authentication.SignOut();
+            authentication.SignIn(claimsIdentity);
 
             return Ok();
         }
