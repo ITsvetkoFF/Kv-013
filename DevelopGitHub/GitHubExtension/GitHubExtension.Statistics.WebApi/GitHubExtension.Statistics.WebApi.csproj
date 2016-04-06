@@ -91,19 +91,23 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommunicationModels\Graph.cs" />
     <Compile Include="CommunicationModels\UserInfo.cs" />
+    <Compile Include="Constant\RouteConstants.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GrahpBuilder\Abstract\GraphBuilder.cs" />
+    <Compile Include="GrahpBuilder\Builder.cs" />
+    <Compile Include="GrahpBuilder\Implementation\StatsBuilder.cs" />
     <Compile Include="Models\CommitsFromRepository.cs" />
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Package\SecurityWebApiPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Implementation\GitHubService.cs" />
-    <Compile Include="Services\IGitHubService.cs" />
-    <Compile Include="Services\IStatisticsService.cs" />
-    <Compile Include="Services\Implementation\StatisticsService.cs" />
+    <Compile Include="Services\Implementations\GitHubService.cs" />
+    <Compile Include="Services\Interfaces\IGitHubService.cs" />
+    <Compile Include="Services\Interfaces\IStatisticsService.cs" />
+    <Compile Include="Services\Implementations\StatisticsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
