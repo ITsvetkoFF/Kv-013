@@ -40,7 +40,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repository.ToRepositoryViewModel());
         }
 
-        //[Authorize]
         [Route("api/user/repos")]
         public async Task<IHttpActionResult> GetReposForCurrentUser()
         {
@@ -55,7 +54,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repos);
         }
 
-        //[Authorize]
         [Route("api/repos/{repoName}/collaborators")]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
@@ -68,7 +66,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(gitHubCollaborators);
         }
 
-        [Authorize]
         [Route("api/repos/current")]
         [HttpPatch]
         public async Task<IHttpActionResult> UpdateProject(Repository repo)

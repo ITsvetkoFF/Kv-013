@@ -12,7 +12,7 @@ using GitHubExtension.Activity.Internal.WebApi.Mappers;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
-    [RoutePrefix("api/activity/internal")] // must be in constants
+    [RoutePrefix("api/activity/internal")] 
     public class InternalActivityController : ApiController
     {
         private readonly IActivityReaderService _activityReaderService;
@@ -23,10 +23,10 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [Route("{userId:guid}/{currentRepositoryId}")]  // Must be in constants 
-        public async Task<IHttpActionResult> GetCurrentRepositoryUserActivities([FromUri]string userId, [FromUri]int currentRepositoryId)
+        [Route("{currentRepositoryId}")] 
+        public async Task<IHttpActionResult> GetCurrentRepositoryUserActivities([FromUri]int currentRepositoryId)
         {
-            ICollection<ActivityEvent> userActivitiesForCurrentRepo = _activityReaderService.GetCurrentRepositoryUserActivities(currentRepositoryId, userId);
+            ICollection<ActivityEvent> userActivitiesForCurrentRepo = _activityReaderService.GetCurrentRepositoryUserActivities(currentRepositoryId);
 
             ICollection<ActivityEventViewModel> activityViewModels = new List<ActivityEventViewModel>();
 

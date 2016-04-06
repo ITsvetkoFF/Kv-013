@@ -17,10 +17,9 @@ namespace GitHubExtension.Activity.Internal.WebApi.Services.Implementation
             activityModelContext = new ActivityModel();
         }
 
-        public ICollection<ActivityEvent> GetCurrentRepositoryUserActivities(int currentRepositoryId, string userId)
+        public ICollection<ActivityEvent> GetCurrentRepositoryUserActivities(int currentRepositoryId)
         {
-            ICollection<ActivityEvent> activitesForCurrentRepo = activityModelContext.Activities.Where(r => r.CurrentRepositoryId == currentRepositoryId)
-                                                                .Where(u => u.UserId == userId).ToList();
+            ICollection<ActivityEvent> activitesForCurrentRepo = activityModelContext.Activities.Where(r => r.CurrentRepositoryId == currentRepositoryId).ToList();
 
             return activitesForCurrentRepo;
         }

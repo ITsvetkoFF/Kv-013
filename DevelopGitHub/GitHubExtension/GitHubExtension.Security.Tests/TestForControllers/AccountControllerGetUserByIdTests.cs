@@ -17,8 +17,6 @@ using FluentAssertions;
 using System;
 using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 
-
-
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class AccountControllerGetUserByIdTests
@@ -56,7 +54,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
             return controller;
         }
-         
+
         [Theory]
         [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(string findUserById, User fakeFoundUser)
@@ -71,7 +69,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
-
 
         [Theory]
         [MemberData("DataForOkResult")]

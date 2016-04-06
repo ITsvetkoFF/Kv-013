@@ -201,7 +201,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 ActivityType = userActivityType,
                 InvokeTime = DateTime.Now,
                 Message = User.Identity.Name + " " + userActivityType.Name + " at " + DateTime.Now.ToString()
-            });	        
+            });
 
             List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
 
