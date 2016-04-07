@@ -15,12 +15,11 @@ namespace GitHubExtension.Notes.WebApi.Services
             this.notesContext = notesContext;
         }
 
-        public async Task<AddNoteModel> GetNote(int noteId)
+        public async Task<Note> GetNote(int noteId)
         {
-            var query = await notesContext.Notes
+            var note = await notesContext.Notes
                 .FirstOrDefaultAsync(x => x.Id == noteId);
-            var noteModel = query.ToNoteViewModel();
-            return noteModel;
+            return note;
         }
 
         public async Task<Note> AddNote(AddNoteModel addNote)

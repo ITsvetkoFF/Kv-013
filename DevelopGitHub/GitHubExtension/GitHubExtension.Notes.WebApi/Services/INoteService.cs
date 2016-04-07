@@ -6,7 +6,7 @@ namespace GitHubExtension.Notes.WebApi.Services
 {
     public interface INotesService
     {
-       Task<AddNoteModel> GetNote(int noteId);
+       Task<Note> GetNote(int noteId);
        Task<Note> AddNote(AddNoteModel addNote);
     }
 }

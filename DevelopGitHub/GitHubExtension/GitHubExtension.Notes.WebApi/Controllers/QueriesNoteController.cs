@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using GitHubExtension.Notes.WebApi.Mappers;
 using GitHubExtension.Notes.WebApi.Services;
 
 namespace GitHubExtension.Notes.WebApi.Controllers
 {
-    public class NoteReadController : ApiController
+    public class QueriesNoteController : ApiController
     {
-         private INotesService noteService;
+        private INotesService noteService;
 
-         public NoteReadController(INotesService noteService)
+        public QueriesNoteController(INotesService noteService)
         {
             this.noteService = noteService;
         }
@@ -21,10 +22,12 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             {
                 return NotFound();
             }
-            else
+            var noteModel = note.ToNoteViewModel();
+            if (!ModelState.IsValid)
             {
-                return Ok(note);
+                return BadRequest(ModelState);
             }
+            return Ok(noteModel);
         }
     }
 }

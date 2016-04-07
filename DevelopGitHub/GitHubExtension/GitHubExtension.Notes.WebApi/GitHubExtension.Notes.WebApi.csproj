@@ -95,8 +95,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\NoteModifyController.cs" />
-    <Compile Include="Controllers\NoteReadController.cs" />
+    <Compile Include="Controllers\CommandsNoteController.cs" />
+    <Compile Include="Controllers\QueriesNoteController.cs" />
     <Compile Include="Mappers\NoteMapper.cs" />
     <Compile Include="Package\NotesWebApiPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

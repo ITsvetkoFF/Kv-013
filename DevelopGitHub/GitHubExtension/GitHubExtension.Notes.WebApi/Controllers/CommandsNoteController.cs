@@ -6,11 +6,11 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Notes.WebApi.Controllers
 {
-    public class NoteModifyController : ApiController
+    public class CommandsNoteController : ApiController
     {
         private INotesService noteService;
 
-        public NoteModifyController(INotesService noteService)
+        public CommandsNoteController(INotesService noteService)
         {
             this.noteService = noteService;
         }
