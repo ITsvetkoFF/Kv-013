@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GitHubExtension.Statistics.WebApi.Constant
 {
-    public class RouteConstants
+    public class StatisticsRouteConstants
     {
         public const string User = "api/user";
         public const string GetUserCommits = User+"/"+"commits";

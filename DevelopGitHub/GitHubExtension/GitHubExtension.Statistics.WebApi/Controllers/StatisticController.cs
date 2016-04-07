@@ -19,7 +19,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
             this._statisticsService = statisticsService1;
         }
 
-        [Route(RouteConstants.GetUserCommits)]
+        [Route(StatisticsRouteConstants.GetUserCommits)]
         public async Task<IHttpActionResult> GetCommitsForUser()
         {
             var claims = User.Identity as ClaimsIdentity;
@@ -29,7 +29,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
             return Ok(await _statisticsService.GraphCreation(userName, token));
         }
 
-       [Route(RouteConstants.GetRepoByName)]
+       [Route(StatisticsRouteConstants.GetRepoByName)]
         public async Task<IHttpActionResult> GetRepo([FromUri] string name)
         {
             var claims = User.Identity as ClaimsIdentity;
