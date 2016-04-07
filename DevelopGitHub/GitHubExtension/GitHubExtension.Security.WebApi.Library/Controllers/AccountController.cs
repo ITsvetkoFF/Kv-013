@@ -175,7 +175,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             if (role == null)
                 return InternalServerError();
 
-            List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
+            List<RepositoryModel> repositories = await _githubService.GetReposAsync(token);
             
             var repositoriesToAdd = repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
             user.UserRepositoryRoles = repositoriesToAdd;

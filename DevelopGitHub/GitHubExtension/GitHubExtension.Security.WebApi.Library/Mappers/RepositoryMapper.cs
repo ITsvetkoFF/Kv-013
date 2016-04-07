@@ -5,7 +5,7 @@ namespace GitHubExtension.Security.WebApi.Library.Mappers
 {
     public static class RepositoryMapper
     {
-        public static Repository ToEntity(this RepositoryDto repository)
+        public static Repository ToEntity(this RepositoryModel repository)
         {
             var repositoryEntity = new Repository()
             {

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace GitHubExtension.Models.CommunicationModels
 {
     [NotMapped]
-    public class RepositoryDto
+    public class RepositoryModel
     {
         public int Id { get; set; }
         [JsonProperty(PropertyName = "id")]
