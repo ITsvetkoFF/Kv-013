@@ -12,7 +12,7 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
     public class StatisticsService : IStatisticsService
     {
         private readonly IGitHubService _gitHubService;
-        private ICollection<Graph> graphs;
+        private ICollection<GraphModel> graphs;
         int countDaysInYear = 364;
 
         public StatisticsService(IGitHubService gitHubService)
@@ -20,7 +20,7 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
             _gitHubService = gitHubService;
         }
 
-        public async Task<Graph> GraphCreation(string userName, string token)
+        public async Task<GraphModel> GraphCreation(string userName, string token)
         {
             Builder builder = new Builder();
             GraphBuilder graphBuilder = new StatsBuilder(_gitHubService);

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.GrahpBuilder.Abstract;
-using GitHubExtension.Statistics.WebApi.Models;
 
 namespace GitHubExtension.Statistics.WebApi.GrahpBuilder
 {

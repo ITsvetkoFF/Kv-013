@@ -5,6 +5,6 @@ namespace GitHubExtension.Statistics.WebApi.Services.Interfaces
 {
     public interface IStatisticsService
     {
-        Task<Graph> GraphCreation(string userName, string token);
+        Task<GraphModel> GraphCreation(string userName, string token);
     }
 }

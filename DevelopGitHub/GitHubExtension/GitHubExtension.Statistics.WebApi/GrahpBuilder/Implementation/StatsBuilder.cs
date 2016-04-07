@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.GrahpBuilder.Abstract;
-using GitHubExtension.Statistics.WebApi.Models;
 using GitHubExtension.Statistics.WebApi.Services.Interfaces;
 
 namespace GitHubExtension.Statistics.WebApi.GrahpBuilder.Implementation
@@ -14,7 +13,7 @@ namespace GitHubExtension.Statistics.WebApi.GrahpBuilder.Implementation
     {
         private readonly IGitHubService _gitHubService;
         int countDaysInYear = 364;
-        private ICollection<Repository> repositories;
+        private ICollection<RepositoryModel> repositories;
 
         public StatsBuilder(IGitHubService gitHubService)
         {

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
-using GitHubExtension.Statistics.WebApi.Models;
 using GitHubExtension.Statistics.WebApi.Services.Interfaces;
 using Newtonsoft.Json;
 
@@ -16,7 +15,7 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
         #region fields
         private int countWeeksInMonth = 4;
         private readonly HttpClient _httpClient;
-        private Graph graph;
+        private GraphModel graph;
         #endregion
 
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
@@ -34,7 +33,7 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
             var requestUri = string.Format("https://api.github.com/repos/{0}/{1}/stats/participation?access_token={2}", owner, repository, token);
             var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
 
-            CommitsFromRepository commitsFromRepository = JsonConvert.DeserializeObject<CommitsFromRepository>(await response.Content.ReadAsStringAsync());
+            CommitsFromRepositoryModel commitsFromRepository = JsonConvert.DeserializeObject<CommitsFromRepositoryModel>(await response.Content.ReadAsStringAsync());
 
             List<int> ListofCommits = new List<int>();
 
@@ -47,11 +46,11 @@ namespace GitHubExtension.Statistics.WebApi.Services.Implementations
             return ListofCommits;
         }
 
-        public async Task<List<Repository>> GetRepositories(string owner, string token)
+        public async Task<List<RepositoryModel>> GetRepositories(string owner, string token)
         {
             var requestUri = string.Format("https://api.github.com/users/{0}/repos?access_token={1}", owner,token);
             var response = await _httpClient.SendAsync(CreateMessage(HttpMethod.Get, requestUri));
-            return JsonConvert.DeserializeObject<List<Repository>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<List<RepositoryModel>>(await response.Content.ReadAsStringAsync());
         }
 
         public List<string> GetMountsFromDateTo(DateTime from, DateTime to)

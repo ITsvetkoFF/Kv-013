@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
-using GitHubExtension.Statistics.WebApi.Models;
 
 namespace GitHubExtension.Statistics.WebApi.GrahpBuilder.Abstract
 {
     public abstract class GraphBuilder
     {
-        public Graph Graph { get; private set; }
+        public GraphModel Graph { get; private set; }
 
         public GraphBuilder()
         {
-            this.Graph = new Graph();
+            this.Graph = new GraphModel();
         }
 
         public abstract Task SetRepositories(string userName, string token);

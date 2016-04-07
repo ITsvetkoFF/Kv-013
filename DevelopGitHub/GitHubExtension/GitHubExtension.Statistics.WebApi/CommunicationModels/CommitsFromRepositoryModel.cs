@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace GitHubExtension.Statistics.WebApi.Models
+namespace GitHubExtension.Statistics.WebApi.CommunicationModels
 {
-    public class CommitsFromRepository
+    public class CommitsFromRepositoryModel
     {
         [JsonProperty(PropertyName = "all")]
         public List<int> Alls { get; set; }
