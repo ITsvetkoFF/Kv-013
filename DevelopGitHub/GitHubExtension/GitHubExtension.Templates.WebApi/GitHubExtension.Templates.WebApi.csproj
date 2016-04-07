@@ -134,16 +134,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitHubExtension.Models.StorageModels\GitHubExtension.Security.StorageModels.csproj">
-      <Project>{38B14075-AF0F-4588-912F-D000C37346CD}</Project>
-      <Name>GitHubExtension.Security.StorageModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
-      <Project>{7c74e58b-b1d7-4c8f-b0ad-9528e07fc3db}</Project>
-      <Name>GitHubExtension.Security.DAL</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>

@@ -11,11 +11,13 @@ using Newtonsoft.Json;
 
 namespace GitHubExtension.Templates.WebApi.Services
 {
-        internal class TemplatesService : ITemplateService
-        {
-            private readonly HttpClient _httpClient;
+    internal class TemplatesService : ITemplateService
+    {
+        private readonly HttpClient _httpClient;
+        private const string NotFound = "NotFound";
 
-            private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>
+
         {
             //Need to set user-agent to access GitHub API, Using Chrome 48
             {
@@ -24,60 +26,64 @@ namespace GitHubExtension.Templates.WebApi.Services
             }
         };
 
-            public TemplatesService()
-            {
-                _httpClient = new HttpClient();
-            }
-
-            public async Task<string> GetPullRequestTemplatesAsync(string userName, string repositoryName,
-                string pathToFile)
-            {
-                var requestUri = String.Format(RouteConstants.RouteToRepository+"{0}/{1}"+RouteConstants.Contents+"{2}", userName, repositoryName, pathToFile);
-                var message = CreateMessage(HttpMethod.Get, requestUri);
-
-                var response = await _httpClient.SendAsync(message);
-
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                    return "NotFound";
-
-                if (!response.IsSuccessStatusCode)
-                    throw new UnsuccessfullGitHubRequestException();
-
-                var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
-                var data = Convert.FromBase64String(dto.Content);
-                var final = Encoding.UTF8.GetString(data);
-                return final;
-            }
-
-            public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
-            {
-                var requestUri = String.Format(RouteConstants.RouteToRepository+"{0}/{1}"+RouteConstants.Contents+"{2}", userName, repositoryName, pathToFile);
-                var message = CreateMessage(HttpMethod.Get, requestUri);
-
-                var response = await _httpClient.SendAsync(message);
-
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                    return "NotFound";
-                if (!response.IsSuccessStatusCode)
-                    throw new UnsuccessfullGitHubRequestException();
-
-                var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
-                var data = Convert.FromBase64String(dto.Content);
-                var final = Encoding.UTF8.GetString(data);
-
-                return final;
-            }
-
-            private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
-            {
-                var message = new HttpRequestMessage(method, requestUri);
-
-                foreach (var header in DefaultHeaders)
-                {
-                    message.Headers.Add(header.Key, header.Value);
-                }
-
-                return message;
-            }
+        public TemplatesService()
+        {
+            _httpClient = new HttpClient();
         }
+
+        public async Task<string> GetPullRequestTemplatesAsync(string userName, string repositoryName,
+            string pathToFile)
+        {
+            var requestUri =
+                string.Format(RouteConstants.RouteToRepository + "{0}/{1}" + RouteConstants.Contents + "{2}", userName,
+                    repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, requestUri);
+
+            var response = await _httpClient.SendAsync(message);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return NotFound;
+
+            if (!response.IsSuccessStatusCode)
+                throw new UnsuccessfullGitHubRequestException();
+
+            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
+            var data = Convert.FromBase64String(dto.Content);
+            var final = Encoding.UTF8.GetString(data);
+            return final;
+        }
+
+        public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
+        {
+            var requestUri =
+                string.Format(RouteConstants.RouteToRepository + "{0}/{1}" + RouteConstants.Contents + "{2}", userName,
+                    repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, requestUri);
+
+            var response = await _httpClient.SendAsync(message);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return NotFound;
+            if (!response.IsSuccessStatusCode)
+                throw new UnsuccessfullGitHubRequestException();
+
+            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
+            var data = Convert.FromBase64String(dto.Content);
+            var final = Encoding.UTF8.GetString(data);
+
+            return final;
+        }
+
+        private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
+        {
+            var message = new HttpRequestMessage(method, requestUri);
+
+            foreach (var header in DefaultHeaders)
+            {
+                message.Headers.Add(header.Key, header.Value);
+            }
+
+            return message;
+        }
+    }
 }
