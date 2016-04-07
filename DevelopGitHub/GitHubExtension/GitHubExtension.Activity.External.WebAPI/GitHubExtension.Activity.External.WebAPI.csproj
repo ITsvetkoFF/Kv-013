@@ -78,6 +78,7 @@
     <Compile Include="EventParsers\BaseEventParser.cs" />
     <Compile Include="EventParsers\CreateEventParser.cs" />
     <Compile Include="EventParsers\DeleteEventParser.cs" />
+    <Compile Include="RouteConstants.cs" />
     <Compile Include="Services\EventParserHelper.cs" />
     <Compile Include="Services\GitHubService.cs" />
     <Compile Include="EventParsers\GolumEventParser.cs" />
