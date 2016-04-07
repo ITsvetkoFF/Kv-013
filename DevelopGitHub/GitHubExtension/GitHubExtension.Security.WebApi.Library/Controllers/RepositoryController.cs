@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
-using GitHubExtension.Security.DAL.Context;
+using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
@@ -70,7 +70,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         [Authorize]
         [Route("api/repos/current")]
         [HttpPatch]
-        public async Task<IHttpActionResult> UpdateProject(Repository repo)
+        public async Task<IHttpActionResult> UpdateProject(RepositoryModel repo)
         {
             string currentUserId = User.Identity.GetUserId();
             User user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);

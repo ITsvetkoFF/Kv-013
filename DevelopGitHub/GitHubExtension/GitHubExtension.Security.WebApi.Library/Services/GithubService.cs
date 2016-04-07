@@ -78,7 +78,7 @@ namespace GitHubExtension.Security.WebApi.Library.Services
             return email;
         }
 
-        public async Task<List<RepositoryDto>> GetReposAsync(string token)
+        public async Task<List<RepositoryModel>> GetReposAsync(string token)
         {
             //Geting repos for user
             var requestUri = string.Format("https://api.github.com/user/repos?access_token={0}", token);
@@ -88,7 +88,7 @@ namespace GitHubExtension.Security.WebApi.Library.Services
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
-            return JsonConvert.DeserializeObject<List<RepositoryDto>>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<List<RepositoryModel>>(await response.Content.ReadAsStringAsync());
         }
 
         /// <summary>
