@@ -17,7 +17,7 @@
                 state: 'stats',
                 config: {
                     url: '/stats',
-                    templateUrl: 'app/stats/stats.html',
+                    templateUrl: 'FrontEnd/src/client/app/stats/stats.html',
                     controller: 'statsController',
                     contollerAs: 'vmStats',
                     title: 'Stats',
