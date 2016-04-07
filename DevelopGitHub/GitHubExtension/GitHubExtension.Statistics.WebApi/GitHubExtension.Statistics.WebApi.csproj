@@ -84,18 +84,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommunicationModels\Graph.cs" />
     <Compile Include="CommunicationModels\UserInfo.cs" />
     <Compile Include="Constant\RouteConstants.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="GrahpBuilder\Abstract\GraphBuilder.cs" />
     <Compile Include="GrahpBuilder\Builder.cs" />
     <Compile Include="GrahpBuilder\Implementation\StatsBuilder.cs" />
@@ -118,9 +113,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
