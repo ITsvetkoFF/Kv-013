@@ -15,6 +15,8 @@ namespace GitHubExtension.Templates.WebApi.Services
     {
         private readonly HttpClient _httpClient;
         private const string NotFound = "NotFound";
+        private const string RouteToRepository = "https://api.github.com/repos/";
+        private const string Contents = "/contents/";
 
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>
 
@@ -35,7 +37,7 @@ namespace GitHubExtension.Templates.WebApi.Services
             string pathToFile)
         {
             var requestUri =
-                string.Format(RouteConstants.RouteToRepository + "{0}/{1}" + RouteConstants.Contents + "{2}", userName,
+                string.Format(RouteToRepository + "{0}/{1}" + Contents + "{2}", userName,
                     repositoryName, pathToFile);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
@@ -56,7 +58,7 @@ namespace GitHubExtension.Templates.WebApi.Services
         public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
         {
             var requestUri =
-                string.Format(RouteConstants.RouteToRepository + "{0}/{1}" + RouteConstants.Contents + "{2}", userName,
+                string.Format(RouteToRepository + "{0}/{1}" + Contents + "{2}", userName,
                     repositoryName, pathToFile);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 

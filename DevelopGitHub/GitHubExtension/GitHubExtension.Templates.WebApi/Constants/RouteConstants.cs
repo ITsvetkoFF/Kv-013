@@ -8,9 +8,6 @@ namespace GitHubExtension.Templates.WebApi.Constants
         public const string IssueTemplate = "issueTemplate";
         public const string PathToPullRequestTemplate = ".github/PULL_REQUEST_TEMPLATE.md";
         public const string PathToIssueTemplate = ".github/ISSUE_TEMPLATE.md";
-        public const string RouteToRepository = "https://api.github.com/repos/";
-        public const string Contents = "/contents/";
-
 
     }
 }
