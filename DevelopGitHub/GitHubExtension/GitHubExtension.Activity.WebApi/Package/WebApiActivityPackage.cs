@@ -10,10 +10,10 @@ namespace GitHubExtension.Activity.Internal.WebApi.Package
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IContextActivityQuery, ContextActivityQuery>(Lifestyle.Singleton);
-            container.Register<IContextActivityCommand, ContextActivityCommand>(Lifestyle.Singleton);
-            container.Register<IGetActivityTypeQuery, GetActivityTypeQuery>(Lifestyle.Singleton);
             container.Register<ActivityContext>(Lifestyle.Scoped);
+            container.Register<IContextActivityQuery, ContextActivityQuery>(Lifestyle.Scoped);
+            container.Register<IContextActivityCommand, ContextActivityCommand>(Lifestyle.Scoped);
+            container.Register<IGetActivityTypeQuery, GetActivityTypeQuery>(Lifestyle.Scoped);
         }
     }
 }
