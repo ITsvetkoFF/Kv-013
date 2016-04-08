@@ -10,12 +10,10 @@ using GitHubExtension.Security.DAL.Interfaces;
 using System.Web.Http;
 using System.Web.Http.Results;
 using GitHubExtension.Security.WebApi.Library.Controllers;
-using System.Data.Entity.Infrastructure;
-using GitHubExtension.Security.Tests.Mocks;
 using System.Threading.Tasks;
 using FluentAssertions;
-using System;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -49,7 +47,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
                  Substitute.For<ISecurityContext>(), userManager);
 
             return controller;

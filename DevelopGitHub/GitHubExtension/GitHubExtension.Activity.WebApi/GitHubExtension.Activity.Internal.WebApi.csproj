@@ -51,6 +51,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -75,15 +76,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\InternalActivityController.cs" />
-    <Compile Include="Exceptions\AddActivityEventException.cs" />
     <Compile Include="Mappers\ActivityEventMapper.cs" />
-    <Compile Include="Models\ActivityEventViewModel.cs" />
+    <Compile Include="Models\ActivityEventModel.cs" />
     <Compile Include="Package\WebApiActivityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Implementation\ActivityReaderService.cs" />
-    <Compile Include="Services\Implementation\ActivityWriterService.cs" />
-    <Compile Include="Services\Interfaces\IActivityReaderService.cs" />
-    <Compile Include="Services\Interfaces\IActivityWriterService.cs" />
+    <Compile Include="Queries\GetActivityTypeQuery.cs" />
+    <Compile Include="Queries\IGetActivityTypeQuery.cs" />
+    <Compile Include="ActivityRouteConstants.cs" />
+    <Compile Include="Services\ActivityExtensionService.cs" />
+    <Compile Include="Queries\ContextActivityQuery.cs" />
+    <Compile Include="Commands\ContextActivityCommand.cs" />
+    <Compile Include="Queries\IContextActivityQuery.cs" />
+    <Compile Include="Commands\IContextActivityCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -95,6 +99,7 @@
       <Name>GitHubExtension.Activity.Internal.DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

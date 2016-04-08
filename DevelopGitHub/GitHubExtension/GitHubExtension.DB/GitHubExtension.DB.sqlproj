@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>GitHubExtension.Activity.DB</Name>
+    <Name>GitHubExtension.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{9338a456-e885-44de-8412-6038e5fb0826}</ProjectGuid>
+    <ProjectGuid>{a91f7636-eeec-4e82-8e7f-132f64ec4043}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>GitHubExtension.Activity.DB</RootNamespace>
-    <AssemblyName>GitHubExtension.Activity.DB</AssemblyName>
+    <RootNamespace>GitHubExtension.DB</RootNamespace>
+    <AssemblyName>GitHubExtension.DB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -59,13 +59,13 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
+    <PostDeploy Include="AddFKUserActivityConstraint.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedActivityTypes.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <Build Include="Activities.sql" />
     <Build Include="ActivitiesTypes.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="GitHubExtension.Activity.DB.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="SeedActivityTypes.sql" />
   </ItemGroup>
 </Project>

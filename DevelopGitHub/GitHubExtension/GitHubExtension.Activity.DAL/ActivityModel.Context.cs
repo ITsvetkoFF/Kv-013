@@ -13,10 +13,10 @@ namespace GitHubExtension.Activity.Internal.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ActivityModelContext : DbContext
+    public partial class ActivityContext : DbContext
     {
-        public ActivityModelContext()
-            : base("name=ActivityModelContext")
+        public ActivityContext()
+            : base("name=ActivityContext")
         {
         }
     
@@ -27,5 +27,6 @@ namespace GitHubExtension.Activity.Internal.DAL
     
         public virtual DbSet<ActivityEvent> Activities { get; set; }
         public virtual DbSet<ActivityType> ActivitiesTypes { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

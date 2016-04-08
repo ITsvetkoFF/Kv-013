@@ -1,7 +1,8 @@
-﻿using GitHubExtension.Activity.Internal.WebApi.Services.Implementation;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
-using SimpleInjector;
+﻿using SimpleInjector;
 using SimpleInjector.Packaging;
+using GitHubExtension.Activity.Internal.DAL;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Package
 {
@@ -9,8 +10,10 @@ namespace GitHubExtension.Activity.Internal.WebApi.Package
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IActivityWriterService, ActivityWriterService>(Lifestyle.Singleton);
-            container.Register<IActivityReaderService, ActivityReaderService>(Lifestyle.Singleton);
+            container.Register<IContextActivityQuery, ContextActivityQuery>(Lifestyle.Singleton);
+            container.Register<IContextActivityCommand, ContextActivityCommand>(Lifestyle.Singleton);
+            container.Register<IGetActivityTypeQuery, GetActivityTypeQuery>(Lifestyle.Singleton);
+            container.Register<ActivityContext>(Lifestyle.Scoped);
         }
     }
 }

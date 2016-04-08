@@ -13,6 +13,8 @@ namespace GitHubExtension.Security.WebApi.Library.Services
     public class GithubService : IGithubService
     {
         private readonly HttpClient _httpClient;
+        private const string DefaultRepositoryType = "owner"; 
+
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
         {
              //Need to set user-agent to access GitHub API, Using Chrome 48
@@ -80,10 +82,10 @@ namespace GitHubExtension.Security.WebApi.Library.Services
             return email;
         }
 
-        public async Task<List<RepositoryDto>> GetReposAsync(string token, string type = "owner")
+        public async Task<List<RepositoryDto>> GetReposAsync(string token)
         {
             //Geting repos for user
-            var requestUri = string.Format("https://api.github.com/user/repos?access_token={0}&type={1}", token, type);
+            var requestUri = string.Format("https://api.github.com/user/repos?access_token={0}&type={1}", token, DefaultRepositoryType);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
             var response = await _httpClient.SendAsync(message);

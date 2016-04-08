@@ -22,5 +22,6 @@ namespace GitHubExtension.Activity.Internal.DAL
         public string Message { get; set; }
     
         public virtual ActivityType ActivityType { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

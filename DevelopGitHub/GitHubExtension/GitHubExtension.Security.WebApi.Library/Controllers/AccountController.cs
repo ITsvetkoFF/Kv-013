@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using GitHubExtension.Models.CommunicationModels;
-using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.StorageModels.Identity;
@@ -16,9 +15,9 @@ using GitHubExtension.Security.WebApi.Library.Exceptions;
 using GitHubExtension.Security.WebApi.Library.Results;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 using GitHubExtension.Activity.Internal.DAL;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
@@ -26,7 +25,8 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
     {
         #region private fields
         private readonly IGithubService _githubService;
-        private readonly IActivityWriterService _activityWriterService;
+        private readonly IContextActivityCommand _contextActivityCommand;
+        private readonly IGetActivityTypeQuery _getActivityTypeQuery;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
@@ -34,12 +34,14 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
         public AccountController(
             IGithubService githubService,
-            IActivityWriterService activityWriterService,
+            IContextActivityCommand contextActivityCommand,
+            IGetActivityTypeQuery getActivityTypeQuery,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
             _githubService = githubService;
-            _activityWriterService = activityWriterService;
+            _contextActivityCommand = contextActivityCommand;
+            _getActivityTypeQuery = getActivityTypeQuery;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -56,7 +58,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
 
             return NotFound();
         }
-  
+
         [Route("api/Account/user/{username}")]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
@@ -75,9 +77,14 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         [HttpPatch]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
-            var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
+            User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
                 return NotFound();
+
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
+
+            if (repositoryRole != null)
+                appUser.UserRepositoryRoles.Remove(repositoryRole);
 
             var role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == roleToAssign);
             if (role == null)
@@ -85,10 +92,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 ModelState.AddModelError("role", string.Format("Roles '{0}' does not exists in the system", roleToAssign));
                 return BadRequest(ModelState);
             }
-
-            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
-            if (repositoryRole != null)
-                appUser.UserRepositoryRoles.Remove(repositoryRole);
 
             appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
             {
@@ -116,15 +119,15 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 return BadRequest(ModelState);
             }
 
-            ActivityType activityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.AddRole);
+            var activityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.AddRole);
 
-            _activityWriterService.AddActivity(new ActivityEvent()
+            _contextActivityCommand.AddActivity(new ActivityEvent
             {
                 UserId = User.Identity.GetUserId(),
                 CurrentRepositoryId = repoId,
                 ActivityType = activityType,
                 InvokeTime = DateTime.Now,
-                Message = User.Identity.Name + " " + activityType.Name + " " + roleToAssign + " to " + appUser.UserName  + " at " + DateTime.Now.ToString()
+                Message = String.Format("{0} {1} {2} to {3} at {4}", User.Identity.Name, activityType.Name, roleToAssign, appUser.UserName, DateTime.Now)
             });
 
             return Ok();
@@ -193,15 +196,15 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             if (role == null)
                 return InternalServerError();
 
-            ActivityType userActivityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.JoinToSystem);
-        
-		     _activityWriterService.AddActivity(new ActivityEvent()
-            {
-                UserId = user.Id,
-                ActivityType = userActivityType,
-                InvokeTime = DateTime.Now,
-                Message = User.Identity.Name + " " + userActivityType.Name + " at " + DateTime.Now.ToString()
-            });
+            var userActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
+
+            _contextActivityCommand.AddActivity(new ActivityEvent()
+           {
+               UserId = user.Id,
+               ActivityType = userActivityType,
+               InvokeTime = DateTime.Now,
+               Message = String.Format("{0} {1} at {2}", User.Identity.Name, userActivityType.Name, DateTime.Now)
+           });
 
             List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
 
@@ -217,19 +220,19 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                         new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
 
-            ActivityType repositoryActivityType = _activityWriterService.GetActivityTypeByName(ActivityTypeNames.RepositoryAddedToSystem);
+            var repositoryActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
 
             foreach (var repository in repositoryRolesToAdd)
-	        {
-		     _activityWriterService.AddActivity(new ActivityEvent()
             {
-                UserId = user.Id,
-                CurrentRepositoryId = repository.RepositoryId,
-                ActivityType = repositoryActivityType,
-                InvokeTime = DateTime.Now,
-                Message = repository.Repository.Name + " " + repositoryActivityType.Name + " at " + DateTime.Now.ToString()
-            });
-	        }
+                _contextActivityCommand.AddActivity(new ActivityEvent()
+                {
+                    UserId = user.Id,
+                    CurrentRepositoryId = repository.RepositoryId,
+                    ActivityType = repositoryActivityType,
+                    InvokeTime = DateTime.Now,
+                    Message = String.Format("{0} {1} at {2}", repository.Repository.Name, repositoryActivityType.Name, DateTime.Now)
+                });
+            }
 
             return null;
         }

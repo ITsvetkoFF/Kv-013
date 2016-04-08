@@ -52,10 +52,6 @@ namespace GitHubExtension.Security.WebApi
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            //FluentValidationModelValidatorProvider
-            //    .Configure(config,
-            //        provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
-
             app.UseWebApi(config);
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, DAL.Migrations.Configuration>());

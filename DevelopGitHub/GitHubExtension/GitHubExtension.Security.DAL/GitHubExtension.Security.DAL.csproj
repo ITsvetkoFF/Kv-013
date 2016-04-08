@@ -114,7 +114,7 @@
     <Compile Include="Migrations\201603311144256_Initial migration.Designer.cs">
       <DependentUpon>201603311144256_Initial migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Package\DALPackage.cs" />
+    <Compile Include="Package\SecurityDALPackage .cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\GitHubRoleStore.cs" />
     <Compile Include="Infrastructure\GitHubUserStore.cs" />

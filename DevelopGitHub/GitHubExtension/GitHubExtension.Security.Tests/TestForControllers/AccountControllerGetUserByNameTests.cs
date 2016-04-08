@@ -7,13 +7,13 @@ using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using NSubstitute;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
 using FluentAssertions;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -47,7 +47,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByNameAsync(name).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IActivityWriterService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
                  Substitute.For<ISecurityContext>(), userManager);
 
             return controller;
@@ -65,7 +65,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
             //Assert
             IHttpActionResult result = response.Result;
-            result.Should().BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database",nameToFind);
+            result.Should().BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database", nameToFind);
         }
 
         [Theory]

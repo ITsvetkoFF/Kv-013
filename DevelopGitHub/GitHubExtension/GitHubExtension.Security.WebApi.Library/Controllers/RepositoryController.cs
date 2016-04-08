@@ -3,14 +3,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
-using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
 using Microsoft.AspNet.Identity;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Activity.Internal.WebApi.Services.Interfaces;
 
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
