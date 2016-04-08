@@ -1,4 +1,4 @@
-﻿namespace GitHubExtension.Notes.WebApi.Validators
+﻿namespace GitHubExtension.Notes.WebApi.Constants
 {
     public static class ValidationConstants
     {

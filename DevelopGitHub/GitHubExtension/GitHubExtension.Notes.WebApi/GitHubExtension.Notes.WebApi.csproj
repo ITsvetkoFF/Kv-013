@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="Commands\INoteCommands.cs" />
     <Compile Include="Commands\NoteCommands.cs" />
+    <Compile Include="Constants\RouteConstants.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="Mappers\NoteMapper.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Queries\INoteQueries.cs" />
     <Compile Include="Queries\NoteQueries.cs" />
     <Compile Include="Validators\AddNoteModelValidator.cs" />
-    <Compile Include="Validators\ValidationConstants.cs" />
+    <Compile Include="Constants\ValidationConstants.cs" />
     <Compile Include="ViewModels\AddNoteModel.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Notes.WebApi.Commands;
+using GitHubExtension.Notes.WebApi.Constants;
 using GitHubExtension.Notes.WebApi.Mappers;
 using GitHubExtension.Notes.WebApi.Queries;
 using GitHubExtension.Notes.WebApi.ViewModels;
@@ -18,7 +19,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             this.queries = queries;
         }
 
-        [Route("api/note/{noteId}")]
+        [Route(RouteConstants.GetNoteRoute)]
         public async Task<IHttpActionResult> GetNote([FromUri] int noteId)
         {
             var note = await queries.GetNote(noteId);
@@ -34,7 +35,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             return Ok(noteModel);
         }
 
-        [Route("api/note")]
+        [Route(RouteConstants.CreateNoteRoute)]
         [HttpPost]
         public async Task<IHttpActionResult> CreateNote(AddNoteModel model)
         {
