@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Models.Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.WebApi.Library", "GitHubExtension.Security.WebApi.Library\GitHubExtension.Security.WebApi.Library.csproj", "{7E05EAF8-B822-493D-81E7-50A054BD5CE4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubTemplates", "GitHubTemplates", "{F8942048-2052-4E16-AB70-A88EBC2383B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Templates.WebApi", "GitHubExtension.Templates.WebApi\GitHubExtension.Templates.WebApi.csproj", "{CBDD17F8-B670-4FB1-8F87-4EA4EB710140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +49,15 @@ Global
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDD17F8-B670-4FB1-8F87-4EA4EB710140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDD17F8-B670-4FB1-8F87-4EA4EB710140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDD17F8-B670-4FB1-8F87-4EA4EB710140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDD17F8-B670-4FB1-8F87-4EA4EB710140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBDD17F8-B670-4FB1-8F87-4EA4EB710140} = {F8942048-2052-4E16-AB70-A88EBC2383B4}
 	EndGlobalSection
 EndGlobal
