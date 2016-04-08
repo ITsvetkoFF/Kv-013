@@ -74,7 +74,7 @@
     <Compile Include="RepositoryDto.cs" />
     <Compile Include="RepositoryViewModel.cs" />
     <Compile Include="RoleViewModel.cs" />
-    <Compile Include="UserDTO.cs" />
+    <Compile Include="GitHubUserModel.cs" />
     <Compile Include="UserModel.cs" />
     <Compile Include="UserReturnModel.cs" />
   </ItemGroup>

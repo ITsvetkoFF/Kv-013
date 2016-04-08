@@ -1,0 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using GitHubExtension.Templates.WebApi.CommunicationModels;
+using GitHubExtension.Templates.WebApi.Constants;
+using GitHubExtension.Templates.WebApi.Exceptions;
+using Newtonsoft.Json;
+
+namespace GitHubExtension.Templates.WebApi.Services
+{
+    internal class TemplatesService : ITemplateService
+    {
+        private readonly HttpClient _httpClient;
+        private const string NotFound = "NotFound";
+        private const string RouteToRepository = "https://api.github.com/repos/";
+        private const string Contents = "/contents/";
+        private const string UserAgent = "User-Agent";
+        private const string UserAgentContent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
+
+        private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>
+
+        {
+            //Need to set user-agent to access GitHub API, Using Chrome 48
+            {
+               UserAgent, UserAgentContent
+            }
+        };
+
+        public TemplatesService()
+        {
+            _httpClient = new HttpClient();
+        }
+
+        public async Task<string> GetPullRequestTemplatesAsync(string userName, string repositoryName,
+            string pathToFile)
+        {
+            var requestUri =
+                string.Format(RouteToRepository + "{0}/{1}" + Contents + "{2}", userName,
+                    repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, requestUri);
+
+            var response = await _httpClient.SendAsync(message);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return NotFound;
+
+            if (!response.IsSuccessStatusCode)
+                throw new UnsuccessfullGitHubRequestException();
+
+            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
+            var data = Convert.FromBase64String(dto.Content);
+            var final = Encoding.UTF8.GetString(data);
+            return final;
+        }
+
+        public async Task<string> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
+        {
+            var requestUri =
+                string.Format(RouteToRepository + "{0}/{1}" + Contents + "{2}", userName,
+                    repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, requestUri);
+
+            var response = await _httpClient.SendAsync(message);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return NotFound;
+            if (!response.IsSuccessStatusCode)
+                throw new UnsuccessfullGitHubRequestException();
+
+            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await response.Content.ReadAsStringAsync());
+            var data = Convert.FromBase64String(dto.Content);
+            var final = Encoding.UTF8.GetString(data);
+
+            return final;
+        }
+
+        private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
+        {
+            var message = new HttpRequestMessage(method, requestUri);
+
+            foreach (var header in DefaultHeaders)
+            {
+                message.Headers.Add(header.Key, header.Value);
+            }
+
+            return message;
+        }
+    }
+}
