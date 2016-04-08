@@ -1,0 +1,22 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <h3>{{vmTemplates.i18n.message.PULLREQUESTTEMPLATE}}</h3>
+                        <button ng-click="vmTemplates.prtoggle()" ng-show="vmTemplates.pullRequestTemplate !== 'NotFound'">{{vmTemplates.i18n.message.SHOWPULLREQUESTTEMPLATE}}</button>
+                        <button ng-show="vmTemplates.pullRequestTemplate === 'NotFound'">{{vmTemplates.i18n.message.ADDPULLREQUESTTEMPLATE}}</button>
+                        <pre ng-show="vmTemplates.prVar">{{vmTemplates.pullRequestTemplate}}</pre>
+                    </div>
+                    <div>
+                        <h3>{{vmTemplates.i18n.message.ISSUETEMPLATE}}</h3>
+                        <button ng-click="vmTemplates.itoggle()" ng-show="vmTemplates.issueTemplate !== 'NotFound'">{{vmTemplates.i18n.message.SHOWISSUETEMPLATE}}</button>
+                        <button ng-show="vmTemplates.issueTemplate === 'NotFound'">{{vmTemplates.i18n.message.ADDISSUETEMPLATE}}</button>
+                        <pre ng-show="vmTemplates.iVar">{{vmTemplates.issueTemplate}}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,20 @@
+﻿<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Login</th>
+            <th>Roles to assign</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="collaborator in vmRoles.collaborators">
+            <td>{{collaborator.login}}</td>
+            <td>
+                <select ng-model="vmRoles.roleName[$index]" ng-options="role.name for role in vmRoles.roles.data" ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
+                    <option value="">---Please select---</option>
+                </select>
+            </td>
+            <td>
+        </tr>
+    </tbody>
+</table>
