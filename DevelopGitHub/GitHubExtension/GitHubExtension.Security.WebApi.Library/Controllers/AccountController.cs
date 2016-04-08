@@ -196,15 +196,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             if (role == null)
                 return InternalServerError();
 
-            var userActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
-
-            _contextActivityCommand.AddActivity(new ActivityEvent()
-           {
-               UserId = user.Id,
-               ActivityType = userActivityType,
-               InvokeTime = DateTime.Now,
-               Message = String.Format("{0} {1} at {2}", User.Identity.Name, userActivityType.Name, DateTime.Now)
-           });
 
             List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
 
@@ -219,6 +210,17 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                     .AddClaim(user.Id,
                         new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
+
+            var userActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
+
+            _contextActivityCommand.AddActivity(new ActivityEvent()
+            {
+                UserId = user.Id,
+                ActivityType = userActivityType,
+                InvokeTime = DateTime.Now,
+                Message = String.Format("{0} {1} at {2}", User.Identity.Name, userActivityType.Name, DateTime.Now)
+            });
+
 
             var repositoryActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activities">
           <Key>
             <PropertyRef Name="Id" />
@@ -79,49 +79,37 @@
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GitHubExtensionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ActivityModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Activities" EntityType="GitHubExtensionModel.ActivityEvent" />
-          <EntitySet Name="ActivitiesTypes" EntityType="GitHubExtensionModel.ActivityType" />
-          <EntitySet Name="Users" EntityType="GitHubExtensionModel.Users" />
-          <AssociationSet Name="FK_Activities_ActivitiesTypes" Association="GitHubExtensionModel.FK_Activities_ActivitiesTypes">
-            <End Role="ActivitiesTypes" EntitySet="ActivitiesTypes" />
-            <End Role="Activities" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Activities_Users" Association="GitHubExtensionModel.FK_Activities_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Activities" EntitySet="Activities" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="ActivityEvent">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CurrentRepositoryId" Type="Int32" Nullable="false" />
           <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <Property Name="InvokeTime" Type="DateTime" Precision="3" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ActivityType" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes" FromRole="Activities" ToRole="ActivitiesTypes" />
-          <NavigationProperty Name="Users" Relationship="GitHubExtensionModel.FK_Activities_Users" FromRole="Activities" ToRole="Users" />
+          <NavigationProperty Name="ActivityType" Relationship="Self.FK_Activities_ActivitiesTypes" FromRole="Activities" ToRole="ActivitiesTypes" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Activities_Users" FromRole="Activities" ToRole="Users" />
         </EntityType>
         <EntityType Name="ActivityType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Activities" Relationship="GitHubExtensionModel.FK_Activities_ActivitiesTypes" FromRole="ActivitiesTypes" ToRole="Activities" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_ActivitiesTypes" FromRole="ActivitiesTypes" ToRole="Activities" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderId" Type="Int32" Nullable="false" />
           <Property Name="GitHubUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -135,11 +123,11 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Activities" Relationship="GitHubExtensionModel.FK_Activities_Users" FromRole="Users" ToRole="Activities" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_Users" FromRole="Users" ToRole="Activities" />
         </EntityType>
         <Association Name="FK_Activities_ActivitiesTypes">
-          <End Type="GitHubExtensionModel.ActivityType" Role="ActivitiesTypes" Multiplicity="1" />
-          <End Type="GitHubExtensionModel.ActivityEvent" Role="Activities" Multiplicity="*" />
+          <End Role="ActivitiesTypes" Type="GitHubExtensionModel.ActivityType" Multiplicity="1" />
+          <End Role="Activities" Type="GitHubExtensionModel.ActivityEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ActivitiesTypes">
               <PropertyRef Name="Id" />
@@ -150,8 +138,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Activities_Users">
-          <End Type="GitHubExtensionModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="GitHubExtensionModel.ActivityEvent" Role="Activities" Multiplicity="*" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Activities" Type="GitHubExtensionModel.ActivityEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="Id" />
@@ -161,49 +149,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="ActivityContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="GitHubExtensionModel.ActivityEvent" />
+          <EntitySet Name="ActivitiesTypes" EntityType="GitHubExtensionModel.ActivityType" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Activities_ActivitiesTypes" Association="Self.FK_Activities_ActivitiesTypes">
+            <End Role="ActivitiesTypes" EntitySet="ActivitiesTypes" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activities_Users" Association="Self.FK_Activities_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GitHubExtensionModelStoreContainer" CdmEntityContainer="ActivityModel">
+        <EntityContainerMapping StorageEntityContainer="GitHubExtensionModelStoreContainer" CdmEntityContainer="ActivityContext">
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityEvent">
               <MappingFragment StoreEntitySet="Activities">
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
-                <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
-                <ScalarProperty Name="CurrentRepositoryId" ColumnName="CurrentRepositoryId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CurrentRepositoryId" ColumnName="CurrentRepositoryId" />
+                <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
+                <ScalarProperty Name="InvokeTime" ColumnName="InvokeTime" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ActivitiesTypes">
             <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityType">
               <MappingFragment StoreEntitySet="ActivitiesTypes">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GitHubExtensionModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="GitHubUrl" ColumnName="GitHubUrl" />
-                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="GitHubUrl" ColumnName="GitHubUrl" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
