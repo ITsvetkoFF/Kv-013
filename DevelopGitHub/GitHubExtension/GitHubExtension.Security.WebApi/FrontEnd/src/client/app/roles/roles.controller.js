@@ -6,10 +6,10 @@
      .module('app.roles')
      .controller('RolesController', RolesController);
 
-    RolesController.$inject = ['githubCollaborators', 'logger'];
+    RolesController.$inject = ['githubCollaborators', 'logger', '$q'];
 
     /* @ngInject */
-    function RolesController(githubCollaborators, logger) {
+    function RolesController(githubCollaborators, logger, $q) {
         var vm = this;
         vm.title = 'Roles';
         vm.repo = '';
@@ -20,10 +20,6 @@
             logger.info('Activated Roles View');
             githubCollaborators.getRepos().then(onGetRepos, onError);
             githubCollaborators.getRoles().then(onGetRoles, onError);
-        }
-
-        function searchCollaborators() {
-            githubCollaborators.getCollaborators(vm.repo).then(onGetCollaborators, onError);
         }
 
         function onGetCollaborators (data) {
@@ -49,12 +45,12 @@
             githubCollaborators.assignRole(vm.repo, collaborator, role);
         };
 
-        vm.updateCurrentProject = function (repo) {
-            githubCollaborators.updateCurrentProject(repo);
-        };
-        //function errorFn(response) {
-        //    logger.error('Sing in operation failed, check your username and password and try again');
-        //}
+        vm.setCurrentProjectAndGetCollaborators = function(repo) {
+            $q.all(githubCollaborators.updateCurrentProject(repo), getColaborators()).then(onError());
+            function getColaborators() {
+                return githubCollaborators.getCollaborators(repo).then(onGetCollaborators);
+            }
+        }
 
         function onError(reason) {
             vm.error = 'Could not get collaborators.';
