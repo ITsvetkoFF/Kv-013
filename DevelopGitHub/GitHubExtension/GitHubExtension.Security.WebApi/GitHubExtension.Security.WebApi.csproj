@@ -295,6 +295,10 @@
     <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\TestTemplates\DevelopGitHub\GitHubExtension\GitHubExtension.Templates.WebApi\GitHubExtension.Templates.WebApi.csproj">
+      <Project>{cbdd17f8-b670-4fb1-8f87-4ea4eb710140}</Project>
+      <Name>GitHubExtension.Templates.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>
