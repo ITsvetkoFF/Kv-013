@@ -9,6 +9,8 @@
         'app.repos',
         'app.roles',
         'ui.bootstrap',
-        'app.login'
+        'app.login',
+        'app.roles',
+        'app.templates'
     ]);
 })();

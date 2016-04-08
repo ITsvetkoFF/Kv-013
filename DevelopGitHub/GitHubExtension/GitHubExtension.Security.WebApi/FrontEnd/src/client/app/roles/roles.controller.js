@@ -6,11 +6,12 @@
      .module('app.roles')
      .controller('RolesController', RolesController);
 
-    RolesController.$inject = ['githubCollaborators', 'logger'];
+    RolesController.$inject = ['githubCollaborators', 'logger', 'i18n'];
 
     /* @ngInject */
-    function RolesController(githubCollaborators, logger) {
+    function RolesController(githubCollaborators, logger, i18n) {
         var vm = this;
+        vm.i18n = i18n;
         vm.title = 'Roles';
         vm.repo = '';
         vm.roleName = [];

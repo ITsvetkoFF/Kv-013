@@ -5,6 +5,16 @@
         "REPOS": "Repositories",
         "COLLABORATORS": "Collaborators",
         "MESSAGES": "Messages",
-        "AUTHORIZATION": "Authorization"
+        "AUTHORIZATION": "Authorization",
+        "TEMPLATES": "Templates",
+        "PULLREQUESTTEMPLATE": "Pull Request Template",
+        "SHOWPULLREQUESTTEMPLATE": "Show Pull Request template",
+        "ADDPULLREQUESTTEMPLATE": "Add Pull Request template",
+        "ISSUETEMPLATE": "Issue Template",
+        "SHOWISSUETEMPLATE": "Show Issue template",
+        "ADDISSUETEMPLATE": "Add Issue template",
+        "COLLABORATORS": "Collaborators",
+        "REPOSITORY" :  "Repositories"
+
     }
 }

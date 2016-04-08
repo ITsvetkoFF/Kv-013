@@ -5,13 +5,13 @@
         .module('app.roles')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper', 'i18n'];
     /* @ngInject */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper ,i18n) {
+        routerHelper.configureStates(getStates(i18n));
     }
 
-    function getStates() {
+    function getStates(i18n) {
         return [
             {
                 state: 'roles',
@@ -23,7 +23,7 @@
                     title: 'Collaborators list',
                     settings: {
                         nav: 3,
-                        content: '<i class="fa fa-dashboard"></i> Collaborators'
+                        content: '<i class="fa fa-dashboard"></i> ' + i18n.message.COLLABORATORS
                     }
                 }
             }

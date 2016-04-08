@@ -9,15 +9,31 @@
 		'REPOS': 'Repositories',
 		'COLLABORATORS': 'Collaborators',
 		'MESSAGES': 'Messages',
-		'AUTHORIZATION': 'Authorization'
+		'AUTHORIZATION': 'Authorization',
+		'TEMPLATES': 'Templates',
+		'PULLREQUESTTEMPLATE': 'Pull Request Template',
+		'SHOWPULLREQUESTTEMPLATE': 'Show Pull Request template',
+		'ADDPULLREQUESTTEMPLATE': 'Add Pull Request template',
+		'ISSUETEMPLATE': 'Issue Template',
+		'SHOWISSUETEMPLATE': 'Show Issue template',
+		'ADDISSUETEMPLATE': 'Add Issue template',
+		'REPOSITORY': 'Repositories'
 	},
 	'uk': {
 		'DASHBOARD': 'Панель управління',
 		'ADMIN': 'Адміністратор',
 		'REPOS': 'Сховища',
-		'COLLABORATORS': 'Коллаборатори',
+		'COLLABORATORS': 'Співавтори',
 		'MESSAGES': 'Повідомлення',
-		'AUTHORIZATION': 'Авторизація'
+		'AUTHORIZATION': 'Авторизація',
+		'TEMPLATES': 'Шаблони',
+		'PULLREQUESTTEMPLATE': 'Шаблон Pull Request',
+		'SHOWPULLREQUESTTEMPLATE': 'Показати Pull Request template',
+		'ADDPULLREQUESTTEMPLATE': 'Додати Pull Request template',
+		'ISSUETEMPLATE': 'Шаблон Issue',
+		'SHOWISSUETEMPLATE': 'Показати Issue template',
+		'ADDISSUETEMPLATE': 'Додати Issue template',
+		'REPOSITORY': 'Репозиторії'
 	}
 }) ;
 })();
