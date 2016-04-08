@@ -7,14 +7,15 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Templates.WebApi.Controllers
 {
-    [RoutePrefix(RouteConstants.GetGitHubTemplatesRoute)]
+    [RoutePrefix(RouteTemplatesConstants.GetGitHubTemplatesRoute)]
     public class TemplatesController : BaseApiController
     {
         #region private fields
 
         private readonly ITemplateService _templateService;
         private const string CurrentProjectName = "CurrentProjectName";
-
+        private const string PathToPullRequestTemplate = ".github/PULL_REQUEST_TEMPLATE.md";
+        private const string PathToIssueTemplate = ".github/ISSUE_TEMPLATE.md";
         #endregion
 
         public TemplatesController(ITemplateService templateService)
@@ -22,7 +23,7 @@ namespace GitHubExtension.Templates.WebApi.Controllers
             _templateService = templateService;
         }
 
-        [Route(RouteConstants.PullRequestTemplate)]
+        [Route(RouteTemplatesConstants.PullRequestTemplate)]
         public async Task<IHttpActionResult> GetPullRequestTemplate()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -31,12 +32,12 @@ namespace GitHubExtension.Templates.WebApi.Controllers
             var content =
                 await
                     _templateService.GetPullRequestTemplatesAsync(userName, repositoryName,
-                        RouteConstants.PathToPullRequestTemplate);
+                        PathToPullRequestTemplate);
 
             return Ok(content);
         }
 
-        [Route(RouteConstants.IssueTemplate)]
+        [Route(RouteTemplatesConstants.IssueTemplate)]
         public async Task<IHttpActionResult> GetIssueTemplate()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -44,8 +45,8 @@ namespace GitHubExtension.Templates.WebApi.Controllers
             var userName = User.Identity.Name;
             var content =
                 await
-                    _templateService.GetIssueTemplateAsync(userName, repositoryName, 
-                    RouteConstants.PathToIssueTemplate);
+                    _templateService.GetIssueTemplateAsync(userName, repositoryName,
+                    PathToIssueTemplate);
 
             return Ok(content);
         }

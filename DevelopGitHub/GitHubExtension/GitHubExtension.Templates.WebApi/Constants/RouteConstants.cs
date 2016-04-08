@@ -1,13 +1,11 @@
 ﻿
 namespace GitHubExtension.Templates.WebApi.Constants
 {
-    public class RouteConstants
+    public class RouteTemplatesConstants
     {
         public const string GetGitHubTemplatesRoute = "api/templates";
         public const string PullRequestTemplate = "pullRequestTemplate";
         public const string IssueTemplate = "issueTemplate";
-        public const string PathToPullRequestTemplate = ".github/PULL_REQUEST_TEMPLATE.md";
-        public const string PathToIssueTemplate = ".github/ISSUE_TEMPLATE.md";
 
     }
 }
