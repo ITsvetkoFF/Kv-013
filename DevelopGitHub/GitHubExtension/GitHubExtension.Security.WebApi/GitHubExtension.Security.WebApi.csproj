@@ -71,6 +71,10 @@
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Owin.FileSystems, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.FileSystems.3.0.1\lib\net45\Microsoft.Owin.FileSystems.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
@@ -85,6 +89,10 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.StaticFiles, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.StaticFiles.3.0.1\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -248,12 +256,18 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.controller.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.factory.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.html" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.module.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.route.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
     <Content Include="FrontEnd\src\client\app\widgets\widgets.module.js" />
     <Content Include="FrontEnd\src\client\index.html" />
     <Content Include="FrontEnd\src\client\specs.html" />
+    <Content Include="FrontEnd\src\client\styles\Site.css" />
     <Content Include="FrontEnd\src\client\test-helpers\bind-polyfill.js" />
     <Content Include="FrontEnd\src\client\test-helpers\mock-data.js" />
     <Content Include="FrontEnd\src\server\app.js" />
@@ -310,6 +324,10 @@
     <ProjectReference Include="..\GitHubExtension.Security.WebApi.Library\GitHubExtension.Security.WebApi.Library.csproj">
       <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
       <Name>GitHubExtension.Security.WebApi.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
+      <Project>{ac64ce56-a38a-4866-82f5-a3be35ef2ea8}</Project>
+      <Name>GitHubExtension.Statistics.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

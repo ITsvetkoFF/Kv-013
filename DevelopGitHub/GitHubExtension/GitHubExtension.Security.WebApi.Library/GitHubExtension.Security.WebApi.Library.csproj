@@ -215,6 +215,10 @@
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
+      <Project>{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}</Project>
+      <Name>GitHubExtension.Statistics.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

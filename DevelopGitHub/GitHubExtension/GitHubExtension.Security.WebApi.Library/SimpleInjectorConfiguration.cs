@@ -7,6 +7,7 @@ using GitHubExtension.Security.DAL.Package;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.WebApi.Library.Package;
 using GitHubExtension.Security.WebApi.Library.Services;
+using GitHubExtension.Statistics.WebApi.Package;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SimpleInjector;
@@ -29,7 +30,8 @@ namespace GitHubExtension.Security.WebApi.Library
             container.RegisterPackages(new[]
             {
                 typeof(DALPackage).Assembly,
-                typeof(WebApiLibraryPackage).Assembly
+                typeof(WebApiLibraryPackage).Assembly,
+                typeof(SecurityWebApiPackage).Assembly
             });
             container.Verify();
 

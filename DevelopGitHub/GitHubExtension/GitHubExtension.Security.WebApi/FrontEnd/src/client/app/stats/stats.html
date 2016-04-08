@@ -1,0 +1,89 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <button href="#" class="btn btn-danger btn-lg" role="button" ng-click="calculateQuantity()"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</button>
+                                <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
+                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Reports</a>
+                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Comments</a>
+                            </div>
+                            <div class="dropdown col-md-2">
+                                <div>
+                                    <select ng-model="repo" ng-options="repo as repo.name for repo in Repos" ng-change="getCommitsFromCurrent(repo)">
+                                        <option value="">---Please select---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <a href="#" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Users</a>
+                                <a href="#" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-file"></span> <br/>Notes</a>
+                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-picture"></span> <br/>Photos</a>
+                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-tag"></span> <br/>Tags</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="blockquote-box blockquote-primary clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-music glyphicon-lg">{{userInfo.repositoryCount}}</span>
+                            </div>
+                            <h4>
+                                User've {{userInfo.repositoryCount}} repositories
+                            </h4>
+                            <p>
+                                Lorem ipsum dolor sit
+                            </p>
+                        </div>
+                        <div class="blockquote-box blockquote-info clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{userInfo.folowingCount}}</span>
+                            </div>
+                            <h4>
+                                Following({{userInfo.folowingCount}})
+                            </h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                            </p>
+                        </div>
+                        <div class="blockquote-box blockquote-warning clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{userInfo.followerCount}}</span>
+                            </div>
+                            <h4>
+                                Follower({{userInfo.followerCount}}) 
+                            </h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <canvas id="line"
+                                class="chart chart-line" chart-data="reposData"
+                                chart-labels="labels" chart-legend="true" chart-series="series"
+                                chart-click="onClick"></canvas>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <canvas id="line" class="chart chart-line" chart-data="eachDate"
+                                    chart-labels="labels" chart-legend="true" chart-series="eachSeries"
+                                    chart-click="onClick"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="bar" class="chart chart-bar"
+                                    chart-data="barData" chart-labels="labels">
+                            </canvas></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
