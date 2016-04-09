@@ -24,7 +24,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         {
             ICollection<ActivityEvent> userActivitiesForCurrentRepo = _contextActivityQuery.GetCurrentRepositoryUserActivities(currentRepositoryId);
 
-            if (userActivitiesForCurrentRepo != null)
+            if ((userActivitiesForCurrentRepo != null) && (userActivitiesForCurrentRepo.Count != 0))
             {
                 ICollection<ActivityEventModel> activityViewModels = userActivitiesForCurrentRepo.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
 
@@ -40,7 +40,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         {
             ICollection<ActivityEvent> userActivities = _contextActivityQuery.GetUserActivities(userId);
 
-            if (userActivities != null)
+            if ((userActivities != null) && (userActivities.Count != 0))
             {
                 ICollection<ActivityEventModel> activityViewModels = userActivities.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
 
