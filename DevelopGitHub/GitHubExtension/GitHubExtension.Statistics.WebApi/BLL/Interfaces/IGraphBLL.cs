@@ -9,7 +9,7 @@ namespace GitHubExtension.Statistics.WebApi.BLL.Interfaces
     {
         Task<ICollection<ICollection<int>>> GetAllCommitsUser(string userName, string token,
             ICollection<RepositoryModel> repositories);
-        ICollection<string> GetMountsFromDateTo(DateTime from, DateTime to);
+        ICollection<string> GetMountsFromDateTo();
         Task<int> GetFollowingCount(string userName, string token);
         Task<int> GetFollowerCount(string userName, string token);
         Task<List<RepositoryModel>> GetRepositories(string userName, string token);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GitHubExtension.Statistics.WebApi.BLL.Interfaces;
@@ -12,7 +11,6 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
     {
         #region fields
         private readonly IGraphBll _graphQuery;
-        int countDaysInYear = 364;
         #endregion
 
         public StatisticsQuery(IGraphBll graphQuery)
@@ -36,7 +34,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
                     RepositoryCount = repositories.Count
                 },
 
-                Months = _graphQuery.GetMountsFromDateTo(DateTime.Now.AddDays(-countDaysInYear), DateTime.Now),
+                Months = _graphQuery.GetMountsFromDateTo(),
                 Repositories = repositories,
                 CommitsForEverRepository = commitsEverRepository,
                 Commits = _graphQuery.GetGroupCommits(commitsEverRepository)

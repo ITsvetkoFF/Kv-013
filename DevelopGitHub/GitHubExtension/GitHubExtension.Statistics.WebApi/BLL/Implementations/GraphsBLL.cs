@@ -14,12 +14,15 @@ namespace GitHubExtension.Statistics.WebApi.BLL.Implementations
     {
         #region fields
         private int countMounthInYear = 12;
+        private int countDaysInYear = 364;
         private readonly IGitHubQuery _gitHubQuery;
         private ICollection<ICollection<int>> commitsForEverRepository;
         private ICollection<int> commitsInYear;
         private ICollection<int> commitsInMonth;
         private ICollection<string> months;
         private ICollection<int> groupCommits;
+        private DateTime timeTo = DateTime.Now;
+        private DateTime timeFrom;
         #endregion
 
         public GraphsBll(IGitHubQuery gitHubQuery)
@@ -46,12 +49,13 @@ namespace GitHubExtension.Statistics.WebApi.BLL.Implementations
             return commitsForEverRepository;
         }
 
-        public ICollection<string> GetMountsFromDateTo(DateTime from, DateTime to)
+        public ICollection<string> GetMountsFromDateTo()
         {
-            int countMonthInFromTo = to.Month - from.Month;//count difference between to and from
-            if (to.Year != from.Year)
+            timeFrom = DateTime.Now.AddDays(-countDaysInYear); //go to 364 days ago
+            int countMonthInFromTo = timeTo.Month - timeFrom.Month; //count difference between to and from
+            if (timeTo.Year != timeFrom.Year)
             {
-                countMonthInFromTo += countMounthInYear * (to.Year - from.Year);
+                countMonthInFromTo += countMounthInYear * (timeTo.Year - timeFrom.Year);
             }
 
             for (int i = 0; i < countMonthInFromTo; i++)
@@ -59,7 +63,7 @@ namespace GitHubExtension.Statistics.WebApi.BLL.Implementations
                 months.Add(CultureInfo.
                     CurrentCulture.
                     DateTimeFormat.
-                    GetMonthName(from.AddMonths(i).Month));
+                    GetMonthName(timeFrom.AddMonths(i).Month));
             }
             return months;
         }
