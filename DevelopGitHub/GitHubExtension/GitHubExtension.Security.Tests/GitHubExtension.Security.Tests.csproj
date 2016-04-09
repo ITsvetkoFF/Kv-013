@@ -119,7 +119,9 @@
     <Compile Include="TestExtensions\UserToUserReturnModelTests.cs" />
     <Compile Include="TestForControllers\AccountControllerAssignRolesToUserTests.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByIdTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="TestForControllers\AccountControllerGetUserByNameTests.cs" />
   </ItemGroup>
   <ItemGroup>
