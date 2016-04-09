@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace GitHubExtension.Statistics.WebApi.CommunicationModels
 {
-    public class CommitsFromRepositoryModel
+    public class RepositoryCommitsModel
     {
         [JsonProperty(PropertyName = "all")]
         public List<int> Alls { get; set; }

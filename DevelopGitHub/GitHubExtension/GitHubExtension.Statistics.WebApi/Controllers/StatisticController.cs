@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
@@ -25,17 +26,19 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         {
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
-
-            return Ok(await _statisticsService.GraphCreation(userName, token));
+            GraphModel graphModel = await _statisticsService.GraphCreation(userName, token);
+            
+            return Ok(graphModel);
         }
 
        [Route(StatisticsRouteConstants.GetRepoByName)]
         public async Task<IHttpActionResult> GetRepo([FromUri] string name)
         {
-            string token = User.Identity.GetExternalAccessToken();
-            string userName = User.Identity.GetUserName();
-
-            return Ok(await _gitHubService.GetCommitsForUser(userName, name, token));
+           string token = User.Identity.GetExternalAccessToken();
+           string userName = User.Identity.GetUserName();
+           List<int> userCommits = await _gitHubService.GetCommitsForUser(userName, name, token);
+            
+           return Ok(userCommits);
         }
     }
 }
