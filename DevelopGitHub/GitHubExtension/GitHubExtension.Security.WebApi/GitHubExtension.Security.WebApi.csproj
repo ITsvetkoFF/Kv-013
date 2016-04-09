@@ -307,10 +307,6 @@
       <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
       <Name>GitHubExtension.Notes.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Notes.DB\GitHubExtension.Notes.DB.sqlproj">
-      <Project>{8cf8c824-b499-4576-b0c8-212746b092fd}</Project>
-      <Name>GitHubExtension.Notes.DB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
       <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
       <Name>GitHubExtension.Notes.WebApi</Name>

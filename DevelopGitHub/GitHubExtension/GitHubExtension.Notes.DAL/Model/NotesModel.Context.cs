@@ -25,6 +25,7 @@ namespace GitHubExtension.Notes.DAL.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual IDbSet<Note> Notes { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

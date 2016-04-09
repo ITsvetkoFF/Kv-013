@@ -98,15 +98,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NotesModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>NotesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Package\NotesDALPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Model\NotesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NotesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Model\NotesModel.edmx.diagram">
       <DependentUpon>NotesModel.edmx</DependentUpon>
     </None>
@@ -115,7 +118,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\NotesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

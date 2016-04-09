@@ -18,5 +18,7 @@ namespace GitHubExtension.Notes.DAL.Model
         public string UserId { get; set; }
         public string CollaboratorId { get; set; }
         public string Body { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }
