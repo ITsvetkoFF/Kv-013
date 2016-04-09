@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Xunit;
-using NSubstitute;
 using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Models.CommunicationModels;

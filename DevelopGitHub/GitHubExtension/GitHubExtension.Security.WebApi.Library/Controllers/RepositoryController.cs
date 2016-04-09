@@ -3,7 +3,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Threading.Tasks;
-using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Library.Mappers;
 using GitHubExtension.Security.WebApi.Library.Services;
@@ -19,8 +18,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
-        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext,
-            ApplicationUserManager userManager)
+        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext, ApplicationUserManager userManager)
         {
             _guGithubService = guGithubService;
             _securityContext = securityContext;
@@ -30,6 +28,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         // GET: api/repos/:id
         // id is a GitHub id of a repo
         [Route("repos/{id}")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetById(int id)
         {
             var repository = await _securityContext.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
@@ -39,7 +38,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repository.ToRepositoryViewModel());
         }
 
-        [Authorize]
         [Route("api/user/repos")]
         public async Task<IHttpActionResult> GetReposForCurrentUser()
         {
@@ -54,7 +52,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(repos);
         }
 
-        [Authorize]
         [Route("api/repos/{repoName}/collaborators")]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
@@ -67,7 +64,6 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             return Ok(gitHubCollaborators);
         }
 
-        [Authorize]
         [Route("api/repos/current")]
         [HttpPatch]
         public async Task<IHttpActionResult> UpdateProject(Repository repo)

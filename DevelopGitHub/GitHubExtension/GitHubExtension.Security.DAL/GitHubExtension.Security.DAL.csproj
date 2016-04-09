@@ -110,7 +110,7 @@
     <Compile Include="Configuration\Tables\UserLoginsConfiguration.cs" />
     <Compile Include="Configuration\Tables\UserRoleConfiguration.cs" />
     <Compile Include="Context\SecurityContext.cs" />
-    <Compile Include="Package\DALPackage.cs" />
+    <Compile Include="Package\SecurityDALPackage .cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\GitHubRoleStore.cs" />
     <Compile Include="Infrastructure\GitHubUserStore.cs" />

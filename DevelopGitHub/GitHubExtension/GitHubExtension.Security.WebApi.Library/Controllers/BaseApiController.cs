@@ -1,7 +1,6 @@
 ﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 
-
 namespace GitHubExtension.Security.WebApi.Library.Controllers
 {
     public class BaseApiController : ApiController

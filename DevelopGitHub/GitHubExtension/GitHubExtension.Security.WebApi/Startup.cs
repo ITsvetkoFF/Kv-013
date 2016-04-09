@@ -52,15 +52,10 @@ namespace GitHubExtension.Security.WebApi
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            FluentValidationModelValidatorProvider
-                .Configure(config,
-                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
-
             app.UseWebApi(config);
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, DAL.Migrations.Configuration>());
         }
-
 
         private static CookieAuthenticationProvider GetMyCookieAuthenticationProvider()
         {
@@ -97,7 +92,6 @@ namespace GitHubExtension.Security.WebApi
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
           
             config.MapHttpAttributeRoutes();           
 
@@ -106,6 +100,9 @@ namespace GitHubExtension.Security.WebApi
             jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Filters.Add(new LoggingFilterAttribute());
+
+            // Configure authorization attribute
+            config.Filters.Add(new AuthorizeAttribute());
 
             return config;
         }

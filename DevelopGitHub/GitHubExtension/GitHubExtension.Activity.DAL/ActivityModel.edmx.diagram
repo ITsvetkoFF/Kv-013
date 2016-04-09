@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11f9ab343e8b4662a7cb8659e0eefc3d" Name="Diagram1">
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityEvent" Width="1.5" PointX="3.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.ActivityType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.Users" Width="1.5" PointX="6.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="GitHubExtensionModel.FK_Activities_ActivitiesTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="GitHubExtensionModel.FK_Activities_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

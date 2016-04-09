@@ -203,6 +203,14 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.Internal.DAL.csproj">
+      <Project>{0edf4879-a0f3-4d59-902a-630b0966fa25}</Project>
+      <Name>GitHubExtension.Activity.Internal.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Activity.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
+      <Project>{5de95c58-2a55-4bac-98f9-3a266df3d4fb}</Project>
+      <Name>GitHubExtension.Activity.Internal.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>
@@ -221,7 +229,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="APILog\" />
     <Folder Include="Helpers\Authentication\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
