@@ -4,17 +4,22 @@ using MvcRouteTester;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Xunit;
+using GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers;
+
 namespace GitHubExtension.Security.Tests.TestRoutes
 {
     public class RepositoryTestRoutes : TestRoutesConfig
     {
+        public RepositoryTestRoutes()
+            : base(null)
+        {
+
+        }
+
         [Fact]
         public void RepositoryGetByIdTest()
         {
-            url += Regex.Replace(
-                RouteConstants.GetByIdRepository,
-                RouteConstants.Id_int,
-                "13");
+            url = url.ForRepositoryGetById();
 
             config.ShouldMap(url)
                 .To<RepositoryController>(HttpMethod.Get,
@@ -24,7 +29,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetReposForCurrentUserTest()
         {
-            url += RouteConstants.GetRepositoryForCurrentUser;
+            url = url.ForRepositoryGetReposForCurrentUser();
 
             config.ShouldMap(url)
                 .To<RepositoryController>(HttpMethod.Get,
@@ -34,10 +39,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetCollaboratorsForRepoTest()
         {
-            url += Regex.Replace(
-                RouteConstants.GetCollaboratorsForRepository,
-                RouteConstants.RepositoryName,
-                "myRepository");
+            url = url.ForRepositoryGetCollaboratorsForRepo();
 
             config.ShouldMap(url)
                 .To<RepositoryController>(HttpMethod.Get,

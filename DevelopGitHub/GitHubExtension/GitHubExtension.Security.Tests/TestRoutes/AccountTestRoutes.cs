@@ -7,19 +7,22 @@ using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Constant;
 using System.Web.Http;
 using System.Text.RegularExpressions;
+using GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers;
 
 namespace GitHubExtension.Security.Tests.TestRoutes
 {
     public class AccountTestRoutes : TestRoutesConfig
     {
+        public AccountTestRoutes()
+            : base(RouteConstants.ApiAccount)
+        {
+
+        }
+
         [Fact]
         public void AccountGetUserTest()
         {
-            url += RouteConstants.ApiAccount +
-                "/" + Regex.Replace(
-                RouteConstants.GetUser,
-                RouteConstants.Id_guid,
-                "644e1dd7-2a7f-18fb-b8ed-ed78c3f92c2b");
+            url = url.ForAccountGetUser(); 
 
             config.ShouldMap(url)
                 .To<AccountController>(HttpMethod.Get,
@@ -29,11 +32,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetUserByNameTest()
         {
-            url += RouteConstants.ApiAccount +
-                "/" + Regex.Replace(
-                RouteConstants.GetUserByName,
-                RouteConstants.UserName,
-                "name");
+            url = url.ForAccountGetUserByName();
 
             config.ShouldMap(url)
                 .To<AccountController>(HttpMethod.Get,
@@ -43,14 +42,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountAssignRolesToUserTest()
         {
-            url += RouteConstants.ApiAccount +
-                "/" + Regex.Replace(
-                Regex.Replace(
-                    RouteConstants.AssignRolesToUser,
-                    RouteConstants.RepositoryId,
-                    "5"),
-                RouteConstants.GitHubId,
-                "6");
+            url = url.ForAccountAssignRolesToUser();
 
             config.ShouldMap(url)
                 .To<AccountController>(new HttpMethod("PATCH"),
@@ -60,9 +52,8 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetExternalLoginTest()
         {
-            url += RouteConstants.ApiAccount +
-                "/" + RouteConstants.GetExternalLogin +
-                "?provider=p&error=e";
+
+            url = url.ForAccountGetExternalLogin();
 
             config.ShouldMap(url)
                 .To<AccountController>(HttpMethod.Get,

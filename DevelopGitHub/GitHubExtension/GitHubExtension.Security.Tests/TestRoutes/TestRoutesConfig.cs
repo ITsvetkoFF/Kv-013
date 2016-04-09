@@ -9,17 +9,18 @@ using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestRoutes
 {
-    public class TestRoutesConfig : IClassFixture<SlashInitializer>
+    public class TestRoutesConfig
     {
         protected HttpConfiguration config;
-        protected string url;
+        protected string url = "/";
 
-        public TestRoutesConfig()
+        public TestRoutesConfig(string url)
         {
             config = new HttpConfiguration();
             WebApiConfig.Register(config);
             config.EnsureInitialized();
-            url = SlashInitializer.Slash;
+            if (url != null)
+                this.url += url + "/";
         }
     }
 }

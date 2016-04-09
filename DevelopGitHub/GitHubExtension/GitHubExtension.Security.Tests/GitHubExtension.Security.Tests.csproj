@@ -155,8 +155,9 @@
     <Compile Include="TestRoutes\AccountTestRoutes.cs" />
     <Compile Include="TestRoutes\RepositoryTestRoutes.cs" />
     <Compile Include="TestRoutes\RolesTestRoutes.cs" />
-    <Compile Include="TestRoutes\SlashInitializer.cs" />
     <Compile Include="TestRoutes\TestRoutesConfig.cs" />
+    <Compile Include="TestRoutes\TestRoutesMappers\AccountTestRoutesMappers.cs" />
+    <Compile Include="TestRoutes\TestRoutesMappers\RepositoryTestRoutesMappers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
