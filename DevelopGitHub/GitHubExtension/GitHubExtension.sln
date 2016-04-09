@@ -17,11 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Security.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{90BDB09D-196E-43E3-B93D-D3033F05B261}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GitHubExtension.Notes.DB", "GitHubExtension.Notes.DB\GitHubExtension.Notes.DB.sqlproj", "{8CF8C824-B499-4576-B0C8-212746B092FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Notes.DAL", "GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj", "{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Notes.WebApi", "GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj", "{819015C6-B19C-4240-9049-CAFA965CEF0D}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GitHubExtension.DB", "GitHubExtension.DB\GitHubExtension.DB.sqlproj", "{879E0685-B0AB-4711-AAF2-E933AA8335AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,12 +53,6 @@ Global
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E05EAF8-B822-493D-81E7-50A054BD5CE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CF8C824-B499-4576-B0C8-212746B092FD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,12 +61,17 @@ Global
 		{819015C6-B19C-4240-9049-CAFA965CEF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{819015C6-B19C-4240-9049-CAFA965CEF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{819015C6-B19C-4240-9049-CAFA965CEF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879E0685-B0AB-4711-AAF2-E933AA8335AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8CF8C824-B499-4576-B0C8-212746B092FD} = {90BDB09D-196E-43E3-B93D-D3033F05B261}
 		{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9} = {90BDB09D-196E-43E3-B93D-D3033F05B261}
 		{819015C6-B19C-4240-9049-CAFA965CEF0D} = {90BDB09D-196E-43E3-B93D-D3033F05B261}
 	EndGlobalSection
