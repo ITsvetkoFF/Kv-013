@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GitHubExtension.Security.WebApi.Library">
-      <HintPath>..\GitHubExtension.Security.WebApi\Bin\GitHubExtension.Security.WebApi.Library.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -61,37 +58,58 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ActivityController.cs" />
-    <Compile Include="EventParsers\CommitCommentEventParser.cs" />
-    <Compile Include="EventParsers\ForkEventParser.cs" />
-    <Compile Include="EventParsers\IssueCommentEventParser.cs" />
-    <Compile Include="EventParsers\IssuesEventParser.cs" />
-    <Compile Include="EventParsers\MemberEventParser.cs" />
-    <Compile Include="EventParsers\PullRequestEventParser.cs" />
-    <Compile Include="EventParsers\PullRequestReviewCommentEventParser.cs" />
-    <Compile Include="EventParsers\RealeaseEventParser.cs" />
-    <Compile Include="EventParsers\WatchEventParser.cs" />
     <Compile Include="Exceptions\LinkHeaderFormatException.cs" />
     <Compile Include="Exceptions\LinkHeaderMissingException.cs" />
     <Compile Include="Exceptions\ParserNotFoundException.cs" />
+    <Compile Include="Extensions\CreateHttpMessageExtension.cs" />
+    <Compile Include="Extensions\GetPagesAmoutExtension.cs" />
+    <Compile Include="Extensions\GitHubRequestException.cs" />
+    <Compile Include="ExternalActivityRoutes.cs" />
+    <Compile Include="GitHubConstants.cs" />
+    <Compile Include="GitHubEventTypeConstants.cs" />
+    <Compile Include="Models\ActorModel.cs" />
+    <Compile Include="Models\EventPayloads\CommitCommentEventPayloadModel.cs" />
+    <Compile Include="Models\CommitCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\CreateEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\DeleteEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\DownloadEventPayloadModel.cs" />
+    <Compile Include="Models\DownloadModel.cs" />
+    <Compile Include="Models\EventPayloads\EventPayloadConverter.cs" />
+    <Compile Include="Models\EventPayloads\PushEventPayloadModel.cs" />
+    <Compile Include="Models\EventsPaginationModel.cs" />
+    <Compile Include="Models\PullRequestCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\PullRequestEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\PullRequestReviewCommentEventPayloadModel.cs" />
+    <Compile Include="Models\PullRequestModel.cs" />
+    <Compile Include="Models\EventPayloads\FollowEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\ForkApplyEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\ForkEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\GistEventPayloadModel.cs" />
+    <Compile Include="Models\GistModel.cs" />
+    <Compile Include="Models\EventPayloads\GollumEventPayloadModel.cs" />
+    <Compile Include="Models\GitHubEventModel.cs" />
+    <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\EventPayloads\IssueCommentEventPayloadModel.cs" />
+    <Compile Include="Models\IssueCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\IssuesEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\MemberEventPayloadModel.cs" />
+    <Compile Include="Models\PageModel.cs" />
+    <Compile Include="Models\PayloadModel.cs" />
+    <Compile Include="Models\ReleaseModel.cs" />
+    <Compile Include="Models\EventPayloads\ReleaseEventPayloadModel.cs" />
+    <Compile Include="Models\RepositoryModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\EventPayloads\WatchEventPayloadModel.cs" />
     <Compile Include="Package\ExternalActivityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EventParsers\BaseEventParser.cs" />
-    <Compile Include="EventParsers\CreateEventParser.cs" />
-    <Compile Include="EventParsers\DeleteEventParser.cs" />
-    <Compile Include="RouteConstants.cs" />
-    <Compile Include="Services\EventParserHelper.cs" />
-    <Compile Include="Services\GitHubService.cs" />
-    <Compile Include="EventParsers\GolumEventParser.cs" />
-    <Compile Include="EventParsers\PushEventParser.cs" />
-    <Compile Include="Services\IGitHubService.cs" />
+    <Compile Include="Queries\GitHubEventsQuery.cs" />
+    <Compile Include="Queries\IGitHubEventsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
