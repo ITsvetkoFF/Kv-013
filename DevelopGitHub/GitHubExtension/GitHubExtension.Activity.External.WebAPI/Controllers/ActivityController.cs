@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -17,7 +18,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
             _eventsQuery = eventsQuery;
         }
 
-        private IGitHubEventsQuery _eventsQuery;
+        private readonly IGitHubEventsQuery _eventsQuery;
 
         [Route(ExternalActivityRoutes.GetGitHubActivityRoute)]
         public async Task<IHttpActionResult> GetGitHubActivity([FromUri] int page)
@@ -30,9 +31,13 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
            
             IEnumerable<GitHubEventModel> events =
                 await _eventsQuery.GetGitHubEventsAsync(fullRepositoryName, tokenClaim.Value, page);
+            List<GitHubEventModel> eventModels = events.ToList();
+
+            if (eventModels.Count == 0)
+                return NotFound();
             int? numberOfPages = _eventsQuery.GetNumberOfPages();
 
-            EventsPaginationModel model = new EventsPaginationModel() {Events = events, AmountOfPages = numberOfPages};
+            EventsPaginationModel model = new EventsPaginationModel() { Events = eventModels, AmountOfPages = numberOfPages };
             return Ok(model);
         }
     }
