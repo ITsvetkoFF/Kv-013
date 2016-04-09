@@ -13,10 +13,12 @@ namespace GitHubExtension.Statistics.WebApi.CommunicationModels
             this.Repositories = new List<RepositoryModel>();
         }
 
+        #region properties
         public UserInfoModel UserInfo { get; set; }
-        public virtual List<int> Commits { get; set; }
+        public virtual ICollection<int> Commits { get; set; }
         public virtual ICollection<string> Months { get; set; }
         public virtual ICollection<ICollection<int>> CommitsForEverRepository { get; set; }
         public virtual ICollection<RepositoryModel> Repositories { get; set; }
+        #endregion
     }
 }

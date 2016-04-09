@@ -11,14 +11,17 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
 {
     public class GitHubQuery : IGitHubQuery
     {
+        #region fields
         private readonly HttpClient _httpClient;
+        #endregion
 
         public GitHubQuery()
         {
             this._httpClient = new HttpClient();
         }
 
-        public async Task<List<int>> UserCommitsInYear(string owner, string repository, string token)
+        #region methods
+        public async Task<List<int>> GetUserCommitsInYear(string owner, string repository, string token)
         {
             var requestUri = string.Format(GitHubQueryConstant.GetRepositoryCommits, owner, repository, token);
             var response = await _httpClient.SendAsync(CreateMessageMapper.CreateMessage(HttpMethod.Get, requestUri));
@@ -52,5 +55,6 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
                 JsonConvert.DeserializeObject<List<GitHubUserModel>>(await response.Content.ReadAsStringAsync());
             return listOfFolowing.Count;
         }
+        #endregion
     }
 }

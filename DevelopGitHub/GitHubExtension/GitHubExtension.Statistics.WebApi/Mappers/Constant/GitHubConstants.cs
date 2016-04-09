@@ -2,7 +2,7 @@
 
 namespace GitHubExtension.Statistics.WebApi.Mappers.Constant
 {
-    public class GitHubConstants
+    public static class GitHubConstants
     {
         public static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
         {

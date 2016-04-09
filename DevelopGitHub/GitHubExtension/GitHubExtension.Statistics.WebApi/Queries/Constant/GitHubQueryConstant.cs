@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GitHubExtension.Statistics.WebApi.Queries.Constant
+﻿namespace GitHubExtension.Statistics.WebApi.Queries.Constant
 {
-    public class GitHubQueryConstant
+    public static class GitHubQueryConstant
     {
         public const string GitHubApi = "https://api.github.com/";
         public const string GetRepositoryCommits = GitHubApi + "repos/{0}/{1}/stats/participation?access_token={2}";

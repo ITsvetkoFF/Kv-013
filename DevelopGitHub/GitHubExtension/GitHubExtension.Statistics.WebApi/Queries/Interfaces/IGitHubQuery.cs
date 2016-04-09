@@ -10,7 +10,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Interfaces
 {
     public interface IGitHubQuery
     {
-        Task<List<int>> UserCommitsInYear(string owner, string repository, string token);
+        Task<List<int>> GetUserCommitsInYear(string owner, string repository, string token);
         Task<List<RepositoryModel>> GetRepositories(string owner, string token);
         Task<int> GetFollowersCount(string owner, string token);
         Task<int> GetFolowingCount(string owner, string token);

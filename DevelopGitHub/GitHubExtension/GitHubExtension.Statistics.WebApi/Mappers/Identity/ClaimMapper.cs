@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace GitHubExtension.Statistics.WebApi.Mappers
+namespace GitHubExtension.Statistics.WebApi.Mappers.Identity
 {
     public static class ClaimMapper
     {
