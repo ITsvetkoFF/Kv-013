@@ -1,24 +1,25 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using GitHubExtension.Activity.External.WebAPI.Services;
-using GitHubExtension.Security.WebApi.Library.Exceptions;
+using GitHubExtension.Activity.External.WebAPI.Extensions;
+using GitHubExtension.Activity.External.WebAPI.Models;
+using GitHubExtension.Activity.External.WebAPI.Queries;
 using Microsoft.AspNet.Identity;
-using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.Activity.External.WebAPI.Controllers
 {
     [Authorize]
     public class ActivityController : ApiController
     {
-        private IGitHubService _gitHubService;
-
-        public ActivityController(IGitHubService gitHubService)
+        public ActivityController(IGitHubEventsQuery eventsQuery)
         {
-            _gitHubService = gitHubService;
+            _eventsQuery = eventsQuery;
         }
 
-        [Route(RouteConstants.GetGitHubActivityRoute)]
+        private IGitHubEventsQuery _eventsQuery;
+
+        [Route(ExternalActivityRoutes.GetGitHubActivityRoute)]
         public async Task<IHttpActionResult> GetGitHubActivity([FromUri] int page)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -26,19 +27,13 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
             string fullRepositoryName = claimsIdentity.FindFirstValue("CurrentProjectName");
             Claim tokenClaim = claimsIdentity.FindFirst("ExternalAccessToken");
 
-            if (tokenClaim == null)
-                throw new TokenNotFoundException();
-            
-            var events =
-                await _gitHubService.GetGitHubEventsAsync(fullRepositoryName, tokenClaim.Value, page);
-            int? numberOfPages = _gitHubService.GetNumberOfPages();
-            JObject response = new JObject();
+           
+            IEnumerable<GitHubEventModel> events =
+                await _eventsQuery.GetGitHubEventsAsync(fullRepositoryName, tokenClaim.Value, page);
+            int? numberOfPages = _eventsQuery.GetNumberOfPages();
 
-            response["events"] = new JArray(events);
-            if (numberOfPages.HasValue)
-                response["pages"] = numberOfPages;
-
-            return Ok(response);
+            EventsPaginationModel model = new EventsPaginationModel() {Events = events, AmountOfPages = numberOfPages};
+            return Ok(model);
         }
     }
 }

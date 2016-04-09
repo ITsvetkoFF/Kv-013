@@ -1,4 +1,4 @@
-﻿using GitHubExtension.Activity.External.WebAPI.Services;
+﻿using GitHubExtension.Activity.External.WebAPI.Queries;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
@@ -8,7 +8,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Package
     {
         public void RegisterServices(Container container)
         {
-            container.Register<IGitHubService, GitHubService>(Lifestyle.Scoped);
+            container.Register<IGitHubEventsQuery, GitHubEventsQuery>(Lifestyle.Scoped);
         }
     }
 }
