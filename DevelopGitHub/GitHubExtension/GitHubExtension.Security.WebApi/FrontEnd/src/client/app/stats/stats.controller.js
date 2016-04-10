@@ -7,15 +7,6 @@
 
     function statsController(statsFactory, $scope, logger) {
         $scope.rep = '';
-        $scope.series = ['Series A'];
-
-        getCommits().then(function () {
-            logger.info('Got commits from GitHub!');
-        });
-
-        getRepos().then(function() {
-            logger.info('Got repositories');
-        });
 
         function getCommits() {
             return statsFactory.getCommitsFromRepos().then(function (response) {
@@ -40,10 +31,6 @@
             return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
                 $scope.reposData = [response.data];
             });
-        };
-
-        $scope.calculateQuantity = function () {
-            logger.info('Okey!');
         };
     }
 })();
