@@ -5,13 +5,13 @@
         .module('app.stats')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper', 'i18n'];
     /* @ngInject */
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper, i18n) {
+        routerHelper.configureStates(getStates(i18n));
     }
 
-    function getStates() {
+    function getStates(i18n) {
         return [
             {
                 state: 'stats',
@@ -23,7 +23,7 @@
                     title: 'Stats',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-lock">Stats</i>'
+                        content: '<i class="fa fa-lock">' + i18n.message.STATISTICS + '</i>'
                     }
                 }
             }

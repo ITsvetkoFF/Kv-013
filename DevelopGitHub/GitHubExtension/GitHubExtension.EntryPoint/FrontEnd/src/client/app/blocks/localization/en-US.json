@@ -29,6 +29,13 @@
         "COMMITS" : "commits",
         "ADDITIONS": "additions",
         "DELETIONS": "deletions",
-        "PREFERENCES":  "Preferences"
+        "PREFERENCES":  "Preferences",
+        "STATISTICS": "Statistics",
+        "USERREPOSITORIES": "Users repositories",
+        "FOLLOWING": "Following",
+        "FOLLOWER": "Follower",
+        "STATISTICSREPOSITORYYEAR": "Statistics for the repository for the year",
+        "STATISTICSEACHREPOSITORYYEAR": "Statistics for each repository for the year",
+        "OVERALLSTATISTICSYEAR": "Overall statistics for the year"
     }
 }

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+    
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <section name="nlog" type="NLog.Config.ConfigSectionHandler, NLog" />
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 --></configSections>
+  <connectionStrings>
+    <add name="GithubExtension" providerName="System.Data.SqlClient" connectionString="Data Source=(localdb)\v11.0;Initial Catalog=GitHubExtension;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;MultipleActiveResultSets=True" />
+    <add name="NoteContext" connectionString="metadata=res://*/Model.NotesModel.csdl|res://*/Model.NotesModel.ssdl|res://*/Model.NotesModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(localdb)\v11.0;initial catalog=GitHubExtension;integrated security=True;multipleactiveresultsets=True;connect timeout=15;encrypt=False;trustservercertificate=False;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+  
+    <appSettings>
+    <!-- Configs for Security.WebApi-->
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+  </appSettings>
+    <system.web>
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5" />
+      <authentication mode="None"></authentication>
+  </system.web>
+  
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="v12.0" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-8.0.0.0" newVersion="8.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Http" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Net.Http.Formatting" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.IdentityModel.Tokens.Jwt" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.20622.1351" newVersion="4.0.20622.1351" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.OAuth" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Cors" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.Cookies" publicKeyToken="31bf3856ad364e35" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+<system.webServer>
+  <rewrite>
+        <rules>
+          <rule name="AngularJS" stopProcessing="true">
+            <match url=".*" />
+            <conditions logicalGrouping="MatchAll">
+              <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+              <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+              <add input="{REQUEST_URI}" pattern="^/(api)" negate="true" />
+<<<<<<< HEAD:DevelopGitHub/GitHubExtension/GitHubExtension.EntryPoint/Web.config
+              <add input="{REQUEST_URI}" pattern="^/(signin-github)" negate="true" />
+=======
+>>>>>>> 604895c... Fix bug with routing .:DevelopGitHub/GitHubExtension/GitHubExtension.Security.WebApi/Web.config
+            </conditions>
+            <action type="Rewrite" url="/" />
+          </rule>
+        </rules>
+      </rewrite>
+  <httpProtocol>
+  <customHeaders>
+<!--    <add name="Access-Control-Allow-Origin" value="*" />-->
+<!--    <add name="Access-Control-Allow-Headers" value="Content-Type" />-->
+<!--    <add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, PATCH, DELETE" />-->
+  </customHeaders>
+</httpProtocol>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+<!--      <remove name="OPTIONSVerbHandler" />-->
+      <remove name="TRACEVerbHandler" />
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+    </handlers>
+<staticContent>
+      <remove fileExtension=".svg" />
+      <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
+
+      <remove fileExtension=".svgz" />
+      <mimeMap fileExtension=".svgz" mimeType="image/svg+xml" />
+    <remove fileExtension=".ttf" /><mimeMap fileExtension=".ttf" mimeType="application/font-sfnt" /><remove fileExtension=".eot" /><mimeMap fileExtension=".eot" mimeType="application/vnd.ms-fontobject" /><remove fileExtension=".otf" /><mimeMap fileExtension=".otf" mimeType="application/font-sfnt" /><remove fileExtension=".woff" /><mimeMap fileExtension=".woff" mimeType="application/font-woff" /><remove fileExtension=".woff2" /><mimeMap fileExtension=".woff2" mimeType="application/font-woff2" /></staticContent>
+  </system.webServer>
+  <nlog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.nlog-project.org/schemas/NLog.xsd"> 
+    <targets>
+      <target name="logfile" xsi:type="File" fileName="${basedir}/APILog/${date:format=yyyy-MM-dd}-api.log" />
+      <target name="eventlog" xsi:type="EventLog" layout="${message}" log="Application" source="Api Services" />
+    </targets>
+    <rules>
+      <logger name="*" minlevel="Trace" writeTo="logfile" />
+      <logger name="*" minlevel="Trace" writeTo="eventlog" />
+    </rules>
+  </nlog>
+</configuration>

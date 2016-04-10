@@ -28,7 +28,7 @@
                                 <span class="glyphicon glyphicon-music glyphicon-lg">{{userInfo.repositoryCount}}</span>
                             </div>
                             <h4>
-                                User've {{userInfo.repositoryCount}} repositories
+                               {{i18n.message.USERREPOSITORIES}} : {{userInfo.repositoryCount}}
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-info clearfix">
@@ -36,7 +36,7 @@
                                 <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{userInfo.folowingCount}}</span>
                             </div>
                             <h4>
-                                Following({{userInfo.folowingCount}})
+                                {{i18n.message.FOLLOWING}}({{userInfo.folowingCount}})
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
@@ -44,7 +44,7 @@
                                 <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{userInfo.followerCount}}</span>
                             </div>
                             <h4>
-                                Follower({{userInfo.followerCount}})
+                                {{i18n.message.FOLLOWER}}({{userInfo.followerCount}})
                             </h4>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading " style="background-color: #f0ad4e;">
                                 <form class="form-inline" role="form">
-                                    <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                    <span class="glyphicon glyphicon-bookmark"></span> {{i18n.message.STATISTICSREPOSITORYYEAR}}
                                     <div class="dropdown pull-right form-group">
                                         <div>
                                             <select ng-model="repo" ng-options="repo as repo.name for repo in Repos" ng-change="getCommitsFromCurrent(repo)">
@@ -70,14 +70,13 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12">
                         <hr />
                         <div class="col-md-6">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                        <span class="glyphicon glyphicon-bookmark"></span> {{i18n.message.STATISTICSEACHREPOSITORYYEAR}}
                                     </h3>
                                 </div>
                                 <div style="padding: 10px;">
@@ -90,7 +89,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading" style="background-color: red;">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                        <span class="glyphicon glyphicon-bookmark"></span> {{i18n.message.OVERALLSTATISTICSYEAR}}
                                     </h3>
                                 </div>
                                 <div style="padding: 10px;">
@@ -105,48 +104,3 @@
         </div>
     </section>
 </section>
-
-<style>
-    
-     .btn-style{
-         width: 120px;
-         margin-bottom: 10px;
-     }
-
-    .glyphicon-lg {
-        font-size:3em
-    }
-    .blockquote-box {
-        border-right:5px solid #E6E6E6;
-        margin-bottom:25px
-    }
-    .blockquote-box .square {
-        width:100px;
-        min-height:50px;
-        margin-right:22px;
-        text-align:center!important;
-        background-color:#E6E6E6;
-        padding:20px 0
-    }
-    .blockquote-box.blockquote-primary {
-        border-color:#357EBD
-    }
-    .blockquote-box.blockquote-primary .square {
-        background-color:#428BCA;
-        color:#FFF
-    }
-    .blockquote-box.blockquote-info {
-        border-color:#46B8DA
-    }
-    .blockquote-box.blockquote-info .square {
-        background-color:#5BC0DE;
-        color:#FFF
-    }
-    .blockquote-box.blockquote-warning {
-        border-color:#EEA236
-    }
-    .blockquote-box.blockquote-warning .square {
-        background-color:#F0AD4E;
-        color:#FFF
-    }
-</style>
