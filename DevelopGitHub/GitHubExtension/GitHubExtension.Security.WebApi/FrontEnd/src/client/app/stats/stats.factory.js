@@ -23,7 +23,6 @@
         }
 
         function getCommitsFromCurrentRepo(repo) {
-            console.log(repo);
             return $http({
                 method: 'GET',
                 dataType: 'string',
