@@ -12,6 +12,8 @@ namespace GitHubExtension.Security.WebApi.Library.Services
     // TODO: Create NLog
     public class GithubService : IGithubService
     {
+        private const string CollaboratorsUrl = "https://api.github.com/repos/{0}/{1}/collaborators?access_token={2}";
+
         private readonly HttpClient _httpClient;
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
         {
@@ -43,7 +45,7 @@ namespace GitHubExtension.Security.WebApi.Library.Services
 
         public async Task<List<CollaboratorDto>> GetCollaboratorsForRepo(string owner, string repository, string token)
         {
-            var requestUri = string.Format("https://api.github.com/repos/{0}/{1}/collaborators?access_token={2}", owner, repository, token);
+            var requestUri = string.Format(CollaboratorsUrl, owner, repository, token);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
             var response = await _httpClient.SendAsync(message);

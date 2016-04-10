@@ -203,6 +203,10 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.External.WebAPI\GitHubExtension.Activity.External.WebAPI.csproj">
+      <Project>{ECD25131-E98D-437C-BA1A-F8EBC60FA266}</Project>
+      <Name>GitHubExtension.Activity.External.WebAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
       <Project>{58240CBE-3BD5-41BA-8B46-8464748580F8}</Project>
       <Name>GitHubExtension.Models.CommunicationModels</Name>

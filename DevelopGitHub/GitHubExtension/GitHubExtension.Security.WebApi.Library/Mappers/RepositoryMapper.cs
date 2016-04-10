@@ -9,10 +9,10 @@ namespace GitHubExtension.Security.WebApi.Library.Mappers
         {
             var repositoryEntity = new Repository()
             {
-                Id = repository.Id,
                 GitHubId = repository.GitHubId,
                 Name =  repository.Name,
-                Url =  repository.Url
+                Url =  repository.Url,
+                FullName = repository.FullName
             };
 
             return repositoryEntity;
@@ -25,7 +25,8 @@ namespace GitHubExtension.Security.WebApi.Library.Mappers
                 GitHubId = repository.GitHubId,
                 Id = repository.Id,
                 Name = repository.Name,
-                Url = repository.Url
+                Url = repository.Url,
+                FullName = repository.FullName
             };
         }
     }

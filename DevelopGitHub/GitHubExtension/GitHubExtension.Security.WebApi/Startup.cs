@@ -40,7 +40,8 @@ namespace GitHubExtension.Security.WebApi
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                AuthenticationMode =  AuthenticationMode.Active
+                AuthenticationMode =  AuthenticationMode.Active,
+                CookieHttpOnly = false
             });
 
             #endregion

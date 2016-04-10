@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ECD25131-E98D-437C-BA1A-F8EBC60FA266}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GitHubExtension.Activity.External.WebAPI</RootNamespace>
+    <AssemblyName>GitHubExtension.Activity.External.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.3.1.2\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging">
+      <HintPath>..\packages\SimpleInjector.Packaging.3.1.2\lib\net40-client\SimpleInjector.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Exceptions\LinkHeaderFormatException.cs" />
+    <Compile Include="Exceptions\LinkHeaderMissingException.cs" />
+    <Compile Include="Exceptions\ParserNotFoundException.cs" />
+    <Compile Include="Extensions\CreateHttpMessageExtension.cs" />
+    <Compile Include="Extensions\GetPagesAmoutExtension.cs" />
+    <Compile Include="Extensions\GitHubRequestException.cs" />
+    <Compile Include="ExternalActivityRoutes.cs" />
+    <Compile Include="GitHubConstants.cs" />
+    <Compile Include="GitHubEventTypeConstants.cs" />
+    <Compile Include="Models\ActorModel.cs" />
+    <Compile Include="Models\EventPayloads\CommitCommentEventPayloadModel.cs" />
+    <Compile Include="Models\CommitCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\CreateEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\DeleteEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\DownloadEventPayloadModel.cs" />
+    <Compile Include="Models\DownloadModel.cs" />
+    <Compile Include="Models\EventPayloads\EventPayloadConverter.cs" />
+    <Compile Include="Models\EventPayloads\PushEventPayloadModel.cs" />
+    <Compile Include="Models\EventsPaginationModel.cs" />
+    <Compile Include="Models\PullRequestCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\PullRequestEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\PullRequestReviewCommentEventPayloadModel.cs" />
+    <Compile Include="Models\PullRequestModel.cs" />
+    <Compile Include="Models\EventPayloads\FollowEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\ForkApplyEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\ForkEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\GistEventPayloadModel.cs" />
+    <Compile Include="Models\GistModel.cs" />
+    <Compile Include="Models\EventPayloads\GollumEventPayloadModel.cs" />
+    <Compile Include="Models\GitHubEventModel.cs" />
+    <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\EventPayloads\IssueCommentEventPayloadModel.cs" />
+    <Compile Include="Models\IssueCommentModel.cs" />
+    <Compile Include="Models\EventPayloads\IssuesEventPayloadModel.cs" />
+    <Compile Include="Models\EventPayloads\MemberEventPayloadModel.cs" />
+    <Compile Include="Models\PageModel.cs" />
+    <Compile Include="Models\PayloadModel.cs" />
+    <Compile Include="Models\ReleaseModel.cs" />
+    <Compile Include="Models\EventPayloads\ReleaseEventPayloadModel.cs" />
+    <Compile Include="Models\RepositoryModel.cs" />
+    <Compile Include="Models\RepositoryShortModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\EventPayloads\WatchEventPayloadModel.cs" />
+    <Compile Include="Package\ExternalActivityPackage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GitHubEventsQuery.cs" />
+    <Compile Include="Queries\IGitHubEventsQuery.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
