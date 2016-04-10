@@ -5,13 +5,16 @@
         .module('app.stats')
         .controller('StatsController', StatsController);
 
-    StatsController.$inject = ['statsFactory', '$scope','i18n'];
+    StatsController.$inject = ['statsFactory', '$scope', 'i18n'];
 
     function StatsController(statsFactory, $scope, i18n) {
         var vmStatistics = this;
 
         $scope.rep = '';
         $scope.i18n = i18n;
+
+        getCommits();
+        getRepos();
 
         function getCommits() {
             return statsFactory.getCommitsFromRepos().then(function (response) {

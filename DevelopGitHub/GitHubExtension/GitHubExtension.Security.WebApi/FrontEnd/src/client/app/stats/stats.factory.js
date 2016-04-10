@@ -4,10 +4,10 @@
 
     module.factory('statsFactory', statsFactory);
 
-    statsFactory.$inject = ['$http'];
+    statsFactory.$inject = ['$http', 'baseStatsUrl'];
 
-    function statsFactory($http) {
-        var baseUrl = 'api/user';
+    function statsFactory($http, baseUrl) {
+        var baseUrl = baseUrl.apiStatsUrl;
 
         function getCommitsFromRepos() {
             return $http({
