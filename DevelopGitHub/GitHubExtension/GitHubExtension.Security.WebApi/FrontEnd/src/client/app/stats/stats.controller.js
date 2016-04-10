@@ -1,11 +1,15 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('app.stats')
-        .controller('statsController', statsController);
-    statsController.$inject = ['statsFactory', '$scope', 'logger'];
+    angular
+        .module('app.stats')
+        .controller('StatsController', StatsController);
 
-    function statsController(statsFactory, $scope, logger) {
+    StatsController.$inject = ['statsFactory', '$scope'];
+
+    function StatsController(statsFactory, $scope) {
+        var vmStatistics = this;
+
         $scope.rep = '';
 
         function getCommits() {

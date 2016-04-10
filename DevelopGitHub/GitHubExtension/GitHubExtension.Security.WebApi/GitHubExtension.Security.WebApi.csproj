@@ -208,7 +208,7 @@
     <Content Include="FrontEnd\src\client\app\widgets\widgets.module.js" />
     <Content Include="FrontEnd\src\client\index.html" />
     <Content Include="FrontEnd\src\client\specs.html" />
-    <Content Include="FrontEnd\src\client\styles\Site.css" />
+    <Content Include="FrontEnd\src\client\styles\stats.css" />
     <Content Include="FrontEnd\src\client\test-helpers\bind-polyfill.js" />
     <Content Include="FrontEnd\src\client\test-helpers\mock-data.js" />
     <Content Include="FrontEnd\src\server\app.js" />

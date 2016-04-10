@@ -18,8 +18,8 @@
                 config: {
                     url: '/stats',
                     templateUrl: 'FrontEnd/src/client/app/stats/stats.html',
-                    controller: 'statsController',
-                    contollerAs: 'vmStats',
+                    controller: 'StatsController',
+                    contollerAs: 'vmStatistics',
                     title: 'Stats',
                     settings: {
                         nav: 4,

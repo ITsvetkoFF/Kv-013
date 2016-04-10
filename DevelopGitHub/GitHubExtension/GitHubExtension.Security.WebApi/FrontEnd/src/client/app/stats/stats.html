@@ -5,30 +5,24 @@
                 <div class="col-md-12">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-5">
-                                <button href="#" class="btn btn-danger btn-lg" role="button" ng-click="calculateQuantity()"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</button>
-                                <a href="#" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br/>Bookmarks</a>
-                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-signal"></span> <br/>Reports</a>
-                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-comment"></span> <br/>Comments</a>
+                            <div class="col-md-6">
+                                <a class="btn btn-danger btn-lg btn-style" role="button"><span class="glyphicon glyphicon-list-alt"></span> <br/>Apps</a>
+                                <a class="btn btn-warning btn-lg btn-style" role="button"><span class="glyphicon glyphicon-bookmark"></span> <br />Bookmarks</a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button"><span class="glyphicon glyphicon-signal"></span> <br />Reports</a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button"><span class="glyphicon glyphicon-comment"></span> <br />Comments</a>
                             </div>
-                            <div class="dropdown col-md-2">
-                                <div>
-                                    <select ng-model="repo" ng-options="repo as repo.name for repo in Repos" ng-change="getCommitsFromCurrent(repo)">
-                                        <option value="">---Please select---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <a href="#" class="btn btn-success btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> <br/>Users</a>
-                                <a href="#" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-file"></span> <br/>Notes</a>
-                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-picture"></span> <br/>Photos</a>
-                                <a href="#" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-tag"></span> <br/>Tags</a>
+                            <div class="col-md-6">
+                                <a class="btn btn-success btn-lg btn-style" role="button"><span class="glyphicon glyphicon-user"></span> <br />Users</a>
+                                <a class="btn btn-info btn-lg btn-style" role="button"><span class="glyphicon glyphicon-file"></span> <br />Notes</a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button"><span class="glyphicon glyphicon-picture"></span> <br />Photos</a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button"><span class="glyphicon glyphicon-tag"></span> <br />Tags</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-3">
+                        <hr />
                         <div class="blockquote-box blockquote-primary clearfix">
                             <div class="square pull-left">
                                 <span class="glyphicon glyphicon-music glyphicon-lg">{{userInfo.repositoryCount}}</span>
@@ -36,9 +30,6 @@
                             <h4>
                                 User've {{userInfo.repositoryCount}} repositories
                             </h4>
-                            <p>
-                                Lorem ipsum dolor sit
-                            </p>
                         </div>
                         <div class="blockquote-box blockquote-info clearfix">
                             <div class="square pull-left">
@@ -47,43 +38,115 @@
                             <h4>
                                 Following({{userInfo.folowingCount}})
                             </h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                            </p>
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
                             <div class="square pull-left">
                                 <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{userInfo.followerCount}}</span>
                             </div>
                             <h4>
-                                Follower({{userInfo.followerCount}}) 
+                                Follower({{userInfo.followerCount}})
                             </h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                            </p>
                         </div>
                     </div>
-
                     <div class="col-md-9">
-                        <canvas id="line"
-                                class="chart chart-line" chart-data="reposData"
-                                chart-labels="labels" chart-legend="true" chart-series="series">
-                        </canvas>
+                        <hr />
+                        <div class="panel panel-primary">
+                            <div class="panel-heading " style="background-color: #f0ad4e;">
+                                <form class="form-inline" role="form">
+                                    <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                    <div class="dropdown pull-right form-group">
+                                        <div>
+                                            <select ng-model="repo" ng-options="repo as repo.name for repo in Repos" ng-change="getCommitsFromCurrent(repo)">
+                                                <option value="">---Please select---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="padding: 10px;">
+                                <canvas id="line"
+                                        class="chart chart-line" chart-data="reposData"
+                                        chart-labels="labels" chart-legend="true" chart-series="series"></canvas>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12">
+                        <hr />
                         <div class="col-md-6">
-                            <canvas id="line" class="chart chart-line" chart-data="eachDate"
-                                    chart-labels="labels" chart-legend="true" chart-series="eachSeries">
-                            </canvas>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                    </h3>
+                                </div>
+                                <div style="padding: 10px;">
+                                    <canvas id="line" class="chart chart-line" chart-data="eachDate"
+                                            chart-labels="labels" chart-legend="true" chart-series="eachSeries"></canvas>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <canvas id="bar" class="chart chart-bar"
-                                    chart-data="barData" chart-labels="labels">
-                            </canvas></div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="background-color: red;">
+                                    <h3 class="panel-title">
+                                        <span class="glyphicon glyphicon-bookmark"></span> Quick Shortcuts
+                                    </h3>
+                                </div>
+                                <div style="padding: 10px;">
+                                    <canvas id="bar" class="chart chart-bar"
+                                            chart-data="barData" chart-labels="labels"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </section>
+
+<style>
+    
+     .btn-style{
+         width: 120px;
+         margin-bottom: 10px;
+     }
+
+    .glyphicon-lg {
+        font-size:3em
+    }
+    .blockquote-box {
+        border-right:5px solid #E6E6E6;
+        margin-bottom:25px
+    }
+    .blockquote-box .square {
+        width:100px;
+        min-height:50px;
+        margin-right:22px;
+        text-align:center!important;
+        background-color:#E6E6E6;
+        padding:20px 0
+    }
+    .blockquote-box.blockquote-primary {
+        border-color:#357EBD
+    }
+    .blockquote-box.blockquote-primary .square {
+        background-color:#428BCA;
+        color:#FFF
+    }
+    .blockquote-box.blockquote-info {
+        border-color:#46B8DA
+    }
+    .blockquote-box.blockquote-info .square {
+        background-color:#5BC0DE;
+        color:#FFF
+    }
+    .blockquote-box.blockquote-warning {
+        border-color:#EEA236
+    }
+    .blockquote-box.blockquote-warning .square {
+        background-color:#F0AD4E;
+        color:#FFF
+    }
+</style>
