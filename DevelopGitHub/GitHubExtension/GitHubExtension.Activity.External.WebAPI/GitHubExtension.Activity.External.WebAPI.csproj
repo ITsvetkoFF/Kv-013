@@ -98,6 +98,7 @@
     <Compile Include="Models\ReleaseModel.cs" />
     <Compile Include="Models\EventPayloads\ReleaseEventPayloadModel.cs" />
     <Compile Include="Models\RepositoryModel.cs" />
+    <Compile Include="Models\RepositoryShortModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\EventPayloads\WatchEventPayloadModel.cs" />
     <Compile Include="Package\ExternalActivityPackage.cs" />

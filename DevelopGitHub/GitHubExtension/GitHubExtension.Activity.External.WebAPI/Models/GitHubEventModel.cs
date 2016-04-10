@@ -10,6 +10,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Models
         public string Type { get; set; }
         public PayloadModel Payload { get; set; }
         public ActorModel Actor { get; set; }
+        public RepositoryShortModel Repo { get; set; }
         [JsonProperty(PropertyName = GitHubConstants.CreatedAt)]
         public DateTime CreatedAt { get; set; }
         public string Id { get; set; }
