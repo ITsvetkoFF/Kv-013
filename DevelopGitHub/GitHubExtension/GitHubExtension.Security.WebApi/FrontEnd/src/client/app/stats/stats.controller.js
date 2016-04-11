@@ -5,39 +5,40 @@
         .module('app.stats')
         .controller('StatsController', StatsController);
 
-    StatsController.$inject = ['statsFactory', '$scope', 'i18n'];
+    StatsController.$inject = ['statsFactory', 'i18n'];
 
-    function StatsController(statsFactory, $scope, i18n) {
-        var vmStatistics = this;
+    function StatsController(statsFactory, i18n) {
+        var vm = this;
+        vm.test = 1;
 
-        $scope.rep = '';
-        $scope.i18n = i18n;
-
+        vm.rep = '';
+        vm.i18n = i18n;
+     
         getCommits();
         getRepos();
 
         function getCommits() {
             return statsFactory.getCommitsFromRepos().then(function (response) {
-                $scope.reposData = [response.data.commits];
-                $scope.labels = response.data.months;
-                $scope.barData = [response.data.commits];
-                $scope.eachDate = response.data.commitsForEverRepository;
-                $scope.eachSeries = response.data.repositories.map(function(el) {
+                vm.reposData = [response.data.commits];
+                vm.labels = response.data.months;
+                vm.barData = [response.data.commits];
+                vm.eachDate = response.data.commitsForEverRepository;
+                vm.eachSeries = response.data.repositories.map(function (el) {
                     return el.name;
                 });
-                $scope.userInfo = response.data.userInfo;
+                vm.userInfo = response.data.userInfo;
             });
         }
 
         function getRepos() {
             return statsFactory.getRepos().then(function(response) {
-                $scope.Repos = response.data;
+                vm.Repos = response.data;
             });
         }
 
-        $scope.getCommitsFromCurrent = function (repo) {
+        vm.getCommitsFromCurrent = function (repo) {
             return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
-                $scope.reposData = [response.data];
+                vm.reposData = [response.data];
             });
         };
     }
