@@ -19,41 +19,34 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             this.queries = queries;
         }
 
-        [Route(RouteConstants.GetNoteRoute)]
-        public async Task<IHttpActionResult> GetNote([FromUri] int noteId)
+        [Route(NotesRouteConstants.GetNoteRoute)]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetNote([FromUri] string collaboratorId)
         {
-            var note = await queries.GetNote(noteId);
+            var userId = IdentityExtensions.GetUserId();
+            var note = await queries.GetNote(userId, collaboratorId);
             if (note == null)
             {
                 return NotFound();
             }
             var noteModel = note.ToNoteViewModel();
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return Ok(noteModel);
         }
 
-        [Route(RouteConstants.CreateNoteRoute)]
+        [Route(NotesRouteConstants.CreateNoteRoute)]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateNote(AddNoteModel model)
+        public async Task<IHttpActionResult> CreateNote(NoteModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!model.IsNoteForOwnAccount())
-            {
-                return BadRequest("You can add notes only in your own account");
-            }
-
-            var noteEntity = model.ToEntity();
+            var noteEntity = model.AddUserIdToModel().ToEntity();
             var note = await commands.AddNote(noteEntity);
             if (note == null)
             {
-                return BadRequest("Note not added");
+                return BadRequest();
             }
             else
             {

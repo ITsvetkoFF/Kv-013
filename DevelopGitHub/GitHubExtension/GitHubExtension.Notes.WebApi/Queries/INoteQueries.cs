@@ -5,6 +5,6 @@ namespace GitHubExtension.Notes.WebApi.Queries
 {
     public interface INoteQueries
     {
-        Task<Note> GetNote(int noteId);
+        Task<Note> GetNote(string userId, string collaboratorId);
     }
 }

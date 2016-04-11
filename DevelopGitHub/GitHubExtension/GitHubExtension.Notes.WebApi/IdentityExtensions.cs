@@ -6,10 +6,17 @@ namespace GitHubExtension.Notes.WebApi
 {
     public static class IdentityExtensions
     {
-        public static bool IsNoteForOwnAccount(this AddNoteModel noteModel)
+        public static string GetUserId()
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
-            return noteModel.UserId == userId;
+            return userId;
+        }
+
+        public static NoteModel AddUserIdToModel (this NoteModel noteModel)
+        {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            noteModel.UserId = userId;
+            return noteModel;
         }
     }
 }

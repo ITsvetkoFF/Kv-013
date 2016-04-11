@@ -5,7 +5,7 @@ namespace GitHubExtension.Notes.WebApi.Mappers
 {
     public static class NoteMapper
     {
-        public static Note ToEntity(this AddNoteModel noteModel)
+        public static Note ToEntity(this NoteModel noteModel)
         {
             var noteEntity = new Note
             {
@@ -16,9 +16,9 @@ namespace GitHubExtension.Notes.WebApi.Mappers
             return noteEntity;
         }
 
-        public static AddNoteModel ToNoteViewModel(this Note noteEntity)
+        public static NoteModel ToNoteViewModel(this Note noteEntity)
         {
-            var noteModel = new AddNoteModel
+            var noteModel = new NoteModel
             {
                 UserId = noteEntity.UserId,
                 CollaboratorId = noteEntity.CollaboratorId,

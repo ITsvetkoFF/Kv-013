@@ -13,10 +13,11 @@ namespace GitHubExtension.Notes.WebApi.Queries
             this.notesContext = notesContext;
         }
 
-        public async Task<Note> GetNote(int noteId)
+        public async Task<Note> GetNote(string userId, string collaboratorId)
         {
             var note = await notesContext.Notes
-                .FirstOrDefaultAsync(x => x.Id == noteId);
+                .FirstOrDefaultAsync(x => x.UserId == userId 
+                    && x.CollaboratorId == collaboratorId);
             return note;
         }
     }

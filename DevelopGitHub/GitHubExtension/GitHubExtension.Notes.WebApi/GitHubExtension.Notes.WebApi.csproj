@@ -107,7 +107,7 @@
     <Compile Include="Queries\NoteQueries.cs" />
     <Compile Include="Validators\AddNoteModelValidator.cs" />
     <Compile Include="Constants\ValidationConstants.cs" />
-    <Compile Include="ViewModels\AddNoteModel.cs" />
+    <Compile Include="ViewModels\NoteModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
