@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using FluentValidation.WebApi;
+using GitHubExtension.Notes.WebApi;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.StorageModels.Identity;
@@ -97,7 +98,6 @@ namespace GitHubExtension.Security.WebApi
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
           
             config.MapHttpAttributeRoutes();           
 
