@@ -5,6 +5,11 @@ namespace GitHubExtension.Statistics.WebApi.CommunicationModels
 {
     public class RepositoryCommitsModel
     {
+        public RepositoryCommitsModel()
+        {
+            this.Alls = new List<int>();
+            this.CommitsOwner = new List<int>();
+        }
         [JsonProperty(PropertyName = "all")]
         public List<int> Alls { get; set; }
         
