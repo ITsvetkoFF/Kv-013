@@ -7,18 +7,18 @@
     statsFactory.$inject = ['$http', 'baseStatsUrl'];
 
     function statsFactory($http, baseUrl) {
-        var baseUrl = baseUrl.apiStatsUrl;
+        var statsUrl = baseUrl.apiStatsUrl;
 
         function getCommitsFromRepos() {
             return $http({
                 method: 'GET',
-                url: baseUrl + '/commits'
+                url: baseUrl.apiGetCommitsRepos
             });
         }
         function getRepos() {
             return $http({
                 method: 'GET',
-                url: baseUrl + '/repos'
+                url: baseUrl.apiGetRepos
             });
         }
 
@@ -26,7 +26,7 @@
             return $http({
                 method: 'GET',
                 dataType: 'string',
-                url: baseUrl + '/commits/' + repo.name
+                url: baseUrl.apiGetCommitsRepos + '/' + repo.name
             });
         }
 
