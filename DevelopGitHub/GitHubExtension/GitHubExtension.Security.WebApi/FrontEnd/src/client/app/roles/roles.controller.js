@@ -50,7 +50,7 @@
             function getColaborators() {
                 return githubCollaborators.getCollaborators(repo).then(onGetCollaborators);
             }
-        }
+        };
 
         function onError(reason) {
             vm.error = 'Could not get collaborators.';
