@@ -50,19 +50,20 @@
                     </div>
                     <div class="col-md-9">
                         <hr/>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading " style="background-color: #f0ad4e;">
-                                <form class="form-inline" role="form">
-                                    <span class="glyphicon glyphicon-bookmark"></span> {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
-                                    <div class="dropdown pull-right form-group">
-                                        <div>
-                                            <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repos" ng-change="getCommitsFromCurrent(repo)">
-                                                <option value="">---Please select---</option>
-                                            </select>
-                                        </div>
+                        <div class="panel-heading " style="background-color: #f0ad4e;">
+                            <form class="form-inline" role="form">
+                                <span class="glyphicon glyphicon-bookmark"></span> {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
+                                <div class="dropdown pull-right form-group">
+                                    <div>
+                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repos" ng-change="vm.getCommitsFromCurrent(repo)">
+                                            <option value="">---Please select---</option>
+                                        </select>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel panel-primary">
+                           
                             <div style="padding: 10px;">
                                 <canvas id="line"
                                         class="chart chart-line" chart-data="vm.reposData"
