@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Constant;
-using GitHubExtension.Statistics.WebApi.Mappers.Identity;
+using GitHubExtension.Statistics.WebApi.Extensions.Identity;
 using GitHubExtension.Statistics.WebApi.Queries.Interfaces;
 using Microsoft.AspNet.Identity;
 

@@ -2,9 +2,9 @@
 using System.Security.Principal;
 using Microsoft.AspNet.Identity;
 
-namespace GitHubExtension.Statistics.WebApi.Mappers.Identity
+namespace GitHubExtension.Statistics.WebApi.Extensions.Identity
 {
-    public static class ClaimMapper
+    public static class IdentityExtensions
     {
         public static string GetExternalAccessToken(this IIdentity identity)
         {

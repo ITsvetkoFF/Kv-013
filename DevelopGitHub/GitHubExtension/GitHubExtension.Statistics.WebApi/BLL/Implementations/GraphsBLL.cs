@@ -51,8 +51,8 @@ namespace GitHubExtension.Statistics.WebApi.BLL.Implementations
 
         public ICollection<string> GetMountsFromDateTo()
         {
-            timeFrom = DateTime.Now.AddDays(-countDaysInYear); //go to 364 days ago
-            int countMonthInFromTo = timeTo.Month - timeFrom.Month; //count difference between to and from
+            timeFrom = DateTime.Now.AddDays(-countDaysInYear);
+            int countMonthInFromTo = timeTo.Month - timeFrom.Month;
             if (timeTo.Year != timeFrom.Year)
             {
                 countMonthInFromTo += countMounthInYear * (timeTo.Year - timeFrom.Year);
