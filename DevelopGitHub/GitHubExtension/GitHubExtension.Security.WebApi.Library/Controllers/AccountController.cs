@@ -75,7 +75,7 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
         [HttpPatch]
         [AllowAnonymous]
         [Route(RouteConstants.AssignRolesToUser)]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repositoryId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
@@ -88,13 +88,13 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
                 return BadRequest(ModelState);
             }
 
-            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repositoryId);
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
             if (repositoryRole != null)
                 appUser.UserRepositoryRoles.Remove(repositoryRole);
 
             appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
             {
-                RepositoryId = repositoryId,
+                RepositoryId = repoId,
                 SecurityRoleId = role.Id
             });
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
@@ -106,10 +106,10 @@ namespace GitHubExtension.Security.WebApi.Library.Controllers
             }
 
             var claimsIdentity = await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
-            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repositoryId.ToString());
+            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
             if (existingClaim != null)
                 _userManager.RemoveClaim(appUser.Id, existingClaim);
-            var addClaimResult = await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repositoryId.ToString()));
+            var addClaimResult = await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
 
             if (!addClaimResult.Succeeded)
             {
