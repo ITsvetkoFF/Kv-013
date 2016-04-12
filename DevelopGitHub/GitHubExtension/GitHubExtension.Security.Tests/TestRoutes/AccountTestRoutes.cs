@@ -1,13 +1,9 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using MvcRouteTester;
-using GitHubExtension.Security.WebApi.Library.Controllers;
 using System.Net.Http;
-using GitHubExtension.Models.CommunicationModels;
 using GitHubExtension.Constant;
-using System.Web.Http;
-using System.Text.RegularExpressions;
 using GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers;
+using GitHubExtension.Security.WebApi.Controllers;
 
 namespace GitHubExtension.Security.Tests.TestRoutes
 {

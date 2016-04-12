@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.DAL.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Security.DAL.Interfaces

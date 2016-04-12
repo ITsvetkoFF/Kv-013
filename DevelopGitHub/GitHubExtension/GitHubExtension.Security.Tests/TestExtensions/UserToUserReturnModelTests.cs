@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using Xunit;
-using NSubstitute;
-using GitHubExtension.Security.StorageModels.Identity;
-using GitHubExtension.Security.WebApi.Library.Mappers;
-using GitHubExtension.Models.CommunicationModels;
 using FluentAssertions;
-
+using Xunit;
+using GitHubExtension.Security.DAL.Identity;
+using GitHubExtension.Security.WebApi.Mappers;
+using GitHubExtension.Security.WebApi.Models;
 
 namespace GitHubExtension.Security.Tests.TestExtensions
 {

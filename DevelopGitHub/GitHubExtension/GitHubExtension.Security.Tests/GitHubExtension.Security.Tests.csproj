@@ -168,24 +168,12 @@
       <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
       <Name>GitHubExtension.Constant</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Models.CommunicationModels\GitHubExtension.Models.CommunicationModels.csproj">
-      <Project>{58240cbe-3bd5-41ba-8b46-8464748580f8}</Project>
-      <Name>GitHubExtension.Models.CommunicationModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Models.StorageModels\GitHubExtension.Security.StorageModels.csproj">
-      <Project>{38b14075-af0f-4588-912f-d000c37346cd}</Project>
-      <Name>GitHubExtension.Security.StorageModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7c74e58b-b1d7-4c8f-b0ad-9528e07fc3db}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Security.WebApi.Library\GitHubExtension.Security.WebApi.Library.csproj">
-      <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
-      <Name>GitHubExtension.Security.WebApi.Library</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.WebApi\GitHubExtension.Security.WebApi.csproj">
-      <Project>{b5f77285-e213-4564-bd65-caa3242f9f5b}</Project>
+      <Project>{7E05EAF8-B822-493D-81E7-50A054BD5CE4}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
     </ProjectReference>
   </ItemGroup>

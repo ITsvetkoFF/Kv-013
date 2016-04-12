@@ -1,5 +1,5 @@
 using GitHubExtension.Security.DAL.Context;
-using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.DAL.Identity;
 
 namespace GitHubExtension.Security.DAL.Migrations
 {

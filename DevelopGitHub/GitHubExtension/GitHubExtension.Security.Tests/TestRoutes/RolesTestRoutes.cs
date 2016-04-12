@@ -1,7 +1,7 @@
 ﻿using GitHubExtension.Constant;
-using GitHubExtension.Security.WebApi.Library.Controllers;
 using MvcRouteTester;
 using System.Net.Http;
+using GitHubExtension.Security.WebApi.Controllers;
 using Xunit;
 namespace GitHubExtension.Security.Tests.TestRoutes
 {

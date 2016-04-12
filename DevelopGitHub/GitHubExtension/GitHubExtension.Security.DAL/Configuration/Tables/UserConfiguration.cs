@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.DAL.Identity;
 
 namespace GitHubExtension.Security.DAL.Configuration.Tables
 {

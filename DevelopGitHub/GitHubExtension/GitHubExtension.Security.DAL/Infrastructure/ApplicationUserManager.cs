@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using GitHubExtension.Security.DAL.Context;
-using GitHubExtension.Security.StorageModels.Identity;
+using GitHubExtension.Security.DAL.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
