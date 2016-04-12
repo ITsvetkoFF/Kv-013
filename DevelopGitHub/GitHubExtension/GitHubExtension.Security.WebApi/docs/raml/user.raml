@@ -1,0 +1,48 @@
+#%RAML 0.8 Resource
+/{username}:
+  get:
+    responses:
+      200:
+      404:
+/repos:
+  get:
+    description: Get list of all repositories where user is owner or collaborator
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "$id": "1",
+                  "id": 1,
+                  "gitHubId": 12345678,
+                  "url": "https://api.github.com/repos/Cat/CatMoves",
+                  "name": "CatMoves"
+                },
+                {
+                  "$id": "2",
+                  "id": 2,
+                  "gitHubId": 11223344,
+                  "url": "https://api.github.com/repos/Cat/CatSleeps",
+                  "name": "CatSleeps"
+                },
+                {
+                  "$id": "3",
+                  "id": 3,
+                  "gitHubId": 12341234,
+                  "url": "https://api.github.com/repos/Cat/CatEats",
+                  "name": "CatEats"
+                }
+              ]
+      404:
+/commits:
+  get:
+    description: Get statistics about user's commits
+    responses:
+      200:
+  /{name}:
+    get:
+      description: Get statistics about user's commits in choser repository
+      responses:
+        200:

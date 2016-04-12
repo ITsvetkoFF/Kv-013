@@ -1,0 +1,268 @@
+<!DOCTYPE HTML><html><head><title>GitHubExtension API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.4.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>GitHubExtension API documentation <small>version v1</small></h1><p>http://localhost:50859/api</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="Account" class="panel-title">/Account</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_Account_ExternalLogin"><span class="parent">/Account</span>/ExternalLogin</a> <span class="methods"><a href="#Account_ExternalLogin_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_Account_ExternalLogin" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#Account_ExternalLogin_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Login with OAuth provider</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="Account_ExternalLogin_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/Account</span>/ExternalLogin</h4></div><div class="modal-body"><div class="alert alert-info"><p>Login with OAuth provider</p></div><ul class="nav nav-tabs"></ul><div class="tab-content"></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_Account_user__idguid_"><span class="parent">/Account/user</span>/{idguid}</a> <span class="methods"><a href="#Account_user__idguid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_Account_user__idguid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#Account_user__idguid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="Account_user__idguid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/Account/user</span>/{idguid}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#Account_user__idguid__get_request" data-toggle="tab">Request</a></li><li><a href="#Account_user__idguid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="Account_user__idguid__get_request"><h3>URI Parameters</h3><ul><li><strong>idguid</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="Account_user__idguid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_Account_user__username_"><span class="parent">/Account/user</span>/{username}</a> <span class="methods"><a href="#Account_user__username__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_Account_user__username_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#Account_user__username__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="Account_user__username__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/Account/user</span>/{username}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#Account_user__username__get_request" data-toggle="tab">Request</a></li><li><a href="#Account_user__username__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="Account_user__username__get_request"><h3>URI Parameters</h3><ul><li><strong>username</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="Account_user__username__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_Account_logout"><span class="parent">/Account</span>/logout</a> <span class="methods"><a href="#Account_logout_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_Account_logout" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#Account_logout_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Logout from the system</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="Account_logout_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/Account</span>/logout</h4></div><div class="modal-body"><div class="alert alert-info"><p>Logout from the system</p></div><ul class="nav nav-tabs"><li class="active"><a href="#Account_logout_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="Account_logout_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="activity" class="panel-title">/activity</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_activity_internal"><span class="parent">/activity</span>/internal</a> <span class="methods"><a href="#activity_internal_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_activity_internal" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#activity_internal_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get information about activity in chosen repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="activity_internal_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/activity</span>/internal</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get information about activity in chosen repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#activity_internal_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="activity_internal_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_activity_internal__userIdguid_"><span class="parent">/activity/internal</span>/{userIdguid}</a> <span class="methods"><a href="#activity_internal__userIdguid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_activity_internal__userIdguid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#activity_internal__userIdguid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get information about chosen user&#39;s activity in current repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="activity_internal__userIdguid__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/activity/internal</span>/{userIdguid}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get information about chosen user&#39;s activity in current repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#activity_internal__userIdguid__get_request" data-toggle="tab">Request</a></li><li><a href="#activity_internal__userIdguid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="activity_internal__userIdguid__get_request"><h3>URI Parameters</h3><ul><li><strong>userIdguid</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="activity_internal__userIdguid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_activity_external"><span class="parent">/activity</span>/external</a> <span class="methods"><a href="#activity_external_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_activity_external" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#activity_external_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get GitHub activity history for chosen repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="activity_external_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/activity</span>/external</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get GitHub activity history for chosen repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#activity_external_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="activity_external_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="note" class="panel-title">/note</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_note"><span class="parent"></span>/note</a> <span class="methods"><a href="#note_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_note" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#note_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create note about chosen collaborator</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="note_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/note</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create note about chosen collaborator</p></div><ul class="nav nav-tabs"><li class="active"><a href="#note_post_request" data-toggle="tab">Request</a></li><li><a href="#note_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="note_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "UserId": {
+        "type": "string",
+        "required": false
+    },
+    "CollaboratorId": {
+        "type": "string",
+        "required": false
+    },
+    "Body": {
+        "type": "string",
+        "required": true
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "UserId": "5",
+  "CollaboratorId": "100",
+  "Body": "Great coder!"
+}
+</code></pre></div><div class="tab-pane" id="note_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "$id": "1",
+  "message": "The request is invalid.",
+  "modelState": {
+    "$id": "2",
+    "model.Body": [
+      "&#39;Body&#39; не должно быть пусто."
+    ]
+  }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_note__noteId_"><span class="parent">/note</span>/{noteId}</a> <span class="methods"><a href="#note__noteId__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_note__noteId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#note__noteId__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get note about chosen collaborator</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="note__noteId__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/note</span>/{noteId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get note about chosen collaborator</p></div><ul class="nav nav-tabs"><li class="active"><a href="#note__noteId__get_request" data-toggle="tab">Request</a></li><li><a href="#note__noteId__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="note__noteId__get_request"><h3>URI Parameters</h3><ul><li><strong>noteId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="note__noteId__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="repos" class="panel-title">/repos</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_repos__id_"><span class="parent">/repos</span>/{id}</a> <span class="methods"><a href="#repos__id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_repos__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#repos__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get information about repository using its GitHubId</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="repos__id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/repos</span>/{id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get information about repository using its GitHubId</p></div><ul class="nav nav-tabs"><li class="active"><a href="#repos__id__get_request" data-toggle="tab">Request</a></li><li><a href="#repos__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="repos__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="repos__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "$id": "1",
+  "id": 4,
+  "gitHubId": 12341234,
+  "url": "https://api.github.com/repos/Dog/DogBarks",
+  "name": "DogBarks"
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_repos__reponame__collaborators"><span class="parent">/repos/{reponame}</span>/collaborators</a> <span class="methods"><a href="#repos__reponame__collaborators_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_repos__reponame__collaborators" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#repos__reponame__collaborators_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get list of collaborators for chosen repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="repos__reponame__collaborators_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/repos/{reponame}</span>/collaborators</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get list of collaborators for chosen repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#repos__reponame__collaborators_get_request" data-toggle="tab">Request</a></li><li><a href="#repos__reponame__collaborators_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="repos__reponame__collaborators_get_request"><h3>URI Parameters</h3><ul><li><strong>reponame</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="repos__reponame__collaborators_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "$id": "1",
+    "id": 12345678,
+    "url": "https://api.github.com/users/Cat",
+    "login": "Cat"
+  },
+  {
+    "$id": "2",
+    "id": 11223344,
+    "url": "https://api.github.com/users/Dog",
+    "login": "Dog"
+  },
+  {
+    "$id": "3",
+    "id": 12341234,
+    "url": "https://api.github.com/users/Cow",
+    "login": "Cow"
+  }
+]
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_repos__repoid__collaborators__gitHubId_"><span class="parent">/repos/{repoid}/collaborators</span>/{gitHubId}</a> <span class="methods"><a href="#repos__repoid__collaborators__gitHubId__patch"><span class="badge badge_patch">patch</span></a></span></h4></div><div id="panel_repos__repoid__collaborators__gitHubId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#repos__repoid__collaborators__gitHubId__patch'" class="list-group-item"><span class="badge badge_patch">patch</span><div class="method_description"><p>Assign role to user in the repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="repos__repoid__collaborators__gitHubId__patch"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_patch">patch</span> <span class="parent">/repos/{repoid}/collaborators</span>/{gitHubId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Assign role to user in the repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#repos__repoid__collaborators__gitHubId__patch_request" data-toggle="tab">Request</a></li><li><a href="#repos__repoid__collaborators__gitHubId__patch_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="repos__repoid__collaborators__gitHubId__patch_request"><h3>URI Parameters</h3><ul><li><strong>repoid</strong>: <em>required (string)</em></li><li><strong>gitHubId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="repos__repoid__collaborators__gitHubId__patch_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_repos_current"><span class="parent">/repos</span>/current</a> <span class="methods"><a href="#repos_current_patch"><span class="badge badge_patch">patch</span></a></span></h4></div><div id="panel_repos_current" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#repos_current_patch'" class="list-group-item"><span class="badge badge_patch">patch</span><div class="method_description"><p>Set user&#39;s current project</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="repos_current_patch"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_patch">patch</span> <span class="parent">/repos</span>/current</h4></div><div class="modal-body"><div class="alert alert-info"><p>Set user&#39;s current project</p></div><ul class="nav nav-tabs"><li class="active"><a href="#repos_current_patch_request" data-toggle="tab">Request</a></li><li><a href="#repos_current_patch_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="repos_current_patch_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "Id": {
+        "type": "string",
+        "required": true
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "Id": "5"
+}
+</code></pre></div><div class="tab-pane" id="repos_current_patch_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "$id": "1",
+  "message": "The request is invalid.",
+  "modelState": {
+    "$id": "2",
+    "repo.Id": [
+      "&#39;Id&#39; не должно быть пусто."
+      ]
+    }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="roles" class="panel-title">/roles</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of existing roles</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_roles"><span class="parent"></span>/roles</a> <span class="methods"><a href="#roles_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_roles" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#roles_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get all existing roles</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="roles_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/roles</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get all existing roles</p></div><ul class="nav nav-tabs"><li class="active"><a href="#roles_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="roles_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "$id": "1",
+    "id": 1,
+    "name": "Admin"
+  },
+  {
+    "$id": "2",
+    "id": 2,
+    "name": "Developer"
+  },
+  {
+    "$id": "3",
+    "id": 3,
+    "name": "Reviewer"
+  }
+]
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="templates" class="panel-title">/templates</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_templates_pullRequestTemplate"><span class="parent">/templates</span>/pullRequestTemplate</a> <span class="methods"><a href="#templates_pullRequestTemplate_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_templates_pullRequestTemplate" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#templates_pullRequestTemplate_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="templates_pullRequestTemplate_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/templates</span>/pullRequestTemplate</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#templates_pullRequestTemplate_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="templates_pullRequestTemplate_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_templates_issueTemplate"><span class="parent">/templates</span>/issueTemplate</a> <span class="methods"><a href="#templates_issueTemplate_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_templates_issueTemplate" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#templates_issueTemplate_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="templates_issueTemplate_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/templates</span>/issueTemplate</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#templates_issueTemplate_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="templates_issueTemplate_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user" class="panel-title">/user</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user__username_"><span class="parent">/user</span>/{username}</a> <span class="methods"><a href="#user__username__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_user__username_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user__username__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user__username__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user</span>/{username}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#user__username__get_request" data-toggle="tab">Request</a></li><li><a href="#user__username__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user__username__get_request"><h3>URI Parameters</h3><ul><li><strong>username</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="user__username__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_repos"><span class="parent">/user</span>/repos</a> <span class="methods"><a href="#user_repos_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_user_repos" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_repos_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get list of all repositories where user is owner or collaborator</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_repos_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user</span>/repos</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get list of all repositories where user is owner or collaborator</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_repos_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_repos_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "$id": "1",
+    "id": 1,
+    "gitHubId": 12345678,
+    "url": "https://api.github.com/repos/Cat/CatMoves",
+    "name": "CatMoves"
+  },
+  {
+    "$id": "2",
+    "id": 2,
+    "gitHubId": 11223344,
+    "url": "https://api.github.com/repos/Cat/CatSleeps",
+    "name": "CatSleeps"
+  },
+  {
+    "$id": "3",
+    "id": 3,
+    "gitHubId": 12341234,
+    "url": "https://api.github.com/repos/Cat/CatEats",
+    "name": "CatEats"
+  }
+]
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_commits"><span class="parent">/user</span>/commits</a> <span class="methods"><a href="#user_commits_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_user_commits" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_commits_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get statistics about user&#39;s commits</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_commits_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user</span>/commits</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get statistics about user&#39;s commits</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_commits_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_commits_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_commits__name_"><span class="parent">/user/commits</span>/{name}</a> <span class="methods"><a href="#user_commits__name__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_user_commits__name_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_commits__name__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get statistics about user&#39;s commits in choser repository</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_commits__name__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user/commits</span>/{name}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get statistics about user&#39;s commits in choser repository</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_commits__name__get_request" data-toggle="tab">Request</a></li><li><a href="#user_commits__name__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_commits__name__get_request"><h3>URI Parameters</h3><ul><li><strong>name</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="user_commits__name__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#Account">/Account</a></li><li><a href="#activity">/activity</a></li><li><a href="#note">/note</a></li><li><a href="#repos">/repos</a></li><li><a href="#roles">/roles</a></li><li><a href="#templates">/templates</a></li><li><a href="#user">/user</a></li></ul></div></div></div></div></body></html>
