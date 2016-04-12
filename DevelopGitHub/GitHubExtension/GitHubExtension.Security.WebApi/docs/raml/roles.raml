@@ -1,0 +1,26 @@
+#%RAML 0.8 Resource
+description: Collection of existing roles
+get:
+  description: Get all existing roles
+  responses:
+    200:
+      body:
+        application/json:
+          example: |
+            [
+              {
+                "$id": "1",
+                "id": 1,
+                "name": "Admin"
+              },
+              {
+                "$id": "2",
+                "id": 2,
+                "name": "Developer"
+              },
+              {
+                "$id": "3",
+                "id": 3,
+                "name": "Reviewer"
+              }
+            ]

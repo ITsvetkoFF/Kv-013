@@ -1,0 +1,92 @@
+#%RAML 0.8 Resource
+/{id}:
+  get:
+    description: Get information about repository using its GitHubId
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "id": 4,
+                "gitHubId": 12341234,
+                "url": "https://api.github.com/repos/Dog/DogBarks",
+                "name": "DogBarks"
+              }
+      404:
+/{reponame}:
+  /collaborators:
+    get:
+      description: Get list of collaborators for chosen repository
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                    "$id": "1",
+                    "id": 12345678,
+                    "url": "https://api.github.com/users/Cat",
+                    "login": "Cat"
+                  },
+                  {
+                    "$id": "2",
+                    "id": 11223344,
+                    "url": "https://api.github.com/users/Dog",
+                    "login": "Dog"
+                  },
+                  {
+                    "$id": "3",
+                    "id": 12341234,
+                    "url": "https://api.github.com/users/Cow",
+                    "login": "Cow"
+                  }
+                ]
+/{repoid}:
+  /collaborators:
+    /{gitHubId}:
+      patch:
+        description: Assign role to user in the repository
+        responses:
+          200:
+          400:
+          404:
+/current:
+  patch:
+    description: Set user's current project
+    body:
+      application/json:
+        example: |
+          {
+            "Id": "5"
+          }
+        schema: |
+          {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "Id": {
+                  "type": "string",
+                  "required": true
+              }
+            }
+          }
+    responses:
+      200:
+      400:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "message": "The request is invalid.",
+                "modelState": {
+                  "$id": "2",
+                  "repo.Id": [
+                    "'Id' не должно быть пусто."
+                    ]
+                  }
+              }
+      404:
