@@ -52,12 +52,12 @@ gulp.task('buildLocalizations', function () {
  */
 gulp.task('createHtmlDoc', function () {
     var rename = require('gulp-rename');
-    var apiSpec = path.join(__dirname, '..', 'docs/raml/api.raml')
+    var apiSpec = path.join(__dirname, '..', 'docs/raml/api.raml');
     var apiDest = path.join(__dirname, '..', 'docs');
     var apiHtml = 'raml.html';
 
     return gulp.src(apiSpec)
-        .pipe(raml2html())
+        .pipe(convertRaml2Html())
         .pipe(rename(apiHtml))
         .pipe(gulp.dest(apiDest));
 });
@@ -750,7 +750,7 @@ function notify(options) {
 /**
  * Create html-file from raml-file
  */
-function raml2html() {
+function convertRaml2Html() {
     var gutil = require('gulp-util');
     var through = require('through2');
     var raml2html = require('raml2html');
