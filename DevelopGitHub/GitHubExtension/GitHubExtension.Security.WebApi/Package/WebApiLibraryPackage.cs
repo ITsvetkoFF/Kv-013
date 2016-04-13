@@ -19,4 +19,3 @@ namespace GitHubExtension.Security.WebApi.Package
         }
     }
 }
-
