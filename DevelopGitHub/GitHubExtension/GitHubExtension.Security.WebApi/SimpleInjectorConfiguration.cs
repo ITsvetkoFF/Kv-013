@@ -1,4 +1,6 @@
-﻿using GitHubExtension.Security.DAL.Package;
+﻿using GitHubExtension.Notes.DAL.Package;
+using GitHubExtension.Notes.WebApi.Package;
+using GitHubExtension.Security.DAL.Package;
 using GitHubExtension.Security.WebApi.Package;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
@@ -20,7 +22,9 @@ namespace GitHubExtension.Security.WebApi
             container.RegisterPackages(new[]
             {
                 typeof(DALPackage).Assembly,
-                typeof(WebApiLibraryPackage).Assembly
+                typeof(WebApiLibraryPackage).Assembly,
+                typeof(NotesDALPackage).Assembly,
+                typeof(NotesWebApiPackage).Assembly
             });
             container.Verify();
 
