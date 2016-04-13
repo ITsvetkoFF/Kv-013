@@ -15,14 +15,14 @@ namespace GitHubExtension.Security.WebApi.Controllers
 {
     public class RepositoryController : BaseApiController
     {
-        private IGithubService _guGithubService;
+        private readonly IGithubService _gitHubService;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
-        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext,
+        public RepositoryController(IGithubService gitHubService, ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
-            _guGithubService = guGithubService;
+            _gitHubService = gitHubService;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -63,7 +63,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
-            var gitHubCollaborators = await _guGithubService.GetCollaboratorsForRepo(userName, repoName, token);
+            var gitHubCollaborators = await _gitHubService.GetCollaboratorsForRepo(userName, repoName, token);
 
             return Ok(gitHubCollaborators);
         }

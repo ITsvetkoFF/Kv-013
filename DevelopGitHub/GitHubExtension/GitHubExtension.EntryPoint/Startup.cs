@@ -6,14 +6,12 @@ using System.Web.Http;
 using FluentValidation.WebApi;
 using GitHubExtension.EntryPoint;
 using GitHubExtension.Security.DAL.Context;
-using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.WebApi;
 using GitHubExtension.Security.WebApi.ActionFilters;
 using GitHubExtension.Security.WebApi.Provider;
 using GitHubExtension.Security.WebApi.Validators.ValidatorFactories;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -61,45 +59,11 @@ namespace GitHubExtension.EntryPoint
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, Security.DAL.Migrations.Configuration>());
         }
-
-
-        private static CookieAuthenticationProvider GetMyCookieAuthenticationProvider()
-        {
-            var cookieAuthenticationProvider = new CookieAuthenticationProvider
-            {
-                OnValidateIdentity = async context =>
-                {
-                    // execute default cookie validation function
-                    var cookieValidatorFunc = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, User>(
-                        TimeSpan.FromMinutes(10),
-                        (manager, user) =>
-                        {
-                            var identity = manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-                            return identity;
-                        });
-                    await cookieValidatorFunc.Invoke(context);
-
-                    // sanity checks
-                    if (context.Identity == null || !context.Identity.IsAuthenticated)
-                    {
-                        return;
-                    }
-
-                    var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-                    var claimsToAdd = await userManager.GetClaimsAsync(context.Identity.GetUserId());
-
-                    // get your claim from your DB or other source
-                    context.Identity.AddClaims(claimsToAdd);
-                }
-            };
-            return cookieAuthenticationProvider;
-        }
-
+        
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
-          
+            
             config.MapHttpAttributeRoutes();           
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();

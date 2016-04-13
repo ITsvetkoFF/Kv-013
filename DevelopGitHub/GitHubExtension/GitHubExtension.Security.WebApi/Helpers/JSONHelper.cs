@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Script.Serialization;
+﻿using System.Web.Script.Serialization;
 
 namespace GitHubExtension.Security.WebApi.Helpers
 {
@@ -9,14 +8,7 @@ namespace GitHubExtension.Security.WebApi.Helpers
         public static string ToJSON(this object obj)
         {
             var serializer = new JavaScriptSerializer();
-            try
-            {
-                return serializer.Serialize(obj);
-            }
-            catch (Exception ex)
-            {
-                return "";
-            }
+            return serializer.Serialize(obj);
         }
     }
 }
