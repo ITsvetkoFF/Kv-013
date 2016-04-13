@@ -1,7 +1,7 @@
 ﻿using GitHubExtension.Security.DAL.Context;
+using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.StorageModels.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SimpleInjector;

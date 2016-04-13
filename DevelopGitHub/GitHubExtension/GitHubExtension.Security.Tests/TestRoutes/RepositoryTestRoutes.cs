@@ -1,10 +1,10 @@
 ﻿using GitHubExtension.Constant;
-using GitHubExtension.Security.WebApi.Library.Controllers;
 using MvcRouteTester;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Xunit;
 using GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers;
+using GitHubExtension.Security.WebApi.Controllers;
 
 namespace GitHubExtension.Security.Tests.TestRoutes
 {
