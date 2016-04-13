@@ -1,0 +1,10 @@
+﻿{
+    "en-US": {
+        "DASHBOARD": "Dashboard",
+        "ADMIN": "Admin",
+        "REPOS": "Repositories",
+        "COLLABORATORS": "Collaborators",
+        "MESSAGES": "Messages",
+        "AUTHORIZATION": "Authorization"
+    }
+}
