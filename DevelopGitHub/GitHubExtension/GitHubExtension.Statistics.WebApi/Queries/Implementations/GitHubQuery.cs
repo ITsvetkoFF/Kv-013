@@ -21,7 +21,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
         }
 
         #region methods
-        public async Task<List<int>> GetUserCommitsInYear(string owner, string repository, string token)
+        public async Task<ICollection<int>> GetCommitsRepository(string owner, string token, string repository)
         {
             var requestUri = string.Format(GitHubQueryConstant.GetRepositoryCommits, owner, repository, token);
             var response = await _httpClient.SendAsync(CreateMessageMapper.CreateMessage(HttpMethod.Get, requestUri));
@@ -29,11 +29,11 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
             return commitsFromRepository.CommitsOwner;
         }
 
-        public async Task<List<RepositoryModel>> GetRepositories(string owner, string token)
+        public async Task<ICollection<RepositoryModel>> GetRepositories(string owner, string token)
         {
             var requestUri = string.Format(GitHubQueryConstant.GetRepositories, owner, token);
             var response = await _httpClient.SendAsync(CreateMessageMapper.CreateMessage(HttpMethod.Get, requestUri));
-            List<RepositoryModel> repositories =
+            ICollection<RepositoryModel> repositories =
                 JsonConvert.DeserializeObject<List<RepositoryModel>>(await response.Content.ReadAsStringAsync());
             return repositories;
         }
