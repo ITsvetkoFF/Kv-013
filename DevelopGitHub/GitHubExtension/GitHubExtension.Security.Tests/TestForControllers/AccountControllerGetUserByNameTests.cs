@@ -1,18 +1,17 @@
-﻿using GitHubExtension.Models.CommunicationModels;
-using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.StorageModels.Identity;
-using GitHubExtension.Security.WebApi.Library.Controllers;
-using GitHubExtension.Security.WebApi.Library.Services;
-using Microsoft.AspNet.Identity;
-using NSubstitute;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Xunit;
 using FluentAssertions;
+using GitHubExtension.Security.DAL.Identity;
+using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.DAL.Interfaces;
+using GitHubExtension.Security.WebApi.Controllers;
+using GitHubExtension.Security.WebApi.Models;
+using GitHubExtension.Security.WebApi.Services;
+using Microsoft.AspNet.Identity;
+using NSubstitute;
+using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
