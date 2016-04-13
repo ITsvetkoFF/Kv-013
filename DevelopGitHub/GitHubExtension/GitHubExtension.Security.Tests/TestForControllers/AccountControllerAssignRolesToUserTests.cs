@@ -4,6 +4,7 @@ using GitHubExtension.Security.StorageModels.Identity;
 using GitHubExtension.Security.Tests.Mocks;
 using GitHubExtension.Security.WebApi.Library.Controllers;
 using GitHubExtension.Security.WebApi.Library.Services;
+using GitHubExtension.Security.Tests.Extensions;
 using Microsoft.AspNet.Identity;
 using NSubstitute;
 using System.Collections.Generic;
@@ -153,7 +154,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             //Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<InvalidModelStateResult>("Because impossible to assign role = {0} that doesn't exist in database", roleToAssign);
-            result.Should().BeOfType<InvalidModelStateResult>().Which.ModelState[roleIndex].Errors.First().ErrorMessage.Should().Be(string.Format(expectedErrorForInvalidRole, roleToAssign));
+            result.Should().BeOfType<InvalidModelStateResult>().Which.GetErrorMessage(roleIndex).Should().Be(string.Format(expectedErrorForInvalidRole, roleToAssign));
         }
 
         [Theory]
