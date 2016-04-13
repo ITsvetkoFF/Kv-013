@@ -15,7 +15,8 @@
     <AssemblyName>GitHubExtension.Security.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>6f7e3ffd</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>1a9ad131</NuGetPackageImportStamp>
+	<StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

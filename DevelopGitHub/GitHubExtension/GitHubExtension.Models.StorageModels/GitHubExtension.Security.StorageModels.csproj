@@ -12,7 +12,8 @@
     <AssemblyName>GitHubExtension.Security.StorageModels</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>b25bf75f</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>b77638d4</NuGetPackageImportStamp>
+	<StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -12,7 +12,8 @@
     <AssemblyName>GitHubExtension.Security.WebApi.Library</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>c32296c1</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>c1756dc1</NuGetPackageImportStamp>
+	<StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
