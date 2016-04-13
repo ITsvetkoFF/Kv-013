@@ -131,10 +131,8 @@
     <Compile Include="Mappers\Constant\GitHubConstants.cs" />
     <Compile Include="Queries\Constant\GitHubQueryConstant.cs" />
     <Compile Include="Queries\Implementations\GitHubQuery.cs" />
-    <Compile Include="BLL\Implementations\GraphsBLL.cs" />
     <Compile Include="Queries\Implementations\StatisticsQuery.cs" />
     <Compile Include="Queries\Interfaces\IGitHubQuery.cs" />
-    <Compile Include="BLL\Interfaces\IGraphBLL.cs" />
     <Compile Include="Queries\Interfaces\IStatisticsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
