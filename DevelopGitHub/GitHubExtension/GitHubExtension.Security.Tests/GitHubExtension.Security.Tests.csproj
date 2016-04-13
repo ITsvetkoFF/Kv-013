@@ -146,12 +146,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\InvalidModelStateResultExtentions.cs" />
     <Compile Include="Mocks\MockForDbSet.cs" />
     <Compile Include="Mocks\MockForEnumerableQuery.cs" />
     <Compile Include="TestExtensions\UserToUserReturnModelTests.cs" />
     <Compile Include="TestForControllers\AccountControllerAssignRolesToUserTests.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByIdTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestForControllers\AccountControllerGetUserByNameTests.cs" />
     <Compile Include="TestRoutes\AccountTestRoutes.cs" />
     <Compile Include="TestRoutes\RepositoryTestRoutes.cs" />
     <Compile Include="TestRoutes\RolesTestRoutes.cs" />
@@ -192,6 +194,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
