@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GitHubExtension.Security.Tests.Mocks
 {
     class MockForDbSet<T> : MockForEnumerableQuery<T>, IDbSet<T> where T : class
     {
-        private IQueryable<T> data;
+        private readonly IQueryable<T> data;
 
         public MockForDbSet(IEnumerable<T> collection) : base(collection)
         {
