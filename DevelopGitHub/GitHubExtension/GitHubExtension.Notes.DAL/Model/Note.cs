@@ -19,7 +19,7 @@ namespace GitHubExtension.Notes.DAL.Model
         public string CollaboratorId { get; set; }
         public string Body { get; set; }
     
+        public virtual User Collaborator { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Notes">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,8 +69,7 @@
             <End Role="Notes" EntitySet="Notes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GitHubExtensionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -82,8 +81,8 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CollaboratorId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Body" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Notes_Collaborators" FromRole="Notes" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Notes_Users" FromRole="Notes" ToRole="Users" />
+          <NavigationProperty Name="Collaborator" Relationship="Self.FK_Notes_Collaborators" FromRole="Notes" ToRole="Users" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Notes_Users" FromRole="Notes" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -103,8 +102,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Notes" Relationship="Self.FK_Notes_Collaborators" FromRole="Users" ToRole="Notes" />
-          <NavigationProperty Name="Notes1" Relationship="Self.FK_Notes_Users" FromRole="Users" ToRole="Notes" />
+          <NavigationProperty Name="NotesForCollaborator" Relationship="Self.FK_Notes_Collaborators" FromRole="Users" ToRole="Notes" />
+          <NavigationProperty Name="NotesOfUser" Relationship="Self.FK_Notes_Users" FromRole="Users" ToRole="Notes" />
         </EntityType>
         <Association Name="FK_Notes_Collaborators">
           <End Role="Users" Type="Self.User" Multiplicity="1" />

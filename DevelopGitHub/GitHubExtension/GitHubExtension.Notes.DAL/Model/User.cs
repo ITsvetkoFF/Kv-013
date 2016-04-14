@@ -17,8 +17,8 @@ namespace GitHubExtension.Notes.DAL.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Notes = new HashSet<Note>();
-            this.Notes1 = new HashSet<Note>();
+            this.NotesForCollaborator = new HashSet<Note>();
+            this.NotesOfUser = new HashSet<Note>();
         }
     
         public string Id { get; set; }
@@ -37,8 +37,8 @@ namespace GitHubExtension.Notes.DAL.Model
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<Note> NotesForCollaborator { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Note> Notes1 { get; set; }
+        public virtual ICollection<Note> NotesOfUser { get; set; }
     }
 }

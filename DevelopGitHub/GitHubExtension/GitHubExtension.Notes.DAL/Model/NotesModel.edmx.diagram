@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8854b4708814434791f5ff75d99c1cd6" Name="Diagram1">
-        <EntityTypeShape EntityType="GitHubExtensionModel.Note" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="GitHubExtensionModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="8854b4708814434791f5ff75d99c1cd6" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="GitHubExtensionModel.Note" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="GitHubExtensionModel.User" Width="1.5" PointX="1.125" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="GitHubExtensionModel.FK_Notes_Collaborators" ManuallyRouted="false" />
         <AssociationConnector Association="GitHubExtensionModel.FK_Notes_Users" ManuallyRouted="false" />
       </Diagram>
