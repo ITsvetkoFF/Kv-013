@@ -1,16 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.DAL.Interfaces;
+using GitHubExtension.Security.Tests.Mocks;
+using Microsoft.AspNet.Identity;
+using NSubstitute;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Xunit;
 using FluentAssertions;
+using GitHubExtension.Activity.DAL;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.DAL.Identity;
-using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.Tests.Mocks;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Services;
+using Microsoft.AspNet.Identity;
+using NSubstitute;
+using Xunit;
 using GitHubExtension.Security.Tests.Extensions;
 using Microsoft.AspNet.Identity;
 using NSubstitute;
@@ -23,7 +32,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         private const string roleIndex = "role";
         private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
         #region common-data
-       
+
         #endregion
         public static IEnumerable<object[]> DataForNotFountResult
         {
@@ -80,7 +89,9 @@ namespace GitHubExtension.Security.Tests.TestForControllers
                     },
                     1, 
                     0, 
-                    "Admin" 
+                    "Admin",
+                    ActivityTypeNames.AddRole,
+                    new ActivityType { Id = 2, Name = "add role" }
                 };
             }
         }
@@ -92,12 +103,31 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             return userManager;
         }
 
+        private IContextActivityCommand MockForActivityCommand()
+        {
+            var service = Substitute.For<IContextActivityCommand>();
+
+            service.AddActivity(Arg.Any<ActivityEvent>());
+
+            return service;
+        }
+
+
+        private IGetActivityTypeQuery MockForgetActivityTypeQuery(string activityTypeName, ActivityType activityType)
+        {
+            var query = Substitute.For<IGetActivityTypeQuery>();
+
+            query.GetUserActivityType(activityTypeName).Returns(activityType);
+
+            return query;
+        }
+
         private ISecurityContext MockForContext(IEnumerable<SecurityRole> roles)
         {
-            var context =Substitute.For<ISecurityContext>();
+            var context = Substitute.For<ISecurityContext>();
             context.SecurityRoles.Returns(new MockForDbSet<SecurityRole>(roles));
             return context;
-        } 
+        }
 
         private ApplicationUserManager MockForAddingClaim(List<User> users, User userToUpdate)
         {
@@ -113,7 +143,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
                 Substitute.For<ISecurityContext>(), MockForUsers(users));
 
             //Act
@@ -121,7 +151,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
             //Assert
             IHttpActionResult result = response.Result;
-            result.Should().BeOfType<NotFoundResult>("Because user with providerId= {0} doesn't exists in database",gitHubId);
+            result.Should().BeOfType<NotFoundResult>("Because user with providerId= {0} doesn't exists in database", gitHubId);
         }
 
         [Theory]
@@ -129,8 +159,8 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrenge
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                MockForContext(roles), MockForUsers(users)); 
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
+                MockForContext(roles), MockForUsers(users));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
@@ -145,7 +175,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
                 MockForContext(roles), MockForUsers(users));
 
             //Act
@@ -159,13 +189,13 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("DataForOkResult")]
-        public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign)
+        public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign, string activityTypeName, ActivityType activityType)
         {
             //Arrange
             users.Add(userToUpdate);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                MockForContext(roles), MockForAddingClaim(users,userToUpdate)); 
-            
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForActivityCommand(), MockForgetActivityTypeQuery(activityTypeName, activityType),
+                MockForContext(roles), MockForAddingClaim(users, userToUpdate));
+
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
 

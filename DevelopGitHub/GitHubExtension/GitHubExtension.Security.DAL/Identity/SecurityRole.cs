@@ -2,7 +2,7 @@
 
 namespace GitHubExtension.Security.DAL.Identity
 {
-    public class SecurityRole 
+    public class SecurityRole
     {
         public int Id { get; set; }
         public string Name { get; set; }

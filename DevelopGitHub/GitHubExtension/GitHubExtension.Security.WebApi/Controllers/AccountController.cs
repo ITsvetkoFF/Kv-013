@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using GitHubExtension.Activity.DAL;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Constant;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
@@ -22,7 +26,10 @@ namespace GitHubExtension.Security.WebApi.Controllers
     public class AccountController : BaseApiController
     {
         #region private fields
+
         private readonly IGithubService _githubService;
+        private readonly IContextActivityCommand _contextActivityCommand;
+        private readonly IGetActivityTypeQuery _getActivityTypeQuery;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
@@ -30,10 +37,14 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         public AccountController(
             IGithubService githubService,
+            IContextActivityCommand contextActivityCommand,
+            IGetActivityTypeQuery getActivityTypeQuery,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
             _githubService = githubService;
+            _contextActivityCommand = contextActivityCommand;
+            _getActivityTypeQuery = getActivityTypeQuery;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -64,38 +75,39 @@ namespace GitHubExtension.Security.WebApi.Controllers
             {
                 return Ok(user.ToUserReturnModel());
             }
-            
+
             return NotFound();
         }
 
-        
-        //Commented intentinaly, need to be tested with authorization logic
-        //[ClaimsAuthorization(ClaimType = "Role", ClaimValue = "Admin")]
         [HttpPatch]
         [AllowAnonymous]
         [Route(RouteConstants.AssignRolesToUser)]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId,
+            [FromBody] string roleToAssign)
         {
-            var appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
+            User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
                 return NotFound();
+
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
+
+            if (repositoryRole != null)
+                appUser.UserRepositoryRoles.Remove(repositoryRole);
 
             var role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == roleToAssign);
             if (role == null)
             {
-                ModelState.AddModelError("role", string.Format("Roles '{0}' does not exists in the system", roleToAssign));
+                ModelState.AddModelError("role",
+                    string.Format("Roles '{0}' does not exists in the system", roleToAssign));
                 return BadRequest(ModelState);
             }
-
-            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
-            if (repositoryRole != null)
-                appUser.UserRepositoryRoles.Remove(repositoryRole);
 
             appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
             {
                 RepositoryId = repoId,
                 SecurityRoleId = role.Id
             });
+
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
             if (!updateResult.Succeeded)
@@ -104,11 +116,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var claimsIdentity = await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var claimsIdentity =
+                await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
             if (existingClaim != null)
                 _userManager.RemoveClaim(appUser.Id, existingClaim);
-            var addClaimResult = await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
+            var addClaimResult =
+                await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
 
             if (!addClaimResult.Succeeded)
             {
@@ -116,20 +130,35 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            var activityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.AddRole);
+
+            _contextActivityCommand.AddActivity(new ActivityEvent
+            {
+                UserId = User.Identity.GetUserId(),
+                CurrentRepositoryId = repoId,
+                ActivityType = activityType,
+                InvokeTime = DateTime.Now,
+                Message =
+                    String.Format("{0} {1} {2} to {3}", User.Identity.Name, activityType.Name, roleToAssign,
+                        appUser.UserName)
+            });
+
             return Ok();
         }
-        
+
         [HttpGet]
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [Route(RouteConstants.GetExternalLogin, Name = "ExternalLogin")]
-        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)// The first call, after click login with GitHub, and call when we write a info user
+        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+            // The first call, after click login with GitHub, and call when we write a info user
         {
             // if not allready authenticated sending user to GitHub
             if (!User.Identity.IsAuthenticated)
                 return new ChallengeResult(provider, this);
 
-            Claim tokenClaim = User.Identity.GetClaim();
+            var claims = User.Identity as ClaimsIdentity;
+            Claim tokenClaim = claims.FindFirst("ExternalAccessToken");
 
             //TODO: Log
             if (tokenClaim == null)
@@ -145,10 +174,10 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 IHttpActionResult registrationResult = await RegisterUser(user, tokenClaim.Value);
                 if (registrationResult != null)
                     return registrationResult;
-
             }
 
-            ClaimsIdentity localIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            ClaimsIdentity localIdentity =
+                await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             localIdentity.AddClaim(tokenClaim);
 
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
@@ -163,34 +192,64 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("logout")]        
+        [Route("logout")]    
         public IHttpActionResult LogOut()
         {
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
-            authentication.SignOut();
+            authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
 
             return Ok();
         }
 
+      
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             SecurityRole role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
                 return InternalServerError();
 
-            List<RepositoryDto> repositories = await _githubService.GetReposAsync(token);
-            
-            var repositoriesToAdd = repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
-            user.UserRepositoryRoles = repositoriesToAdd;
+
+            List<GitHubRepositoryModel> repositories = await _githubService.GetReposAsync(token);
+
+            var repositoryRolesToAdd =
+                repositories.Select(r => new UserRepositoryRole() {Repository = r.ToEntity(), SecurityRole = role})
+                    .ToList();
+            user.UserRepositoryRoles = repositoryRolesToAdd;
 
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
             if (!addUserResult.Succeeded)
                 return GetErrorResult(addUserResult);
 
             if (repositories.Any(r => !_userManager
-                    .AddClaim(user.Id,
-                        new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
+                .AddClaim(user.Id,
+                    new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
+
+            var userActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
+
+            _contextActivityCommand.AddActivity(new ActivityEvent()
+            {
+                UserId = user.Id,
+                ActivityType = userActivityType,
+                InvokeTime = DateTime.Now,
+                Message = String.Format("{0} {1}", User.Identity.Name, userActivityType.Name)
+            });
+
+
+            var repositoryActivityType =
+                _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
+
+            foreach (var repository in repositoryRolesToAdd)
+            {
+                _contextActivityCommand.AddActivity(new ActivityEvent()
+                {
+                    UserId = user.Id,
+                    CurrentRepositoryId = repository.RepositoryId,
+                    ActivityType = repositoryActivityType,
+                    InvokeTime = DateTime.Now,
+                    Message = String.Format("{0} {1}", repository.Repository.Name, repositoryActivityType.Name)
+                });
+            }
 
             return null;
         }

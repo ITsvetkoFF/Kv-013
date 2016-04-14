@@ -7,7 +7,7 @@
     <Name>GitHubExtension.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{879e0685-b0ab-4711-aaf2-e933aa8335af}</ProjectGuid>
+    <ProjectGuid>{f7b4a089-e77f-4dbd-b49f-550fbbba827a}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -59,10 +59,11 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Build Include="Activities.sql" />
+    <Build Include="ActivitiesTypes.sql" />
+    <Build Include="Users.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Notes.sql" />
-    <Build Include="Users.sql" />
+    <PostDeploy Include="SeedActivityTypes.sql" />
   </ItemGroup>
 </Project>
