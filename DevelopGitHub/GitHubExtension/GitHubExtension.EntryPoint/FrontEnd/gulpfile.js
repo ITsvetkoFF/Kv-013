@@ -46,6 +46,22 @@ gulp.task('buildLocalizations', function () {
       .pipe(replace(/"/g, '\''))
      .pipe(gulp.dest(config.localizationPath));
 });
+
+/**
+ * Convert API-doc from raml to html
+ */
+gulp.task('createHtmlDoc', function () {
+    var rename = require('gulp-rename');
+    var apiSpec = path.join(__dirname, '..', 'docs/raml/api.raml');
+    var apiDest = path.join(__dirname, '..', 'docs');
+    var apiHtml = 'raml.html';
+
+    return gulp.src(apiSpec)
+        .pipe(convertRaml2Html())
+        .pipe(rename(apiHtml))
+        .pipe(gulp.dest(apiDest));
+});
+
 /**
  * List the available gulp tasks
  */
@@ -729,6 +745,38 @@ function notify(options) {
     };
     _.assign(notifyOptions, options);
     notifier.notify(notifyOptions);
+}
+
+/**
+ * Create html-file from raml-file
+ */
+function convertRaml2Html() {
+    var gutil = require('gulp-util');
+    var through = require('through2');
+    var raml2html = require('raml2html');
+
+    var options = {};
+    options.config = raml2html.getDefaultConfig(options.template, options.templatePath);
+    options.type = 'html';
+    var stream = through.obj(function (file, enc, done) {
+        if (file.isBuffer()) {
+            var cwd = process.cwd();
+            process.chdir(path.resolve(path.dirname(file.path)));
+            raml2html.render(file.contents, options.config).then(
+                function (output) {
+                    process.chdir(cwd);
+                    stream.push(new gutil.File({
+                        base: file.base,
+                        cwd: file.cwd,
+                        path: gutil.replaceExtension(file.path, '.' + options.type),
+                        contents: new Buffer(output)
+                    }));
+                    done();
+                });
+        }
+    });
+
+    return stream;
 }
 
 module.exports = gulp;
