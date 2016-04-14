@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using GitHubExtension.Notes.WebApi.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Notes.WebApi
@@ -10,13 +9,6 @@ namespace GitHubExtension.Notes.WebApi
         {
             var userId = ClaimsPrincipal.Current.Identity.GetUserId();
             return userId;
-        }
-
-        public static NoteModel AddUserIdToModel (this NoteModel noteModel)
-        {
-            var userId = ClaimsPrincipal.Current.Identity.GetUserId();
-            noteModel.UserId = userId;
-            return noteModel;
         }
     }
 }

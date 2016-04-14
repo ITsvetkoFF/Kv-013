@@ -35,16 +35,21 @@ namespace GitHubExtension.Notes.WebApi.Controllers
 
         [Route(NotesRouteConstants.CreateNoteRoute)]
         [HttpPost]
-        public async Task<IHttpActionResult> CreateNote(NoteModel model)
+        public async Task<IHttpActionResult> CreateNote(AddNoteModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var fullNoteModelWithUserId = model.AddUserIdToModel();
+            var userId = IdentityExtensions.GetUserId();
+            var noteModel = model.AddUserIdToModel(userId);
+            if (noteModel == null)
+            {
+                return BadRequest();
+            }
 
-            var noteEntity = fullNoteModelWithUserId.ToEntity();
+            var noteEntity = noteModel.ToEntity();
             if (noteEntity == null)
             {
                 return BadRequest();

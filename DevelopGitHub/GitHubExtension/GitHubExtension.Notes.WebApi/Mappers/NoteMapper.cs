@@ -26,6 +26,17 @@ namespace GitHubExtension.Notes.WebApi.Mappers
             };
             return noteModel;
         }
+
+        public static NoteModel AddUserIdToModel(this AddNoteModel addNoteModel, string userId)
+        {
+            var noteModel = new NoteModel
+            {
+                UserId = userId,
+                CollaboratorId = addNoteModel.CollaboratorId,
+                Body = addNoteModel.Body
+            };
+            return noteModel;
+        }
     }
 
 }
