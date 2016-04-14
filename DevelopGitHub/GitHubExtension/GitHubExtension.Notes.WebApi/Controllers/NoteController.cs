@@ -42,7 +42,9 @@ namespace GitHubExtension.Notes.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var noteEntity = model.AddUserIdToModel().ToEntity();
+            var fullNoteModelWithUserId = model.AddUserIdToModel();
+
+            var noteEntity = fullNoteModelWithUserId.ToEntity();
             if (noteEntity == null)
             {
                 return BadRequest();
