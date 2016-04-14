@@ -10,7 +10,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
             return url + Regex.Replace(
                 RouteConstants.GetByIdRepository,
                 RouteConstants.Id_int,
-                "13");
+                "/13");
         }
 
         public static string ForRepositoryGetReposForCurrentUser(this string url)
@@ -23,7 +23,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
             return url + Regex.Replace(
                 RouteConstants.GetCollaboratorsForRepository,
                 RouteConstants.RepositoryName,
-                "myRepository");
+                "/myRepository");
         }
     }
 }
