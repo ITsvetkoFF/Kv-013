@@ -253,12 +253,16 @@
         <StringProperty Name="SP2102_Limit">30</StringProperty>
         <StringProperty Name="AdvancedNaming_Namespace">
         </StringProperty>
-        <StringProperty Name="AdvancedNaming_ProtectedInstanceField">$(aaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_PrivateInstanceField">_$(aaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_ProtectedStaticField">$(aaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_PrivateStaticField">$(aaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_ProtectedConst">$(aaBb)</StringProperty>
-        <StringProperty Name="AdvancedNaming_PrivateConst">$(aaBb):$(AA_BB)</StringProperty>
+        <StringProperty Name="AdvancedNaming_ProtectedInstanceField">$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_PrivateInstanceField">$(aaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_ProtectedStaticField">$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_PrivateStaticField">$(aaBb):$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_ProtectedConst">$(AaBb)</StringProperty>
+        <StringProperty Name="AdvancedNaming_PrivateConst">$(aaBb):$(AaBb):$(AA_BB)</StringProperty>
+        <StringProperty Name="AdvancedNaming_ClassNotInternal">
+        </StringProperty>
+        <StringProperty Name="AdvancedNaming_ClassInternal">
+        </StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">
@@ -299,11 +303,25 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+      <AnalyzerSettings>
+        <CollectionProperty Name="Hungarian">
+          <Value>o</Value>
+        </CollectionProperty>
+      </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.SpacingRules">
       <Rules>
         <Rule Name="OpeningCurlyBracketsMustBeSpacedCorrectly">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+    <Analyzer AnalyzerId="StyleCop.CSharp.MaintainabilityRules">
+      <Rules>
+        <Rule Name="AccessModifierMustBeDeclared">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>
