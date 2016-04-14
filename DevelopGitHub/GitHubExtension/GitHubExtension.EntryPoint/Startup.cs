@@ -22,6 +22,7 @@ using Owin.Security.Providers.GitHub;
 using SimpleInjector.Integration.WebApi;
 
 [assembly: OwinStartup(typeof(Startup))]
+
 namespace GitHubExtension.EntryPoint
 {
     public class Startup
@@ -31,18 +32,15 @@ namespace GitHubExtension.EntryPoint
         public void Configuration(IAppBuilder app)
         {
             var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
-            ConfigureOAuth(app);
+            ConfigureOauth(app);
 
-            #region config for http
             var config = ConfigureWebApi();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                AuthenticationMode =  AuthenticationMode.Active
+                AuthenticationMode = AuthenticationMode.Active
             });
-
-            #endregion
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             config.EnsureInitialized();
@@ -51,9 +49,9 @@ namespace GitHubExtension.EntryPoint
 
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
-            FluentValidationModelValidatorProvider
-                .Configure(config,
-                    provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
+            FluentValidationModelValidatorProvider.Configure(
+                config,
+                provider => provider.ValidatorFactory = new FluentValidatorFactory(container));
 
             app.UseWebApi(config);
 
@@ -75,12 +73,12 @@ namespace GitHubExtension.EntryPoint
             return config;
         }
 
-        void ConfigureOAuth(IAppBuilder app)
+        void ConfigureOauth(IAppBuilder app)
         {
-            //use a cookie to temporarily store information about a user logging in with a third party login provider
+            // use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            OAuthAuthorizationServerOptions oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
@@ -88,7 +86,7 @@ namespace GitHubExtension.EntryPoint
             };
 
             // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthAuthorizationServer(oAuthServerOptions);
 
             GitHubAuthOptions = new GitHubAuthenticationOptions()
             {

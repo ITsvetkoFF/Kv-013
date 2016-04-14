@@ -37,10 +37,10 @@ namespace GitHubExtension.Security.Tests.TestExtensions
         [MemberData("DataForUserReturnModelTest")]
         public void UserReturnModelTest(User entityToUserReturnModelTest, UserReturnModel expectedUserReturnModel)
         {
-            //Act
+            // Act
             var userReturnModel = entityToUserReturnModelTest.ToUserReturnModel();
 
-            //Assert
+            // Assert
             userReturnModel.ShouldBeEquivalentTo(expectedUserReturnModel);
         }
     }

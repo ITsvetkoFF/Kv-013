@@ -15,11 +15,6 @@ namespace GitHubExtension.Security.Tests.Mocks
             data = collection.AsQueryable();
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            return data.GetEnumerator();
-        }
-
         public Type ElementType
         {
             get { return data.ElementType; }
@@ -30,6 +25,16 @@ namespace GitHubExtension.Security.Tests.Mocks
             get { return data.Expression; }
         }
 
+        public ObservableCollection<T> Local
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return data.GetEnumerator();
+        }
+        
         public T Add(T entity)
         {
             throw new NotImplementedException();
@@ -53,11 +58,6 @@ namespace GitHubExtension.Security.Tests.Mocks
         public T Find(params object[] keyValues)
         {
             throw new NotImplementedException();
-        }
-
-        public ObservableCollection<T> Local
-        {
-            get { throw new NotImplementedException(); }
         }
 
         public T Remove(T entity)

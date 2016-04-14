@@ -11,4 +11,3 @@ namespace GitHubExtension.Security.WebApi.Validators
         }
     }
 }
-

@@ -1,5 +1,5 @@
-﻿using GitHubExtension.Constant;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using GitHubExtension.Constant;
 
 namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
 {
@@ -9,7 +9,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
         {
             return url + Regex.Replace(
                 RouteConstants.GetByIdRepository,
-                RouteConstants.Id_int,
+                RouteConstants.IdInt,
                 "/13");
         }
 
