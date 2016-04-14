@@ -21,6 +21,7 @@ using Owin;
 using Owin.Security.Providers.GitHub;
 using SimpleInjector.Integration.WebApi;
 
+
 [assembly: OwinStartup(typeof(Startup))]
 namespace GitHubExtension.EntryPoint
 {
