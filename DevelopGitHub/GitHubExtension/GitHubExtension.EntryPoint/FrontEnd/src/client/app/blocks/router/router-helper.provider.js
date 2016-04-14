@@ -21,10 +21,10 @@
             angular.extend(config, cfg);
         };
 
-        this.$get = RouterHelper;
-        RouterHelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
+        this.$get = routerHelper;
+        routerHelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
         /* @ngInject */
-        function RouterHelper($location, $rootScope, $state, logger) {
+        function routerHelper($location, $rootScope, $state, logger) {
             var handlingStateChangeError = false;
             var hasOtherwise = false;
             var stateCounts = {

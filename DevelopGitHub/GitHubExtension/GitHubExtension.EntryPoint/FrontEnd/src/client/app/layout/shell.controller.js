@@ -3,16 +3,16 @@
 
     angular
         .module('app.layout')
-        .controller('ShellController', ShellController);
+        .controller('ShellController', shellController);
 
-    ShellController.$inject = ['$rootScope', '$timeout', 'config', 'logger', 'i18n'];
+    shellController.$inject = ['$rootScope', '$timeout', 'config', 'logger', 'i18n'];
     /* @ngInject */
 
-    function ShellController($rootScope, $timeout, config, logger, i18n) {
+    function shellController($rootScope, $timeout, config, logger, i18N) {
         var vm = this;
 
         // add i18n for localization
-        vm.i18n = i18n;
+        vm.i18n = i18N;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         $rootScope.showSplash = true;

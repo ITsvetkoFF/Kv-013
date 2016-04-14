@@ -753,16 +753,16 @@ function notify(options) {
 function convertRaml2Html() {
     var gutil = require('gulp-util');
     var through = require('through2');
-    var raml2html = require('raml2html');
+    var raml2Html = require('raml2html');
 
     var options = {};
-    options.config = raml2html.getDefaultConfig(options.template, options.templatePath);
+    options.config = raml2Html.getDefaultConfig(options.template, options.templatePath);
     options.type = 'html';
     var stream = through.obj(function (file, enc, done) {
         if (file.isBuffer()) {
             var cwd = process.cwd();
             process.chdir(path.resolve(path.dirname(file.path)));
-            raml2html.render(file.contents, options.config).then(
+            raml2Html.render(file.contents, options.config).then(
                 function (output) {
                     process.chdir(cwd);
                     stream.push(new gutil.File({

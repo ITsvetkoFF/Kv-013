@@ -4,12 +4,12 @@
 
     angular
      .module('app.roles')
-     .controller('RolesController', RolesController);
+     .controller('RolesController', rolesController);
 
-    RolesController.$inject = ['githubCollaborators', 'logger', '$q'];
+    rolesController.$inject = ['githubCollaborators', 'logger', '$q'];
 
     /* @ngInject */
-    function RolesController(githubCollaborators, logger, $q) {
+    function rolesController(githubCollaborators, logger, $q) {
         var vm = this;
         vm.title = 'Roles';
         vm.repo = '';

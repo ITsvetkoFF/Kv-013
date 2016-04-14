@@ -9,7 +9,7 @@
     function htTopNav () {
         var directive = {
             bindToController: true,
-            controller: TopNavController,
+            controller: topNavController,
             controllerAs: 'vm',
             restrict: 'EA',
             scope: {
@@ -18,13 +18,13 @@
             templateUrl: 'FrontEnd/src/client/app/layout/ht-top-nav.html'
         };
 
-        TopNavController.$inject = ['i18n', '$state', 'routerHelper'];
+        topNavController.$inject = ['i18n', '$state', 'routerHelper'];
         /* @ngInject */
-        function TopNavController(i18n, $state, routerHelper) {
+        function topNavController(i18N, $state, routerHelper) {
             var vm = this;
 
             // add i18n for localization
-            vm.i18n = i18n;
+            vm.i18n = i18N;
             var states = routerHelper.getStates();
 
             activate();
