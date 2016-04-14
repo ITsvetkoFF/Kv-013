@@ -1,0 +1,53 @@
+#%RAML 0.8 Resource
+post:
+  description: Create note about chosen collaborator
+  body:
+    application/json:
+      example: |
+        {
+          "UserId": "5",
+          "CollaboratorId": "100",
+          "Body": "Great coder!"
+        }
+      schema: |
+        {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "UserId": {
+                "type": "string",
+                "required": false
+            },
+            "CollaboratorId": {
+                "type": "string",
+                "required": false
+            },
+            "Body": {
+                "type": "string",
+                "required": true
+            }
+          }
+        }
+  responses:
+    200:
+    400:
+      body:
+        application/json:
+          example: |
+            {
+              "$id": "1",
+              "message": "The request is invalid.",
+              "modelState": {
+                "$id": "2",
+                "model.Body": [
+                  "'Body' не должно быть пусто."
+                ]
+              }
+            }
+/{noteId}:
+  get:
+    description: Get note about chosen collaborator
+    responses:
+      200:
+      400:
+      404:

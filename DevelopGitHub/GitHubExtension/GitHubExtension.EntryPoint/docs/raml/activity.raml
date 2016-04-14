@@ -1,0 +1,24 @@
+#%RAML 0.8 Resource
+/internal:
+  get:
+    description: Get information about activity in chosen repository
+    responses:
+      200:
+      400:
+      404:
+  /{userIdguid}:
+    get:
+      description: Get information about chosen user's activity in current repository
+      responses:
+        200:
+        404:
+
+/external:
+  get:
+    description: Get GitHub activity history for chosen repository
+    responses:
+      200:
+        body:
+          application/json:
+      400:
+      404:

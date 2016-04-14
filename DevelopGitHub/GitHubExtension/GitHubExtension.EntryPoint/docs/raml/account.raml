@@ -1,0 +1,20 @@
+#%RAML 0.8 Resource
+/ExternalLogin:
+  get:
+    description: Login with OAuth provider
+/user:
+  /{idguid}:
+    get:
+      responses:
+        200:
+        404:
+  /{username}:
+    get:
+      responses:
+        200:
+        404:
+/logout:
+  post:
+    description: Logout from the system
+    responses:
+      200:
