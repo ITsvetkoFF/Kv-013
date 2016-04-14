@@ -6,8 +6,11 @@ namespace GitHubExtension.Security.WebApi.Models
     public class RepositoryViewModel
     {
         public int Id { get; set; }
+        
         public int GitHubId { get; set; }
+        
         public string Url { get; set; }
+        
         public string Name { get; set; }
     }
 }

@@ -3,11 +3,11 @@
 
     angular.module('app.login')
     .controller('loginController', ['$scope', 'apiURLs',
-        function ($scope, apiURLs) {
+        function ($scope, apiUrLs) {
 
             $scope.authExternalProvider = function (provider) {
 
-                var externalProviderUrl = apiURLs.apiLoginUrl + '?provider=' + provider;
+                var externalProviderUrl = apiUrLs.apiLoginUrl + '?provider=' + provider;
 
                 window.$windowScope = $scope;
                 location.href = externalProviderUrl;

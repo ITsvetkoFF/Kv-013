@@ -15,16 +15,18 @@ namespace GitHubExtension.Security.WebApi.Controllers
 {
     public class RepositoryController : BaseApiController
     {
-        private readonly IGithubService _gitHubService;
-        private readonly ISecurityContext _securityContext;
-        private readonly ApplicationUserManager _userManager;
+        private readonly IGithubService gitHubService;
+        private readonly ISecurityContext securityContext;
+        private readonly ApplicationUserManager userManager;
 
-        public RepositoryController(IGithubService gitHubService, ISecurityContext securityContext,
+        public RepositoryController(
+            IGithubService gitHubService,
+            ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
-            _gitHubService = gitHubService;
-            _securityContext = securityContext;
-            _userManager = userManager;
+            this.gitHubService = gitHubService;
+            this.securityContext = securityContext;
+            this.userManager = userManager;
         }
 
         // id is a GitHub id of a repo
@@ -32,9 +34,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.GetByIdRepository)]
         public async Task<IHttpActionResult> GetById(int id)
         {
-            var repository = await _securityContext.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
+            var repository = await this.securityContext.Repositories.FirstOrDefaultAsync(r => r.GitHubId == id);
             if (repository == null)
+            {
                 return NotFound();
+            }
 
             return Ok(repository.ToRepositoryViewModel());
         }
@@ -45,11 +49,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
         public async Task<IHttpActionResult> GetRepositoryForCurrentUser()
         {
             string userId = User.Identity.GetUserId();
-            var role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
+            var role = await this.securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
+            {
                 return NotFound();
+            }
 
-            var repos = _securityContext.Repositories
+            var repos = this.securityContext.Repositories
                 .Where(r => r.UserRepositoryRoles.Any(ur => ur.UserId == userId && ur.SecurityRoleId == role.Id))
                 .AsEnumerable().Select(r => r.ToRepositoryViewModel());
             return Ok(repos);
@@ -63,7 +69,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
-            var gitHubCollaborators = await _gitHubService.GetCollaboratorsForRepo(userName, repoName, token);
+            var gitHubCollaborators = await this.gitHubService.GetCollaboratorsForRepo(userName, repoName, token);
 
             return Ok(gitHubCollaborators);
         }
@@ -74,23 +80,29 @@ namespace GitHubExtension.Security.WebApi.Controllers
         public async Task<IHttpActionResult> UpdateProject(Repository repo)
         {
             string currentUserId = User.Identity.GetUserId();
-            User user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
+            User user = await this.userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
             if (user == null)
+            {
                 return NotFound();
+            }
 
-            var repository = _securityContext.UserRepository.FirstOrDefault(r => r.RepositoryId == repo.Id && r.UserId == user.Id);
+            var repository = this.securityContext.UserRepository.FirstOrDefault(r => r.RepositoryId == repo.Id && r.UserId == user.Id);
             if (repository == null)
             {
-                ModelState.AddModelError("repo", string.Format("user with id '{0}' does not have a repository with id '{1}'", user.Id, repo.Id));
+                ModelState.AddModelError(
+                    "repo", 
+                    string.Format("user with id '{0}' does not have a repository with id '{1}'", user.Id, repo.Id));
                 return BadRequest(ModelState);
             }
 
-            var claimsIdentity = await user.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var claimsIdentity = await user.GenerateUserIdentityAsync(this.userManager, DefaultAuthenticationTypes.ApplicationCookie);
             var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "CurrentProjectId");
             if (existingClaim != null)
-                _userManager.RemoveClaim(user.Id, existingClaim);
+            {
+                this.userManager.RemoveClaim(user.Id, existingClaim);
+            }
 
-            var addClaimResult = await _userManager.AddClaimAsync(user.Id, new Claim("CurrentProjectId", repo.Id.ToString()));
+            var addClaimResult = await this.userManager.AddClaimAsync(user.Id, new Claim("CurrentProjectId", repo.Id.ToString()));
 
             if (!addClaimResult.Succeeded)
             {

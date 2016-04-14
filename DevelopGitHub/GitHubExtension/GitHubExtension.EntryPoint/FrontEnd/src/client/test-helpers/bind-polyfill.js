@@ -17,14 +17,14 @@ if (!Function.prototype.bind) {
 
         var aArgs = Array.prototype.slice.call(arguments, 1),
             fToBind = this,
-            FuncNoOp = function () {},
+            funcNoOp = function () {},
             fBound = function () {
-                return fToBind.apply(this instanceof FuncNoOp && oThis ? this : oThis,
+                return fToBind.apply(this instanceof funcNoOp && oThis ? this : oThis,
                     aArgs.concat(Array.prototype.slice.call(arguments)));
             };
 
-        FuncNoOp.prototype = this.prototype;
-        fBound.prototype = new FuncNoOp();
+        funcNoOp.prototype = this.prototype;
+        fBound.prototype = new funcNoOp();
 
         return fBound;
     };

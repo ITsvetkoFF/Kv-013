@@ -4,12 +4,12 @@
 
     angular
      .module('app.repos')
-     .controller('ReposController', ReposController);
+     .controller('ReposController', reposController);
 
-    ReposController.$inject = ['githubData', 'logger'];
+    reposController.$inject = ['githubData', 'logger'];
 
     /* @ngInject */
-    function ReposController(githubData, logger) {
+    function reposController(githubData, logger) {
 
         var vm = this;
         vm.title = 'Repositories';

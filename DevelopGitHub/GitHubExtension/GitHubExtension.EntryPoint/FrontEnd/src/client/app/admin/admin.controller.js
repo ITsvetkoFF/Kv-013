@@ -3,15 +3,15 @@
 
     angular
         .module('app.admin')
-        .controller('AdminController', AdminController);
+        .controller('AdminController', adminController);
 
-    AdminController.$inject = ['logger', 'i18n'];
+    adminController.$inject = ['logger', 'i18n'];
     /* @ngInject */
-    function AdminController(logger, i18n) {
+    function adminController(logger, i18N) {
         var vm = this;
 
         // add localization
-        vm.i18n = i18n;
+        vm.i18n = i18N;
 
         vm.title = 'Admin';
 

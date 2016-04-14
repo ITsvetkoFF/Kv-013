@@ -3,11 +3,11 @@
 
     angular
         .module('app.layout')
-        .controller('SidebarController', SidebarController);
+        .controller('SidebarController', sidebarController);
 
-    SidebarController.$inject = ['$state', 'routerHelper'];
+    sidebarController.$inject = ['$state', 'routerHelper'];
     /* @ngInject */
-    function SidebarController($state, routerHelper) {
+    function sidebarController($state, routerHelper) {
         var vm = this;
         var states = routerHelper.getStates();
         vm.isCurrent = isCurrent;

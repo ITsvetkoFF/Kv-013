@@ -1,8 +1,9 @@
-﻿using GitHubExtension.Constant;
-using MvcRouteTester;
-using System.Net.Http;
+﻿using System.Net.Http;
+using GitHubExtension.Constant;
 using GitHubExtension.Security.WebApi.Controllers;
+using MvcRouteTester;
 using Xunit;
+
 namespace GitHubExtension.Security.Tests.TestRoutes
 {
     public class RolesTestRoutes : TestRoutesConfig
@@ -10,15 +11,12 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         public RolesTestRoutes()
             : base(RouteConstants.ApiRoles)
         {
-
         }
 
         [Fact]
         public void RolesGetTest()
         {
-            config.ShouldMap(url)
-                .To<RolesController>(HttpMethod.Get,
-                x => x.GetAllRoles());
+            this.Config.ShouldMap(this.Url).To<RolesController>(HttpMethod.Get, x => x.GetAllRoles());
         }
     }
 }

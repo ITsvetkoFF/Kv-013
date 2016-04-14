@@ -6,16 +6,16 @@ namespace GitHubExtension.Security.WebApi.Validators.ValidatorFactories
 {
     public class FluentValidatorFactory : ValidatorFactoryBase
     {
-        private readonly Container _container;
+        private readonly Container container;
 
         public FluentValidatorFactory(Container container)
         {
-            _container = container;
+            this.container = container;
         }
 
         public override IValidator CreateInstance(Type validatorType)
         {
-            return _container.GetInstance(validatorType) as IValidator;
+            return this.container.GetInstance(validatorType) as IValidator;
         }
     }
 }

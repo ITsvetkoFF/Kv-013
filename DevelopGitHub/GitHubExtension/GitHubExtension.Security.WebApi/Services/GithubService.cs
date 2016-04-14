@@ -12,16 +12,20 @@ namespace GitHubExtension.Security.WebApi.Services
     // TODO: Create NLog
     public class GithubService : IGithubService
     {
-        private readonly HttpClient _httpClient;
         private static readonly Dictionary<string, string> DefaultHeaders = new Dictionary<string, string>()
         {
-             //Need to set user-agent to access GitHub API, Using Chrome 48
-            { "User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36" }
+             // Need to set user-agent to access GitHub API, Using Chrome 48
+            {
+                "User-Agent", 
+                "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
+            }
         };
+
+        private readonly HttpClient httpClient;
 
         public GithubService()
         {
-            _httpClient = new HttpClient();
+            this.httpClient = new HttpClient();
         }
 
         public async Task<GitHubUserModel> GetUserAsync(string token)
@@ -30,11 +34,13 @@ namespace GitHubExtension.Security.WebApi.Services
             var requestUri = string.Format("https://api.github.com/user?access_token={0}", token);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
-            var response = await _httpClient.SendAsync(message);
+            var response = await this.httpClient.SendAsync(message);
 
             if (!response.IsSuccessStatusCode)
+            {
                 throw new UnsuccessfullGitHubRequestException();
-            
+            }
+
             var dto = JsonConvert.DeserializeObject<GitHubUserModel>(await response.Content.ReadAsStringAsync());
             dto.Email = dto.Email ?? await GetPrimaryEmailForUser(token);
 
@@ -46,10 +52,12 @@ namespace GitHubExtension.Security.WebApi.Services
             var requestUri = string.Format("https://api.github.com/repos/{0}/{1}/collaborators?access_token={2}", owner, repository, token);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
-            var response = await _httpClient.SendAsync(message);
+            var response = await this.httpClient.SendAsync(message);
 
             if (!response.IsSuccessStatusCode)
+            {
                 throw new UnsuccessfullGitHubRequestException();
+            }
 
             return JsonConvert.DeserializeObject<List<CollaboratorDto>>(await response.Content.ReadAsStringAsync());
         }
@@ -59,17 +67,28 @@ namespace GitHubExtension.Security.WebApi.Services
             var requestUri = string.Format("https://api.github.com/user/emails?access_token={0}", token);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
-            var response = await _httpClient.SendAsync(message);
+            var response = await this.httpClient.SendAsync(message);
 
             if (!response.IsSuccessStatusCode)
+            {
                 throw new UnsuccessfullGitHubRequestException();
+            }
 
             var emails = JArray.Parse(await response.Content.ReadAsStringAsync());
-            var email = "";
+            var email = string.Empty;
 
-            foreach ( var typedEntry in emails.Children()
-                .Select(emailEntry => JsonConvert.DeserializeAnonymousType(emailEntry.ToString(), new {Email = "", Primary = false}))
-                .Where(typedEntry => typedEntry.Primary) )
+            foreach (
+                var typedEntry in
+                    emails.Children()
+                        .Select(
+                            emailEntry =>
+                            JsonConvert.DeserializeAnonymousType(
+                                emailEntry.ToString(),
+                                new
+                                    {
+                                        Email = string.Empty, Primary = false
+                                    }))
+                        .Where(typedEntry => typedEntry.Primary))
             {
                 email = typedEntry.Email;
                 break;
@@ -80,13 +99,15 @@ namespace GitHubExtension.Security.WebApi.Services
 
         public async Task<List<RepositoryDto>> GetReposAsync(string token)
         {
-            //Geting repos for user
+            // Geting repos for user
             var requestUri = string.Format("https://api.github.com/user/repos?access_token={0}", token);
             var message = CreateMessage(HttpMethod.Get, requestUri);
 
-            var response = await _httpClient.SendAsync(message);
+            var response = await this.httpClient.SendAsync(message);
             if (!response.IsSuccessStatusCode)
+            {
                 throw new UnsuccessfullGitHubRequestException();
+            }
 
             return JsonConvert.DeserializeObject<List<RepositoryDto>>(await response.Content.ReadAsStringAsync());
         }
