@@ -52,45 +52,12 @@ namespace GitHubExtension.Security.WebApi.Helpers
         {
             var message = new StringBuilder();
 
-            if (!string.IsNullOrWhiteSpace(record.Message))
-            {
-                message.Append(string.Empty).Append(record.Message + Environment.NewLine);
-            }
+            var finalMessage = message.CheckRecordMessage(record)
+                .CheckRecordMessage(record)
+                .CheckRecordCategory(record)
+                .CheckRecordOperator(record);
 
-            if (record.Request != null)
-            {
-                if (record.Request.Method != null)
-                {
-                    message.Append("Method: " + record.Request.Method + Environment.NewLine);
-                }
-
-                if (record.Request.RequestUri != null)
-                {
-                    message.Append(string.Empty).Append("URL: " + record.Request.RequestUri + Environment.NewLine);
-                }
-
-                if (record.Request.Headers != null && 
-                    record.Request.Headers.Contains("Token") && 
-                    record.Request.Headers.GetValues("Token") != null && 
-                    record.Request.Headers.GetValues("Token").FirstOrDefault() != null)
-                {
-                    message.Append(string.Empty)
-                        .Append(
-                            "Token: " + record.Request.Headers.GetValues("Token").FirstOrDefault() + Environment.NewLine);
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(record.Category))
-            {
-                message.Append(string.Empty).Append(record.Category);
-            }
-
-            if (!string.IsNullOrWhiteSpace(record.Operator))
-            {
-                message.Append(" ").Append(record.Operator).Append(" ").Append(record.Operation);
-            }
-
-            Logger[record.Level](Convert.ToString(message) + Environment.NewLine);
+            Logger[record.Level](Convert.ToString(finalMessage) + Environment.NewLine);
         }
     }
 }
