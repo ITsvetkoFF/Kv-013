@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http;
 using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Constant;
 using GitHubExtension.Security.DAL.Identity;
@@ -151,7 +152,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [Route(RouteConstants.GetExternalLogin, Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
-            // The first call, after click login with GitHub, and call when we write a info user
+        // The first call, after click login with GitHub, and call when we write a info user
         {
             // if not allready authenticated sending user to GitHub
             if (!User.Identity.IsAuthenticated)
@@ -192,7 +193,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("logout")]    
+        [Route("logout")]
         public IHttpActionResult LogOut()
         {
             var authentication = HttpContext.Current.GetOwinContext().Authentication;
@@ -201,7 +202,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok();
         }
 
-      
+
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             SecurityRole role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
@@ -212,7 +213,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             List<GitHubRepositoryModel> repositories = await _githubService.GetReposAsync(token);
 
             var repositoryRolesToAdd =
-                repositories.Select(r => new UserRepositoryRole() {Repository = r.ToEntity(), SecurityRole = role})
+                repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role })
                     .ToList();
             user.UserRepositoryRoles = repositoryRolesToAdd;
 
@@ -236,8 +237,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             });
 
 
-            var repositoryActivityType =
-                _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
+            var repositoryActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
 
             foreach (var repository in repositoryRolesToAdd)
             {

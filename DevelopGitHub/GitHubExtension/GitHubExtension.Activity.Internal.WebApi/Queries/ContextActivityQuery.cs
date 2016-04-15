@@ -16,7 +16,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
         {
             get
             {
-                return _activityContext.Activities;
+                return _activityContext.Activities.AsNoTracking();
             }
         }
     }

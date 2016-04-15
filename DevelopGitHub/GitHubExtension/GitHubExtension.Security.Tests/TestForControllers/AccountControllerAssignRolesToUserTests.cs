@@ -4,7 +4,6 @@ using GitHubExtension.Security.Tests.Mocks;
 using Microsoft.AspNet.Identity;
 using NSubstitute;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -13,17 +12,13 @@ using Xunit;
 using FluentAssertions;
 using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Services;
-using Microsoft.AspNet.Identity;
-using NSubstitute;
-using Xunit;
 using GitHubExtension.Security.Tests.Extensions;
-using Microsoft.AspNet.Identity;
-using NSubstitute;
-using Xunit;
+
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {

@@ -23,18 +23,17 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         [Route(ActivityRouteConstants.CurrentRepositoryActivityRoute)]
         public IHttpActionResult GetCurrentRepositoryUserActivities()
         {
-            var identity = User.Identity as ClaimsIdentity;
-            Claim currProjectClaim = identity.FindFirst("CurrentProjectId");
+            Claim currProjectClaim = User.GetCurrentProjectClaim();
             int currentRepositoryId;
 
             if (currProjectClaim == null || !int.TryParse(currProjectClaim.Value, out currentRepositoryId))
                 return BadRequest();
 
-            ICollection<ActivityEvent> userActivitiesForCurrentRepo = _contextActivityQuery.GetCurrentRepositoryUserActivities(currentRepositoryId);
+            IEnumerable<ActivityEvent> userActivitiesForCurrentRepo = _contextActivityQuery.GetCurrentRepositoryUserActivities(currentRepositoryId);
 
-            if (userActivitiesForCurrentRepo.Count == 0)
+            if (userActivitiesForCurrentRepo == null)
                 return NotFound();
-            ICollection<ActivityEventModel> activityViewModels = userActivitiesForCurrentRepo.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
+            IEnumerable<ActivityEventModel> activityViewModels = userActivitiesForCurrentRepo.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
 
             return Ok(activityViewModels);
         }
@@ -43,11 +42,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         [Route(ActivityRouteConstants.CurrentUserActivityRoute)]
         public IHttpActionResult GetUserActivities([FromUri]string userId)
         {
-            ICollection<ActivityEvent> userActivities = _contextActivityQuery.GetUserActivities(userId);
+            IEnumerable<ActivityEvent> userActivities = _contextActivityQuery.GetUserActivities(userId);
 
-            if (userActivities.Count == 0)
+            if (userActivities == null)
                 return NotFound();
-            ICollection<ActivityEventModel> activityViewModels = userActivities.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
+            IEnumerable<ActivityEventModel> activityViewModels = userActivities.Select(userActivity => userActivity.ToActivityEventModel());
 
             return Ok(activityViewModels);
         }

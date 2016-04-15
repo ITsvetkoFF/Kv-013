@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-
 using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Queries
@@ -13,9 +12,10 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
             _activityContext = activityContext;
         }
 
-        public ActivityType GetUserActivityType(string name)
+        public IOrderedQueryable<ActivityType> ActivitiesTypes
         {
-            return _activityContext.ActivitiesTypes.FirstOrDefault(n => n.Name == name);
+            get { return _activityContext.ActivitiesTypes.AsNoTracking(); }
         }
+
     }
 }
