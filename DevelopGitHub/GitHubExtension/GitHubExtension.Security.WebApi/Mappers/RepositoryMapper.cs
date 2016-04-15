@@ -5,14 +5,14 @@ namespace GitHubExtension.Security.WebApi.Mappers
 {
     public static class RepositoryMapper
     {
-        public static Repository ToEntity(this RepositoryDto repository)
+        public static Repository ToEntity(this GitHubRepositoryModel repository)
         {
             var repositoryEntity = new Repository()
             {
-                Id = repository.Id,
                 GitHubId = repository.GitHubId,
-                Name =  repository.Name,
-                Url =  repository.Url
+                Name = repository.Name,
+                Url = repository.Url,
+                FullName = repository.FullName
             };
 
             return repositoryEntity;
@@ -25,8 +25,9 @@ namespace GitHubExtension.Security.WebApi.Mappers
                 GitHubId = repository.GitHubId,
                 Id = repository.Id,
                 Name = repository.Name,
-                Url = repository.Url
+                Url = repository.Url,
             };
         }
     }
+
 }

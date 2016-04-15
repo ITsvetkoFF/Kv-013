@@ -9,7 +9,7 @@ using SimpleInjector.Packaging;
 
 namespace GitHubExtension.Security.DAL.Package
 {
-    public class DALPackage : IPackage
+    public class DALSecurityPackage : IPackage
     {
         public void RegisterServices(Container container)
         {
@@ -18,6 +18,7 @@ namespace GitHubExtension.Security.DAL.Package
             container.Register<SecurityRoleManager>(Lifestyle.Scoped);
             container.Register<IUserStore<User>, GitHubUserStore>(Lifestyle.Scoped);
             container.Register<IRoleStore<IdentityRole, string>, GitHubRoleStore>(Lifestyle.Scoped);
+
         }
     }
 }

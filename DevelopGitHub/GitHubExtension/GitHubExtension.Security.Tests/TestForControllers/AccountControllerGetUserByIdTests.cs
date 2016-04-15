@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+using NSubstitute;
+using Xunit;
+using GitHubExtension.Security.DAL.Infrastructure;
+using Microsoft.AspNet.Identity;
+using GitHubExtension.Security.DAL.Interfaces;
 using System.Web.Http;
 using System.Web.Http.Results;
+using System.Threading.Tasks;
 using FluentAssertions;
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.DAL.Identity;
-using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Services;
-using Microsoft.AspNet.Identity;
-using NSubstitute;
-using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -45,12 +47,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                 Substitute.For<ISecurityContext>(), userManager);
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<ISecurityContext>(), userManager);
 
             return controller;
         }
-         
+
         [Theory]
         [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(string findUserById, User fakeFoundUser)
@@ -65,7 +66,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
-
 
         [Theory]
         [MemberData("DataForOkResult")]
