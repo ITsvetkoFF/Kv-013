@@ -44,7 +44,7 @@ namespace GitHubExtension.Templates.Controllers
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
-            var content = response.GetTemplatesContent().Result;
+            var content = await response.GetTemplatesContent();
 
             return Ok(content);
         }
@@ -71,7 +71,7 @@ namespace GitHubExtension.Templates.Controllers
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
-            var content = response.GetTemplatesContent().Result;
+            var content = await response.GetTemplatesContent();
 
             return Ok(content);
         }
