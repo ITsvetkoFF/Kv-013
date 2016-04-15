@@ -215,6 +215,14 @@
       <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
       <Name>GitHubExtension.Constant</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
+      <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
+      <Name>GitHubExtension.Notes.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
+      <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
+      <Name>GitHubExtension.Notes.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
