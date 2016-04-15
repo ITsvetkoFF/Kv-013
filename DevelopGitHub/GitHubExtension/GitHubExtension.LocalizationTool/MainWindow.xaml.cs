@@ -38,12 +38,12 @@ namespace GitHubExtension.LocalizationTool
 
         private static void ShowErrorMessageBox(string error, Exception exception)
         {
-            MessageBox.Show(error + "\n" + exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(error + "\n" + exception.Message, "Error - Localization Tool", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private static void ShowInformationMessageBox(string information)
         {
-            MessageBox.Show(information, "OK", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(information, "OK - Localization Tool", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private static JObject GetTranslationFromYandexApi(
