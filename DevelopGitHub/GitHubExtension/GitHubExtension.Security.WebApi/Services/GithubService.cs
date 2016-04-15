@@ -76,19 +76,11 @@ namespace GitHubExtension.Security.WebApi.Services
 
             var emails = JArray.Parse(await response.Content.ReadAsStringAsync());
             var email = string.Empty;
+            var emailEntryDefinition = new { Email = string.Empty, Primary = false };
 
-            foreach (
-                var typedEntry in
-                    emails.Children()
-                        .Select(
-                            emailEntry =>
-                            JsonConvert.DeserializeAnonymousType(
-                                emailEntry.ToString(),
-                                new
-                                    {
-                                        Email = string.Empty, Primary = false
-                                    }))
-                        .Where(typedEntry => typedEntry.Primary))
+            foreach (var typedEntry in emails.Children()
+                .Select(emailEntry => JsonConvert.DeserializeAnonymousType(emailEntry.ToString(), emailEntryDefinition))
+                .Where(typedEntry => typedEntry.Primary))
             {
                 email = typedEntry.Email;
                 break;
