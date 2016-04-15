@@ -18,9 +18,9 @@
         public const string Collaborators = "/collaborators";
 
         // segments
-        public const string Id_int = "/{id:int}";
+        public const string IdInt = "/{id:int}";
         public const string RepositoryName = "/{repoName}";
-        public const string Id_guid = "/{id:guid}";
+        public const string IdGuid = "/{id:guid}";
         public const string UserName = "/{username}";
         public const string RepositoryId = "/{repoId}";
         public const string GitHubId = "/{gitHubId}";
@@ -28,10 +28,10 @@
         // routes
         public const string AssignRolesToUser = ApiRepository + RepositoryId + Collaborators + GitHubId;
         public const string GetUserByName = User + UserName;
-        public const string GetUser = User + Id_guid;
+        public const string GetUser = User + IdGuid;
         public const string AccountsRegister = Register;
         public const string GetExternalLogin = ExternalLogin;
-        public const string GetByIdRepository = ApiRepository + Id_int;
+        public const string GetByIdRepository = ApiRepository + IdInt;
         public const string GetRepositoryForCurrentUser = ApiUser + Repository;
         public const string GetCollaboratorsForRepository = ApiRepository + RepositoryName + Collaborators;
     }

@@ -41,44 +41,47 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             }
         }
 
-        private static AccountController GetControllerInstance(string name, User user)
-        {
-            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            userManager.FindByNameAsync(name).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
-                 Substitute.For<ISecurityContext>(), userManager);
-
-            return controller;
-        }
-
         [Theory]
         [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(string nameToFind, User fakeFoundUser)
         {
-            //Arrange
+            // Arrange
             AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
 
-            //Act
+            // Act
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
-            //Assert
+            // Assert
             IHttpActionResult result = response.Result;
-            result.Should().BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database",nameToFind);
+            result.Should()
+                .BeOfType<NotFoundResult>("Because user with name = {0} doesn't exists in database", nameToFind);
         }
 
         [Theory]
         [MemberData("DataForOkResult")]
         public void OkResultTest(string nameToFind, User fakeFoundUser)
         {
-            //Arrange
+            // Arrange
             AccountController controller = GetControllerInstance(nameToFind, fakeFoundUser);
 
-            //Act
+            // Act
             Task<IHttpActionResult> response = controller.GetUserByName(nameToFind);
 
-            //Assert
+            // Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
+        }
+
+        private static AccountController GetControllerInstance(string name, User user)
+        {
+            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
+            userManager.FindByNameAsync(name).Returns(user);
+            AccountController controller = new AccountController(
+                Substitute.For<IGithubService>(),
+                Substitute.For<ISecurityContext>(),
+                userManager);
+
+            return controller;
         }
     }
 }

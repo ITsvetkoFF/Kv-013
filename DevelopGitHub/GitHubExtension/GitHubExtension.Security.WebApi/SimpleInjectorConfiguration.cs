@@ -19,7 +19,7 @@ namespace GitHubExtension.Security.WebApi
         {
             container.RegisterPackages(new[]
             {
-                typeof(DALPackage).Assembly,
+                typeof(DalPackage).Assembly,
                 typeof(WebApiLibraryPackage).Assembly
             });
             container.Verify();

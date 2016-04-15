@@ -12,20 +12,20 @@ namespace GitHubExtension.Security.WebApi.Controllers
     [RoutePrefix(RouteConstants.ApiRoles)]
     public class RolesController : BaseApiController
     {
+        private readonly ISecurityContext securityContext;
+
         public RolesController(ISecurityContext securityContext)
         {
-            _securityContext = securityContext;
+            this.securityContext = securityContext;
         }
 
-        private readonly ISecurityContext _securityContext;
-        
         [HttpGet]
         [Route("")]
         [AllowAnonymous]
         public IHttpActionResult GetAllRoles()
         {
-            IEnumerable<RoleViewModel> roles = _securityContext.SecurityRoles.AsEnumerable().Select(r => r.ToRoleViewModel());
-            
+            IEnumerable<RoleViewModel> roles = this.securityContext.SecurityRoles.AsEnumerable().Select(r => r.ToRoleViewModel());
+
             return Ok(roles);
         }
     }

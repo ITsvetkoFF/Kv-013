@@ -25,7 +25,7 @@ namespace GitHubExtension.Security.WebApi.Mappers
                 Id = user.Id,
                 Email = user.Email,
                 GitHubId = user.ProviderId,
-                UserName =  user.UserName
+                UserName = user.UserName
             };
 
             return userReturnModel;

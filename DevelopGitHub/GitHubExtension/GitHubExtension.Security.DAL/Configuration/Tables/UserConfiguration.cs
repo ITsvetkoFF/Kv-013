@@ -5,13 +5,14 @@ namespace GitHubExtension.Security.DAL.Configuration.Tables
 {
     public class UserConfiguration : EntityTypeConfiguration<User>
     {
-        public string TableName
-        {
-            get { return "Users"; }
-        }
         public UserConfiguration()
         {
             this.ToTable(TableName);
+        }
+
+        public string TableName
+        {
+            get { return "Users"; }
         }
     }
 }

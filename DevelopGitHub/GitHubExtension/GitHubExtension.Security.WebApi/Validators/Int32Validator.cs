@@ -2,7 +2,7 @@
 
 namespace GitHubExtension.Security.WebApi.Validators
 {
-    class Int32Validator : AbstractValidator<int>
+    public class Int32Validator : AbstractValidator<int>
     {
         public Int32Validator()
         {

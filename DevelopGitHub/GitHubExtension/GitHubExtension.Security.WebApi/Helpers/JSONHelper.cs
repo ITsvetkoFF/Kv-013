@@ -2,10 +2,9 @@
 
 namespace GitHubExtension.Security.WebApi.Helpers
 {
-    static class JSONHelper
+    static class JsonHelper
     {
-
-        public static string ToJSON(this object obj)
+        public static string ToJson(this object obj)
         {
             var serializer = new JavaScriptSerializer();
             return serializer.Serialize(obj);

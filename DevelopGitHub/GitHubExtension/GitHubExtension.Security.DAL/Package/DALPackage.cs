@@ -9,7 +9,7 @@ using SimpleInjector.Packaging;
 
 namespace GitHubExtension.Security.DAL.Package
 {
-    public class DALPackage : IPackage
+    public class DalPackage : IPackage
     {
         public void RegisterServices(Container container)
         {

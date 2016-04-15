@@ -11,8 +11,8 @@ namespace GitHubExtension.Security.WebApi.Mappers
             {
                 Id = repository.Id,
                 GitHubId = repository.GitHubId,
-                Name =  repository.Name,
-                Url =  repository.Url
+                Name = repository.Name,
+                Url = repository.Url
             };
 
             return repositoryEntity;

@@ -13,9 +13,16 @@ namespace GitHubExtension.Security.WebApi.ActionFilters
         {
             GlobalConfiguration.Configuration.Services.Replace(typeof(ITraceWriter), new NLogger());
             var trace = GlobalConfiguration.Configuration.Services.GetTraceWriter();
-            trace.Info(filterContext.Request,
-                "Controller : " + filterContext.ControllerContext.ControllerDescriptor.ControllerType.FullName +
-                Environment.NewLine + "Action : " + filterContext.ActionDescriptor.ActionName, "JSON",
+            var category =
+                "Controller : " 
+                + filterContext.ControllerContext.ControllerDescriptor.ControllerType.FullName
+                + Environment.NewLine 
+                + "Action : " 
+                + filterContext.ActionDescriptor.ActionName;
+            trace.Info(
+                filterContext.Request,
+                category,
+                "JSON",
                 filterContext.ActionArguments);
         }
     }
