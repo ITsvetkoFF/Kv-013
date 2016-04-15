@@ -11,6 +11,8 @@ using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.LocalizationTool
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
@@ -183,34 +185,61 @@ namespace GitHubExtension.LocalizationTool
             Close();
         }
 
-        private void Translate(string sourceLanguage, string targetLanguage)
+        private async void Translate(string sourceLanguage, string targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
             {
                 return;
             }
 
-            var sourceLanguageEnum = GetLang(sourceLanguage);
-            var targetLanguageEnum = GetLang(targetLanguage);
+            StringBuilder textToTranslate;
+            Lang sourceLanguageEnum;
+            Lang targetLanguageEnum = TargetLanguageEnum(
+                ref sourceLanguage, 
+                ref targetLanguage, 
+                out sourceLanguageEnum, 
+                out textToTranslate);
 
-            var textToTranslate = TextParameterForTranslate(sourceLanguageEnum);
+            var result = Task<JObject>.Factory.StartNew(() => GetTranslationFromYandexApi(sourceLanguage, targetLanguage, textToTranslate));
 
-            sourceLanguage = sourceLanguage == "us" ? "en" : sourceLanguage;
-            targetLanguage = targetLanguage == "us" ? "en" : targetLanguage;
+            TranslateButton.IsEnabled = false;
+            TranslateButton.Content = "Translating...";
+            await result;
+            TranslateButton.IsEnabled = true;
+            TranslateButton.Content = "Translate";
 
-            var result = GetTranslationFromYandexApi(sourceLanguage, targetLanguage, textToTranslate);
-
-            if (result == null)
+            if (result.Result == null)
             {
                 return;
             }
 
+            SaveTranslationResult(result, targetLanguageEnum);
+        }
+
+        private void SaveTranslationResult(Task<JObject> result, Lang targetLanguageEnum)
+        {
             var i = 0;
-            foreach (var item in result.GetValue("text"))
+            foreach (var item in result.Result.GetValue("text"))
             {
                 Translations[i][targetLanguageEnum] = item.ToString();
                 i++;
             }
+        }
+
+        private Lang TargetLanguageEnum(
+            ref string sourceLanguage,
+            ref string targetLanguage,
+            out Lang sourceLanguageEnum,
+            out StringBuilder textToTranslate)
+        {
+            sourceLanguageEnum = GetLang(sourceLanguage);
+            var targetLanguageEnum = GetLang(targetLanguage);
+
+            textToTranslate = TextParameterForTranslate(sourceLanguageEnum);
+
+            sourceLanguage = sourceLanguage == "us" ? "en" : sourceLanguage;
+            targetLanguage = targetLanguage == "us" ? "en" : targetLanguage;
+            return targetLanguageEnum;
         }
 
         private StringBuilder TextParameterForTranslate(Lang sourceLanguageEnum)
