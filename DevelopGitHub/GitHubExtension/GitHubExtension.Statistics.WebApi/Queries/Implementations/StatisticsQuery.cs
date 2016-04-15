@@ -14,55 +14,44 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
     {
         #region fields
         private readonly IGitHubQuery _gitHubQuery;
-        private DateTime timeTo = DateTime.Now;
-        private DateTime timeFrom;
+        private ICollection<RepositoryModel> _repositories;
         private int countDaysInYear = 364;
         private int countMounthInYear = 12;
-        private ICollection<string> _activityMonths;
-        private ICollection<RepositoryModel> _repositories;
-        private ICollection<ICollection<int>> _commitsRepositories;
-        private ICollection<int> _commitsForYear;
-        private ICollection<int> _commitsRepository;
-        private int countFollower;
-        private int countFollowing;
-        private int countRepositories;
-        private HttpCookie cookieCommitsRepositories;
         #endregion
 
         public StatisticsQuery(IGitHubQuery gitHubQuery)
         {
             this._gitHubQuery = gitHubQuery;
-            this._activityMonths = new List<string>();
             this._repositories = new List<RepositoryModel>();
-            this._commitsRepositories = new List<ICollection<int>>();
-            this._commitsForYear = new List<int>();
-            this._commitsRepository = new List<int>();
         }
         #region methods
 
         public async Task<int> GetFollowerCount(string userName, string token)
         {
-            countFollower = await _gitHubQuery.GetFollowersCount(userName, token);
+            int countFollower = await _gitHubQuery.GetFollowersCount(userName, token);
             return countFollower;
         }
 
         public async Task<int> GetFollowingCount(string userName, string token)
         {
-            countFollowing = await _gitHubQuery.GetFolowingCount(userName, token);
+            int countFollowing = await _gitHubQuery.GetFolowingCount(userName, token);
             return countFollowing;
         }
 
         public async Task<int> GetRepositoriesCount(string userName, string token)
         {
             _repositories = await _gitHubQuery.GetRepositories(userName, token);
-            countRepositories = _repositories.Count;
+            int countRepositories = _repositories.Count;
             return countRepositories;
         }
 
         public async Task<ICollection<string>> GetActivityMonths()
         {
-            timeFrom = DateTime.Now.AddDays(-countDaysInYear);
+            DateTime timeTo = DateTime.Now;
+            DateTime timeFrom = DateTime.Now.AddDays(-countDaysInYear);
+            ICollection<string> _activityMonths = new List<string>();
             int countMonthInFromTo = timeTo.Month - timeFrom.Month;
+
             if (timeTo.Year != timeFrom.Year)
             {
                 countMonthInFromTo += countMounthInYear * (timeTo.Year - timeFrom.Year);
@@ -86,7 +75,8 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
 
         public async Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token)
         {
-            cookieCommitsRepositories = HttpContext.Current.Request.Cookies["commitsRepositories"];
+            ICollection<ICollection<int>> _commitsRepositories = new List<ICollection<int>>();
+            HttpCookie cookieCommitsRepositories = HttpContext.Current.Request.Cookies["commitsRepositories"];
             if (cookieCommitsRepositories == null)
             {
                 _repositories = await _gitHubQuery.GetRepositories(userName, token);
@@ -109,13 +99,13 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
 
         public async Task<ICollection<int>> GetCommitsRepository(string userName, string token, string repository)
         {
-            _commitsRepository = await _gitHubQuery.GetCommitsRepository(userName, token, repository);
+            ICollection<int> _commitsRepository = await _gitHubQuery.GetCommitsRepository(userName, token, repository);
             return _commitsRepository;
         }
 
         public async Task<ICollection<int>> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository)
         {
-            _commitsForYear = _gitHubQuery.ToGroupCommits(commitsEverRepository);
+            ICollection<int> _commitsForYear = _gitHubQuery.ToGroupCommits(commitsEverRepository);
             return _commitsForYear;
         }
         #endregion

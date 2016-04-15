@@ -12,7 +12,6 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
     public class StatisticController : ApiController
     {
         #region fields
-        private ICollection<string> _activityMonths;
         private ICollection<RepositoryModel> _repositories;
         private ICollection<ICollection<int>> _commitsRepositories;
         private ICollection<int> _commitsRepository;
@@ -64,7 +63,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetActivityMonths)]
         public async Task<ICollection<string>> GetActivityMonths()
         {
-            _activityMonths = await _statisticsQuery.GetActivityMonths();
+            ICollection<string> _activityMonths = await _statisticsQuery.GetActivityMonths();
             return _activityMonths;
         }
 
