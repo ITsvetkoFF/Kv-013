@@ -62,6 +62,7 @@
     <Build Include="Activities.sql" />
     <Build Include="ActivitiesTypes.sql" />
     <Build Include="Users.sql" />
+    <Build Include="Notes.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="SeedActivityTypes.sql" />
