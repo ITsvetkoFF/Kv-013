@@ -30,8 +30,8 @@ namespace GitHubExtension.Templates.Services
         public async Task<HttpResponseMessage> GetPullRequestTemplatesAsync(string userName, string repositoryName,
             string pathToFile)
         {
-            var requestUri = GetRequestUri(userName, repositoryName, pathToFile);
-            var message = CreateMessage(HttpMethod.Get, requestUri);
+            var pullRequestTemplateUri = GetTemplatesRequestUri(userName, repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, pullRequestTemplateUri);
             var response = await _httpClient.GetResponse(message);
 
             return response;
@@ -39,8 +39,8 @@ namespace GitHubExtension.Templates.Services
 
         public async Task<HttpResponseMessage> GetIssueTemplateAsync(string userName, string repositoryName, string pathToFile)
         {
-            var requestUri = GetRequestUri(userName, repositoryName, pathToFile);
-            var message = CreateMessage(HttpMethod.Get, requestUri);
+            var issueTemplateUri = GetTemplatesRequestUri(userName, repositoryName, pathToFile);
+            var message = CreateMessage(HttpMethod.Get, issueTemplateUri);
             var response = await _httpClient.GetResponse(message);
             
             return response;
@@ -49,16 +49,14 @@ namespace GitHubExtension.Templates.Services
         private static HttpRequestMessage CreateMessage(HttpMethod method, string requestUri)
         {
             var message = new HttpRequestMessage(method, requestUri);
-
             foreach (var header in DefaultHeaders)
             {
                 message.Headers.Add(header.Key, header.Value);
             }
-
             return message;
         }
 
-        private static string GetRequestUri(string userName, string repositoryName, string pathToFile)
+        private static string GetTemplatesRequestUri(string userName, string repositoryName, string pathToFile)
         {
             var requestUri =
                 string.Format(RouteToRepository + "{0}/{1}" + Contents + "{2}", userName,
