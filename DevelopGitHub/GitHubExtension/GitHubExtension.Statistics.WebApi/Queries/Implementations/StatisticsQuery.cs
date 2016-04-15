@@ -15,8 +15,6 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
         #region fields
         private readonly IGitHubQuery _gitHubQuery;
         private ICollection<RepositoryModel> _repositories;
-        private int countDaysInYear = 364;
-        private int countMounthInYear = 12;
         #endregion
 
         public StatisticsQuery(IGitHubQuery gitHubQuery)
@@ -47,8 +45,9 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
 
         public async Task<ICollection<string>> GetActivityMonths()
         {
+            int countMounthInYear = 12;
             DateTime timeTo = DateTime.Now;
-            DateTime timeFrom = DateTime.Now.AddDays(-countDaysInYear);
+            DateTime timeFrom = GetTimeFrom();
             ICollection<string> _activityMonths = new List<string>();
             int countMonthInFromTo = timeTo.Month - timeFrom.Month;
 
@@ -107,6 +106,13 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
         {
             ICollection<int> _commitsForYear = _gitHubQuery.ToGroupCommits(commitsEverRepository);
             return _commitsForYear;
+        }
+
+        public DateTime GetTimeFrom()
+        {
+            int countDaysInYear = 364;
+            DateTime timeFrom = DateTime.Now.AddDays(-countDaysInYear);
+            return timeFrom;
         }
         #endregion
     }
