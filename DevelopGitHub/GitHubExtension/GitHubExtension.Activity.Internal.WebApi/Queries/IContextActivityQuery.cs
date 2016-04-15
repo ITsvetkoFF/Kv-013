@@ -6,5 +6,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
     public interface IContextActivityQuery
     {
         IOrderedQueryable<ActivityEvent> Activities { get; }
+       
+        IOrderedQueryable<ActivityType> ActivitiesTypes { get; }
     }
 }

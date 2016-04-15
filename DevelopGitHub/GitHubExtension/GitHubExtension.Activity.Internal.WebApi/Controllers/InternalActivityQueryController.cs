@@ -10,11 +10,11 @@ using GitHubExtension.Activity.Internal.WebApi.Queries;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
-    public class InternalActivityController : ApiController
+    public class InternalActivityQueryController : ApiController  
     {
         private readonly IContextActivityQuery _contextActivityQuery;
 
-        public InternalActivityController(IContextActivityQuery contextActivityQuery)
+        public InternalActivityQueryController(IContextActivityQuery contextActivityQuery)
         {
             _contextActivityQuery = contextActivityQuery;
         }

@@ -13,7 +13,6 @@ namespace GitHubExtension.Activity.Internal.WebApi.Package
             container.Register<ActivityContext>(Lifestyle.Scoped);
             container.Register<IContextActivityQuery, ContextActivityQuery>(Lifestyle.Scoped);
             container.Register<IContextActivityCommand, ContextActivityCommand>(Lifestyle.Scoped);
-            container.Register<IGetActivityTypeQuery, GetActivityTypeQuery>(Lifestyle.Scoped);
         }
     }
 }

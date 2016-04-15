@@ -12,8 +12,6 @@ using Xunit;
 using FluentAssertions;
 using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
-using GitHubExtension.Activity.Internal.WebApi.Extensions;
-using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Services;
@@ -84,9 +82,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
                     },
                     1, 
                     0, 
-                    "Admin",
-                    ActivityTypeNames.AddRole,
-                    new ActivityType { Id = 2, Name = "add role" }
+                    "Admin"
                 };
             }
         }
@@ -107,15 +103,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             return service;
         }
 
-
-        private IGetActivityTypeQuery MockForgetActivityTypeQuery(string activityTypeName, ActivityType activityType)
-        {
-            var query = Substitute.For<IGetActivityTypeQuery>();
-
-            query.GetUserActivityType(activityTypeName).Returns(activityType);
-
-            return query;
-        }
 
         private ISecurityContext MockForContext(IEnumerable<SecurityRole> roles)
         {
@@ -138,7 +125,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
                 Substitute.For<ISecurityContext>(), MockForUsers(users));
 
             //Act
@@ -154,8 +141,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrenge
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
-                MockForContext(roles), MockForUsers(users));
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
@@ -170,8 +156,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<IContextActivityCommand>(), Substitute.For<IGetActivityTypeQuery>(),
-                MockForContext(roles), MockForUsers(users));
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
@@ -188,8 +173,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             //Arrange
             users.Add(userToUpdate);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForActivityCommand(), MockForgetActivityTypeQuery(activityTypeName, activityType),
-                MockForContext(roles), MockForAddingClaim(users, userToUpdate));
+            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForAddingClaim(users, userToUpdate));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);

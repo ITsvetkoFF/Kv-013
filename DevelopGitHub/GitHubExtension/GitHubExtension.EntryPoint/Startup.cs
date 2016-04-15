@@ -23,7 +23,7 @@ using SimpleInjector.Integration.WebApi;
 
 
 [assembly: OwinStartup(typeof(Startup))]
-namespace GitHubExtension.EntryPoint
+namespace GitHubExtension.EntryPoint     
 {
     public class Startup
     {

@@ -18,6 +18,7 @@ namespace GitHubExtension.Security.DAL.Package
             container.Register<SecurityRoleManager>(Lifestyle.Scoped);
             container.Register<IUserStore<User>, GitHubUserStore>(Lifestyle.Scoped);
             container.Register<IRoleStore<IdentityRole, string>, GitHubRoleStore>(Lifestyle.Scoped);
+
         }
     }
 }

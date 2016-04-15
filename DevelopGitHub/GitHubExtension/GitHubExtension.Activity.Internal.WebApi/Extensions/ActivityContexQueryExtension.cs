@@ -9,21 +9,21 @@ namespace GitHubExtension.Activity.Internal.WebApi.Extensions
     {
         public static IEnumerable<ActivityEvent> GetCurrentRepositoryUserActivities(this IContextActivityQuery contextActivityQuery, int currentRepositoryId)
         {
-            IEnumerable<ActivityEvent> activitesForCurrentRepo = contextActivityQuery.Activities.Where(r => r.CurrentRepositoryId == currentRepositoryId).ToList();
+            IEnumerable<ActivityEvent> activitesForCurrentRepo = contextActivityQuery.Activities.Where(r => r.CurrentRepositoryId == currentRepositoryId);
 
             return activitesForCurrentRepo;
         }
 
         public static IEnumerable<ActivityEvent> GetUserActivities(this IContextActivityQuery contextActivityQuery, string userId)
         {
-            IEnumerable<ActivityEvent> userActivities = contextActivityQuery.Activities.Where(r => r.UserId == userId).ToList();
+            IEnumerable<ActivityEvent> userActivities = contextActivityQuery.Activities.Where(r => r.UserId == userId);
 
             return userActivities;
         }
 
-        public static ActivityType GetUserActivityType(this IGetActivityTypeQuery getActivityTypeQuery, string name)
+        public static ActivityType GetUserActivityType(this IContextActivityQuery contextActivityQuery, string name)
         {
-            ActivityType userActivityType = getActivityTypeQuery.ActivitiesTypes.FirstOrDefault<ActivityType>(n => n.Name == name);
+            ActivityType userActivityType = contextActivityQuery.ActivitiesTypes.FirstOrDefault(n => n.Name == name);
 
             return userActivityType;
         }

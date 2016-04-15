@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.Internal.WebApi.Commands;
-using GitHubExtension.Activity.Internal.WebApi.Extensions;
-using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Constant;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
@@ -29,8 +24,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         #region private fields
 
         private readonly IGithubService _githubService;
-        private readonly IContextActivityCommand _contextActivityCommand;
-        private readonly IGetActivityTypeQuery _getActivityTypeQuery;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
@@ -38,14 +31,10 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         public AccountController(
             IGithubService githubService,
-            IContextActivityCommand contextActivityCommand,
-            IGetActivityTypeQuery getActivityTypeQuery,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
             _githubService = githubService;
-            _contextActivityCommand = contextActivityCommand;
-            _getActivityTypeQuery = getActivityTypeQuery;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -131,19 +120,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var activityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.AddRole);
-
-            _contextActivityCommand.AddActivity(new ActivityEvent
-            {
-                UserId = User.Identity.GetUserId(),
-                CurrentRepositoryId = repoId,
-                ActivityType = activityType,
-                InvokeTime = DateTime.Now,
-                Message =
-                    String.Format("{0} {1} {2} to {3}", User.Identity.Name, activityType.Name, roleToAssign,
-                        appUser.UserName)
-            });
-
             return Ok();
         }
 
@@ -226,30 +202,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
                     new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
                 return BadRequest();
 
-            var userActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
-
-            _contextActivityCommand.AddActivity(new ActivityEvent()
-            {
-                UserId = user.Id,
-                ActivityType = userActivityType,
-                InvokeTime = DateTime.Now,
-                Message = String.Format("{0} {1}", User.Identity.Name, userActivityType.Name)
-            });
-
-
-            var repositoryActivityType = _getActivityTypeQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
-
-            foreach (var repository in repositoryRolesToAdd)
-            {
-                _contextActivityCommand.AddActivity(new ActivityEvent()
-                {
-                    UserId = user.Id,
-                    CurrentRepositoryId = repository.RepositoryId,
-                    ActivityType = repositoryActivityType,
-                    InvokeTime = DateTime.Now,
-                    Message = String.Format("{0} {1}", repository.Repository.Name, repositoryActivityType.Name)
-                });
-            }
 
             return null;
         }
