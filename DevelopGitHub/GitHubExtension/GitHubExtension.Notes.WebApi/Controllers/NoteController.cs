@@ -23,7 +23,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetNote([FromUri] string collaboratorId)
         {
-            var userId = IdentityExtensions.GetUserId();
+            var userId = User.GetUserId();
             var note = await queries.GetNote(userId, collaboratorId);
             if (note == null)
             {
@@ -42,12 +42,14 @@ namespace GitHubExtension.Notes.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userId = IdentityExtensions.GetUserId();
-            var noteModel = model.AddUserIdToModel(userId);
-            if (noteModel == null)
+            var userId = User.GetUserId();
+            if (userId == null)
             {
-                return BadRequest();
+                ModelState.AddModelError(ValidationConstants.UserId, ValidationConstants.UserIdError);
+                return BadRequest(ModelState);
             }
+
+            var noteModel = model.AddUserIdToModel(userId);
 
             var noteEntity = noteModel.ToEntity();
             if (noteEntity == null)

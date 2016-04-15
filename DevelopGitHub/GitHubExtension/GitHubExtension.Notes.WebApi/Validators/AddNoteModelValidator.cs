@@ -8,6 +8,7 @@ namespace GitHubExtension.Notes.WebApi.Validators
     {
         public AddNoteModelValidator()
         {
+            RuleFor(m => m.CollaboratorId).NotEmpty();
             RuleFor(m => m.Body).NotEmpty().Length(ValidationConstants.MinBodyLength, ValidationConstants.MaxBodyLength);
         }
     }
