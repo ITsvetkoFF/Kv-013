@@ -1,8 +1,6 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Templates.Constants;
-using GitHubExtension.Templates.Exceptions;
 using GitHubExtension.Templates.ExtensionMethods;
 using GitHubExtension.Templates.Services;
 
@@ -38,13 +36,9 @@ namespace GitHubExtension.Templates.Controllers
                     _templateService.GetPullRequestTemplatesAsync(userName, repositoryName,
                         PathToPullRequestTemplate);
 
-            if (response.StatusCode == HttpStatusCode.NotFound)
-                return NotFound();
+            var responseMessage = response.CheckResponseMessage();
 
-            if (!response.IsSuccessStatusCode)
-                throw new UnsuccessfullGitHubRequestException();
-
-            var content = await response.GetTemplatesContent();
+            var content = await responseMessage.GetTemplatesContent();
 
             return Ok(content);
         }
@@ -65,13 +59,9 @@ namespace GitHubExtension.Templates.Controllers
                     _templateService.GetIssueTemplateAsync(userName, repositoryName,
                     PathToIssueTemplate);
 
-            if (response.StatusCode == HttpStatusCode.NotFound)
-                return NotFound();
+            var responseMessage = response.CheckResponseMessage();
 
-            if (!response.IsSuccessStatusCode)
-                throw new UnsuccessfullGitHubRequestException();
-
-            var content = await response.GetTemplatesContent();
+            var content = await responseMessage.GetTemplatesContent();
 
             return Ok(content);
         }
