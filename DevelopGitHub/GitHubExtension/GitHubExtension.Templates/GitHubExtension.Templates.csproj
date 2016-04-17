@@ -83,6 +83,7 @@
     <Compile Include="Controllers\TemplatesController.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="ExtensionMethods\HttpClientExtension.cs" />
+    <Compile Include="ExtensionMethods\HttpRequestMessageExtension.cs" />
     <Compile Include="ExtensionMethods\HttpResponseMessageExtension.cs" />
     <Compile Include="ExtensionMethods\IdentityExtensions.cs" />
     <Compile Include="Package\WebApiTemplatesPackage.cs" />
