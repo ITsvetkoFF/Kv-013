@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
@@ -17,6 +18,11 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         public StatisticController(IStatisticsQuery statisticsQuery)
         {
             this._statisticsQuery = statisticsQuery;
+        }
+
+        public HttpContext GetHttpContext
+        {
+            get { return HttpContext.Current;}
         }
 
         #region methods
@@ -78,8 +84,9 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         {
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
+            HttpContext httpContext = GetHttpContext;
 
-            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token);
+            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token, httpContext);
 
             return commitsRepositories;
         }
@@ -90,8 +97,9 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         {
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
+            HttpContext httpContext = GetHttpContext;
 
-            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token);
+            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token, httpContext);
 
             ICollection<int> commitsRepository =
                 await _statisticsQuery.GetGroupCommits(commitsRepositories);

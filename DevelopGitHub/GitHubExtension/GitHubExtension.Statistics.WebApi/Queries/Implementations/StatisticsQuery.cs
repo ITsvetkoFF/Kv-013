@@ -72,10 +72,10 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
             return repositories;
         }
 
-        public async Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token)
+        public async Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token, HttpContext httpContext)
         {
             ICollection<ICollection<int>> commitsRepositories = new List<ICollection<int>>();
-            HttpCookie cookieCommitsRepositories = HttpContext.Current.Request.Cookies["commitsRepositories"];
+            HttpCookie cookieCommitsRepositories = httpContext.Request.Cookies["commitsRepositories"];
             
             if (cookieCommitsRepositories == null)
             {
@@ -87,11 +87,11 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
                     commitsRepositories.Add(commitsInMouth);
                 }
 
-                HttpContext.Current.SetCommitsRepositories(commitsRepositories);
+                httpContext.SetCommitsRepositories(commitsRepositories);
             }
             else
             {
-                commitsRepositories = HttpContext.Current.GetCommitsRepositories();
+                commitsRepositories = httpContext.GetCommitsRepositories();
             }
 
             return commitsRepositories;
