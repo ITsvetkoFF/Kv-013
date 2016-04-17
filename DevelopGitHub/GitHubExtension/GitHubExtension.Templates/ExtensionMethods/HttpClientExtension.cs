@@ -7,9 +7,8 @@ namespace GitHubExtension.Templates.ExtensionMethods
     {
         public static async Task<HttpResponseMessage> GetResponse(this HttpClient httpClient, HttpRequestMessage httpRequestMessage)
         {
-            var _httpClient = new HttpClient();
+            var response = await httpClient.SendAsync(httpRequestMessage);
 
-            var response = await _httpClient.SendAsync(httpRequestMessage);
             return response;
         }
     }
