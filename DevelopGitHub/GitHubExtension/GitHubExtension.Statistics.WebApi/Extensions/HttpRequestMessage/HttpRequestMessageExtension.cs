@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
 using GitHubExtension.Statistics.WebApi.Mappers.Constant;
 
-namespace GitHubExtension.Statistics.WebApi.Mappers.HttpRequest
+namespace GitHubExtension.Statistics.WebApi.Extensions.HttpRequest
 {
-    public static class CreateMessageMapper
+    public static class HttpRequestMessageExtension
     {
         public static HttpRequestMessage CreateMessage(this HttpMethod method, string requestUri)
         {

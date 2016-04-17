@@ -135,7 +135,7 @@
     <Compile Include="CommunicationModels\RepositoryModel.cs" />
     <Compile Include="Extensions\Cookie\CookieExtensions.cs" />
     <Compile Include="Mappers\GitHub\GitHubMapper.cs" />
-    <Compile Include="Mappers\HttpRequest\CreateMessageMapper.cs" />
+    <Compile Include="Extensions\HttpRequestMessage\HttpRequestMessageExtension.cs" />
     <Compile Include="Extensions\Identity\IdentityExtensions.cs" />
     <Compile Include="Package\SecurityWebApiPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
