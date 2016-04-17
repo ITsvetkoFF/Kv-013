@@ -12,14 +12,14 @@ namespace GitHubExtension.Statistics.WebApi.Extensions.Cookie
     {
         public static ICollection<ICollection<int>> GetCommitsRepositories(this HttpContext httpContext)
         {
-            string cookieValue = HttpContext.Current.Request.Cookies["commitsRepositories"].Value;
+            string cookieValue = httpContext.Request.Cookies["commitsRepositories"].Value;
             ICollection<ICollection<int>> _commitsRepositories = JsonConvert.DeserializeObject<ICollection<ICollection<int>>>(cookieValue);
             return _commitsRepositories;
         }
 
         public static void SetCommitsRepositories(this HttpContext httpContext, ICollection<ICollection<int>> commitsRepositories)
         {
-                HttpContext.Current.Response.Cookies["commitsRepositories"].Value
+            httpContext.Response.Cookies["commitsRepositories"].Value
                     = JsonConvert.SerializeObject(commitsRepositories);
         }
     }
