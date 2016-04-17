@@ -3,7 +3,7 @@ using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Queries
 {
-    public interface IContextActivityQuery
+    public interface IActivityContextQuery
     {
         IOrderedQueryable<ActivityEvent> Activities { get; }
        

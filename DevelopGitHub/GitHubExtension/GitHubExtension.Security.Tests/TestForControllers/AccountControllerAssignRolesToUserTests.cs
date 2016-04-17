@@ -11,7 +11,6 @@ using System.Web.Http.Results;
 using Xunit;
 using FluentAssertions;
 using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Services;
@@ -92,15 +91,6 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
             return userManager;
-        }
-
-        private IContextActivityCommand MockForActivityCommand()
-        {
-            var service = Substitute.For<IContextActivityCommand>();
-
-            service.AddActivity(Arg.Any<ActivityEvent>());
-
-            return service;
         }
 
 

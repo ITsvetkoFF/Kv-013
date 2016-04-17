@@ -2,11 +2,11 @@
 
 namespace GitHubExtension.Activity.Internal.WebApi.Commands
 {
-    public class ContextActivityCommand : IContextActivityCommand
+    public class ActivityContextCommand : IActivityContextCommand
     {
         private readonly ActivityContext _activityContext;
 
-        public ContextActivityCommand(ActivityContext activityContext)
+        public ActivityContextCommand(ActivityContext activityContext)
         {
             _activityContext = activityContext;
         }

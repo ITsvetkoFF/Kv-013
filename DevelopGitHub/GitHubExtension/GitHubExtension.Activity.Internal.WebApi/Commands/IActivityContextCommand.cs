@@ -2,7 +2,7 @@
 
 namespace GitHubExtension.Activity.Internal.WebApi.Commands
 {
-    public interface IContextActivityCommand
+    public interface IActivityContextCommand
     {
         void AddActivity(ActivityEvent activityEvent);
     }

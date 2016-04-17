@@ -10,13 +10,13 @@ using GitHubExtension.Activity.Internal.WebApi.Queries;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
-    public class InternalActivityQueryController : ApiController  
+    public class InternalActivityQueryController : ApiController
     {
-        private readonly IContextActivityQuery _contextActivityQuery;
+        private readonly IActivityContextQuery _activityContextQuery;
 
-        public InternalActivityQueryController(IContextActivityQuery contextActivityQuery)
+        public InternalActivityQueryController(IActivityContextQuery activityContextQuery)
         {
-            _contextActivityQuery = contextActivityQuery;
+            _activityContextQuery = activityContextQuery;
         }
 
         [HttpGet]
@@ -29,11 +29,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
             if (currProjectClaim == null || !int.TryParse(currProjectClaim.Value, out currentRepositoryId))
                 return BadRequest();
 
-            IEnumerable<ActivityEvent> userActivitiesForCurrentRepo = _contextActivityQuery.GetCurrentRepositoryUserActivities(currentRepositoryId);
+            IEnumerable<ActivityEvent> userActivitiesForCurrentRepo = _activityContextQuery.GetCurrentRepositoryUserActivities(currentRepositoryId).ToList();
 
-            if (userActivitiesForCurrentRepo == null)
+            if (!userActivitiesForCurrentRepo.Any())
                 return NotFound();
-            IEnumerable<ActivityEventModel> activityViewModels = userActivitiesForCurrentRepo.Select(userActivity => userActivity.ToActivityEventModel()).ToList();
+            IEnumerable<ActivityEventModel> activityViewModels = userActivitiesForCurrentRepo.Select(userActivity => userActivity.ToActivityEventModel());
 
             return Ok(activityViewModels);
         }
@@ -42,9 +42,9 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         [Route(ActivityRouteConstants.CurrentUserActivityRoute)]
         public IHttpActionResult GetUserActivities([FromUri]string userId)
         {
-            IEnumerable<ActivityEvent> userActivities = _contextActivityQuery.GetUserActivities(userId);
+            IEnumerable<ActivityEvent> userActivities = _activityContextQuery.GetUserActivities(userId).ToList();
 
-            if (userActivities == null)
+            if (!userActivities.Any())
                 return NotFound();
             IEnumerable<ActivityEventModel> activityViewModels = userActivities.Select(userActivity => userActivity.ToActivityEventModel());
 

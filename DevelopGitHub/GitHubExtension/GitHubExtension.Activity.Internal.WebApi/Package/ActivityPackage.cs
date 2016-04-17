@@ -6,13 +6,13 @@ using SimpleInjector.Packaging;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Package
 {
-    public class WebApiActivityPackage : IPackage
+    public class ActivityPackage : IPackage
     {
         public void RegisterServices(Container container)
         {
             container.Register<ActivityContext>(Lifestyle.Scoped);
-            container.Register<IContextActivityQuery, ContextActivityQuery>(Lifestyle.Scoped);
-            container.Register<IContextActivityCommand, ContextActivityCommand>(Lifestyle.Scoped);
+            container.Register<IActivityContextQuery, ActivityContextQuery>(Lifestyle.Scoped);
+            container.Register<IActivityContextCommand, ActivityContextCommand>(Lifestyle.Scoped);
         }
     }
 }

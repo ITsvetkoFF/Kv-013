@@ -27,6 +27,6 @@ namespace GitHubExtension.Activity.Internal.WebApi.Mappers
                 InvokeTime = activityEventModel.InvokeTime,
                 Message = activityEventModel.Message
             };
-        }
+        } 
     }
 }

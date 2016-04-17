@@ -3,11 +3,11 @@ using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Queries
 {
-    public class ContextActivityQuery : IContextActivityQuery
+    public class ActivityContextQuery : IActivityContextQuery
     {
         private readonly ActivityContext _activityContext;
 
-        public ContextActivityQuery(ActivityContext activityContext)
+        public ActivityContextQuery(ActivityContext activityContext)
         {
             _activityContext = activityContext;
         }

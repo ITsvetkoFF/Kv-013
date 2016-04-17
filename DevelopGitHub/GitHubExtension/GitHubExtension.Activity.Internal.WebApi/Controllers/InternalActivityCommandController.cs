@@ -4,6 +4,7 @@ using System.Web.Http;
 using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Activity.Internal.WebApi.Extensions;
+using GitHubExtension.Activity.Internal.WebApi.Models;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using Microsoft.AspNet.Identity;
 
@@ -11,18 +12,18 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
     public class InternalActivityCommandController : ApiController
     {
-        private IContextActivityCommand _contextActivityCommand;
-        private IContextActivityQuery _contextActivityQuery;
+        private IActivityContextCommand _activityContextCommand;
+        private IActivityContextQuery _activityContextQuery;
 
-        public InternalActivityCommandController(IContextActivityCommand contextActivityCommand, IContextActivityQuery contextActivityQuery)
+        public InternalActivityCommandController(IActivityContextCommand activityContextCommand, IActivityContextQuery activityContextQuery)
         {
-            _contextActivityCommand = contextActivityCommand;
-            _contextActivityQuery = contextActivityQuery;
+            _activityContextCommand = activityContextCommand;
+            _activityContextQuery = activityContextQuery;
         }
 
         [HttpPost]
         [Route(ActivityRouteConstants.AddRoleActivityForCurrentRepository)]
-        public IHttpActionResult AddRoleActivityForCurrentRepository([FromBody] string roleToAssign, [FromBody] string collaboratorName)
+        public IHttpActionResult AddRoleActivityForCurrentRepository([FromBody]RoleActivityModel roleActivityModel)
         {
             Claim currProjectClaim = User.GetCurrentProjectClaim();
             int currentRepositoryId;
@@ -30,52 +31,60 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
             if (currProjectClaim == null || !int.TryParse(currProjectClaim.Value, out currentRepositoryId))
                 return BadRequest();
 
-            var activityType = _contextActivityQuery.GetUserActivityType(ActivityTypeNames.AddRole);
+            var activityType = _activityContextQuery.GetUserActivityType(ActivityTypeNames.AddRole);
 
-            _contextActivityCommand.AddActivity(new ActivityEvent
+            ActivityEvent activityEvent = new ActivityEvent()
             {
                 UserId = User.Identity.GetUserId(),
                 CurrentRepositoryId = currentRepositoryId,
                 ActivityType = activityType,
                 InvokeTime = DateTime.Now,
                 Message =
-                    String.Format("{0} {1} {2} to {3}", User.Identity.Name, activityType.Name, roleToAssign, collaboratorName)
-            });
+                    String.Format("{0} {1} {2} to {3}", User.Identity.Name, activityType.Name, roleActivityModel.RoleToAssign,
+                        roleActivityModel.CollaboratorName)
+            };
 
+            _activityContextCommand.AddActivity(activityEvent);
+     
             return Ok();
         }
 
         [HttpPost]
         [Route(ActivityRouteConstants.AddJoinToSystemActivity)]
-        public IHttpActionResult AddJoinToSystemActivity([FromBody] string userName, [FromBody] string userId)
+        public IHttpActionResult AddJoinToSystemActivity()
         {
-            var activityType = _contextActivityQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
+            var activityType = _activityContextQuery.GetUserActivityType(ActivityTypeNames.JoinToSystem);
 
-            _contextActivityCommand.AddActivity(new ActivityEvent()
+            ActivityEvent activityEvent = new ActivityEvent()
             {
-                UserId = userId,
+              
+                UserId = User.Identity.GetUserId(),
                 ActivityType = activityType,
                 InvokeTime = DateTime.Now,
                 Message = String.Format("{0} {1}", User.Identity.Name, activityType.Name)
-            });
+            };
+
+            _activityContextCommand.AddActivity(activityEvent);  
 
             return Ok();
         }
 
         [HttpPost]
         [Route(ActivityRouteConstants.RepositoryAddedToSystemActivity)]
-        public IHttpActionResult AddRepositoryAddedToSystemActivity([FromBody] string userId, [FromBody] int repositoryId, [FromBody] string repositoryName)
+        public IHttpActionResult AddRepositoryAddedToSystemActivity([FromBody]RepositoryActivityModel repositoryActivityModel)
         {
-            var repositoryActivityType = _contextActivityQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
+            var repositoryActivityType = _activityContextQuery.GetUserActivityType(ActivityTypeNames.RepositoryAddedToSystem);
 
-            _contextActivityCommand.AddActivity(new ActivityEvent()
+            ActivityEvent activityEvent = new ActivityEvent()
             {
-                UserId = userId,
-                CurrentRepositoryId = repositoryId,
+                UserId = User.Identity.GetUserId(),
+                CurrentRepositoryId = repositoryActivityModel.RepositoryId,
                 ActivityType = repositoryActivityType,
                 InvokeTime = DateTime.Now,
-                Message = String.Format("{0} {1}", repositoryName, repositoryActivityType.Name)
-            });
+                Message = String.Format("{0} {1}", repositoryActivityModel.RepositoryName, repositoryActivityType.Name)
+            };
+
+            _activityContextCommand.AddActivity(activityEvent); 
 
             return Ok();
         }
