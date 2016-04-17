@@ -101,7 +101,6 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>NotesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Package\NotesDALPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

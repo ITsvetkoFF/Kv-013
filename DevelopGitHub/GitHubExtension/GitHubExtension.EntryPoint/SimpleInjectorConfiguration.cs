@@ -1,12 +1,10 @@
-using GitHubExtension.Security.DAL.Package;
-using GitHubExtension.Notes.DAL.Package;
 using GitHubExtension.Notes.WebApi.Package;
 using GitHubExtension.Activity.Internal.WebApi.Package;
 using GitHubExtension.Security.WebApi.Package;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 
-namespace GitHubExtension.Security.WebApi
+namespace GitHubExtension.EntryPoint
 {
     public static class SimpleInjectorConfiguration
     {
@@ -22,11 +20,8 @@ namespace GitHubExtension.Security.WebApi
         {
             container.RegisterPackages(new[]
             {
-                typeof(ActivityPackage).Assembly,
-                typeof(DALSecurityPackage).Assembly,
-                typeof(WebApiSecurityPackage).Assembly,
-  				typeof(NotesDALPackage).Assembly,
-                typeof(NotesWebApiPackage).Assembly
+                typeof(SecurityPackage).Assembly,
+                typeof(NotesPackage).Assembly
             });
             container.Verify();
 

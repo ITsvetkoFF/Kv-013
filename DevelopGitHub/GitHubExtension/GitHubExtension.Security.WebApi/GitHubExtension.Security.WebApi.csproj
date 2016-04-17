@@ -131,7 +131,7 @@
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserReturnModel.cs" />
-    <Compile Include="Package\WebApiSecurityPackage.cs" />
+    <Compile Include="Package\SecurityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\GitHubAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -139,7 +139,6 @@
     <Compile Include="Services\GithubService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\IGithubService.cs" />
-    <Compile Include="SimpleInjectorConfiguration.cs" />
     <Compile Include="Validators\Int32Validator.cs" />
     <Compile Include="Validators\NullValidator.cs" />
     <Compile Include="Validators\StringValidator.cs" />

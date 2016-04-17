@@ -101,7 +101,7 @@
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="Mappers\NoteMapper.cs" />
-    <Compile Include="Package\NotesWebApiPackage.cs" />
+    <Compile Include="Package\NotesPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\INoteQueries.cs" />
     <Compile Include="Queries\NoteQueries.cs" />
