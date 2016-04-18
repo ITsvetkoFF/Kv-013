@@ -248,6 +248,12 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\file.directive.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\user-data.factory.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.controller.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.html" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.module.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.route.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
