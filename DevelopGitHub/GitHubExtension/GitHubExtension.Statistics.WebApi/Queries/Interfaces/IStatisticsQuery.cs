@@ -13,7 +13,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Interfaces
         Task<int> GetRepositoriesCount(string userName, string token);
         Task<ICollection<string>> GetActivityMonths();
         Task<ICollection<RepositoryModel>> GetRepositories(string userName, string token);
-        Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token, HttpContext context);
+        Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token);
         Task<ICollection<int>> GetCommitsRepository(string userName, string token, string repository);
         Task<ICollection<int>> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository);
     }

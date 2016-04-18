@@ -5,6 +5,7 @@ using System.Web.Http;
 using System.Web.Routing;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Constant;
+using GitHubExtension.Statistics.WebApi.Extensions.Cookie;
 using GitHubExtension.Statistics.WebApi.Extensions.Identity;
 using GitHubExtension.Statistics.WebApi.Queries.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -15,14 +16,21 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
     {
         private readonly IStatisticsQuery _statisticsQuery;
 
+        public RequestContext GetRequestContext
+        {
+            get
+            {
+                var context = new HttpContextWrapper(HttpContext.Current);
+                var routeData = HttpContext.Current.Request.RequestContext.RouteData;
+
+                var requestContext = new RequestContext(context, routeData);
+                return requestContext;
+            }
+        }
+
         public StatisticController(IStatisticsQuery statisticsQuery)
         {
             this._statisticsQuery = statisticsQuery;
-        }
-
-        public HttpContext GetHttpContext
-        {
-            get { return HttpContext.Current;}
         }
 
         #region methods
@@ -84,9 +92,8 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         {
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
-            HttpContext httpContext = GetHttpContext;
 
-            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token, httpContext);
+            var commitsRepositories = await GetCommitsRepositories(userName, token);
 
             return commitsRepositories;
         }
@@ -97,9 +104,8 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         {
             string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
-            HttpContext httpContext = GetHttpContext;
 
-            ICollection<ICollection<int>> commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token, httpContext);
+            ICollection<ICollection<int>> commitsRepositories = await GetCommitsRepositories(userName, token);
 
             ICollection<int> commitsRepository =
                 await _statisticsQuery.GetGroupCommits(commitsRepositories);
@@ -116,6 +122,26 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
            ICollection<int> commitsRepository = await _statisticsQuery.GetCommitsRepository(userName, token, name);
 
            return commitsRepository;
+        }
+
+
+        private async Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token)
+        {
+            string paramCookie = "commitsRepositories";
+            ICollection<ICollection<int>> commitsRepositories;
+
+            var cookieCommitsRepositories = GetRequestContext.HttpContext.Request.Cookies[paramCookie];
+
+            if (cookieCommitsRepositories == null)
+            {
+                commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token);
+                GetRequestContext.SetCommitsRepositories(commitsRepositories);
+            }
+            else
+            {
+                commitsRepositories = GetRequestContext.GetCommitsRepositories();
+            }
+            return commitsRepositories;
         }
         #endregion
     }
