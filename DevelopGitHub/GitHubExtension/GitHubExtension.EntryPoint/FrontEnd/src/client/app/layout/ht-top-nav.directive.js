@@ -18,14 +18,15 @@
             templateUrl: 'FrontEnd/src/client/app/layout/ht-top-nav.html'
         };
 
-        TopNavController.$inject = ['i18n', '$state', 'routerHelper'];
+        TopNavController.$inject = ['userService', 'i18n', '$state', 'routerHelper'];
         /* @ngInject */
-        function TopNavController(i18n, $state, routerHelper) {
+        function TopNavController(userService, i18n, $state, routerHelper) {
             var vm = this;
 
             // add i18n for localization
             vm.i18n = i18n;
             var states = routerHelper.getStates();
+            vm.user = userService;
 
             activate();
 
