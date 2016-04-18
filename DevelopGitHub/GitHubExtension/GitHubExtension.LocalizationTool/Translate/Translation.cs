@@ -22,25 +22,25 @@
         public string Name
         {
             get { return _name; }
-            set { CheckPropertyChanged("Name", ref _name, ref value); }
+            set { CheckPropertyChanged("Name", ref _name, value); }
         }
 
         public string Uk
         {
             get { return _uk; }
-            set { CheckPropertyChanged("Uk", ref _uk, ref value); }
+            set { CheckPropertyChanged("Uk", ref _uk, value); }
         }
 
         public string Us
         {
             get { return _us; }
-            set { CheckPropertyChanged("Us", ref _us, ref value); }
+            set { CheckPropertyChanged("Us", ref _us, value); }
         }
 
         public string Ru
         {
             get { return _ru; }
-            set { CheckPropertyChanged("Ru", ref _ru, ref value); }
+            set { CheckPropertyChanged("Ru", ref _ru, value); }
         }
 
         public string this[Lang index]

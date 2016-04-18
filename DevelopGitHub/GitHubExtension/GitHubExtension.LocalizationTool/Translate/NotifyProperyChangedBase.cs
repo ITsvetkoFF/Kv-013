@@ -6,7 +6,7 @@ namespace GitHubExtension.LocalizationTool
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected bool CheckPropertyChanged<T>(string propertyName, ref T oldValue, ref T newValue)
+        protected bool CheckPropertyChanged<T>(string propertyName, ref T oldValue, T newValue)
         {
             if (oldValue == null && newValue == null)
             {
