@@ -12,9 +12,6 @@
 
         function postImage(fd) {
             $http.post('http://localhost:50859/api/account/avatar', fd, {
-                withCredentials: true,
-                headers: {'Content-Type': undefined},
-                transformRequest: angular.identity
             });
         }
 
