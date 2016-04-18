@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace GitHubExtension.LocalizationTool
 {
@@ -6,7 +7,7 @@ namespace GitHubExtension.LocalizationTool
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected bool CheckPropertyChanged<T>(string propertyName, ref T oldValue, T newValue)
+        protected bool CheckPropertyChanged<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = "")
         {
             if (oldValue == null && newValue == null)
             {
