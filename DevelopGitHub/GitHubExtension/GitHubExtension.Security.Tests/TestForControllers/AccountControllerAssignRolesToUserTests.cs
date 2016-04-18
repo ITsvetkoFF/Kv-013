@@ -10,7 +10,6 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using Xunit;
 using FluentAssertions;
-using GitHubExtension.Activity.DAL;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Services;
@@ -159,7 +158,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 
         [Theory]
         [MemberData("DataForOkResult")]
-        public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign, string activityTypeName, ActivityType activityType)
+        public void OkResultTest(List<User> users, List<SecurityRole> roles, User userToUpdate, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
             users.Add(userToUpdate);
