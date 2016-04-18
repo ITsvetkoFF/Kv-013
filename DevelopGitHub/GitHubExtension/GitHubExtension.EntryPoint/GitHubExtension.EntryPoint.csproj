@@ -97,8 +97,22 @@
       <HintPath>..\packages\SimpleInjector.3.1.2\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SimpleInjector.Extensions.ExecutionContextScoping.3.1.2\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleInjector.Integration.WebApi, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleInjector.Integration.WebApi.3.1.2\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Packaging, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SimpleInjector.Packaging.3.1.2\lib\net40-client\SimpleInjector.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http" />
@@ -225,12 +239,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleInjectorConfiguration.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
+      <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
+      <Name>GitHubExtension.Activity.Internal.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GithubExtension.Extensions\GithubExtension.Extensions.csproj">
+      <Project>{97B2EFB3-6F64-49F2-8B1D-FE5C0AD86C33}</Project>
+      <Name>GithubExtension.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
+      <Project>{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}</Project>
+      <Name>GitHubExtension.Notes.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
+      <Project>{819015C6-B19C-4240-9049-CAFA965CEF0D}</Project>
+      <Name>GitHubExtension.Notes.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7c74e58b-b1d7-4c8f-b0ad-9528e07fc3db}</Project>
       <Name>GitHubExtension.Security.DAL</Name>

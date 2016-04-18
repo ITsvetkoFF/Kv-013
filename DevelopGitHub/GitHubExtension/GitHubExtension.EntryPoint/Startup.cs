@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using FluentValidation.WebApi;
+using GithubExtension.Extensions;
 using GitHubExtension.EntryPoint;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.WebApi;
 using GitHubExtension.Security.WebApi.ActionFilters;
 using GitHubExtension.Security.WebApi.Provider;
 using GitHubExtension.Security.WebApi.Validators.ValidatorFactories;
@@ -32,6 +32,11 @@ namespace GitHubExtension.EntryPoint
         public void Configuration(IAppBuilder app)
         {
             var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
+
+            app.UseSimpleInjectorContext(container);
+            app.CreatePerOwinContext(container.GetInstance<SecurityContext>);
+            app.CreatePerOwinContext(container.GetInstance<ApplicationUserManager>);
+
             ConfigureOAuth(app);
 
             #region config for http
@@ -47,10 +52,6 @@ namespace GitHubExtension.EntryPoint
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             config.EnsureInitialized();
-
-            app.CreatePerOwinContext(() => container.GetInstance<SecurityContext>());
-
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             FluentValidationModelValidatorProvider
                 .Configure(config,

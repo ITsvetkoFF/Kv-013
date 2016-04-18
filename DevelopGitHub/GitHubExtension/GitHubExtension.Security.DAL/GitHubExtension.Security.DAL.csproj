@@ -83,7 +83,6 @@
     <Compile Include="Infrastructure\SecurityRoleManager.cs" />
     <Compile Include="Interfaces\ISecurityContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Package\DALSecurityPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\RepositoryValidator.cs" />
     <Compile Include="Validators\UserRepositoryRoleValidator.cs" />
