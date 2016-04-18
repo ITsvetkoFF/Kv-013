@@ -217,6 +217,11 @@
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.html" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.module.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.route.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.controller.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.factory.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.html" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.module.js" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.route.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
@@ -244,6 +249,7 @@
     <Content Include="FrontEnd\src\client\app\blocks\localization\en-US.json" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\template.ejs" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\uk.json" />
+    <Content Include="FrontEnd\src\client\app\stats\stats.controller.js.rej" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
