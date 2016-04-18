@@ -125,8 +125,8 @@
     <Compile Include="Exceptions\TokenNotFoundException.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="Models\CollaboratorModel.cs" />
-    <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\GitHubRepositoryModel.cs" />
+    <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -145,6 +145,15 @@
     <Compile Include="Validators\ValidatorFactories\FluentValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="APILog\" />
+    <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
+    <Folder Include="Helpers\Authentication\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.External.WebAPI\GitHubExtension.Activity.External.WebAPI.csproj">
+      <Project>{ecd25131-e98d-437c-ba1a-f8ebc60fa266}</Project>
+      <Name>GitHubExtension.Activity.External.WebAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.DAL.csproj">
       <Project>{E8B59A6B-7115-479D-AF6E-B9047499EBE9}</Project>
       <Name>GitHubExtension.Activity.DAL</Name>
@@ -153,9 +162,9 @@
       <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Constant\GitHubExtension.Constant.csproj">
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
       <Project>{642455C5-0A4B-4E25-A2C3-1F1304A0D7DD}</Project>
-      <Name>GitHubExtension.Constant</Name>
+      <Name>GitHubExtension.Infrastructure.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
       <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
@@ -181,10 +190,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="APILog\" />
-    <Folder Include="Helpers\Authentication\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

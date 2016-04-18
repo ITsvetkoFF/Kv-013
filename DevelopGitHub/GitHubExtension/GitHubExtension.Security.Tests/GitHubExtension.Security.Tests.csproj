@@ -138,9 +138,9 @@
       <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Constant\GitHubExtension.Constant.csproj">
-      <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
-      <Name>GitHubExtension.Constant</Name>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
+      <Project>{642455C5-0A4B-4E25-A2C3-1F1304A0D7DD}</Project>
+      <Name>GitHubExtension.Infrastructure.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7c74e58b-b1d7-4c8f-b0ad-9528e07fc3db}</Project>

@@ -246,13 +246,17 @@
     <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.External.WebAPI\GitHubExtension.Activity.External.WebAPI.csproj">
+      <Project>{ECD25131-E98D-437C-BA1A-F8EBC60FA266}</Project>
+      <Name>GitHubExtension.Activity.External.WebAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
       <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GithubExtension.Extensions\GithubExtension.Extensions.csproj">
-      <Project>{97B2EFB3-6F64-49F2-8B1D-FE5C0AD86C33}</Project>
-      <Name>GithubExtension.Extensions</Name>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Extensions\GitHubExtension.Infrastructure.Extensions.csproj">
+      <Project>{D6C328E6-DB94-4FFF-A775-BD7C2F42C56F}</Project>
+      <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
       <Project>{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}</Project>

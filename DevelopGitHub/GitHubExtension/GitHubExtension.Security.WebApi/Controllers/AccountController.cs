@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using GitHubExtension.Constant;
+using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
@@ -21,13 +21,9 @@ namespace GitHubExtension.Security.WebApi.Controllers
     [RoutePrefix(RouteConstants.ApiAccount)]
     public class AccountController : BaseApiController
     {
-        #region private fields
-
         private readonly IGithubService _githubService;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
-
-        #endregion
 
         public AccountController(
             IGithubService githubService,
@@ -137,7 +133,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
             var claims = User.Identity as ClaimsIdentity;
             Claim tokenClaim = claims.FindFirst("ExternalAccessToken");
 
-            //TODO: Log
             if (tokenClaim == null)
                 throw new TokenNotFoundException();
 
@@ -178,13 +173,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok();
         }
 
-
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             SecurityRole role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == "Admin");
             if (role == null)
                 return InternalServerError();
-
 
             List<GitHubRepositoryModel> repositories = await _githubService.GetReposAsync(token);
 
