@@ -6,7 +6,12 @@
         .module('app.core')
         .constant('toastr', toastr)
         .constant('moment', moment)
-        .constant('apiURLs', {
-            apiLoginUrl: 'http://localhost:50859/api/Account/ExternalLogin'
-        });
+        .constant('API_URL', (function() {
+            var resource = 'http://localhost:50859/api/';
+            return {
+                BASE_URL: resource,
+                LOGIN: resource + 'account/ExternalLogin?provider=GitHub',
+                LOGOUT: resource + 'account/logout'
+            };
+        })());
 })();

@@ -8,7 +8,8 @@
         'app.layout',
         'app.repos',
         'app.roles',
+        'app.user',
         'ui.bootstrap',
-        'app.login'
+        'ngCookies'
     ]);
 })();
