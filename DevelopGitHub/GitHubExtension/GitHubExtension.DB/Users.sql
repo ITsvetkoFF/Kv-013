@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Users] (
+CREATE TABLE [dbo].[Users] (
     [Id]                   NVARCHAR (128) NOT NULL,
     [ProviderId]           INT            NOT NULL,
     [GitHubUrl]            NVARCHAR (MAX) NULL,

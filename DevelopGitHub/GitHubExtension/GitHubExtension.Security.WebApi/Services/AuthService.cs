@@ -13,13 +13,13 @@ namespace GitHubExtension.Security.WebApi.Services
         private readonly ApplicationUserManager _userManager;
         private readonly IGithubService _githubService;
 
-        public AuthService(IGithubService githubService,  ApplicationUserManager userManager, ISecurityContext context)
+        public AuthService(IGithubService githubService, ApplicationUserManager userManager, ISecurityContext context)
         {
             _securityContext = context;
             _userManager = userManager;
             _githubService = githubService;
         }
-        
+
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
         {
             User user = new User
@@ -41,7 +41,7 @@ namespace GitHubExtension.Security.WebApi.Services
 
         //TODO: Use GitHub id 
         public async Task<User> FindAsync(UserLoginInfo loginInfo)
-       {
+        {
             User user = await _userManager.FindAsync(loginInfo);
 
             return user;

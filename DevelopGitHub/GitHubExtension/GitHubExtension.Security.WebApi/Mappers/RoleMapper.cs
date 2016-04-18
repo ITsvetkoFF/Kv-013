@@ -3,6 +3,7 @@ using System.Linq;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Models;
 
+
 namespace GitHubExtension.Security.WebApi.Mappers
 {
     public static class RoleMapper

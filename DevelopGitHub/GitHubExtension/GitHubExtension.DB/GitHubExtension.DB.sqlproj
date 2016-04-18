@@ -59,10 +59,12 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Build Include="Activities.sql" />
+    <Build Include="ActivitiesTypes.sql" />
+    <Build Include="Users.sql" />
+    <Build Include="Notes.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Notes.sql" />
-    <Build Include="Users.sql" />
+    <PostDeploy Include="SeedActivityTypes.sql" />
   </ItemGroup>
 </Project>
