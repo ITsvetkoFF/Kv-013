@@ -8,10 +8,9 @@
     userData.$inject = ['$http'];
 
     function userData($http) {
-        var baseUrl = 'http://localhost:50859/api/account';
 
-        function postImage(fd) {
-            $http.post('http://localhost:50859/api/account/avatar', fd, {
+        function postImage(route, fd) {
+            $http.post(route, fd, {
             });
         }
 

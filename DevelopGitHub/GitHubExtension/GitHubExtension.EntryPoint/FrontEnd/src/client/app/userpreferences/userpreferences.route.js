@@ -5,13 +5,13 @@
         .module('app.userpreferences')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper'];
+    appRun.$inject = ['routerHelper','i18n'];
 
-    function appRun(routerHelper) {
-        routerHelper.configureStates(getStates());
+    function appRun(routerHelper,i18n) {
+        routerHelper.configureStates(getStates(i18n));
     }
 
-    function getStates() {
+    function getStates(i18n) {
         return [
             {
                 state: 'userpreferences',
@@ -20,10 +20,10 @@
                     templateUrl: 'FrontEnd/src/client/app/userpreferences/userpreferences.html',
                     controller: 'UserPreferencesController',
                     controllerAs: 'vmPreferences',
-                    title: 'User Preferences',
+                    title: 'Preferences',
                     settings: {
-                        nav: 6,
-                        content: '<i class="fa fa-dashboard"></i> Preferences'
+                        nav: 4,
+                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.PREFERENCES
                     }
                 }
             }
