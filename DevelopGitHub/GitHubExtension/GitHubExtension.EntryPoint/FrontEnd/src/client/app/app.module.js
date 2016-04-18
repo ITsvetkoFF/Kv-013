@@ -8,6 +8,7 @@
         'app.layout',
         'app.repos',
         'app.roles',
+        'app.userpreferences',
         'ui.bootstrap',
         'app.login'
     ]);

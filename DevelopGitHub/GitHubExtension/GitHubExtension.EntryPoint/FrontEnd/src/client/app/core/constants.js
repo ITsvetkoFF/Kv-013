@@ -7,6 +7,7 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('apiURLs', {
-            apiLoginUrl: 'http://localhost:50859/api/Account/ExternalLogin'
+            apiLoginUrl: 'http://localhost:50859/api/Account/ExternalLogin',
+            apiChangeAvatar: 'http://localhost:50859/api/account/avatar'
         });
 })();
