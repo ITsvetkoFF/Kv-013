@@ -21,7 +21,8 @@ namespace GitHubExtension.EntryPoint
             container.RegisterPackages(new[]
             {
                 typeof(SecurityPackage).Assembly,
-                typeof(NotesPackage).Assembly
+                typeof(NotesPackage).Assembly,
+                typeof(ActivityPackage).Assembly
             });
             container.Verify();
 
