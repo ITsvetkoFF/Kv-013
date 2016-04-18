@@ -13,7 +13,8 @@ namespace GitHubExtension.Templates.ExtensionMethods
     {
         public static async Task<string> GetTemplatesContent(this HttpResponseMessage message)
         {
-            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(await message.Content.ReadAsStringAsync());
+            var messageContent = await message.Content.ReadAsStringAsync();
+            var dto = JsonConvert.DeserializeObject<GitHubTemplatesModel>(messageContent);
             var data = Convert.FromBase64String(dto.Content);
             var final = Encoding.UTF8.GetString(data);
 
