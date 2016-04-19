@@ -1,4 +1,4 @@
-﻿namespace GitHubExtension.LocalizationTool
+﻿namespace GitHubExtension.LocalizationTool.Translate
 {
     public enum Lang
     {
