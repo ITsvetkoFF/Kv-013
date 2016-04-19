@@ -2,28 +2,6 @@
     <section class="matter">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <ul class="today-datas">
-                        <li class="blightblue">
-                            <div class="pull-left"><i class="fa fa-plane"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">May 18 - 19, 2015</span> Castle Resort, Neverland
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                        <li class="borange">
-                            <div class="pull-left"><i class="fa fa-envelope"></i></div>
-                            <div class="datas-text pull-right">
-                                <span class="bold">{{vm.messageCount}}</span> {{vm.i18n.message.MESSAGES}}
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <div class="widget wgreen">
                         <div ht-widget-header title="{{vm.news.title}}"
@@ -35,6 +13,40 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <h2 ng-show="vm.userService.isAuthenticated() && vm.externalActivities">{{vm.i18n.GITHUB_ACTIVITY}}</h2>
+            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.numberOfPages > 0">
+                <div class="col-md-12">
+                    <ge-activity ng-repeat="activity in vm.externalActivities" activity="activity"></ge-activity>
+
+                    <uib-pagination ng-hide="vm.numberOfPages ===  1" direction-links="true"
+                                    ng-model="vm.currentPage" num-pages="vm.numberOfPages"
+                                    items-per-page="30" total-items="vm.totalItems"
+                                    ng-change="vm.pageChanged()"
+                                    max-size="10" ng-disabled="vm.paginationDisabled">
+                    </uib-pagination>
+                </div>
+            </div>
+
+            <h2 ng-show="vm.userService.isAuthenticated() && vm.internalActivities">{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
+            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{vm.i18n.ACTIVITY_MESSAGE}}</th>
+                            <th>{{vm.i18n.DATE_TIME}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="activity in vm.internalActivities">
+                                <td>{{activity.message}}</td>
+                                <td>{{activity.invokeTime | date:'H:mm:ss dd.MM.yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

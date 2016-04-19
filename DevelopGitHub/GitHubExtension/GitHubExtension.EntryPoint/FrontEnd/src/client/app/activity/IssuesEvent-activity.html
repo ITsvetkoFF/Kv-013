@@ -1,0 +1,17 @@
+<div class="media activity">
+    <div class="media-left">
+        <img class="media-object activity-avatar" ng-src="{{activity.actor.avatar_url}}">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{activity.actor.login}} {{activity.payload.action}}
+            Issue
+            <a ng-href="{{activity.payload.issue.html_url}}">
+                {{activity.repo.name}}/issues#{{activity.payload.issue.number}}
+            </a>
+        </h4>
+        <time class="pull-right" datetime="{{activity.created_at}}">
+            {{activity.created_at | date: 'H:mm:ss dd.MM.yyyy'}}
+        </time>
+    </div>
+</div>

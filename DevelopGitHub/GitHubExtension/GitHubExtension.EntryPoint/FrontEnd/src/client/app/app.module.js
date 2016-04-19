@@ -9,6 +9,7 @@
         'app.repos',
         'app.roles',
         'app.user',
+        'app.activity',
         'app.userpreferences',
         'ui.bootstrap',
         'ngCookies'

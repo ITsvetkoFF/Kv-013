@@ -6,13 +6,17 @@
      .module('app.repos')
      .controller('ReposController', ReposController);
 
-    ReposController.$inject = ['githubData', 'logger'];
+    ReposController.$inject = ['githubData', 'logger', 'i18n'];
 
     /* @ngInject */
-    function ReposController(githubData, logger) {
+    function ReposController(githubData, logger, i18n) {
 
         var vm = this;
-        vm.title = 'Repositories';
+        // add localization
+        vm.i18n = i18n.message;
+
+        //delete
+        //vm.title = 'Repositories';
 
         activate();
 
