@@ -19,7 +19,7 @@
         }
 
         return {
-            makeRequest: postImage,
+            postImage: postImage,
         };
     }
 })();

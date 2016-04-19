@@ -17,8 +17,7 @@
         }
 
         vm.uploadFile = function (event) {
-            logger.info('activate photo logining');
-            userData.makeRequest(API_URL.UPLOADPHOTO, event.target.files);
+            userData.postImage(API_URL.UPLOADPHOTO, event.target.files);
         };
 
     }
