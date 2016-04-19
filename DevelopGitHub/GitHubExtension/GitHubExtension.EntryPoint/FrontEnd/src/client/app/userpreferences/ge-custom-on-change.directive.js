@@ -3,13 +3,13 @@
 
     angular
     .module('app.userpreferences')
-    .directive('customOnChange', file);
+    .directive('geCustomOnChange', geCustomOnChange);
 
-    function file() {
+    function geCustomOnChange() {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                var onChangeHandler = scope.$eval(attrs.customOnChange);
+                var onChangeHandler = scope.$eval(attrs.geCustomOnChange);
                 element.bind('change', onChangeHandler);
             }
         };

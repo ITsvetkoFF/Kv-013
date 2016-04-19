@@ -9,7 +9,6 @@
 
     function UserPreferencesController(userData, logger, API_URL) {
         var vm = this;
-        vm.files = {};
 
         activate();
 
@@ -18,10 +17,8 @@
         }
 
         vm.uploadFile = function (event) {
-            vm.files = event.target.files;
-            var fd = new FormData();
-            fd.append('file', vm.files[0]);
-            userData.makeRequest(API_URL.UPLOADPHOTO, fd);
+            logger.info('activate photo logining');
+            userData.makeRequest(API_URL.UPLOADPHOTO, event.target.files);
         };
 
     }

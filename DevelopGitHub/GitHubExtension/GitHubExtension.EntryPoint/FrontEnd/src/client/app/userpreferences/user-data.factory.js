@@ -9,10 +9,12 @@
 
     function userData($http) {
 
-        function postImage(route, fd) {
+        function postImage(route, files) {
+            var fd = new FormData();
+            fd.append('file', files[0]);
             $http.post(route, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
+                transformRequest: angular.identity, //to make authomatical serialisation
+                headers: {'Content-Type': undefined} //to make content-type multipart/from-data
             });
         }
 
