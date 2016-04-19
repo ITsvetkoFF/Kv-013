@@ -6,7 +6,7 @@ using SimpleInjector.Packaging;
 
 namespace GitHubExtension.Statistics.WebApi.Package
 {
-    public class SecurityWebApiPackage : IPackage
+    public class StatisticsPackage : IPackage
     {
         public void RegisterServices(Container container)
         {

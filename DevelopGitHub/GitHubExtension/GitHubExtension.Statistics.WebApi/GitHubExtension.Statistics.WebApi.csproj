@@ -137,7 +137,7 @@
     <Compile Include="Mappers\GitHub\GitHubMapper.cs" />
     <Compile Include="Extensions\HttpRequestMessage\HttpRequestMessageExtension.cs" />
     <Compile Include="Extensions\Identity\IdentityExtensions.cs" />
-    <Compile Include="Package\SecurityWebApiPackage.cs" />
+    <Compile Include="Package\StatisticsPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mappers\Constant\GitHubConstants.cs" />
     <Compile Include="Queries\Constant\GitHubQueryConstant.cs" />
