@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using GitHubExtension.Infrastructure.Constants;
 using Newtonsoft.Json;
 
 namespace GitHubExtension.Security.WebApi.Models
@@ -8,7 +9,7 @@ namespace GitHubExtension.Security.WebApi.Models
     {
         public string Login { get; set; }
 
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = GitHubConstants.Id)]
         public int GitHubId { get; set; }
 
         public string Url { get; set; }

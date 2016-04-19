@@ -1,8 +1,8 @@
-﻿using Owin;
-using SimpleInjector;
+﻿using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
+using Owin;
 
-namespace GithubExtension.Extensions
+namespace GitHubExtension.Infrastructure.Extensions
 {
     public static class UseOwinContextInjectorExtension
     {

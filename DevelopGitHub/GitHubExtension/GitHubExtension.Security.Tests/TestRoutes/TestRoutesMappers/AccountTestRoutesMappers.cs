@@ -1,5 +1,5 @@
-﻿using GitHubExtension.Constant;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using GitHubExtension.Infrastructure.Constants;
 
 namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
 {

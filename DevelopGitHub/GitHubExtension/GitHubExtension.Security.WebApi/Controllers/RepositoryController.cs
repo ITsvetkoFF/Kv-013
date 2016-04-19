@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web;
-using GitHubExtension.Constant;
+using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
@@ -16,6 +16,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
 {
     public class RepositoryController : BaseApiController
     {
+        private const string UserDoesNotHaveRepository = "User with id {0} don't have a repository with id {1} in system";
+
         private IGithubService _guGithubService;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
@@ -82,32 +84,20 @@ namespace GitHubExtension.Security.WebApi.Controllers
             var userRepositoryRole = _securityContext.UserRepository.FirstOrDefault(r => r.RepositoryId == repo.Id && r.UserId == user.Id);
             if (userRepositoryRole == null)
             {
-                ModelState.AddModelError("repo", string.Format("user with id '{0}' does not have a repository with id '{1}'", user.Id, repo.Id));
+                ModelState.AddModelError("repo", string.Format(UserDoesNotHaveRepository, user.Id, repo.Id));
                 return BadRequest(ModelState);
             }
 
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            string[] claimTypes = { "CurrentProjectId", "CurrentProjectName" };
-            foreach (var type in claimTypes)
+            Claim[] claimsToAdd =
             {
-                var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == type);
-                if (existingClaim != null)
-                {
-                    _userManager.RemoveClaim(user.Id, existingClaim);
-                    claimsIdentity.RemoveClaim(existingClaim);
-                }
-            }
+                new Claim("CurrentProjectId", repo.Id.ToString()),
+                new Claim("CurrentProjectName", userRepositoryRole.Repository.FullName)
+            };
 
-            Claim[] claimsToAdd = { new Claim("CurrentProjectId", repo.Id.ToString()), new Claim("CurrentProjectName", userRepositoryRole.Repository.FullName) };
-            IdentityResult[] results = new IdentityResult[claimsToAdd.Length];
-
-            for (int i = 0; i < claimsToAdd.Length; i++)
-            {
-                results[i] = _userManager.AddClaim(user.Id, claimsToAdd[i]);
-                claimsIdentity.AddClaim(claimsToAdd[i]);
-            }
-
-
+            RemoveClaims(claimsIdentity, claimsToAdd, user.Id);
+            var results = AddClaims(claimsIdentity, claimsToAdd, user.Id);
+                
             if (results.Any(r => !r.Succeeded))
             {
                 ModelState.AddModelError("CurrentProject", "Failed to update current project");
@@ -120,6 +110,32 @@ namespace GitHubExtension.Security.WebApi.Controllers
             authentication.SignIn(claimsIdentity);
 
             return Ok();
+        }
+
+        private void RemoveClaims(ClaimsIdentity claimsIdentity, Claim[] claims, string userId)
+        {
+            foreach (var claim in claims)
+            {
+                var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == claim.Type);
+                if (existingClaim != null)
+                {
+                    _userManager.RemoveClaim(userId, existingClaim);
+                    claimsIdentity.RemoveClaim(existingClaim);
+                }
+            }
+        }
+
+        private IdentityResult[] AddClaims(ClaimsIdentity claimsIdentity, Claim[] claimsToAdd, string userId)
+        {
+            IdentityResult[] results = new IdentityResult[claimsToAdd.Length];
+
+            for (int i = 0; i < claimsToAdd.Length; i++)
+            {
+                results[i] = _userManager.AddClaim(userId, claimsToAdd[i]);
+                claimsIdentity.AddClaim(claimsToAdd[i]);
+            }
+
+            return results;
         }
     }
 }

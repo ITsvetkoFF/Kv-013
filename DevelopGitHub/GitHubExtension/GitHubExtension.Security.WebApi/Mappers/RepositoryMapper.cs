@@ -26,6 +26,7 @@ namespace GitHubExtension.Security.WebApi.Mappers
                 Id = repository.Id,
                 Name = repository.Name,
                 Url = repository.Url,
+                FullName = repository.FullName
             };
         }
     }

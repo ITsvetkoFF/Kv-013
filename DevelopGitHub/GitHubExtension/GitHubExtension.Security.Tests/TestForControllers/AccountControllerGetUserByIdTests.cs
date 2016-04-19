@@ -8,8 +8,6 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Threading.Tasks;
 using FluentAssertions;
-using GitHubExtension.Activity.Internal.WebApi.Commands;
-using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Models;

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using FluentValidation.WebApi;
-using GithubExtension.Extensions;
 using GitHubExtension.EntryPoint;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
@@ -25,6 +24,8 @@ using SimpleInjector.Integration.WebApi;
 [assembly: OwinStartup(typeof(Startup))]
 namespace GitHubExtension.EntryPoint     
 {
+    using GitHubExtension.Infrastructure.Extensions;
+
     public class Startup
     {
         public static GitHubAuthenticationOptions GitHubAuthOptions { get; private set; }
@@ -32,23 +33,24 @@ namespace GitHubExtension.EntryPoint
         public void Configuration(IAppBuilder app)
         {
             var container = SimpleInjectorConfiguration.ConfigurationSimpleInjector();
-
+           
             app.UseSimpleInjectorContext(container);
             app.CreatePerOwinContext(container.GetInstance<SecurityContext>);
             app.CreatePerOwinContext(container.GetInstance<ApplicationUserManager>);
 
             ConfigureOAuth(app);
+            app.Use(
+              async  (context, next) =>
+                    { await next(); });
 
-            #region config for http
             var config = ConfigureWebApi();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                AuthenticationMode =  AuthenticationMode.Active
+                AuthenticationMode =  AuthenticationMode.Active,
+                CookieHttpOnly = false
             });
-
-            #endregion
 
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             config.EnsureInitialized();
@@ -82,7 +84,7 @@ namespace GitHubExtension.EntryPoint
             //use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            OAuthAuthorizationServerOptions oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
@@ -90,7 +92,7 @@ namespace GitHubExtension.EntryPoint
             };
 
             // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthAuthorizationServer(oAuthServerOptions);
 
             GitHubAuthOptions = new GitHubAuthenticationOptions()
             {

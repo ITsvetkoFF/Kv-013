@@ -21,13 +21,11 @@ namespace GitHubExtension.Security.DAL.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            #region Add Configuration to DB
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new RolesConfiguration());
             modelBuilder.Configurations.Add(new UserClaimsConfiguration());
             modelBuilder.Configurations.Add(new UserLoginsConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
-            #endregion
 
             base.OnModelCreating(modelBuilder);
         }

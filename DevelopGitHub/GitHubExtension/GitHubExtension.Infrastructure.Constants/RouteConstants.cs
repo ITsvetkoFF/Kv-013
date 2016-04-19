@@ -1,4 +1,4 @@
-﻿namespace GitHubExtension.Constant
+﻿namespace GitHubExtension.Infrastructure.Constants
 {
     public static class RouteConstants
     {
