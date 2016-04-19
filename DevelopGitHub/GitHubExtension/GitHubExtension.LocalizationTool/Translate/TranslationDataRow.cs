@@ -1,6 +1,6 @@
 ﻿namespace GitHubExtension.LocalizationTool
 {
-    public class Translation : NotifyProperyChangedBase
+    public class TranslationDataRow : NotifyProperyChangedBase
     {
         private string _name;
 
@@ -10,11 +10,11 @@
 
         private string _us;
 
-        public Translation()
+        public TranslationDataRow()
         {
         }
 
-        public Translation(string name)
+        public TranslationDataRow(string name)
         {
             Name = name;
         }

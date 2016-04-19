@@ -27,14 +27,14 @@ namespace GitHubExtension.LocalizationTool
         {
             InitializeComponent();
 
-            Translations = new ObservableCollection<Translation>();
+            TranslationData = new ObservableCollection<TranslationDataRow>();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
-                ReadJson(value);
+                ReadJsonFromFile(value);
             }
         }
 
-        public ObservableCollection<Translation> Translations { get; set; }
+        public ObservableCollection<TranslationDataRow> TranslationData { get; set; }
 
         private static void ShowErrorMessageBox(string error, Exception exception)
         {
@@ -70,20 +70,20 @@ namespace GitHubExtension.LocalizationTool
 
         private void DataGridLoaded(object sender, RoutedEventArgs e)
         {
-            Table.ItemsSource = Translations;
+            Table.ItemsSource = TranslationData;
         }
 
-        private void AddRow(object sender, RoutedEventArgs e)
+        private void AddEmptyDataRow(object sender, RoutedEventArgs e)
         {
-            Translations.Add(new Translation());
+            TranslationData.Add(new TranslationDataRow());
         }
 
         private void SaveJson(object sender, RoutedEventArgs e)
         {
-            RemoveEmptyRows();
+            RemoveEmptyDataRows();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
-                File.WriteAllText(GetFileName(value), BuildJson(value));
+                File.WriteAllText(GetFileName(value), GenerateJson(value));
             }
 
             ShowInformationMessageBox("Saved!");
@@ -91,17 +91,17 @@ namespace GitHubExtension.LocalizationTool
 
         private void OpenJson(object sender, RoutedEventArgs e)
         {
-            Translations.Clear();
+            TranslationData.Clear();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
-                ReadJson(value);
+                ReadJsonFromFile(value);
             }
 
-            RemoveEmptyRows();
+            RemoveEmptyDataRows();
             ShowInformationMessageBox("Oppened!");
         }
 
-        private void ReadJson(Lang language)
+        private void ReadJsonFromFile(Lang language)
         {
             var fileName = GetFileName(language);
             try
@@ -133,51 +133,51 @@ namespace GitHubExtension.LocalizationTool
                 var index = Contains(element.Key);
                 if (index == -1)
                 {
-                    AddNewLineToTranslation(language, element);
+                    AddNewRowToTranslationData(language, element);
                 }
                 else
                 {
-                    Translations[index][language] = element.Value.ToString();
+                    TranslationData[index][language] = element.Value.ToString();
                 }
             }
         }
 
-        private void AddNewLineToTranslation(Lang language, KeyValuePair<string, JToken> element)
+        private void AddNewRowToTranslationData(Lang language, KeyValuePair<string, JToken> element)
         {
-            var line = new Translation(element.Key);
+            var line = new TranslationDataRow(element.Key);
             line[language] = element.Value.ToString();
-            Translations.Add(line);
+            TranslationData.Add(line);
         }
 
-        private string BuildJson(Lang language)
+        private string GenerateJson(Lang language)
         {
-            RemoveEmptyRows();
+            RemoveEmptyDataRows();
             var result = new StringBuilder();
             result.Append("{\"");
             result.Append(GetLang(language));
             result.Append("\":{");
-            if (Translations.Count != 0)
+            if (TranslationData.Count != 0)
             {
-                for (var i = 0; i < Translations.Count - 1; i++)
+                for (var i = 0; i < TranslationData.Count - 1; i++)
                 {
-                    result.Append("\"" + Translations[i].Name + "\"");
+                    result.Append("\"" + TranslationData[i].Name + "\"");
                     result.Append(":");
-                    result.Append("\"" + Translations[i][language] + "\"");
+                    result.Append("\"" + TranslationData[i][language] + "\"");
                     result.Append(",");
                 }
 
-                result.Append("\"" + Translations[Translations.Count - 1].Name + "\"");
+                result.Append("\"" + TranslationData[TranslationData.Count - 1].Name + "\"");
                 result.Append(":");
-                result.Append("\"" + Translations[Translations.Count - 1][language] + "\"");
+                result.Append("\"" + TranslationData[TranslationData.Count - 1][language] + "\"");
             }
 
             result.Append("}}");
             return result.ToString();
         }
 
-        private void ClearTable(object sender, RoutedEventArgs e)
+        private void ClearTranslationData(object sender, RoutedEventArgs e)
         {
-            Translations.Clear();
+            TranslationData.Clear();
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -185,28 +185,25 @@ namespace GitHubExtension.LocalizationTool
             Close();
         }
 
-        private async void Translate(string sourceLanguage, string targetLanguage)
+        private async void WebTranslate(string sourceLanguage, string targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
             {
                 return;
             }
 
-            StringBuilder textToTranslate;
             Lang sourceLanguageEnum;
-            Lang targetLanguageEnum = TargetLanguageEnum(
-                ref sourceLanguage, 
-                ref targetLanguage, 
-                out sourceLanguageEnum, 
-                out textToTranslate);
-
+            Lang targetLanguageEnum;
+            TargetLanguageEnum(ref sourceLanguage, ref targetLanguage, out sourceLanguageEnum, out targetLanguageEnum);
+            
+            StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
+            
             var result = Task<JObject>.Factory.StartNew(() => GetTranslationFromYandexApi(sourceLanguage, targetLanguage, textToTranslate));
-
             TranslateButton.IsEnabled = false;
             TranslateButton.Content = "Translating...";
             await result;
             TranslateButton.IsEnabled = true;
-            TranslateButton.Content = "Translate";
+            TranslateButton.Content = "WebTranslate";
 
             if (result.Result == null)
             {
@@ -216,39 +213,31 @@ namespace GitHubExtension.LocalizationTool
             SaveTranslationResult(result, targetLanguageEnum);
         }
 
-        private void SaveTranslationResult(Task<JObject> result, Lang targetLanguageEnum)
+        private void SaveTranslationResult(Task<JObject> result, Lang language)
         {
             var i = 0;
             foreach (var item in result.Result.GetValue("text"))
             {
-                Translations[i][targetLanguageEnum] = item.ToString();
+                TranslationData[i][language] = item.ToString();
                 i++;
             }
         }
 
-        private Lang TargetLanguageEnum(
-            ref string sourceLanguage,
-            ref string targetLanguage,
-            out Lang sourceLanguageEnum,
-            out StringBuilder textToTranslate)
+        private void TargetLanguageEnum(ref string sourceLanguage, ref string targetLanguage, out Lang sourceLanguageEnum, out Lang targetLanguageEnum)
         {
             sourceLanguageEnum = GetLang(sourceLanguage);
-            var targetLanguageEnum = GetLang(targetLanguage);
-
-            textToTranslate = TextParameterForTranslate(sourceLanguageEnum);
-
+            targetLanguageEnum = GetLang(targetLanguage);
             sourceLanguage = sourceLanguage == "us" ? "en" : sourceLanguage;
             targetLanguage = targetLanguage == "us" ? "en" : targetLanguage;
-            return targetLanguageEnum;
         }
 
-        private StringBuilder TextParameterForTranslate(Lang sourceLanguageEnum)
+        private StringBuilder GenerateTextParameter(Lang language)
         {
             var textToTranslate = new StringBuilder();
-            foreach (var translation in Translations)
+            foreach (var translation in TranslationData)
             {
                 textToTranslate.Append("&text=");
-                textToTranslate.Append(translation[sourceLanguageEnum]);
+                textToTranslate.Append(translation[language]);
             }
 
             return textToTranslate;
@@ -258,7 +247,7 @@ namespace GitHubExtension.LocalizationTool
         {
             var sourceLanguage = SourceLanguage.Text;
             var targetLanguage = TargetLanguage.Text;
-            Translate(sourceLanguage, targetLanguage);
+            WebTranslate(sourceLanguage, targetLanguage);
         }
 
         private Lang GetLang(string lang)
@@ -329,9 +318,9 @@ namespace GitHubExtension.LocalizationTool
 
         private int Contains(string key)
         {
-            for (var i = 0; i < Translations.Count; i++)
+            for (var i = 0; i < TranslationData.Count; i++)
             {
-                if (Translations[i].Name == key)
+                if (TranslationData[i].Name == key)
                 {
                     return i;
                 }
@@ -340,13 +329,13 @@ namespace GitHubExtension.LocalizationTool
             return -1;
         }
 
-        private void RemoveEmptyRows()
+        private void RemoveEmptyDataRows()
         {
-            for (var i = 0; i < Translations.Count; i++)
+            for (var i = 0; i < TranslationData.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(Translations[i].Name))
+                if (string.IsNullOrWhiteSpace(TranslationData[i].Name))
                 {
-                    Translations.Remove(Translations[i--]);
+                    TranslationData.Remove(TranslationData[i--]);
                 }
             }
         }

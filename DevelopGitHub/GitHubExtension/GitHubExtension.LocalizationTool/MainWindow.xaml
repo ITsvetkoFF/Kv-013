@@ -4,8 +4,8 @@
         xmlns:loc="clr-namespace:GitHubExtension.LocalizationTool"
         Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="icon.ico" MinHeight="400">
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static loc:MainWindow.AddRowRoutedCmd}" Executed="AddRow" />
-        <CommandBinding Command="{x:Static loc:MainWindow.ClearTableRoutedCmd}" Executed="ClearTable" />
+        <CommandBinding Command="{x:Static loc:MainWindow.AddRowRoutedCmd}" Executed="AddEmptyDataRow" />
+        <CommandBinding Command="{x:Static loc:MainWindow.ClearTableRoutedCmd}" Executed="ClearTranslationData" />
         <CommandBinding Command="{x:Static loc:MainWindow.OpenJsonRoutedCmd}" Executed="OpenJson" />
         <CommandBinding Command="{x:Static loc:MainWindow.SaveAsJsonRoutedCmd}" Executed="SaveJson" />
     </Window.CommandBindings>
@@ -32,9 +32,9 @@
                 <MenuItem Header="Exit" HorizontalAlignment="Left" Width="200" Click="Close"/>
             </MenuItem>
             <MenuItem Header="Table">
-                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Click="AddRow" InputGestureText="Ctrl+R"/>
+                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Click="AddEmptyDataRow" InputGestureText="Ctrl+R"/>
                 <MenuItem Header="Delete row" HorizontalAlignment="Left" Width="200" InputGestureText="Del"/>
-                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Click="ClearTable" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Click="ClearTranslationData" InputGestureText="Ctrl+N"/>
             </MenuItem>
             <MenuItem Header="Chose language" Visibility="Collapsed">
                 <MenuItem Header="UA" HorizontalAlignment="Left" Width="140"/>
@@ -81,11 +81,11 @@
             <CheckBox Name="Us" Content="&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="LanguageChange" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="RU" Margin="6,6,3,6" Grid.Row="2" Grid.Column="0" />
             <CheckBox Name="Ru" Content="&#xD;&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="LanguageChange" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Content="Translation" Margin="6" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0"
+            <Label Content="TranslationDataRow" Margin="6" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0"
                    HorizontalContentAlignment="Center"/>
             <Label Content="Source language" Grid.Row="4" Grid.Column="0" Margin="6,6,3,6"/>
             <Label Content="Target language" Grid.Row="5" Grid.Column="0" Margin="6,6,3,6"/>
-            <Button Name="TranslateButton" Content="Translate" Margin="6" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0"
+            <Button Name="TranslateButton" Content="WebTranslate" Margin="6" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0"
                     Click="TranslatingButton"/>
             <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <TextBlock>uk</TextBlock>

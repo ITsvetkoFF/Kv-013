@@ -63,7 +63,7 @@
     <Compile Include="HotKeyCommands.cs" />
     <Compile Include="Translate\Language.cs" />
     <Compile Include="Translate\NotifyProperyChangedBase.cs" />
-    <Compile Include="Translate\Translation.cs" />
+    <Compile Include="Translate\TranslationDataRow.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
