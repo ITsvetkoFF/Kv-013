@@ -11,7 +11,8 @@
             return {
                 BASE_URL: resource,
                 LOGIN: resource + 'account/ExternalLogin?provider=GitHub',
-                LOGOUT: resource + 'account/logout'
+                LOGOUT: resource + 'account/logout',
+                UPLOADPHOTO: resource + 'account/avatar'
             };
         })());
 })();

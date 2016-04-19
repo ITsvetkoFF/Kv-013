@@ -5,6 +5,7 @@
         "REPOS": "Repositories",
         "COLLABORATORS": "Collaborators",
         "MESSAGES": "Messages",
-        "AUTHORIZATION": "Authorization"
+        "AUTHORIZATION": "Authorization",
+        "PREFERENCES":  "Preferences"
     }
 }
