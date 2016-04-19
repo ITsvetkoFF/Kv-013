@@ -5,6 +5,7 @@
         "REPOS": "Сховища",
         "COLLABORATORS": "Коллаборатори",
         "MESSAGES": "Повідомлення",
-        "AUTHORIZATION": "Авторизація"
+        "AUTHORIZATION": "Авторизація",
+        "PREFERENCES":  "Налаштування"
     }
 }

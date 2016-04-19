@@ -9,6 +9,7 @@
         'app.repos',
         'app.roles',
         'app.user',
+        'app.userpreferences',
         'ui.bootstrap',
         'ngCookies'
     ]);
