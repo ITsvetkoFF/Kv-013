@@ -12,8 +12,6 @@
     function RolesController(githubCollaborators, logger, $q, i18n) {
         var vm = this;
         vm.title = 'Roles';
-        vm.repo = '';
-        vm.roleName = [];
         vm.i18n = i18n.message;
         activate();
 
