@@ -48,7 +48,11 @@ namespace GitHubExtension.LocalizationTool
 
         public static void ShowErrorMessageBox(string error, Exception exception)
         {
-            MessageBox.Show(error + "\n" + exception.Message, "Error - Localization Tool", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                error + Environment.NewLine + exception.Message, 
+                "Error - Localization Tool", 
+                MessageBoxButton.OK, 
+                MessageBoxImage.Error);
         }
 
         public static void ShowInformationMessageBox(string information)

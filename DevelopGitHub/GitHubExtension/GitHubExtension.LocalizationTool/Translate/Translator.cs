@@ -16,6 +16,16 @@ namespace GitHubExtension.LocalizationTool.Translate
             "key=trnsl.1.1.20160322T103501Z.10b2b142f2f8bf7f.66c4f9f75232ede5cb9d8cc5ce17df5fd1d02d32&" +
             "lang=";
 
+        private const string UsLang = "us";
+
+        private const string EnLang = "en";
+
+        private const string Dash = "-";
+
+        private const string JsonTextParameter = "text";
+
+        private const string GetTextParameter = "&text=";
+
         private readonly MainWindow mainWindow;
 
         public Translator(MainWindow mainWindow)
@@ -135,8 +145,8 @@ namespace GitHubExtension.LocalizationTool.Translate
         {
             sourceLanguageEnum = GetLang(sourceLanguage);
             targetLanguageEnum = GetLang(targetLanguage);
-            sourceLanguage = sourceLanguage == "us" ? "en" : sourceLanguage;
-            targetLanguage = targetLanguage == "us" ? "en" : targetLanguage;
+            sourceLanguage = sourceLanguage == UsLang ? EnLang : sourceLanguage;
+            targetLanguage = targetLanguage == UsLang ? EnLang : targetLanguage;
         }
 
         private static JObject GetTranslationFromYandexApi(
@@ -150,7 +160,7 @@ namespace GitHubExtension.LocalizationTool.Translate
                 var result =
                     JObject.Parse(
                         webClient.DownloadString(
-                            YandexTranslateApiUrl + sourceLanguage + "-" + targetLanguage + textToTranslate));
+                            YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate));
                 return result;
             }
             catch (WebException exception)
@@ -164,7 +174,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         private void SaveTranslationResult(Task<JObject> result, Lang language)
         {
             var i = 0;
-            foreach (var item in result.Result.GetValue("text"))
+            foreach (var item in result.Result.GetValue(JsonTextParameter))
             {
                 TranslationData[i][language] = item.ToString();
                 i++;
@@ -176,7 +186,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             var textToTranslate = new StringBuilder();
             foreach (var translation in TranslationData)
             {
-                textToTranslate.Append("&text=");
+                textToTranslate.Append(GetTextParameter);
                 textToTranslate.Append(translation[language]);
             }
 

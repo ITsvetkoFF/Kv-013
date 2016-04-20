@@ -11,6 +11,18 @@ namespace GitHubExtension.LocalizationTool.Translate
 {
     public class JsonHelper
     {
+        private const string DoubleQuote = "\"";
+
+        private const string CloseBrackets = "}}";
+
+        private const string Ñolon = ":";
+
+        private const string Comma = ",";
+
+        private const string FirstOpenQuote = "{\"";
+
+        private const string SecondOpenQuote = "\":{";
+
         private readonly MainWindow mainWindow;
 
         public JsonHelper(MainWindow mainWindow)
@@ -60,7 +72,6 @@ namespace GitHubExtension.LocalizationTool.Translate
             catch (Exception exception)
             {
                 MainWindow.ShowErrorMessageBox("Unknown error", exception);
-                MessageBox.Show("\n" + exception.Message);
             }
         }
 
@@ -68,25 +79,25 @@ namespace GitHubExtension.LocalizationTool.Translate
         {
             Translator.RemoveEmptyRows();
             var result = new StringBuilder();
-            result.Append("{\"");
+            result.Append(FirstOpenQuote);
             result.Append(Translator.GetLang(language));
-            result.Append("\":{");
+            result.Append(SecondOpenQuote);
             if (TranslationData.Count != 0)
             {
                 for (var i = 0; i < TranslationData.Count - 1; i++)
                 {
-                    result.Append("\"" + TranslationData[i].Name + "\"");
-                    result.Append(":");
-                    result.Append("\"" + TranslationData[i][language] + "\"");
-                    result.Append(",");
+                    result.Append(DoubleQuote + TranslationData[i].Name + DoubleQuote);
+                    result.Append(Ñolon);
+                    result.Append(DoubleQuote + TranslationData[i][language] + DoubleQuote);
+                    result.Append(Comma);
                 }
 
-                result.Append("\"" + TranslationData[TranslationData.Count - 1].Name + "\"");
-                result.Append(":");
-                result.Append("\"" + TranslationData[TranslationData.Count - 1][language] + "\"");
+                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1].Name + DoubleQuote);
+                result.Append(Ñolon);
+                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1][language] + DoubleQuote);
             }
 
-            result.Append("}}");
+            result.Append(CloseBrackets);
             return result.ToString();
         }
 
