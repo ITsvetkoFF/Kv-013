@@ -18,7 +18,7 @@ using GitHubExtension.Security.Tests.Extensions;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
-    public class AccountControllerAssignRolesToUserTests
+    public class RepositoryControllerAssignRolesToUserTests
     {
         private const string roleIndex = "role";
         private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
@@ -114,7 +114,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(),
+            RepositoryController controller = new RepositoryController(Substitute.For<IGithubService>(),
                 Substitute.For<ISecurityContext>(), MockForUsers(users));
 
             //Act
@@ -130,7 +130,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void InvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrenge
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
+            RepositoryController controller = new RepositoryController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
@@ -145,7 +145,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void ErrorMessageForInvalidRoleTest(List<User> users, IEnumerable<SecurityRole> roles, int gitHubId, int repoId, string roleToAssign)
         {
             //Arrange
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
+            RepositoryController controller = new RepositoryController(Substitute.For<IGithubService>(), MockForContext(roles), MockForUsers(users));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);
@@ -162,7 +162,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             //Arrange
             users.Add(userToUpdate);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), MockForContext(roles), MockForAddingClaim(users, userToUpdate));
+            RepositoryController controller = new RepositoryController(Substitute.For<IGithubService>(), MockForContext(roles), MockForAddingClaim(users, userToUpdate));
 
             //Act
             Task<IHttpActionResult> response = controller.AssignRolesToUser(repoId, gitHubId, roleToAssign);

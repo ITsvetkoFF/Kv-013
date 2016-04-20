@@ -112,6 +112,60 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok();
         }
 
+        [HttpPatch]
+        [AllowAnonymous]
+        [Route(RouteConstants.AssignRolesToUser)]
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId,
+            [FromBody] string roleToAssign)
+        {
+            User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
+            if (appUser == null)
+                return NotFound();
+
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
+
+            if (repositoryRole != null)
+                appUser.UserRepositoryRoles.Remove(repositoryRole);
+
+            var role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == roleToAssign);
+            if (role == null)
+            {
+                ModelState.AddModelError("role",
+                    string.Format("Roles '{0}' does not exists in the system", roleToAssign));
+                return BadRequest(ModelState);
+            }
+
+            appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
+            {
+                RepositoryId = repoId,
+                SecurityRoleId = role.Id
+            });
+
+            IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
+
+            if (!updateResult.Succeeded)
+            {
+                ModelState.AddModelError("Role", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+
+            var claimsIdentity =
+                await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
+            var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
+            if (existingClaim != null)
+                _userManager.RemoveClaim(appUser.Id, existingClaim);
+            var addClaimResult =
+                await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
+
+            if (!addClaimResult.Succeeded)
+            {
+                ModelState.AddModelError("Role", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
+        }
+
         private void RemoveClaims(ClaimsIdentity claimsIdentity, Claim[] claims, string userId)
         {
             foreach (var claim in claims)
