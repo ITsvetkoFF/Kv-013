@@ -103,7 +103,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             TranslationData.Add(line);
         }
 
-        public async void WebTranslate(string sourceLanguage, string targetLanguage)
+        public async Task WebTranslate(string sourceLanguage, string targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
             {
@@ -113,21 +113,21 @@ namespace GitHubExtension.LocalizationTool.Translate
             Lang sourceLanguageEnum;
             Lang targetLanguageEnum;
             LanguageCheck(ref sourceLanguage, ref targetLanguage, out sourceLanguageEnum, out targetLanguageEnum);
-
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
-
-            var result = Task<JObject>.Factory.StartNew(() => GetTranslationFromYandexApi(sourceLanguage, targetLanguage, textToTranslate));
-            mainWindow.TranslateButton.IsEnabled = false;
-            mainWindow.TranslateButton.Content = "Translating...";
-            await result;
-            mainWindow.TranslateButton.IsEnabled = true;
-            mainWindow.TranslateButton.Content = "WebTranslate";
-
-            if (result.Result == null)
+            var result = string.Empty;
+            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
-                return;
+                try
+                {
+                    result = await webClient.DownloadStringTaskAsync(
+                                YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate);
+                }
+                catch (WebException exception)
+                {
+                    MainWindow.ShowErrorMessageBox("The waiting time of server response has expired", exception);
+                }
             }
-
+            
             SaveTranslationResult(result, targetLanguageEnum);
         }
 
@@ -142,7 +142,11 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        private static void LanguageCheck(ref string sourceLanguage, ref string targetLanguage, out Lang sourceLanguageEnum, out Lang targetLanguageEnum)
+        private static void LanguageCheck(
+            ref string sourceLanguage, 
+            ref string targetLanguage, 
+            out Lang sourceLanguageEnum, 
+            out Lang targetLanguageEnum)
         {
             sourceLanguageEnum = GetLang(sourceLanguage);
             targetLanguageEnum = GetLang(targetLanguage);
@@ -150,32 +154,16 @@ namespace GitHubExtension.LocalizationTool.Translate
             targetLanguage = targetLanguage == UsLang ? EnLang : targetLanguage;
         }
 
-        private static JObject GetTranslationFromYandexApi(
-            string sourceLanguage,
-            string targetLanguage,
-            StringBuilder textToTranslate)
+        private void SaveTranslationResult(string result, Lang language)
         {
-            var webClient = new WebClient { Encoding = Encoding.UTF8 };
-            try
+            if (string.IsNullOrWhiteSpace(result))
             {
-                var result =
-                    JObject.Parse(
-                        webClient.DownloadString(
-                            YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate));
-                return result;
-            }
-            catch (WebException exception)
-            {
-                MainWindow.ShowErrorMessageBox("Истекло время ожидания ответа сервера", exception);
+                return;
             }
 
-            return null;
-        }
-
-        private void SaveTranslationResult(Task<JObject> result, Lang language)
-        {
+            var jsonResult = JObject.Parse(result);
             var i = 0;
-            foreach (var value in result.Result.GetValue(JsonTextParameter).Select(item => item.ToString()))
+            foreach (var value in jsonResult.GetValue(JsonTextParameter).Select(item => item.ToString()))
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {

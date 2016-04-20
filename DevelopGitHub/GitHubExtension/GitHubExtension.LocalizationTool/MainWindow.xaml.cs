@@ -11,7 +11,7 @@ namespace GitHubExtension.LocalizationTool
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly Translator translator;
 
@@ -103,11 +103,15 @@ namespace GitHubExtension.LocalizationTool
             Close();
         }
 
-        private void TranslatingButton(object sender, RoutedEventArgs e)
+        private async void TranslatingButton(object sender, RoutedEventArgs e)
         {
+            TranslateButton.IsEnabled = false;
+            TranslateButton.Content = "Translating...";
             var sourceLanguage = SourceLanguage.Text;
             var targetLanguage = TargetLanguage.Text;
-            Translator.WebTranslate(sourceLanguage, targetLanguage);
+            await Translator.WebTranslate(sourceLanguage, targetLanguage);
+            TranslateButton.IsEnabled = true;
+            TranslateButton.Content = "WebTranslate";
         }
 
         private void LanguageChange(object sender, RoutedEventArgs e)
