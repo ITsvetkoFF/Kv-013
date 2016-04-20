@@ -16,9 +16,9 @@
                 </div>
             </div>
 
-            <h2 ng-show="vm.userService.isAuthenticated() && vm.externalActivities">{{vm.i18n.GITHUB_ACTIVITY}}</h2>
             <div class="row" ng-show="vm.userService.isAuthenticated() && vm.numberOfPages > 0">
                 <div class="col-md-12">
+                    <h2>{{vm.i18n.GITHUB_ACTIVITY}}</h2>
                     <ge-activity ng-repeat="activity in vm.externalActivities" activity="activity"></ge-activity>
 
                     <uib-pagination ng-hide="vm.numberOfPages ===  1" direction-links="true"
@@ -30,9 +30,9 @@
                 </div>
             </div>
 
-            <h2 ng-show="vm.userService.isAuthenticated() && vm.internalActivities">{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
             <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities">
                 <div class="col-md-12">
+                    <h2>{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
                     <table class="table table-striped">
                         <thead>
                         <tr>
