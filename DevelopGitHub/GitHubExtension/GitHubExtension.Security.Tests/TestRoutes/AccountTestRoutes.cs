@@ -53,7 +53,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
 
             config.ShouldMap(url)
                 .To<AccountController>(HttpMethod.Get,
-                x => x.GetExternalLogin("p", "e"));
+                x => x.GetExternalLogin("p"));
         }
     }
 }
