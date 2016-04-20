@@ -36,12 +36,12 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         }
 
         [Fact]
-        public void AccountAssignRolesToUserTest()
+        public void RepositoryAssignRolesToUserTest()
         {
             url = url.ForAccountAssignRolesToUser();
 
             config.ShouldMap(url)
-                .To<AccountController>(new HttpMethod("PATCH"),
+                .To<RepositoryController>(new HttpMethod("PATCH"),
                 x => x.AssignRolesToUser(5, 6, null));
         }
 
