@@ -12,8 +12,8 @@ using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Exceptions;
 using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
+using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using GitHubExtension.Security.WebApi.Results;
-using GitHubExtension.Security.WebApi.Services;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Controllers
@@ -21,16 +21,16 @@ namespace GitHubExtension.Security.WebApi.Controllers
     [RoutePrefix(RouteConstants.ApiAccount)]
     public class AccountController : BaseApiController
     {
-        private readonly IGithubService _githubService;
+        private readonly IGitHubQuery _gitHubQuery;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
         public AccountController(
-            IGithubService githubService,
+            IGitHubQuery gitHubQuery,
             ISecurityContext securityContext,
             ApplicationUserManager userManager)
         {
-            _githubService = githubService;
+            _gitHubQuery = gitHubQuery;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -83,7 +83,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (tokenClaim == null)
                 throw new TokenNotFoundException();
 
-            GitHubUserModel userReadModel = await _githubService.GetUserAsync(tokenClaim.Value);
+            GitHubUserModel userReadModel = await _gitHubQuery.GetUserAsync(tokenClaim.Value);
             User user = _userManager.FindByGitHubId(userReadModel.GitHubId);
 
             if (user == null)
@@ -126,7 +126,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (role == null)
                 return InternalServerError();
 
-            List<GitHubRepositoryModel> repositories = await _githubService.GetReposAsync(token);
+            List<RepositoryViewModel> repositories = await _gitHubQuery.GetReposAsync(token);
 
             var repositoryRolesToAdd =
                 repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role })

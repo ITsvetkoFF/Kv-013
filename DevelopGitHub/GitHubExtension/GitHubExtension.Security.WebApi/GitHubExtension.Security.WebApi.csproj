@@ -140,8 +140,6 @@
     <Compile Include="Queries\Implementations\GitHubQuery.cs" />
     <Compile Include="Queries\Interfaces\IGitHubQuery.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Services\GithubService.cs" />
-    <Compile Include="Services\IGithubService.cs" />
     <Compile Include="Validators\Int32Validator.cs" />
     <Compile Include="Validators\NullValidator.cs" />
     <Compile Include="Validators\StringValidator.cs" />

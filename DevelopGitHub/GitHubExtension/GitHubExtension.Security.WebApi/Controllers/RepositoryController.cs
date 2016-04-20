@@ -9,7 +9,7 @@ using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Mappers;
-using GitHubExtension.Security.WebApi.Services;
+using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Controllers
@@ -18,13 +18,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
     {
         private const string UserDoesNotHaveRepository = "User with id {0} don't have a repository with id {1} in system";
 
-        private IGithubService _guGithubService;
+        private IGitHubQuery _gitHubQuery;
         private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
 
-        public RepositoryController(IGithubService guGithubService, ISecurityContext securityContext, ApplicationUserManager userManager)
+        public RepositoryController(IGitHubQuery gitHubQuery, ISecurityContext securityContext, ApplicationUserManager userManager)
         {
-            _guGithubService = guGithubService;
+            _gitHubQuery = gitHubQuery;
             _securityContext = securityContext;
             _userManager = userManager;
         }
@@ -65,7 +65,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             string token = claims.FindFirstValue("ExternalAccessToken");
             string userName = User.Identity.GetUserName();
 
-            var gitHubCollaborators = await _guGithubService.GetCollaboratorsForRepo(userName, repoName, token);
+            var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
 
             return Ok(gitHubCollaborators);
         }
