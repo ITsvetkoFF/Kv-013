@@ -12,11 +12,7 @@
     function ReposController(githubData, logger, i18n) {
 
         var vm = this;
-        // add localization
         vm.i18n = i18n.message;
-
-        //delete
-        //vm.title = 'Repositories';
 
         activate();
 
