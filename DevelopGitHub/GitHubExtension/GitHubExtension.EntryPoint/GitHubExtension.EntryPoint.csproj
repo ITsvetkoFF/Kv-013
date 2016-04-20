@@ -280,6 +280,10 @@
       <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
+      <Project>{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}</Project>
+      <Name>GitHubExtension.Statistics.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Templates\GitHubExtension.Templates.csproj">
       <Project>{d2adb828-d1e5-40ed-aa12-1643fb5cd11e}</Project>
       <Name>GitHubExtension.Templates</Name>

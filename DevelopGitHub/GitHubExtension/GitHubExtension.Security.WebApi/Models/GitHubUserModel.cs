@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace GitHubExtension.Security.WebApi.Models
 {
-    [NotMapped]
     public class GitHubUserModel
     {
         public string Login { get; set; }

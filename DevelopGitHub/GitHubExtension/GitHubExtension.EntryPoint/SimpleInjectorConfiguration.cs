@@ -2,6 +2,7 @@ using GitHubExtension.Activity.External.WebAPI.Package;
 using GitHubExtension.Notes.WebApi.Package;
 using GitHubExtension.Activity.Internal.WebApi.Package;
 using GitHubExtension.Security.WebApi.Package;
+using GitHubExtension.Statistics.WebApi.Package;
 using GitHubExtension.Templates.Package;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
@@ -26,7 +27,8 @@ namespace GitHubExtension.EntryPoint
                 typeof(SecurityPackage).Assembly,
                 typeof(NotesPackage).Assembly,
                 typeof(ActivityPackage).Assembly,
-                typeof(WebApiTemplatesPackage).Assembly
+                typeof(WebApiTemplatesPackage).Assembly,
+                typeof(StatisticsPackage).Assembly
             });
             container.Verify();
 
