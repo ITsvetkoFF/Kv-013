@@ -38,11 +38,11 @@
         }
 
         function formatDate(date) {
-            return moment(date).format(ACTIVITY_CONSTANTS.DATE_FORMAT);
+            return moment(date).fromNow();
         }
 
         function getPullRequestAction(action, pullRequest) {
-            return action === 'closed' && pullRequest.merged ? 'merged' : action;
+            return action === ACTIVITY_CONSTANTS.CLOSED && pullRequest.merged ? ACTIVITY_CONSTANTS.MERGED : action;
         }
 
         return {

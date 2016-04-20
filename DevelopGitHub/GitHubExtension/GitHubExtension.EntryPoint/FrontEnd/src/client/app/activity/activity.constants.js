@@ -8,7 +8,9 @@
                     'ACTIVITY_PATH_POSTFIX': '-activity.html',
                     'EXTERNAL_ACTIVITY_ITEMS_PER_PAGE': 30,
                     'FIRST_PAGE': 1,
-                    'DATE_FORMAT': 'HH:mm:ss DD.MM.YYYY'
+                    'DATE_FORMAT': 'HH:mm:ss DD.MM.YYYY',
+                    'CLOSED': 'closed',
+                    'MERGED': 'merged'
                 };
             })()
         );
