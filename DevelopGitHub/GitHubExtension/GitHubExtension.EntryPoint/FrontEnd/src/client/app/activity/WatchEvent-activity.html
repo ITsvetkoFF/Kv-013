@@ -9,7 +9,7 @@
             {{activity.actor.login}} {{i18n.ADD_STAR_TO}} {{activity.repo.name}}
         </h4>
         <time class="pull-right" datetime="{{activity.created_at}}">
-            {{activity.created_at | date: 'H:mm:ss dd.MM.yyyy'}}
+            {{formatDate(activity.created_at)}}
         </time>
     </div>
 </div>

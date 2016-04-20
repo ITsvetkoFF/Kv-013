@@ -8,15 +8,18 @@
         '$templateCache',
         '$compile',
         'logger',
+        'moment',
         'ACTIVITY_CONSTANTS',
         'i18n'
     ];
 
     // Directive gets template from templateCache base on property type of activity that is passed to it
-    function ActivityDirective($templateCache, $compile, logger, ACTIVITY_CONSTANTS, i18n) {
+    function ActivityDirective($templateCache, $compile, logger, moment, ACTIVITY_CONSTANTS, i18n) {
         function link(scope, element) {
             var type = scope.activity.type;
             scope.i18n = i18n.message;
+            scope.formatDate = formatDate;
+            scope.getPullRequestAction = getPullRequestAction;
 
             // We have new type of activity from GitHub
             if (!type) {
@@ -32,6 +35,14 @@
             );
             element.html(template).show();
             $compile(element.contents())(scope);
+        }
+
+        function formatDate(date) {
+            return moment(date).format(ACTIVITY_CONSTANTS.DATE_FORMAT);
+        }
+
+        function getPullRequestAction(action, pullRequest) {
+            return action === 'closed' && pullRequest.merged ? 'merged' : action;
         }
 
         return {

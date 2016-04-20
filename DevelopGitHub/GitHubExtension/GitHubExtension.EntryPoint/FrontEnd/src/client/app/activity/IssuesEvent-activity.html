@@ -11,7 +11,7 @@
             </a>
         </h4>
         <time class="pull-right" datetime="{{activity.created_at}}">
-            {{activity.created_at | date: 'H:mm:ss dd.MM.yyyy'}}
+            {{formatDate(activity.created_at)}}
         </time>
     </div>
 </div>

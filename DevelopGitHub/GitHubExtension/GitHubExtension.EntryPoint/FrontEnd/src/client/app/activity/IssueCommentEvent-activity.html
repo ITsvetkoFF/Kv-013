@@ -12,6 +12,8 @@
             </a>
         </h4>
         <pre>{{activity.payload.comment.body}}</pre>
-        <time class="pull-right" datetime="{{activity.created_at}}">{{activity.created_at | date: 'H:mm:ss dd.MM.yyyy'}}</time>
+        <time class="pull-right" datetime="{{activity.created_at}}">
+            {{formatDate(activity.created_at)}}
+        </time>
     </div>
 </div>
