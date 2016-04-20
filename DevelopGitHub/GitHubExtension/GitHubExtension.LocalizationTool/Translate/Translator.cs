@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,9 +175,13 @@ namespace GitHubExtension.LocalizationTool.Translate
         private void SaveTranslationResult(Task<JObject> result, Lang language)
         {
             var i = 0;
-            foreach (var item in result.Result.GetValue(JsonTextParameter))
+            foreach (var value in result.Result.GetValue(JsonTextParameter).Select(item => item.ToString()))
             {
-                TranslationData[i][language] = item.ToString();
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    TranslationData[i][language] = value;
+                }
+
                 i++;
             }
         }
