@@ -193,11 +193,6 @@
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
-    <Content Include="FrontEnd\src\client\app\login\auth.service.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.controller.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.html" />
-    <Content Include="FrontEnd\src\client\app\login\login.module.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.route.js" />
     <Content Include="FrontEnd\src\client\app\repos\github-data.factory.js" />
     <Content Include="FrontEnd\src\client\app\repos\repos.controller.js" />
     <Content Include="FrontEnd\src\client\app\repos\repos.html" />
@@ -222,6 +217,8 @@
     <Content Include="FrontEnd\src\client\app\stats\stats.html" />
     <Content Include="FrontEnd\src\client\app\stats\stats.module.js" />
     <Content Include="FrontEnd\src\client\app\stats\stats.route.js" />
+    <Content Include="FrontEnd\src\client\app\user\user.module.js" />
+    <Content Include="FrontEnd\src\client\app\user\user.service.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
     <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />

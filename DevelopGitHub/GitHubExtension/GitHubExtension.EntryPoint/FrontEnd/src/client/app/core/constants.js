@@ -6,7 +6,7 @@
         .module('app.core')
         .constant('toastr', toastr)
         .constant('moment', moment)
-        .constant('API_URL', (function() {
+        .constant('API_URL', (function () {
             var resource = 'http://localhost:50859/api/';
             return {
                 BASE_URL: resource,
