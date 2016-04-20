@@ -4,7 +4,7 @@
         xmlns:loc="clr-namespace:GitHubExtension.LocalizationTool"
         Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="icon.ico" MinHeight="400">
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static loc:MainWindow.AddRowRoutedCmd}" Executed="AddEmptyDataRow" />
+        <CommandBinding Command="{x:Static loc:MainWindow.AddRowRoutedCmd}" Executed="AddEmptyRow" />
         <CommandBinding Command="{x:Static loc:MainWindow.ClearTableRoutedCmd}" Executed="ClearTranslationData" />
         <CommandBinding Command="{x:Static loc:MainWindow.OpenJsonRoutedCmd}" Executed="OpenJson" />
         <CommandBinding Command="{x:Static loc:MainWindow.SaveAsJsonRoutedCmd}" Executed="SaveJson" />
@@ -32,7 +32,7 @@
                 <MenuItem Header="Exit" HorizontalAlignment="Left" Width="200" Click="Close"/>
             </MenuItem>
             <MenuItem Header="Table">
-                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Click="AddEmptyDataRow" InputGestureText="Ctrl+R"/>
+                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Click="AddEmptyRow" InputGestureText="Ctrl+R"/>
                 <MenuItem Header="Delete row" HorizontalAlignment="Left" Width="200" InputGestureText="Del"/>
                 <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Click="ClearTranslationData" InputGestureText="Ctrl+N"/>
             </MenuItem>

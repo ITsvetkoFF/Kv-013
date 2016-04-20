@@ -66,7 +66,7 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         public string GenerateJson(Lang language)
         {
-            Translator.RemoveEmptyDataRows();
+            Translator.RemoveEmptyRows();
             var result = new StringBuilder();
             result.Append("{\"");
             result.Append(Translator.GetLang(language));
@@ -94,10 +94,10 @@ namespace GitHubExtension.LocalizationTool.Translate
         {
             foreach (var element in translation)
             {
-                var index = Contains(element.Key);
+                var index = IndexOfNamedElement(element.Key);
                 if (index == -1)
                 {
-                    Translator.AddNewRowToTranslationData(language, element);
+                    Translator.AddNewRow(language, element);
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        private int Contains(string key)
+        private int IndexOfNamedElement(string key)
         {
             for (var i = 0; i < TranslationData.Count; i++)
             {

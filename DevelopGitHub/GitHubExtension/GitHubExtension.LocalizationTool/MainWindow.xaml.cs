@@ -61,14 +61,14 @@ namespace GitHubExtension.LocalizationTool
             Table.ItemsSource = TranslationData;
         }
 
-        private void AddEmptyDataRow(object sender, RoutedEventArgs e)
+        private void AddEmptyRow(object sender, RoutedEventArgs e)
         {
             TranslationData.Add(new TranslationDataRow());
         }
 
         private void SaveJson(object sender, RoutedEventArgs e)
         {
-            Translator.RemoveEmptyDataRows();
+            Translator.RemoveEmptyRows();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
                 File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJson(value));
@@ -85,7 +85,7 @@ namespace GitHubExtension.LocalizationTool
                 JsonHelper.ReadJsonFromFile(value);
             }
 
-            Translator.RemoveEmptyDataRows();
+            Translator.RemoveEmptyRows();
             ShowInformationMessageBox("Oppened!");
         }
 

@@ -85,7 +85,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        public void AddNewRowToTranslationData(Lang language, KeyValuePair<string, JToken> element)
+        public void AddNewRow(Lang language, KeyValuePair<string, JToken> element)
         {
             var line = new TranslationDataRow(element.Key);
             line[language] = element.Value.ToString();
@@ -101,7 +101,7 @@ namespace GitHubExtension.LocalizationTool.Translate
 
             Lang sourceLanguageEnum;
             Lang targetLanguageEnum;
-            TargetLanguageEnum(ref sourceLanguage, ref targetLanguage, out sourceLanguageEnum, out targetLanguageEnum);
+            LanguageCheck(ref sourceLanguage, ref targetLanguage, out sourceLanguageEnum, out targetLanguageEnum);
 
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
 
@@ -120,7 +120,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             SaveTranslationResult(result, targetLanguageEnum);
         }
 
-        public void RemoveEmptyDataRows()
+        public void RemoveEmptyRows()
         {
             for (var i = 0; i < TranslationData.Count; i++)
             {
@@ -131,7 +131,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        private static void TargetLanguageEnum(ref string sourceLanguage, ref string targetLanguage, out Lang sourceLanguageEnum, out Lang targetLanguageEnum)
+        private static void LanguageCheck(ref string sourceLanguage, ref string targetLanguage, out Lang sourceLanguageEnum, out Lang targetLanguageEnum)
         {
             sourceLanguageEnum = GetLang(sourceLanguage);
             targetLanguageEnum = GetLang(targetLanguage);
