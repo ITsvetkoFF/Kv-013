@@ -16,7 +16,7 @@
                 LOGOUT: resource + 'account/logout',
                 internalActivityUrl: resource + 'activity/internal',
                 externalActivityUrl: resource + 'activity/external?page=',
-                UPLOADPHOTO: resource + 'account/avatar'
+                UPLOADPHOTO: resource + 'account/avatar',
 
                 GET_REPOBYNAME: baseUserStats + '/commits',
                 GET_FOLLOWERS: baseUserStatsInfo + '/followers',
