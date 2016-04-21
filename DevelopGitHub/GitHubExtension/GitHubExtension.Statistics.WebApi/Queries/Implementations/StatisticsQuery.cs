@@ -80,8 +80,8 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
                 foreach (var item in repositories)
                 {
                     ICollection<int> commitsInYear = await _gitHubQuery.GetCommitsRepository(userName, token, item.Name);
-                    ICollection<int> commitsInMouth = _gitHubQuery.ToMounth(commitsInYear);
-                    commitsRepositories.Add(commitsInMouth);
+                    ICollection<int> commitsInMonths = _gitHubQuery.ToMonths(commitsInYear);
+                    commitsRepositories.Add(commitsInMonths);
                 }
                
             return commitsRepositories;
@@ -97,6 +97,12 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
         {
             ICollection<int> commitsForYear = _gitHubQuery.ToGroupCommits(commitsEverRepository);
             return commitsForYear;
+        }
+
+        public async Task<ICollection<int>> GetToMonths(ICollection<int> commits)
+        {
+            ICollection<int> commitsMonths = _gitHubQuery.ToMonths(commits);
+            return commitsMonths;
         }
 
         public DateTime GetTimeFrom()

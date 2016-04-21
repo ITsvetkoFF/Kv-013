@@ -6,7 +6,7 @@ namespace GitHubExtension.Statistics.WebApi.Mappers.GitHub
 {
     public static class GitHubMapper
     {
-        public static List<int> ToMounth(this IGitHubQuery gitHubQuery, ICollection<int> commits)
+        public static List<int> ToMonths(this IGitHubQuery gitHubQuery, ICollection<int> commits)
         {
             List<int> listOfCommits = new List<int>();
             int countWeeksInMonth = 4;
