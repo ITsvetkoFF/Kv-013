@@ -25,26 +25,26 @@
                         <hr/>
                         <div class="blockquote-box blockquote-primary clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-music glyphicon-lg">{{vm.userInfo.repositoryCount}}</span>
+                                <span class="glyphicon glyphicon-music glyphicon-lg">{{vm.RepositoriesCount}}</span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.USERREPOSITORIES}} : {{vm.userInfo.repositoryCount}}
+                                {{vm.i18n.message.USERREPOSITORIES}} : {{vm.RepositoriesCount}}
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-info clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{vm.userInfo.folowingCount}}</span>
+                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{vm.Following}}</span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.FOLLOWING}}({{vm.userInfo.folowingCount}})
+                                {{vm.i18n.message.FOLLOWING}}({{vm.Following}})
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{vm.userInfo.followerCount}}</span>
+                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{vm.Followers}}</span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.FOLLOWER}}({{vm.userInfo.followerCount}})
+                                {{vm.i18n.message.FOLLOWER}}({{vm.Followers}})
                             </h4>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                 <span class="glyphicon glyphicon-bookmark"></span> {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
                                 <div class="dropdown pull-right form-group">
                                     <div>
-                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repos" ng-change="vm.getCommitsFromCurrent(repo)">
+                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repositories" ng-change="vm.getCommitsFromCurrent(repo)">
                                             <option value="">---Please select---</option>
                                         </select>
                                     </div>
@@ -63,7 +63,6 @@
                             </form>
                         </div>
                         <div class="panel panel-primary">
-                           
                             <div style="padding: 10px;">
                                 <canvas id="line"
                                         class="chart chart-line" chart-data="vm.reposData"

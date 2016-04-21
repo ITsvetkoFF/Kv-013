@@ -25,7 +25,7 @@
                 GET_ACTIVITYMONTHS: baseUserStats + '/activity-months',
                 GET_REPOSITORIES: baseUserStats + '/repositories',
                 GET_COMMITSREPOSITORIES: baseUserStats + '/repositories/commits',
-                GET_GROUPCOMMITS: baseUserStats + 'repositories/group-commits'
+                GET_GROUPCOMMITS: baseUserStats + '/repositories/group-commits'
             };
         })());
 })();

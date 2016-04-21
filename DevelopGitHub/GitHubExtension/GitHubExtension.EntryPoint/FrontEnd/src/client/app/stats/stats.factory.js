@@ -4,21 +4,56 @@
 
     module.factory('statsFactory', statsFactory);
 
-    statsFactory.$inject = ['$http', 'baseStatsUrl'];
+    statsFactory.$inject = ['$http', 'API_URL'];
 
-    function statsFactory($http, baseUrl) {
-        var statsUrl = baseUrl.apiStatsUrl;
+    function statsFactory($http, API_URL) {
 
-        function getCommitsFromRepos() {
+        function getFollowers() {
             return $http({
                 method: 'GET',
-                url: baseUrl.apiGetCommitsRepos
+                url: API_URL.GET_FOLLOWERS
             });
         }
-        function getRepos() {
+
+        function getFollowing() {
             return $http({
                 method: 'GET',
-                url: baseUrl.apiGetRepos
+                url: API_URL.GET_FOLLOWING
+            });
+        }
+
+        function getRepositoriesCount() {
+            return $http({
+                method: 'GET',
+                url: API_URL.GET_REPOSITORIESCOUNT
+            });
+        }
+
+        function getActibityMonths() {
+            return $http({
+                method: 'GET',
+                url: API_URL.GET_ACTIVITYMONTHS
+            });
+        }
+
+        function getRepositories() {
+            return $http({
+                method: 'GET',
+                url: API_URL.GET_REPOSITORIES
+            });
+        }
+
+        function getCommitsRepositories() {
+            return $http({
+                method: 'GET',
+                url: API_URL.GET_COMMITSREPOSITORIES
+            });
+        }
+
+        function getGroupCommits() {
+            return $http({
+                method: 'GET',
+                url: API_URL.GET_GROUPCOMMITS
             });
         }
 
@@ -26,13 +61,18 @@
             return $http({
                 method: 'GET',
                 dataType: 'string',
-                url: baseUrl.apiGetCommitsRepos + '/' + repo.name
+                url: API_URL.GET_REPOBYNAME + '/' + repo.name
             });
         }
 
         return {
-            getCommitsFromRepos: getCommitsFromRepos,
-            getRepos: getRepos,
+            getFollowers: getFollowers,
+            getFollowing: getFollowing,
+            getRepositoriesCount: getRepositoriesCount,
+            getActibityMonths: getActibityMonths,
+            getRepositories: getRepositories,
+            getCommitsRepositories: getCommitsRepositories,
+            getGroupCommits: getGroupCommits,
             getCommitsFromCurrentRepo: getCommitsFromCurrentRepo
         };
     }

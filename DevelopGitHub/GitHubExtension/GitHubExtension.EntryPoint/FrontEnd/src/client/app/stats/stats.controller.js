@@ -9,30 +9,61 @@
 
     function StatsController(statsFactory, i18n) {
         var vm = this;
-        vm.test = 1;
 
         vm.rep = '';
         vm.i18n = i18n;
-     
-        getCommits();
-        getRepos();
 
-        function getCommits() {
-            return statsFactory.getCommitsFromRepos().then(function (response) {
-                vm.reposData = [response.data.commits];
-                vm.labels = response.data.months;
-                vm.barData = [response.data.commits];
-                vm.eachDate = response.data.commitsForEverRepository;
-                vm.eachSeries = response.data.repositories.map(function (el) {
-                    return el.name;
-                });
-                vm.userInfo = response.data.userInfo;
+        getFollowers();
+        getFollowing();
+        getRepositoriesCount();
+        getActivityMonths();
+        getRepositories();
+        getCommitsRepositories();
+        getGroupCommits();
+
+        function getFollowers() {
+            return statsFactory.getFollowers().then(function(response) {
+                vm.Followers = response.data;
             });
         }
 
-        function getRepos() {
-            return statsFactory.getRepos().then(function(response) {
-                vm.Repos = response.data;
+        function getFollowing() {
+            return statsFactory.getFollowing().then(function (response) {
+                vm.Following = response.data;
+            });
+        }
+
+        function getRepositoriesCount() {
+            return statsFactory.getRepositoriesCount().then(function (response) {
+                vm.RepositoriesCount = response.data;
+            });
+        }
+
+        function getActivityMonths() {
+            return statsFactory.getActibityMonths().then(function (response) {
+                vm.labels = response.data;
+            });
+        }
+
+        function getRepositories() {
+            return statsFactory.getRepositories().then(function (response) {
+                vm.Repositories = response.data;
+                vm.eachSeries = response.data.map(function(el) {
+                    return el.name;
+                });
+            });
+        }
+
+        function getCommitsRepositories() {
+            return statsFactory.getCommitsRepositories().then(function (response) {
+                vm.eachDate = response.data;
+            });
+        }
+
+        function getGroupCommits() {
+            return statsFactory.getGroupCommits().then(function (response) {
+                vm.barData = [response.data];
+                vm.reposData = [response.data];
             });
         }
 
