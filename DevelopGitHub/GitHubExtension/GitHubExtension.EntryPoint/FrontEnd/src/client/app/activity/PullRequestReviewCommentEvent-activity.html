@@ -1,0 +1,19 @@
+<div class="media activity">
+    <div class="media-left">
+        <a href="#">
+            <img class="media-object activity-avatar" ng-src="{{activity.actor.avatar_url}}">
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{activity.actor.login}} {{i18n.COMMENTED_ON_PULL_REQUEST}}
+            <a ng-href="{{activity.payload.comment.html_url}}">
+                {{activity.repo.name}}#{{activity.payload.pull_request.number}}
+            </a>
+        </h4>
+        <pre>{{activity.payload.comment.body}}</pre>
+        <time class="pull-right" datetime="{{activity.created_at}}">
+            {{formatDate(activity.created_at)}}
+        </time>
+    </div>
+</div>

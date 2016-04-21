@@ -12,6 +12,8 @@
                 BASE_URL: resource,
                 LOGIN: resource + 'account/ExternalLogin?provider=GitHub',
                 LOGOUT: resource + 'account/logout',
+                internalActivityUrl: resource + 'activity/internal',
+                externalActivityUrl: resource + 'activity/external?page=',
                 UPLOADPHOTO: resource + 'account/avatar'
             };
         })());

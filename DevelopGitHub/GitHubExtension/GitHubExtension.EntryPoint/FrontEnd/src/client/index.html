@@ -52,12 +52,14 @@
     <script src="./Frontend/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="./Frontend/bower_components/angular-cookies/angular-cookies.js"></script>
     <!-- endbower -->
+    <script src="./Frontend/bower_components/moment/locale/uk.js"></script>
     <!-- endbuild -->
 
     <!-- build:js js/app.js -->
 
     <!-- inject:js -->
     <script src="./FrontEnd/src/client/app/app.module.js"></script>
+    <script src="./FrontEnd/src/client/app/activity/activity.module.js"></script>
     <script src="./FrontEnd/src/client/app/admin/admin.module.js"></script>
     <script src="./FrontEnd/src/client/app/blocks/exception/exception.module.js"></script>
     <script src="./FrontEnd/src/client/app/blocks/localization/localization.module.js"></script>
@@ -71,6 +73,9 @@
     <script src="./FrontEnd/src/client/app/user/user.module.js"></script>
     <script src="./FrontEnd/src/client/app/userpreferences/userpreferences.module.js"></script>
     <script src="./FrontEnd/src/client/app/widgets/widgets.module.js"></script>
+    <script src="./FrontEnd/src/client/app/activity/activity.constants.js"></script>
+    <script src="./FrontEnd/src/client/app/activity/activity.directive.js"></script>
+    <script src="./FrontEnd/src/client/app/activity/activity.service.js"></script>
     <script src="./FrontEnd/src/client/app/admin/admin.controller.js"></script>
     <script src="./FrontEnd/src/client/app/admin/admin.route.js"></script>
     <script src="./FrontEnd/src/client/app/blocks/exception/exception-handler.provider.js"></script>
@@ -105,6 +110,7 @@
     <!-- endinject -->
 
     <!-- inject:templates:js -->
+    <script src="./FrontEnd/src/client/../../.tmp/templates.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 </div>

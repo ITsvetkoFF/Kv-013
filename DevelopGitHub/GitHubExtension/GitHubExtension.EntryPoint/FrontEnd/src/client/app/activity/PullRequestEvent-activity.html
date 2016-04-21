@@ -1,0 +1,22 @@
+<div class="media activity">
+    <div class="media-left">
+        <img class="media-object activity-avatar" ng-src="{{activity.actor.avatar_url}}">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">
+            {{activity.actor.login}}
+            {{getPullRequestAction(activity.payload.action, activity.payload.pull_request)}}
+            {{i18n.PULL_REQUEST}}
+            <a ng-href="{{activity.payload.pull_request.html_url}}">
+                {{activity.repo.name}}#{{activity.payload.pull_request.number}}
+            </a>
+        </h4>
+        {{activity.payload.pull_request.commits}} {{i18n.COMMITS}} {{activity.payload.pull_request.additions}}
+        {{i18n.ADDITIONS}}
+        {{activity.payload.pull_request.deletions}} {{i18n.DELETIONS}} {{activity.payload.pull_request.changed_files}}
+        {{i18n.CHANGED_FILES}}
+        <time class="pull-right" datetime="{{activity.created_at}}">
+            {{formatDate(activity.created_at)}}
+        </time>
+    </div>
+</div>

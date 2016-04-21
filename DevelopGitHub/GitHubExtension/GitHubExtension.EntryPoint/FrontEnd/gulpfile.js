@@ -145,6 +145,10 @@ gulp.task('less-watcher', function() {
  */
 gulp.task('templatecache', ['clean-code'], function() {
     log('Creating an AngularJS $templateCache');
+    var options = config.templateCache.options;
+    if (args.vs) {
+        options.root = 'Frontend/src/client/app';
+    }
 
     return gulp
         .src(config.htmltemplates)
@@ -192,9 +196,12 @@ gulp.task('wiredep', function() {
 gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
     log('Wire up css into the html, after files are ready');
 
+    var templateCache = config.temp + config.templateCache.file;
+
     return gulp
         .src(config.index)
         .pipe(inject(config.css))
+        .pipe(inject(templateCache, 'templates'))
         .pipe(gulp.dest(config.client));
 });
 
