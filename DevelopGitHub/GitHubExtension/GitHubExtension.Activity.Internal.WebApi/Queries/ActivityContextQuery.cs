@@ -14,12 +14,12 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
 
         public IOrderedQueryable<ActivityEvent> Activities
         {
-            get { return _activityContext.Activities.AsNoTracking(); }
+            get { return _activityContext.Activities; }
         }
 
         public IOrderedQueryable<ActivityType> ActivitiesTypes
         {
-            get { return _activityContext.ActivitiesTypes.AsNoTracking(); }
+            get { return _activityContext.ActivitiesTypes; }
         }
     }
 }
