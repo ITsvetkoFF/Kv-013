@@ -32,10 +32,10 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
             if (!response.IsSuccessStatusCode)
                 throw new UnsuccessfullGitHubRequestException();
 
-            var dto = JsonConvert.DeserializeObject<GitHubUserModel>(await response.Content.ReadAsStringAsync());
-            dto.Email = dto.Email ?? await GetPrimaryEmailForUser(token);
+            var gitHubUser = JsonConvert.DeserializeObject<GitHubUserModel>(await response.Content.ReadAsStringAsync());
+            gitHubUser.Email = gitHubUser.Email ?? await GetPrimaryEmailForUser(token);
 
-            return dto;
+            return gitHubUser;
         }
 
         public async Task<string> GetPrimaryEmailForUser(string token)
