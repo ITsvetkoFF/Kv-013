@@ -9,59 +9,48 @@
     function statsFactory($http, API_URL) {
 
         function getFollowers() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_FOLLOWERS
-            });
+            return $http.get(API_URL.GET_FOLLOWERS);
         }
 
         function getFollowing() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_FOLLOWING
-            });
+            return $http.get(API_URL.GET_FOLLOWING);
         }
 
         function getRepositoriesCount() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_REPOSITORIESCOUNT
-            });
+            return $http.get(API_URL.GET_REPOSITORIESCOUNT);
         }
 
-        function getActibityMonths() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_ACTIVITYMONTHS
-            });
+        function getActivityMonths() {
+            return $http.get(API_URL.GET_ACTIVITYMONTHS);
         }
 
         function getRepositories() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_REPOSITORIES
-            });
+            return $http.get(API_URL.GET_REPOSITORIES);
+        }
+
+        function getRepositoriesNames() {
+            return $http.get(API_URL.GET_REPOSITORIES).then(successCbMap);
         }
 
         function getCommitsRepositories() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_COMMITSREPOSITORIES
-            });
+            return $http.get(API_URL.GET_COMMITSREPOSITORIES);
         }
 
         function getGroupCommits() {
-            return $http({
-                method: 'GET',
-                url: API_URL.GET_GROUPCOMMITS
-            });
+            return $http.get(API_URL.GET_GROUPCOMMITS).then(successCb);
         }
 
         function getCommitsFromCurrentRepo(repo) {
-            return $http({
-                method: 'GET',
-                dataType: 'string',
-                url: API_URL.GET_REPOBYNAME + '/' + repo.name
+            return $http.get(API_URL.GET_REPOBYNAME + '/' + repo.name).then(successCb);
+        }
+
+        function successCb(response) {
+            return [response.data];
+        }
+
+        function successCbMap(response) {
+            return response.data.map(function(el) {
+                return el.name;
             });
         }
 
@@ -69,8 +58,9 @@
             getFollowers: getFollowers,
             getFollowing: getFollowing,
             getRepositoriesCount: getRepositoriesCount,
-            getActibityMonths: getActibityMonths,
+            getActivityMonths: getActivityMonths,
             getRepositories: getRepositories,
+            getRepositoriesNames: getRepositoriesNames,
             getCommitsRepositories: getCommitsRepositories,
             getGroupCommits: getGroupCommits,
             getCommitsFromCurrentRepo: getCommitsFromCurrentRepo

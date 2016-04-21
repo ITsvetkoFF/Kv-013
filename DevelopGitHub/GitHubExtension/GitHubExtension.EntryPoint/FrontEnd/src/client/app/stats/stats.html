@@ -68,7 +68,9 @@
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">{{vm.Followers}}</span>
+                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">
+                                    {{vm.Followers}}
+                                </span>
                             </div>
                             <h4>
                                 {{vm.i18n.message.FOLLOWER}}({{vm.Followers}})
@@ -79,7 +81,8 @@
                         <hr/>
                         <div class="panel-heading" style="background-color: #f0ad4e;">
                             <form class="form-inline" role="form">
-                                <span class="glyphicon glyphicon-bookmark"></span> {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
+                                <span class="glyphicon glyphicon-bookmark"/>
+                                    {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
                                 <div class="dropdown pull-right form-group">    
                                     <div>
                                         <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repositories" ng-change="vm.getCommitsFromCurrent(repo)">
