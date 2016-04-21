@@ -246,7 +246,6 @@
     <Content Include="FrontEnd\src\client\app\blocks\localization\en-US.json" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\template.ejs" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\uk.json" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.controller.js.rej" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

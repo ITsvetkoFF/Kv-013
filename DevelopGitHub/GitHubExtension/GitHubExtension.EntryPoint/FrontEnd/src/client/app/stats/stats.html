@@ -51,29 +51,29 @@
                         <div class="blockquote-box blockquote-primary clearfix">
                             <div class="square pull-left">
                                 <span class="glyphicon glyphicon-music glyphicon-lg">
-                                    {{vm.RepositoriesCount}}
+                                    {{vm.repositoriesCount}}
                                 </span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.USERREPOSITORIES}} : {{vm.RepositoriesCount}}
+                                {{vm.i18n.message.USER_REPOSITORIES}}({{vm.repositoriesCount}})
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-info clearfix">
                             <div class="square pull-left">
-                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{vm.Following}}</span>
+                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{vm.following}}</span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.FOLLOWING}}({{vm.Following}})
+                                {{vm.i18n.message.FOLLOWING}}({{vm.following}})
                             </h4>
                         </div>
                         <div class="blockquote-box blockquote-warning clearfix">
                             <div class="square pull-left">
                                 <span class="glyphicon glyphicon-warning-sign glyphicon-lg">
-                                    {{vm.Followers}}
+                                    {{vm.followers}}
                                 </span>
                             </div>
                             <h4>
-                                {{vm.i18n.message.FOLLOWER}}({{vm.Followers}})
+                                {{vm.i18n.message.FOLLOWER}}({{vm.followers}})
                             </h4>
                         </div>
                     </div>
@@ -82,10 +82,10 @@
                         <div class="panel-heading" style="background-color: #f0ad4e;">
                             <form class="form-inline" role="form">
                                 <span class="glyphicon glyphicon-bookmark"/>
-                                    {{vm.i18n.message.STATISTICSREPOSITORYYEAR}}
+                                    {{vm.i18n.message.STATISTICS_REPOSITORY_YEAR}}
                                 <div class="dropdown pull-right form-group">    
                                     <div>
-                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.Repositories" ng-change="vm.getCommitsFromCurrent(repo)">
+                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.repositories" ng-change="vm.getCommitsFromCurrent(repo)">
                                             <option value="">---Please select---</option>
                                         </select>
                                     </div>
@@ -108,7 +108,7 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         <span class="glyphicon glyphicon-bookmark"/>
-                                        {{vm.i18n.message.STATISTICSEACHREPOSITORYYEAR}}
+                                        {{vm.i18n.message.STATISTICS_EACH_REPOSITORY_YEAR}}
                                     </h3>
                                 </div>
                                 <div style="padding: 10px;">
@@ -123,7 +123,7 @@
                                 <div class="panel-heading" style="background-color: red;">
                                     <h3 class="panel-title">
                                         <span class="glyphicon glyphicon-bookmark"/>
-                                        {{vm.i18n.message.OVERALLSTATISTICSYEAR}}
+                                        {{vm.i18n.message.OVER_ALL_STATISTICS_YEAR}}
                                     </h3>
                                 </div>
                                 <div style="padding: 10px;">

@@ -31,11 +31,12 @@
         "DELETIONS": "deletions",
         "PREFERENCES":  "Preferences",
         "STATISTICS": "Statistics",
-        "USERREPOSITORIES": "Users repositories",
+        "USER_REPOSITORIES": "Users repositories",
         "FOLLOWING": "Following",
         "FOLLOWER": "Follower",
-        "STATISTICSREPOSITORYYEAR": "Statistics for the repository for the year",
-        "STATISTICSEACHREPOSITORYYEAR": "Statistics for each repository for the year",
-        "OVERALLSTATISTICSYEAR": "Overall statistics for the year"
+        "STATISTICS_REPOSITORY_YEAR": "Statistics for the repository for the year",
+        "STATISTICS_EACH_REPOSITORY_YEAR": "Statistics for each repository for the year",
+        "OVER_ALL_STATISTICS_YEAR": "Overall statistics for the year",
+        "WAITING": "wait"
     }
 }

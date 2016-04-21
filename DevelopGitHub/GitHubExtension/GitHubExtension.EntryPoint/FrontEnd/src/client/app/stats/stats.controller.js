@@ -9,9 +9,18 @@
 
     function StatsController($q, statsFactory, i18n) {
         var vm = this;
-
-        vm.rep = '';
         vm.i18n = i18n;
+
+        vm.followers = i18n.message.WAITING;
+        vm.following = i18n.message.WAITING;
+        vm.repositoriesCount = i18n.message.WAITING;
+        vm.labels = [];
+        vm.repositories = [];
+        vm.eachSeries = [];
+        vm.eachData = [];
+        vm.barData = [];
+        vm.reposData = [];
+        vm.rep = '';
 
         activate();
 
@@ -32,19 +41,19 @@
 
         function getFollowers() {
             return statsFactory.getFollowers().then(function(response) {
-                vm.Followers = response.data;
+                vm.followers = response.data;
             });
         }
 
         function getFollowing() {
             return statsFactory.getFollowing().then(function (response) {
-                vm.Following = response.data;
+                vm.following = response.data;
             });
         }
 
         function getRepositoriesCount() {
             return statsFactory.getRepositoriesCount().then(function (response) {
-                vm.RepositoriesCount = response.data;
+                vm.repositoriesCount = response.data;
             });
         }
 
@@ -56,7 +65,7 @@
 
         function getRepositories() {
             return statsFactory.getRepositories().then(function (response) {
-                vm.Repositories = response.data;
+                vm.repositories = response.data;
                 vm.eachSeries = response.data;
             });
         }
