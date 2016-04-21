@@ -29,7 +29,7 @@
         }
 
         function getRepositoriesNames() {
-            return $http.get(API_URL.GET_REPOSITORIES).then(successCbMap);
+            return $http.get(API_URL.GET_REPOSITORIES).then(mapToNames);
         }
 
         function getCommitsRepositories() {
@@ -37,18 +37,18 @@
         }
 
         function getGroupCommits() {
-            return $http.get(API_URL.GET_GROUPCOMMITS).then(successCb);
+            return $http.get(API_URL.GET_GROUPCOMMITS).then(wrappToArray);
         }
 
         function getCommitsFromCurrentRepo(repo) {
-            return $http.get(API_URL.GET_REPOBYNAME + '/' + repo.name).then(successCb);
+            return $http.get(API_URL.GET_REPOBYNAME + '/' + repo.name).then(wrappToArray);
         }
 
-        function successCb(response) {
+        function wrappToArray(response) {
             return [response.data];
         }
 
-        function successCbMap(response) {
+        function mapToNames(response) {
             return response.data.map(function(el) {
                 return el.name;
             });
