@@ -56,7 +56,7 @@
 
         function getCommitsRepositories() {
             return statsFactory.getCommitsRepositories().then(function (response) {
-                vm.eachDate = response.data;
+                vm.eachData = response.data;
             });
         }
 
