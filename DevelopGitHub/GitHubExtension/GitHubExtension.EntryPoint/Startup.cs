@@ -20,9 +20,9 @@ using Owin;
 using Owin.Security.Providers.GitHub;
 using SimpleInjector.Integration.WebApi;
 
-[assembly: OwinStartup(typeof(Startup))]
 
-namespace GitHubExtension.EntryPoint
+[assembly: OwinStartup(typeof(Startup))]
+namespace GitHubExtension.EntryPoint     
 {
     using GitHubExtension.Infrastructure.Extensions;
 
@@ -43,7 +43,6 @@ namespace GitHubExtension.EntryPoint
               async  (context, next) =>
                     { await next(); });
 
-
             var config = ConfigureWebApi();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -62,27 +61,25 @@ namespace GitHubExtension.EntryPoint
 
             app.UseWebApi(config);
 
-            Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion<SecurityContext, Security.DAL.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, Security.DAL.Migrations.Configuration>());
         }
-
+        
         private HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
-
-            config.MapHttpAttributeRoutes();
+            
+            config.MapHttpAttributeRoutes();           
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            jsonFormatter.SerializerSettings.PreserveReferencesHandling =
-                Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Filters.Add(new LoggingFilterAttribute());
 
             return config;
         }
 
-        private void ConfigureOAuth(IAppBuilder app)
+        void ConfigureOAuth(IAppBuilder app)
         {
             //use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

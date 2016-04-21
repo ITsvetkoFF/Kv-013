@@ -50,32 +50,12 @@
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.FileSystems, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.FileSystems.3.0.1\lib\net45\Microsoft.Owin.FileSystems.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.StaticFiles, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.StaticFiles.3.0.1\lib\net45\Microsoft.Owin.StaticFiles.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -128,107 +108,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FrontEnd\gulp.config.js" />
-    <Content Include="FrontEnd\gulp.png" />
-    <Content Include="FrontEnd\gulpfile.js" />
-    <Content Include="FrontEnd\karma.conf.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.controller.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.html" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.module.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.route.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.route.spec.js" />
-    <Content Include="FrontEnd\src\client\app\app.module.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.spec.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\exception\exception.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\exception\exception.module.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\i18n.factory.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\localization.module.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\logger\logger.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\logger\logger.module.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\router\router-helper.provider.js" />
-    <Content Include="FrontEnd\src\client\app\blocks\router\router.module.js" />
-    <Content Include="FrontEnd\src\client\app\core\404.html" />
-    <Content Include="FrontEnd\src\client\app\core\config.js" />
-    <Content Include="FrontEnd\src\client\app\core\constants.js" />
-    <Content Include="FrontEnd\src\client\app\core\core.module.js" />
-    <Content Include="FrontEnd\src\client\app\core\core.route.js" />
-    <Content Include="FrontEnd\src\client\app\core\core.route.spec.js" />
-    <Content Include="FrontEnd\src\client\app\core\dataservice.js" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.controller.js" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.html" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.module.js" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.route.js" />
-    <Content Include="FrontEnd\src\client\app\dashboard\dashboard.route.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-to-nav.controller.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.directive.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.html" />
-    <Content Include="FrontEnd\src\client\app\layout\layout.module.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.controller.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\shell.html" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
-    <Content Include="FrontEnd\src\client\app\login\auth.service.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.controller.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.html" />
-    <Content Include="FrontEnd\src\client\app\login\login.module.js" />
-    <Content Include="FrontEnd\src\client\app\login\login.route.js" />
-    <Content Include="FrontEnd\src\client\app\repos\github-data.factory.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.controller.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.html" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.module.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.route.js" />
-    <Content Include="FrontEnd\src\client\app\repos\userdetails.html" />
-    <Content Include="FrontEnd\src\client\app\roles\collaboratorsdetails.html" />
-    <Content Include="FrontEnd\src\client\app\roles\github-collaborators.factory.js" />
-    <Content Include="FrontEnd\src\client\app\roles\reposdetails.html" />
-    <Content Include="FrontEnd\src\client\app\roles\roles.controller.js" />
-    <Content Include="FrontEnd\src\client\app\roles\roles.html" />
-    <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
-    <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.controller.js" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.factory.js" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.html" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.module.js" />
-    <Content Include="FrontEnd\src\client\app\stats\stats.route.js" />
-    <Content Include="FrontEnd\src\client\app\widgets\ht-img-person.directive.js" />
-    <Content Include="FrontEnd\src\client\app\widgets\ht-widget-header.directive.js" />
-    <Content Include="FrontEnd\src\client\app\widgets\widget-header.html" />
-    <Content Include="FrontEnd\src\client\app\widgets\widgets.module.js" />
-    <Content Include="FrontEnd\src\client\index.html" />
-    <Content Include="FrontEnd\src\client\specs.html" />
-    <Content Include="FrontEnd\src\client\test-helpers\bind-polyfill.js" />
-    <Content Include="FrontEnd\src\client\test-helpers\mock-data.js" />
-    <Content Include="FrontEnd\src\server\app.js" />
-    <Content Include="FrontEnd\src\server\data.js" />
-    <Content Include="FrontEnd\src\server\favicon.ico" />
-    <Content Include="FrontEnd\src\server\routes.js" />
-    <Content Include="FrontEnd\src\server\utils\404.js" />
-    <Content Include="index.html" />
-    <Content Include="packages.config" />
-    <Content Include="FrontEnd\.bowerrc" />
-    <Content Include="FrontEnd\.editorconfig" />
-    <Content Include="FrontEnd\.gitignore" />
-    <Content Include="FrontEnd\.jscsrc" />
-    <Content Include="FrontEnd\.jshintrc" />
-    <Content Include="FrontEnd\bower.json" />
-    <Content Include="FrontEnd\package.json" />
-    <Content Include="FrontEnd\README.md" />
-    <Content Include="FrontEnd\src\client\styles\styles.less" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\en-US.json" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\template.ejs" />
-    <Content Include="FrontEnd\src\client\app\blocks\localization\uk.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\LoggingFilterAttribute.cs" />
