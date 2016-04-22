@@ -32,7 +32,7 @@
             return !!$cookies.get('userName');
         }
 
-        function getRepositories() {
+        function loadRepositories() {
             return $http({
                 method: 'GET',
                 url: API_URL.REPOSITORY
@@ -74,7 +74,7 @@
             isAuthenticated: isAuthenticated,
             getCurrentRepository: getCurrentRepository,
             setCurrentRepository: setCurrentRepository,
-            getRepositories: getRepositories,
+            loadRepositories: loadRepositories,
             getRepositoryList: getRepositoryList
         };
     }

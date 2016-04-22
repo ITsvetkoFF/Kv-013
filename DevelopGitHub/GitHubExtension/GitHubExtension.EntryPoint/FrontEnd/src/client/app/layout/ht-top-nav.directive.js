@@ -31,7 +31,7 @@
             function activate() {
                 getNavRoutes();
                 if (vm.user.isAuthenticated()) {
-                  vm.user.getRepositories();
+                  vm.user.loadRepositories();
                 };
             }
 
