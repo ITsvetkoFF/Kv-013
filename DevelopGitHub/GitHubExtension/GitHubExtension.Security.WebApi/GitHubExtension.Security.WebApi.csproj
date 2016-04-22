@@ -120,6 +120,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\HttpRequestMessage\HttpRequestMessageExtension.cs" />
+    <Compile Include="Extensions\OwinContext\OwinContextAuthentication.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextExtension.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
@@ -128,11 +129,13 @@
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Exceptions\TokenNotFoundException.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
+    <Compile Include="Mappers\UserRepositoryRoleMapper.cs" />
     <Compile Include="Models\CollaboratorModel.cs" />
     <Compile Include="Models\GitHubRepositoryModel.cs" />
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\UpdateSecurityRoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserReturnModel.cs" />
     <Compile Include="Package\SecurityPackage.cs" />
