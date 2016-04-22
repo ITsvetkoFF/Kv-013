@@ -133,7 +133,6 @@
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
-    <Compile Include="Models\UserCookieModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserReturnModel.cs" />
     <Compile Include="Package\SecurityPackage.cs" />

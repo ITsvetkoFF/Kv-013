@@ -9,7 +9,6 @@ using System.Web.Routing;
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Exceptions;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
 using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
@@ -55,7 +54,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         [HttpGet]
         [Authorize(Roles = RoleConstants.Admin)]
-        [Route(RouteConstants.GetUser, Name = "GetUserById")]
+        [Route(RouteConstants.GetUser)]
         public async Task<IHttpActionResult> GetUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -86,41 +85,43 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [HttpPatch]
         [AllowAnonymous]
         [Route(RouteConstants.AssignRolesToUser)]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId,
-            [FromBody] string roleToAssign)
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
                 return NotFound();
 
-            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
-
-            if (repositoryRole != null)
-                appUser.UserRepositoryRoles.Remove(repositoryRole);
-
+            DeleteUserRepositoryRoles(repoId, appUser);
             SecurityRole role = _securityContextQuery.GetUserRole(roleToAssign);
 
             if (role == null)
             {
-                ModelState.AddModelError("role",
-                    string.Format("Roles '{0}' does not exists in the system", roleToAssign));
+                ModelState.AddModelError(RoleConstants.Role, string.Format(RoleConstants.RoleNull, roleToAssign));
                 return BadRequest(ModelState);
             }
 
-            appUser.UserRepositoryRoles.Add(new UserRepositoryRole()
-            {
-                RepositoryId = repoId,
-                SecurityRoleId = role.Id
-            });
-
+            appUser.UserRepositoryRoles.Add(new UserRepositoryRole(){ RepositoryId = repoId, SecurityRoleId = role.Id });
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
             if (!updateResult.Succeeded)
             {
-                ModelState.AddModelError("Role", "Failed to remove user roles");
+                ModelState.AddModelError(RoleConstants.Role, RoleConstants.FailedRemoveRole);
                 return BadRequest(ModelState);
             }
+            await AddUserClaim(repoId, roleToAssign, appUser);
+            return Ok();
+        }
 
+        private static void DeleteUserRepositoryRoles(int repoId, User appUser)
+        {
+            var repositoryRole = appUser.UserRepositoryRoles.FirstOrDefault(r => r.RepositoryId == repoId);
+
+            if (repositoryRole != null)
+                appUser.UserRepositoryRoles.Remove(repositoryRole);
+        }
+
+        private async Task<IHttpActionResult> AddUserClaim(int repoId, string roleToAssign, User appUser)
+        {
             var claimsIdentity =
                 await appUser.GenerateUserIdentityAsync(_userManager, DefaultAuthenticationTypes.ApplicationCookie);
             var existingClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Value == repoId.ToString());
@@ -135,7 +136,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Ok();
+            return null;
         }
 
         [HttpGet]
@@ -162,8 +163,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             await UpdateClaims(user, tokenClaim);
 
-            UserCookieModel userCookie = new UserCookieModel() { IsAuth = true, UserName = user.UserName };
-            GetRequestContext.SetUserCookie(userCookie);
+            GetRequestContext.SetUserCookie(user.UserName);
             return Redirect(RouteConstants.RedirectHome);
         }
 

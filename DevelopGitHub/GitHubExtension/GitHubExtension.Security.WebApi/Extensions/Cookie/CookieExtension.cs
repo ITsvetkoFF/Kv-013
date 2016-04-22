@@ -10,10 +10,9 @@ namespace GitHubExtension.Security.WebApi.Extensions.Cookie
 {
     public static class CookieExtensions
     {
-        public static void SetUserCookie(this RequestContext httpContext, UserCookieModel userCookie)
+        public static void SetUserCookie(this RequestContext httpContext, string userName)
         {
-            httpContext.HttpContext.Response.Cookies["userName"].Value = userCookie.UserName;
-            httpContext.HttpContext.Response.Cookies["isAuth"].Value = userCookie.IsAuth.ToString();
+            httpContext.HttpContext.Response.Cookies["userName"].Value = userName;
         }
     }
 }
