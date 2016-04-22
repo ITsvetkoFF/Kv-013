@@ -18,6 +18,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li data-ng-show="vm.user.isAuthenticated()"><a style="cursor:default">Your current repository:</a></li>
                 <li data-ng-show="vm.user.isAuthenticated()">
                     <div class="panel-heading">
                         <select
@@ -28,8 +29,8 @@
                     </div>
                 </li>
                 <li data-ng-show="vm.user.isAuthenticated()"><a>{{vm.i18n.WELCOME}} {{vm.user.userName()}}!</a></li>
-                <li data-ng-hide="vm.user.isAuthenticated()"><a href="" data-ng-click="vm.user.login()">{{vm.i18n.LOGIN}}</a></li>
-                <li data-ng-show="vm.user.isAuthenticated()"><a href="" data-ng-click="vm.user.logout()">{{vm.i18n.LOGOUT}}</a></li>
+                <li data-ng-hide="vm.user.isAuthenticated()"><a href="" data-ng-click="vm.user.login()"><span class="glyphicon glyphicon-log-in"></span> {{vm.i18n.LOGIN}}</a></li>
+                <li data-ng-show="vm.user.isAuthenticated()"><a href="" data-ng-click="vm.user.logout()"><span class="glyphicon glyphicon-log-out"></span> {{vm.i18n.LOGOUT}}</a></li>
             </ul>
         </div>
     </div>

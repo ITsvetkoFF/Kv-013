@@ -14,7 +14,6 @@
 
         function login() {
             location.href = API_URL.LOGIN;
-            getRepositories();
         }
 
         function logout() {
