@@ -34,10 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingConstants.cs" />
     <Compile Include="GitHubConstants.cs" />
     <Compile Include="RoleConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteConstants.cs" />
+    <Compile Include="RoleValidationConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

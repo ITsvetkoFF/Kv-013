@@ -11,7 +11,7 @@ using FluentAssertions;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Models;
-using GitHubExtension.Security.WebApi.Services;
+using GitHubExtension.Security.WebApi.Queries.Interfaces;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -45,7 +45,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGithubService>(), Substitute.For<ISecurityContext>(), userManager);
+            AccountController controller = new AccountController(Substitute.For<IGitHubQuery>(), userManager, Substitute.For<ISecurityContextQuery>());
 
             return controller;
         }

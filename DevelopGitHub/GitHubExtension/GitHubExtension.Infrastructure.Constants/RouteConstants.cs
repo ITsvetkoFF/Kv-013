@@ -9,6 +9,7 @@
         public const string ApiUser = "api/user";
 
         // static segments
+        public const string Logout = "logout";
         public const string User = "user";
         public const string Repository = "/repos";
         public const string Register = "register";
@@ -26,6 +27,7 @@
         public const string GitHubId = "/{gitHubId}";
 
         // routes
+        public const string AccountLogout = Logout;
         public const string AssignRolesToUser = ApiRepository + RepositoryId + Collaborators + GitHubId;
         public const string GetUserByName = User + UserName;
         public const string GetUser = User + Id_guid;

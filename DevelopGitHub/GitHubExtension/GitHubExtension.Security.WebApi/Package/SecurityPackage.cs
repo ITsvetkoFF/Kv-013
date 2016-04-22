@@ -5,7 +5,8 @@ using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.WebApi.Services;
+using GitHubExtension.Security.WebApi.Queries.Implementations;
+using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SimpleInjector;
@@ -22,8 +23,8 @@ namespace GitHubExtension.Security.WebApi.Package
             container.Register<SecurityRoleManager>(Lifestyle.Scoped);
             container.Register<IUserStore<User>, GitHubUserStore>(Lifestyle.Scoped);
             container.Register<IRoleStore<IdentityRole, string>, GitHubRoleStore>(Lifestyle.Scoped);
-            container.Register<IGithubService, GithubService>(Lifestyle.Singleton);
-            container.Register<IAuthService, AuthService>(Lifestyle.Scoped);
+            container.Register<IGitHubQuery, GitHubQuery>(Lifestyle.Singleton);
+            container.Register<ISecurityContextQuery, SecurityContextQuery>(Lifestyle.Scoped);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             container.Register(typeof (IValidator<>), assemblies, Lifestyle.Singleton);
         }
