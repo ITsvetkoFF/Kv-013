@@ -19,11 +19,13 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li data-ng-show="vm.user.isAuthenticated()">
-                    <select
-                        ng-model="vm.repo"
-                        ng-options="repo as repo.name for repo in vm.user.getRepositoryList()"
-                        ng-change="vm.user.setCurrentRepository(vm.repo)">
-                    </select>
+                    <div class="panel-heading">
+                        <select
+                            ng-model="vm.repo"
+                            ng-options="repo as repo.name for repo in vm.user.getRepositoryList()"
+                            ng-change="vm.user.setCurrentRepository(vm.repo)">
+                        </select>
+                    </div>
                 </li>
                 <li data-ng-show="vm.user.isAuthenticated()"><a>{{vm.i18n.WELCOME}} {{vm.user.userName()}}!</a></li>
                 <li data-ng-hide="vm.user.isAuthenticated()"><a href="" data-ng-click="vm.user.login()">{{vm.i18n.LOGIN}}</a></li>
