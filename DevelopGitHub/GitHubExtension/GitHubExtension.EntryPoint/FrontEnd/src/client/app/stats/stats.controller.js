@@ -20,6 +20,7 @@
         vm.eachData = [];
         vm.barData = [];
         vm.reposData = [];
+        vm.getCommitsFromCurrent = getCommitsFromCurrent;
         vm.rep = '';
 
         activate();
@@ -89,7 +90,7 @@
             });
         }
 
-        vm.getCommitsFromCurrent = function (repo) {
+        function getCommitsFromCurrent(repo) {
             return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
                 vm.reposData = response;
             });
