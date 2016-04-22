@@ -10,7 +10,7 @@ namespace GitHubExtension.Security.WebApi.Mappers
 {
     public static class UserRepositoryRoleMapper
     {
-        public static UserRepositoryRole ToEntity(this UpdateSecurityRoleModel securityRoleModel)
+        public static UserRepositoryRole ToUserRepositoryRole(this UpdateSecurityRoleModel securityRoleModel)
         {
             UserRepositoryRole userRepositoryRole = new UserRepositoryRole()
             {
