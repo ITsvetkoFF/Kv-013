@@ -99,7 +99,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (role == null)
             {
-                ModelState.AddModelError(RoleConstants.Role, string.Format(ValidationConstants.RoleNull, roleToAssign));
+                ModelState.AddModelError(RoleConstants.Role, string.Format(RoleValidationConstants.RoleNull, roleToAssign));
                 return BadRequest(ModelState);
             }
 
@@ -110,7 +110,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (!updateResult.Succeeded)
             {
-                ModelState.AddModelError(RoleConstants.Role, ValidationConstants.FailedRemoveRole);
+                ModelState.AddModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
                 return BadRequest(ModelState);
             }
             await AddUserClaim(repoId, roleToAssign, appUser);
@@ -137,7 +137,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (!addClaimResult.Succeeded)
             {
-                ModelState.AddModelError(RoleConstants.Role, ValidationConstants.FailedRemoveRole);
+                ModelState.AddModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
                 return BadRequest(ModelState);
             }
 
