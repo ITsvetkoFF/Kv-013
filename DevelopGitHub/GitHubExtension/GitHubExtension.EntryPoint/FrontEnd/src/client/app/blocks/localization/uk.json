@@ -4,11 +4,11 @@
         "ADMIN": "Адміністратор",
         "LOGIN": "Вхід в систему",
         "LOGOUT":  "Вихід з системи",
+        "WELCOME": "Привіт",
         "REPOS": "Сховища",
         "COLLABORATORS": "Коллаборатори",
         "Repositories" :  "Репозиторії",
         "MESSAGES": "Повідомлення",
-        "AUTHORIZATION": "Авторизація",
         "PUSHED_TO": "завантажив в",
         "AT": "від",
         "ADD_STAR_TO": "додав зірку до",
@@ -37,6 +37,9 @@
         "STATISTICS_REPOSITORY_YEAR": "Статистика для репозиторія за рік",
         "STATISTICS_EACH_REPOSITORY_YEAR": "Статистика користувача коммітів за рік по всім репозиторіям",
         "OVER_ALL_STATISTICS_YEAR": "Статистика коммітів користувача на протязі року",
-        "WAITING": "Зачекай"
+        "WAITING": "Зачекай",
+        "CHANGE_REPOSITORY_MESSAGE": "Репозиторій змінено",
+        "CHANGE_REPOSITORY_ERROR_MESSAGE": "Помилка при зміні репозиторію",
+        "REPOSITORIES_LOAD_MESSAGE": "Репозиторії завантажені"
     }
 }

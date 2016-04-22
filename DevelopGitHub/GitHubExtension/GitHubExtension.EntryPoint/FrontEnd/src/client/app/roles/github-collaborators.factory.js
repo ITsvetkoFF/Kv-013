@@ -4,11 +4,11 @@
 
     module.factory('githubCollaborators', githubCollaborators);
 
-    githubCollaborators.$inject = ['$http'];
+    githubCollaborators.$inject = ['$http', 'API_URL'];
 
     /* @ngInject */
-    function githubCollaborators($http) {
-        var baseUrl = 'http://localhost:50859/api';
+    function githubCollaborators($http, API_URL) {
+        var baseUrl = API_URL.BASE_URL;
         function getCollaborators(repo) {
             return $http({
                 method: 'GET',
@@ -16,17 +16,10 @@
             }).then(function (response) { return response.data; });
         }
 
-        function getRepos() {
-            return $http({
-                method: 'GET',
-                url: baseUrl + '/user/repos'
-            });
-        }
-
         function getRoles() {
             return $http({
                 method: 'GET',
-                url: baseUrl + '/roles'
+                url: API_URL.ROLES
             });
         }
 
@@ -39,23 +32,10 @@
             });
         }
 
-        function updateCurrentProject(repo) {
-            return $http({
-                method: 'PATCH',
-                dataType: 'json',
-                url: baseUrl + '/repos/current',
-                data: {
-                    Id: repo.id,
-                }
-            });
-        }
-
         return {
             getCollaborators: getCollaborators,
-            getRepos: getRepos,
             getRoles: getRoles,
-            assignRole: assignRole,
-            updateCurrentProject: updateCurrentProject
+            assignRole: assignRole
         };
     }
 })();

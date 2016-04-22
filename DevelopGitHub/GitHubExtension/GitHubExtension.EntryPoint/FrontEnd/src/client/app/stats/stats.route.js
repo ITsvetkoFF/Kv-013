@@ -23,7 +23,7 @@
                     title: 'Stats',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-lock">' + i18n.message.STATISTICS + '</i>'
+                        content: '<i class="fa fa-lock"></i>' + i18n.message.STATISTICS
                     }
                 }
             }

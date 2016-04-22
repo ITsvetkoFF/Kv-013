@@ -22,9 +22,7 @@
         /* @ngInject */
         function TopNavController(userService, i18n, $state, routerHelper) {
             var vm = this;
-
-            // add i18n for localization
-            vm.i18n = i18n;
+            vm.i18n = i18n.message;
             var states = routerHelper.getStates();
             vm.user = userService;
 
@@ -32,6 +30,9 @@
 
             function activate() {
                 getNavRoutes();
+                if (vm.user.isAuthenticated()) {
+                  vm.user.loadRepositories();
+                };
             }
 
             function getNavRoutes() {

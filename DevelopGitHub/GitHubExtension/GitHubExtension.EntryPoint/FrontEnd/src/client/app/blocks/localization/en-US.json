@@ -4,11 +4,11 @@
         "ADMIN": "Admin",
         "LOGIN": "Login",
         "LOGOUT":  "Logout",
+        "WELCOME": "Welcome",
         "REPOS": "Repositories",
         "COLLABORATORS": "Collaborators",
         "Repositories" : "Repositories",
         "MESSAGES": "Messages",
-        "AUTHORIZATION": "Authorization",
         "PUSHED_TO": "pushed to",
         "AT": "at",
         "ADD_STAR_TO": "add star to",
@@ -37,6 +37,9 @@
         "STATISTICS_REPOSITORY_YEAR": "Statistics for the repository for the year",
         "STATISTICS_EACH_REPOSITORY_YEAR": "Statistics for each repository for the year",
         "OVER_ALL_STATISTICS_YEAR": "Overall statistics for the year",
-        "WAITING": "wait"
+        "WAITING": "wait",
+        "CHANGE_REPOSITORY_MESSAGE": "Repository changed",
+        "CHANGE_REPOSITORY_ERROR_MESSAGE": "Failed to change repository",
+        "REPOSITORIES_LOAD_MESSAGE": "Repositories loaded"
     }
 }
