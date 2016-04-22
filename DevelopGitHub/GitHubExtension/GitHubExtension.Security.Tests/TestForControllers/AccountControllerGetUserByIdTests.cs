@@ -45,7 +45,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGitHubQuery>(), Substitute.For<ISecurityContext>(), userManager);
+            AccountController controller = new AccountController(Substitute.For<IGitHubQuery>(), userManager, Substitute.For<ISecurityContextQuery>());
 
             return controller;
         }

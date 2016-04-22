@@ -120,6 +120,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\HttpRequestMessage\HttpRequestMessageExtension.cs" />
+    <Compile Include="Extensions\SecurityContext\SecurityContextExtension.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Mappers\RepositoryMapper.cs" />
@@ -140,7 +141,9 @@
     <Compile Include="Provider\GitHubAuthProvider.cs" />
     <Compile Include="Queries\Constant\GitHubQueryConstant.cs" />
     <Compile Include="Queries\Implementations\GitHubQuery.cs" />
+    <Compile Include="Queries\Implementations\SecurityContextQuery.cs" />
     <Compile Include="Queries\Interfaces\IGitHubQuery.cs" />
+    <Compile Include="Queries\Interfaces\ISecurityContextQuery.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Validators\Int32Validator.cs" />
     <Compile Include="Validators\NullValidator.cs" />

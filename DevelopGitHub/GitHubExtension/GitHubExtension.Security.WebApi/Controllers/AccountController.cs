@@ -12,6 +12,7 @@ using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Exceptions;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
+using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
 using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
@@ -26,18 +27,18 @@ namespace GitHubExtension.Security.WebApi.Controllers
     {
         #region private fields
         private readonly IGitHubQuery _gitHubQuery;
-        private readonly ISecurityContext _securityContext;
         private readonly ApplicationUserManager _userManager;
+        private readonly ISecurityContextQuery _securityContextQuery;
         #endregion
 
         public AccountController(
             IGitHubQuery gitHubQuery,
-            ISecurityContext securityContext,
-            ApplicationUserManager userManager)
+            ApplicationUserManager userManager,
+            ISecurityContextQuery securityContextQuery)
         {
             _gitHubQuery = gitHubQuery;
-            _securityContext = securityContext;
             _userManager = userManager;
+            _securityContextQuery = securityContextQuery;
         }
 
         public RequestContext GetRequestContext
@@ -97,7 +98,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (repositoryRole != null)
                 appUser.UserRepositoryRoles.Remove(repositoryRole);
 
-            var role = await _securityContext.SecurityRoles.FirstOrDefaultAsync(r => r.Name == roleToAssign);
+            SecurityRole role = _securityContextQuery.GetUserRole(roleToAssign);
+
             if (role == null)
             {
                 ModelState.AddModelError("role",
@@ -178,8 +180,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             string userRole = RoleConstants.Admin;
-            SecurityRole role = await _securityContext.SecurityRoles
-                .FirstOrDefaultAsync(r => r.Name == userRole);
+            SecurityRole role = _securityContextQuery.GetUserRole(userRole);
+
             if (role == null)
                 return InternalServerError();
 

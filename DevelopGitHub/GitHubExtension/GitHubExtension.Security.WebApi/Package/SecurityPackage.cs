@@ -24,6 +24,7 @@ namespace GitHubExtension.Security.WebApi.Package
             container.Register<IUserStore<User>, GitHubUserStore>(Lifestyle.Scoped);
             container.Register<IRoleStore<IdentityRole, string>, GitHubRoleStore>(Lifestyle.Scoped);
             container.Register<IGitHubQuery, GitHubQuery>(Lifestyle.Singleton);
+            container.Register<ISecurityContextQuery, SecurityContextQuery>(Lifestyle.Scoped);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             container.Register(typeof (IValidator<>), assemblies, Lifestyle.Singleton);
         }
