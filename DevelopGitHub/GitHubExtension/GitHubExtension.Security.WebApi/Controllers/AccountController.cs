@@ -100,7 +100,9 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            appUser.UserRepositoryRoles.Add(new UserRepositoryRole(){ RepositoryId = repoId, SecurityRoleId = role.Id });
+            UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel(){ RepositoryId = repoId,  SecurityRole = role};
+            appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToEntity());
+
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
             if (!updateResult.Succeeded)
