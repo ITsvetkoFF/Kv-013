@@ -96,7 +96,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (role == null)
             {
-                ModelState.AddModelError(RoleConstants.Role, string.Format(RoleConstants.RoleNull, roleToAssign));
+                ModelState.AddModelError(RoleConstants.Role, string.Format(ValidationConstants.RoleNull, roleToAssign));
                 return BadRequest(ModelState);
             }
 
@@ -105,7 +105,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (!updateResult.Succeeded)
             {
-                ModelState.AddModelError(RoleConstants.Role, RoleConstants.FailedRemoveRole);
+                ModelState.AddModelError(RoleConstants.Role, ValidationConstants.FailedRemoveRole);
                 return BadRequest(ModelState);
             }
             await AddUserClaim(repoId, roleToAssign, appUser);
@@ -132,7 +132,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             if (!addClaimResult.Succeeded)
             {
-                ModelState.AddModelError("Role", "Failed to remove user roles");
+                ModelState.AddModelError(RoleConstants.Role, ValidationConstants.FailedRemoveRole);
                 return BadRequest(ModelState);
             }
 
