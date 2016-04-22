@@ -12,6 +12,8 @@
         'app.activity',
         'app.userpreferences',
         'ui.bootstrap',
-        'ngCookies'
+        'ngCookies',
+        'app.user',
+        'app.stats'
     ]);
 })();

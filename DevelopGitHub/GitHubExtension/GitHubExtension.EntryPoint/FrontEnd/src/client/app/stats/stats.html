@@ -1,0 +1,141 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-danger btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-list-alt"/>
+                                    <br/>
+                                    Apps
+                                </a>
+                                <a class="btn btn-warning btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-bookmark"/>
+                                    <br/>Bookmarks
+                                </a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-signal"/>
+                                    <br/>Reports
+                                </a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-comment"/>
+                                    <br/>Comments
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a class="btn btn-success btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-user"/>
+                                    <br/>Users
+                                </a>
+                                <a class="btn btn-info btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-file"/>
+                                    <br/>Notes
+                                </a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-picture"/>
+                                    <br/>Photos
+                                </a>
+                                <a class="btn btn-primary btn-lg btn-style" role="button">
+                                    <span class="glyphicon glyphicon-tag"/>
+                                    <br/>Tags
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <hr/>
+                        <div class="blockquote-box blockquote-primary clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-music glyphicon-lg">
+                                    {{vm.repositoriesCount}}
+                                </span>
+                            </div>
+                            <h4>
+                                {{vm.i18n.message.USER_REPOSITORIES}}({{vm.repositoriesCount}})
+                            </h4>
+                        </div>
+                        <div class="blockquote-box blockquote-info clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-info-sign glyphicon-lg">{{vm.following}}</span>
+                            </div>
+                            <h4>
+                                {{vm.i18n.message.FOLLOWING}}({{vm.following}})
+                            </h4>
+                        </div>
+                        <div class="blockquote-box blockquote-warning clearfix">
+                            <div class="square pull-left">
+                                <span class="glyphicon glyphicon-warning-sign glyphicon-lg">
+                                    {{vm.followers}}
+                                </span>
+                            </div>
+                            <h4>
+                                {{vm.i18n.message.FOLLOWER}}({{vm.followers}})
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <hr/>
+                        <div class="panel-heading" style="background-color: #f0ad4e;">
+                            <form class="form-inline" role="form">
+                                <span class="glyphicon glyphicon-bookmark"/>
+                                    {{vm.i18n.message.STATISTICS_REPOSITORY_YEAR}}
+                                <div class="dropdown pull-right form-group">    
+                                    <div>
+                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.repositories" ng-change="vm.getCommitsFromCurrent(repo)">
+                                            <option value="">---Please select---</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel panel-primary" >
+                            <div style="padding: 10px;">
+                                <canvas id="line"
+                                        class="chart chart-line" chart-data="vm.reposData"
+                                        chart-labels="vm.labels" chart-legend="true" chart-series="vm.series">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr/>
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <span class="glyphicon glyphicon-bookmark"/>
+                                        {{vm.i18n.message.STATISTICS_EACH_REPOSITORY_YEAR}}
+                                    </h3>
+                                </div>
+                                <div style="padding: 10px;">
+                                    <canvas id="line" class="chart chart-line" chart-data="vm.eachData"
+                                            chart-labels="vm.labels" chart-legend="true" chart-series="vm.eachSeries">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading" style="background-color: red;">
+                                    <h3 class="panel-title">
+                                        <span class="glyphicon glyphicon-bookmark"/>
+                                        {{vm.i18n.message.OVER_ALL_STATISTICS_YEAR}}
+                                    </h3>
+                                </div>
+                                <div style="padding: 10px;">
+                                    <canvas id="bar" class="chart chart-bar"
+                                            chart-data="vm.barData" chart-labels="vm.labels">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

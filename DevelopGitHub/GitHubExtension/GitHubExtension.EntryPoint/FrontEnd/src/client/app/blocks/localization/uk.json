@@ -29,6 +29,14 @@
         "COMMITS" : "комітів",
         "ADDITIONS": "додавань",
         "DELETIONS": "видалень",
-        "PREFERENCES":  "Налаштування"
+        "PREFERENCES":  "Налаштування",
+        "STATISTICS": "Статистика",
+        "USER_REPOSITORIES": "К-ть репозиторіїв",
+        "FOLLOWING": "Підписаний",
+        "FOLLOWER": "Підписники",
+        "STATISTICS_REPOSITORY_YEAR": "Статистика для репозиторія за рік",
+        "STATISTICS_EACH_REPOSITORY_YEAR": "Статистика користувача коммітів за рік по всім репозиторіям",
+        "OVER_ALL_STATISTICS_YEAR": "Статистика коммітів користувача на протязі року",
+        "WAITING": "Зачекай"
     }
 }
