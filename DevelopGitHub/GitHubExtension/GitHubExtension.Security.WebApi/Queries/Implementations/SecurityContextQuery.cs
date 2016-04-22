@@ -22,7 +22,7 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
 
         public IQueryable<SecurityRole> SecurityRoles
         {
-            get { return _securityContext.SecurityRoles.AsNoTracking(); }
+            get { return _securityContext.SecurityRoles; }
         }
     }
 }
