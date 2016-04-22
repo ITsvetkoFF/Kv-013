@@ -49,11 +49,17 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
                 throw new UnsuccessfullGitHubRequestException();
 
             var emails = JArray.Parse(await response.Content.ReadAsStringAsync());
+            var email = GetEmailFromResponse(emails);
+            return email;
+        }
+
+        private static string GetEmailFromResponse(JArray emails)
+        {
             var email = "";
 
             foreach (var typedEntry in emails.Children()
                 .Select(emailEntry => JsonConvert.DeserializeAnonymousType
-                    (emailEntry.ToString(), new { Email = "", Primary = false }))
+                    (emailEntry.ToString(), new {Email = "", Primary = false}))
                 .Where(typedEntry => typedEntry.Primary))
             {
                 email = typedEntry.Email;
