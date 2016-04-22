@@ -120,8 +120,8 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
            string userName = User.Identity.GetUserName();
 
            ICollection<int> commitsRepository = await _statisticsQuery.GetCommitsRepository(userName, token, name);
-
-           return commitsRepository;
+           ICollection<int> commitsRepositoryMonths = await _statisticsQuery.GetToMonths(commitsRepository);
+           return commitsRepositoryMonths;
         }
 
 

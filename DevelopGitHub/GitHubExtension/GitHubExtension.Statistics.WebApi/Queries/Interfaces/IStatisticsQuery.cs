@@ -16,5 +16,6 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Interfaces
         Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token);
         Task<ICollection<int>> GetCommitsRepository(string userName, string token, string repository);
         Task<ICollection<int>> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository);
+        Task<ICollection<int>> GetToMonths(ICollection<int> commits);
     }
 }
