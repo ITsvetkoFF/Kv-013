@@ -104,7 +104,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             }
 
             UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel(){ RepositoryId = repoId,  SecurityRole = role};
-            appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToEntity());
+            appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToUserRepositoryRole());
 
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
 
