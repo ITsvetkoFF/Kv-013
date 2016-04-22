@@ -6,19 +6,23 @@
      .module('app.roles')
      .controller('RolesController', RolesController);
 
-    RolesController.$inject = ['githubCollaborators', 'logger', '$q', 'i18n'];
+    RolesController.$inject = ['githubCollaborators', 'logger', 'i18n', 'userService'];
 
     /* @ngInject */
-    function RolesController(githubCollaborators, logger, $q, i18n) {
+    function RolesController(githubCollaborators, logger, i18n, userService) {
         var vm = this;
         vm.title = 'Roles';
         vm.i18n = i18n.message;
+        vm.repo = {};
         activate();
 
         function activate() {
             logger.info('Activated Roles View');
-            githubCollaborators.getRepos().then(onGetRepos, onError);
-            githubCollaborators.getRoles().then(onGetRoles, onError);
+            vm.repo = userService.getCurrentRepository();
+            if (!!vm.repo) {
+                githubCollaborators.getRoles().then(onGetRoles, onError);
+                githubCollaborators.getCollaborators(vm.repo).then(onGetCollaborators);
+            }
         }
 
         function onGetCollaborators (data) {
@@ -26,29 +30,13 @@
             vm.collaborators = data;
         }
 
-        function onGetRepos(response) {
-            logger.info('Repos Succeded');
-            vm.repositories = response.data;
-        }
-
         function onGetRoles(data) {
             logger.info('Roles Succeded');
             vm.roles = data;
         }
-        /**
-         *
-         * @param {object} collaborator
-         * @param {object} role
-         */
+
         vm.assignRole = function (collaborator, role) {
             githubCollaborators.assignRole(vm.repo, collaborator, role);
-        };
-
-        vm.setCurrentProjectAndGetCollaborators = function(repo) {
-            $q.all(githubCollaborators.updateCurrentProject(repo), getColaborators()).then(onError());
-            function getColaborators() {
-                return githubCollaborators.getCollaborators(repo).then(onGetCollaborators);
-            }
         };
 
         function onError(reason) {

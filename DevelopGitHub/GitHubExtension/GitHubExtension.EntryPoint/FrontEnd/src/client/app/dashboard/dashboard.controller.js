@@ -13,10 +13,6 @@
         // add localization
         vm.i18n = i18n.message;
         vm.userService = userService;
-        vm.news = {
-            title: 'GitHubExtension',
-            description: 'Hot Towel Angular is a SPA template for Angular developers.'
-        };
         vm.title = 'Dashboard';
         vm.currentPage = ACTIVITY_CONSTANTS.FIRST_PAGE;
 
