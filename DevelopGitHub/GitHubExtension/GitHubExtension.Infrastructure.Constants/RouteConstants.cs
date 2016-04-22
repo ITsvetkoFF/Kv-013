@@ -9,7 +9,6 @@
         public const string ApiUser = "api/user";
 
         // static segments
-        public const string Home = "http://localhost:50859/";
         public const string Logout = "logout";
         public const string User = "user";
         public const string Repository = "/repos";
@@ -29,7 +28,6 @@
 
         // routes
         public const string AccountLogout = Logout;
-        public const string RedirectHome = Home;
         public const string AssignRolesToUser = ApiRepository + RepositoryId + Collaborators + GitHubId;
         public const string GetUserByName = User + UserName;
         public const string GetUser = User + Id_guid;

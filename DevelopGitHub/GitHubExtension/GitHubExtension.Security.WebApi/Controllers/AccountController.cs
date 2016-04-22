@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
@@ -168,7 +169,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
             await UpdateClaims(user, tokenClaim);
 
             GetRequestContext.SetUserCookie(user.UserName);
-            return Redirect(RouteConstants.RedirectHome);
+            string homeUri = ConfigurationManager.AppSettings[AppSettingConstants.Uri];
+            return Redirect(homeUri);
         }
 
         [HttpPost]
