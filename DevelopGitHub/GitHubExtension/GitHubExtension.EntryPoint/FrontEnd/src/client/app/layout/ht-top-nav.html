@@ -18,7 +18,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li data-ng-show="vm.user.isAuthenticated()"><a style="cursor:default">Your current repository:</a></li>
+                <li data-ng-show="vm.user.isAuthenticated()"><a style="cursor:default">{{vm.i18n.CURRENT_REPOSITORY}}:</a></li>
                 <li data-ng-show="vm.user.isAuthenticated()">
                     <div class="panel-heading">
                         <select

@@ -5,6 +5,7 @@
         "LOGIN": "Вхід в систему",
         "LOGOUT":  "Вихід з системи",
         "WELCOME": "Привіт",
+        "CURRENT_REPOSITORY": "Ваш поточний репозиторій",
         "REPOS": "Сховища",
         "COLLABORATORS": "Коллаборатори",
         "Repositories" :  "Репозиторії",
