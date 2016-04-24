@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+
 using GitHubExtension.Statistics.WebApi.Mappers.Constant;
 
 namespace GitHubExtension.Statistics.WebApi.Extensions.HttpRequest

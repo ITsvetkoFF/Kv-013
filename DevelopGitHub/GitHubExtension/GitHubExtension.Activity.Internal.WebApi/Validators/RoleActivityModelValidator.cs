@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using GitHubExtension.Activity.Internal.WebApi.Models;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Validators

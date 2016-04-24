@@ -1,6 +1,6 @@
-﻿using System.Web.Routing;
-using GitHubExtension.Statistics.WebApi.Queries.Implementations;
+﻿using GitHubExtension.Statistics.WebApi.Queries.Implementations;
 using GitHubExtension.Statistics.WebApi.Queries.Interfaces;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
 

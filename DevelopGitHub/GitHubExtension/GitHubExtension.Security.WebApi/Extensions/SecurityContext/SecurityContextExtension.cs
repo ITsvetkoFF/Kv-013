@@ -1,5 +1,5 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
+
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 

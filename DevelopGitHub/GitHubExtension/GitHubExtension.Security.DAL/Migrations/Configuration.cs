@@ -1,10 +1,10 @@
+using System.Data.Entity.Migrations;
+
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 
 namespace GitHubExtension.Security.DAL.Migrations
 {
-    using System.Data.Entity.Migrations;
-
     public sealed class Configuration : DbMigrationsConfiguration<SecurityContext>
     {
         public Configuration()

@@ -5,5 +5,5 @@
         public RepositoryModel Forkee { get; set; }
     }
 
-    //Same as repository model
+    // Same as repository model
 }

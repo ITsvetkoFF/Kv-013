@@ -1,5 +1,7 @@
 ﻿using System;
+
 using FluentValidation;
+
 using SimpleInjector;
 
 namespace GitHubExtension.Security.WebApi.Validators.ValidatorFactories

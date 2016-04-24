@@ -22,12 +22,10 @@ using System.Runtime.InteropServices;
 [assembly: Guid("045a7065-6564-40d7-8a15-eeec1a0efb14")]
 
 // Version information for an assembly consists of the following four values:
-//
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
-//
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]

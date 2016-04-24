@@ -1,9 +1,9 @@
 ﻿using GitHubExtension.Security.DAL.Context;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-
 
 namespace GitHubExtension.Security.DAL.Infrastructure
 {
@@ -16,11 +16,10 @@ namespace GitHubExtension.Security.DAL.Infrastructure
         }
 
         public static SecurityRoleManager Create(
-            IdentityFactoryOptions<SecurityRoleManager> options,
-        IOwinContext context)
+            IdentityFactoryOptions<SecurityRoleManager> options, 
+            IOwinContext context)
         {
-            return new SecurityRoleManager(new
-            RoleStore<IdentityRole>(context.Get<SecurityContext>()));
+            return new SecurityRoleManager(new RoleStore<IdentityRole>(context.Get<SecurityContext>()));
         }
     }
 }

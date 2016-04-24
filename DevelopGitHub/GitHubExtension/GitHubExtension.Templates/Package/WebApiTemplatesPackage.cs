@@ -1,4 +1,5 @@
 ﻿using GitHubExtension.Templates.Services;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
 

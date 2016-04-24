@@ -1,6 +1,7 @@
 ﻿using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
 

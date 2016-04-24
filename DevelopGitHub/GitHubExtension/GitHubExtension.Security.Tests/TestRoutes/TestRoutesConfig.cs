@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+
 using GitHubExtension.Security.WebApi;
 
 namespace GitHubExtension.Security.Tests.TestRoutes
@@ -6,6 +7,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
     public class TestRoutesConfig
     {
         protected HttpConfiguration config;
+
         protected string url = "/";
 
         public TestRoutesConfig(string url)
@@ -14,7 +16,9 @@ namespace GitHubExtension.Security.Tests.TestRoutes
             WebApiConfig.Register(config);
             config.EnsureInitialized();
             if (url != null)
+            {
                 this.url += url + "/";
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,7 +17,9 @@ namespace GitHubExtension.Security.DAL.Infrastructure
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static ApplicationUserManager Create(
+            IdentityFactoryOptions<ApplicationUserManager> options, 
+            IOwinContext context)
         {
             SecurityContext db = context.Get<SecurityContext>();
             ApplicationUserManager manager = new ApplicationUserManager(new UserStore<User>(db));
@@ -28,7 +32,9 @@ namespace GitHubExtension.Security.DAL.Infrastructure
             return Users.FirstOrDefault(u => u.ProviderId == gitHubId);
         }
 
-        ApplicationUserManager IApplicationUserManager.Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        ApplicationUserManager IApplicationUserManager.Create(
+            IdentityFactoryOptions<ApplicationUserManager> options, 
+            IOwinContext context)
         {
             return Create(options, context);
         }

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+
 using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Queries
@@ -14,12 +15,18 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
 
         public IOrderedQueryable<ActivityEvent> Activities
         {
-            get { return _activityContext.Activities; }
+            get
+            {
+                return _activityContext.Activities;
+            }
         }
 
         public IOrderedQueryable<ActivityType> ActivitiesTypes
         {
-            get { return _activityContext.ActivitiesTypes; }
+            get
+            {
+                return _activityContext.ActivitiesTypes;
+            }
         }
     }
 }

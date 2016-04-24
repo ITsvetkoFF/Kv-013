@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using GitHubExtension.Notes.DAL.Model;
 
 namespace GitHubExtension.Notes.WebApi.Commands
@@ -16,6 +17,6 @@ namespace GitHubExtension.Notes.WebApi.Commands
         {
             notesContext.Notes.Add(noteEntity);
             await notesContext.SaveChangesAsync();
-        } 
+        }
     }
 }

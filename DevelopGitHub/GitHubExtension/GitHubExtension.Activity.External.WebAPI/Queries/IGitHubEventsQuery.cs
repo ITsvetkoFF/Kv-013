@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+
 using GitHubExtension.Activity.External.WebAPI.Models;
 
 namespace GitHubExtension.Activity.External.WebAPI.Queries

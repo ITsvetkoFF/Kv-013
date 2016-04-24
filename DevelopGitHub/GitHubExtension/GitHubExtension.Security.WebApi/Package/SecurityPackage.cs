@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Linq;
+
 using FluentValidation;
+
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Queries.Implementations;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
@@ -26,8 +30,7 @@ namespace GitHubExtension.Security.WebApi.Package
             container.Register<IGitHubQuery, GitHubQuery>(Lifestyle.Singleton);
             container.Register<ISecurityContextQuery, SecurityContextQuery>(Lifestyle.Scoped);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            container.Register(typeof (IValidator<>), assemblies, Lifestyle.Singleton);
+            container.Register(typeof(IValidator<>), assemblies, Lifestyle.Singleton);
         }
     }
 }
-
