@@ -18,7 +18,10 @@
 
         function logout() {
             $http.post(API_URL.LOGOUT, {}).then(function() {
-                $cookies.remove('userName');
+                var cookies = $cookies.getAll();
+                angular.forEach(cookies, function (value, key) {
+                    $cookies.remove(key);
+                });
                 $state.go('dashboard');
             });
         }
