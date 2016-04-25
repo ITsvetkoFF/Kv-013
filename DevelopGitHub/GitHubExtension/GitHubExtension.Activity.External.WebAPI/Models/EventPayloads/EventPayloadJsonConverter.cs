@@ -65,10 +65,9 @@ namespace GitHubExtension.Activity.External.WebAPI.Models.EventPayloads
                         GitHubEventTypeConstants.MemberEvent, 
                         () => new MemberEventPayloadModel()
                     }, 
-
-                    // public event has empty payload
                     { GitHubEventTypeConstants.PublicEvent, () => null }, 
                     {
+                        // public event has empty payload
                         // example can be found here https://gist.github.com/senioroman4uk/f9d7fc52de8d3332dff22d468fd7a57e
                         GitHubEventTypeConstants.PullRequestEvent, 
                         () => new PullRequestEventPayloadModel()

@@ -22,7 +22,7 @@
 
         public const string ExternalLogin = "externalLogin";
 
-        public const string GetByIdRepository = ApiRepository + Id_int;
+        public const string GetByIdRepository = ApiRepository + IdInt;
 
         public const string GetCollaboratorsForRepository = ApiRepository + RepositoryName + Collaborators;
 
@@ -30,16 +30,20 @@
 
         public const string GetRepositoryForCurrentUser = ApiUser + Repository;
 
-        public const string GetUser = User + Id_guid;
+        public const string GetUser = User + IdGuid;
 
         public const string GetUserByName = User + UserName;
 
         public const string GitHubId = "/{gitHubId}";
 
-        public const string Id_guid = "/{id:guid}";
+        public const string IdGuid = "/{id:guid}";
+
+        public const string Current = "/current";
+
+        public const string UpdateProject = ApiRepository + Current;
 
         // segments
-        public const string Id_int = "/{id:int}";
+        public const string IdInt = "/{id:int}";
 
         // static segments
         public const string Logout = "logout";

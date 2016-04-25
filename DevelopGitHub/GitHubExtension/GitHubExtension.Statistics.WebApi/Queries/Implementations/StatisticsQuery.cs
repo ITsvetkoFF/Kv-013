@@ -18,7 +18,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
             _gitHubQuery = gitHubQuery;
         }
 
-        public async Task<ICollection<string>> GetActivityMonths()
+        public ICollection<string> GetActivityMonths()
         {
             int countMounthInYear = 12;
             DateTime timeTo = DateTime.Now;
@@ -72,7 +72,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
             return countFollowing;
         }
 
-        public async Task<ICollection<int>> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository)
+        public ICollection<int> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository)
         {
             ICollection<int> commitsForYear = _gitHubQuery.ToGroupCommits(commitsEverRepository);
             return commitsForYear;
@@ -105,7 +105,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Implementations
             return timeFrom;
         }
 
-        public async Task<ICollection<int>> GetToMonths(ICollection<int> commits)
+        public ICollection<int> GetToMonths(ICollection<int> commits)
         {
             ICollection<int> commitsMonths = _gitHubQuery.ToMonths(commits);
             return commitsMonths;

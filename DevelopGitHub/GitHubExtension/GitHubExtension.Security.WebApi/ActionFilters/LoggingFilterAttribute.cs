@@ -10,16 +10,13 @@ namespace GitHubExtension.Security.WebApi.ActionFilters
 {
     public class LoggingFilterAttribute : ActionFilterAttribute
     {
+        private static readonly string LogFormat = string.Format("Controller : {{0}}{0}Action : {{1}}", Environment.NewLine);
+
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
             GlobalConfiguration.Configuration.Services.Replace(typeof(ITraceWriter), new NLogger());
-            var trace = GlobalConfiguration.Configuration.Services.GetTraceWriter();
-            trace.Info(
-                filterContext.Request, 
-                "Controller : " + filterContext.ControllerContext.ControllerDescriptor.ControllerType.FullName
-                + Environment.NewLine + "Action : " + filterContext.ActionDescriptor.ActionName, 
-                "JSON", 
-                filterContext.ActionArguments);
+            ITraceWriter trace = GlobalConfiguration.Configuration.Services.GetTraceWriter();
+            trace.Info(filterContext.Request, LogFormat, "JSON", filterContext.ActionArguments);
         }
     }
 }

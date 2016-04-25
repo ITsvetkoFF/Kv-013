@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http.Tracing;
+
 using NLog;
 
 namespace GitHubExtension.Security.WebApi.Helpers
@@ -41,7 +42,7 @@ namespace GitHubExtension.Security.WebApi.Helpers
             {
                 if (traceAction != null && traceAction.Target != null)
                 {
-                    category = category + Environment.NewLine + "Action Parameters : " + traceAction.Target.ToJSON();
+                    category = category + Environment.NewLine + "Action Parameters : " + traceAction.Target.ToJson();
                 }
 
                 var record = new TraceRecord(request, category, level);

@@ -10,19 +10,19 @@ namespace GitHubExtension.Security.Tests.Mocks
     class MockForDbSet<T> : MockForEnumerableQuery<T>, IDbSet<T>
         where T : class
     {
-        private readonly IQueryable<T> data;
+        private readonly IQueryable<T> _data;
 
         public MockForDbSet(IEnumerable<T> collection)
             : base(collection)
         {
-            data = collection.AsQueryable();
+            _data = collection.AsQueryable();
         }
 
         public Type ElementType
         {
             get
             {
-                return data.ElementType;
+                return _data.ElementType;
             }
         }
 
@@ -30,7 +30,7 @@ namespace GitHubExtension.Security.Tests.Mocks
         {
             get
             {
-                return data.Expression;
+                return _data.Expression;
             }
         }
 
@@ -69,7 +69,7 @@ namespace GitHubExtension.Security.Tests.Mocks
 
         public IEnumerator<T> GetEnumerator()
         {
-            return data.GetEnumerator();
+            return _data.GetEnumerator();
         }
 
         public T Remove(T entity)

@@ -19,7 +19,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RolesGetTest()
         {
-            config.ShouldMap(url).To<RolesController>(HttpMethod.Get, x => x.GetAllRoles());
+            Config.ShouldMap(Url).To<RolesController>(HttpMethod.Get, x => x.GetAllRoles());
         }
     }
 }

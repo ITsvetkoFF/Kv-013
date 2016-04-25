@@ -7,18 +7,18 @@ namespace GitHubExtension.Notes.WebApi.Queries
 {
     public class NoteQueries : INoteQueries
     {
-        private readonly NoteContext notesContext;
+        private readonly NoteContext _notesContext;
 
         public NoteQueries(NoteContext notesContext)
         {
-            this.notesContext = notesContext;
+            _notesContext = notesContext;
         }
 
         public async Task<Note> GetNote(string userId, string collaboratorId)
         {
             var note =
                 await
-                notesContext.Notes.FirstOrDefaultAsync(x => x.UserId == userId && x.CollaboratorId == collaboratorId);
+                _notesContext.Notes.FirstOrDefaultAsync(x => x.UserId == userId && x.CollaboratorId == collaboratorId);
             return note;
         }
     }

@@ -19,26 +19,26 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void RepositoryGetByIdTest()
         {
-            url = url.ForRepositoryGetById();
+            Url = Url.ForRepositoryGetById();
 
-            config.ShouldMap(url).To<RepositoryController>(HttpMethod.Get, x => x.GetById(13));
+            Config.ShouldMap(Url).To<RepositoryController>(HttpMethod.Get, x => x.GetById(13));
         }
 
         [Fact]
         public void RepositoryGetCollaboratorsForRepoTest()
         {
-            url = url.ForRepositoryGetCollaboratorsForRepo();
+            Url = Url.ForRepositoryGetCollaboratorsForRepo();
 
-            config.ShouldMap(url)
+            Config.ShouldMap(Url)
                 .To<RepositoryController>(HttpMethod.Get, x => x.GetCollaboratorsForRepo("myRepository"));
         }
 
         [Fact]
         public void RepositoryGetReposForCurrentUserTest()
         {
-            url = url.ForRepositoryGetReposForCurrentUser();
+            Url = Url.ForRepositoryGetReposForCurrentUser();
 
-            config.ShouldMap(url).To<RepositoryController>(HttpMethod.Get, x => x.GetRepositoryForCurrentUser());
+            Config.ShouldMap(Url).To<RepositoryController>(HttpMethod.Get, x => x.GetRepositoryForCurrentUser());
         }
     }
 }

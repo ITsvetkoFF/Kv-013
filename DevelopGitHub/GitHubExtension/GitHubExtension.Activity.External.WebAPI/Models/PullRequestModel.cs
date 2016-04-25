@@ -36,7 +36,8 @@ namespace GitHubExtension.Activity.External.WebAPI.Models
 
         public bool Locked { get; set; }
 
-        // The value of the mergeable attribute can be true, false, or null. If the value is null, this means that the mergeability hasn't been computed yet, and a background job was started to compute it
+        // The value of the mergeable attribute can be true, false, or null
+        // If the value is null, this means that the mergeability hasn't been computed yet, and a background job was started to compute it
         public bool? Mergeable { get; set; }
 
         [JsonProperty(PropertyName = GitHubConstants.MergeableState)]

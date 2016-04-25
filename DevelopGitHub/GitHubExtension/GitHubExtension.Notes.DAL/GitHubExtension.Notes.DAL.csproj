@@ -99,6 +99,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NotesModel.edmx</DependentUpon>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Model\User.cs">
       <DependentUpon>NotesModel.tt</DependentUpon>

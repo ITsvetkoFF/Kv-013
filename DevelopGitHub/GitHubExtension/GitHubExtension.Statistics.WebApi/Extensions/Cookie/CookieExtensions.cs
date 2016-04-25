@@ -10,9 +10,9 @@ namespace GitHubExtension.Statistics.WebApi.Extensions.Cookie
         public static ICollection<ICollection<int>> GetCommitsRepositories(this RequestContext httpContext)
         {
             string cookieValue = httpContext.HttpContext.Request.Cookies["commitsRepositories"].Value;
-            ICollection<ICollection<int>> _commitsRepositories =
+            ICollection<ICollection<int>> commitsRepositories =
                 JsonConvert.DeserializeObject<ICollection<ICollection<int>>>(cookieValue);
-            return _commitsRepositories;
+            return commitsRepositories;
         }
 
         public static void SetCommitsRepositories(

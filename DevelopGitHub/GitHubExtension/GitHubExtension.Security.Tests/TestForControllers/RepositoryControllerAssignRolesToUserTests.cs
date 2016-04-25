@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -6,12 +7,14 @@ using System.Web.Http.Results;
 
 using FluentAssertions;
 
+using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.Tests.Extensions;
 using GitHubExtension.Security.Tests.Mocks;
 using GitHubExtension.Security.WebApi.Controllers;
+using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 
 using Microsoft.AspNet.Identity;
@@ -24,9 +27,9 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class RepositoryControllerAssignRolesToUserTests
     {
-        private const string expectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
+        private const string ExpectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
 
-        private const string roleIndex = "role";
+        private const string RoleIndex = "role";
 
         public static IEnumerable<object[]> DataForInvalidModelStateResult
         {
@@ -73,9 +76,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             string roleToAssign)
         {
             // Arrange
+            ISecurityContextQuery mockQuery = Substitute.For<ISecurityContextQuery>();
+
             RepositoryController controller = new RepositoryController(
-                Substitute.For<IGitHubQuery>(), 
-                MockForContext(roles), 
+                Substitute.For<IGitHubQuery>(),
+                mockQuery, 
                 MockForUsers(users));
 
             // Act
@@ -89,9 +94,9 @@ namespace GitHubExtension.Security.Tests.TestForControllers
                     roleToAssign);
             result.Should()
                 .BeOfType<InvalidModelStateResult>()
-                .Which.GetErrorMessage(roleIndex)
+                .Which.GetErrorMessage(RoleIndex)
                 .Should()
-                .Be(string.Format(expectedErrorForInvalidRole, roleToAssign));
+                .Be(string.Format(ExpectedErrorForInvalidRole, roleToAssign));
         }
 
         [Theory]
@@ -104,9 +109,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             string roleToAssign)
         {
             // Arrenge
+            ISecurityContextQuery mockQuery = Substitute.For<ISecurityContextQuery>();
+
             RepositoryController controller = new RepositoryController(
-                Substitute.For<IGitHubQuery>(), 
-                MockForContext(roles), 
+                Substitute.For<IGitHubQuery>(),
+                mockQuery, 
                 MockForUsers(users));
 
             // Act
@@ -125,9 +132,11 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         public void NotFoundUserTest(List<User> users, int gitHubId, int repoId, string roleToAssign)
         {
             // Arrange
+            ISecurityContextQuery mockQuery = Substitute.For<ISecurityContextQuery>();
+
             RepositoryController controller = new RepositoryController(
-                Substitute.For<IGitHubQuery>(), 
-                Substitute.For<ISecurityContext>(), 
+                Substitute.For<IGitHubQuery>(),
+                mockQuery, 
                 MockForUsers(users));
 
             // Act
@@ -150,10 +159,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             string roleToAssign)
         {
             // Arrange
+            ISecurityContextQuery mockQuery = Substitute.For<ISecurityContextQuery>();
+            mockQuery.SecurityRoles.Returns(new MockForDbSet<SecurityRole>(roles));
+            mockQuery.UserRepositoryRoles.Returns(new MockForDbSet<UserRepositoryRole>(new List<UserRepositoryRole>()));
+
             users.Add(userToUpdate);
             RepositoryController controller = new RepositoryController(
-                Substitute.For<IGitHubQuery>(), 
-                MockForContext(roles), 
+                Substitute.For<IGitHubQuery>(),
+                mockQuery, 
                 MockForAddingClaim(users, userToUpdate));
 
             // Act
@@ -186,6 +199,14 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.Users.Returns(new MockForEnumerableQuery<User>(users));
             return userManager;
+        }
+
+        private SecurityContext MockSecurityContext(IEnumerable<SecurityRole> roles)
+        {
+            SecurityContext securityContextMock = Substitute.For<SecurityContext>();
+            securityContextMock.SecurityRoles.Returns(new MockForDbSet<SecurityRole>(roles));
+
+            return securityContextMock;
         }
     }
 }

@@ -44,19 +44,10 @@ namespace GitHubExtension.EntryPoint
             app.CreatePerOwinContext(container.GetInstance<SecurityContext>);
             app.CreatePerOwinContext(container.GetInstance<ApplicationUserManager>);
 
-            ConfigureOAuth(app);
-            app.Use(async (context, next) => { await next(); });
+            ConfigureOauth(app);
+            ConfigureCookies(app);
 
             var config = ConfigureWebApi();
-
-            app.UseCookieAuthentication(
-                new CookieAuthenticationOptions
-                    {
-                        AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie, 
-                        AuthenticationMode = AuthenticationMode.Active, 
-                        CookieHttpOnly = false
-                    });
-
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             config.EnsureInitialized();
 
@@ -66,11 +57,21 @@ namespace GitHubExtension.EntryPoint
 
             app.UseWebApi(config);
 
-            Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion<SecurityContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, Configuration>());
         }
 
-        void ConfigureOAuth(IAppBuilder app)
+        void ConfigureCookies(IAppBuilder app)
+        {
+            app.UseCookieAuthentication(
+                new CookieAuthenticationOptions
+                {
+                    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                    AuthenticationMode = AuthenticationMode.Active,
+                    CookieHttpOnly = false
+                });
+        }
+
+        void ConfigureOauth(IAppBuilder app)
         {
             // use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

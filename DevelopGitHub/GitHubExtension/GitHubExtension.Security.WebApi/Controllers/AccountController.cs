@@ -44,25 +44,10 @@ namespace GitHubExtension.Security.WebApi.Controllers
             _securityContextQuery = securityContextQuery;
         }
 
-        public RequestContext GetRequestContext
-        {
-            get
-            {
-                var context = new HttpContextWrapper(HttpContext.Current);
-                var routeData = HttpContext.Current.Request.RequestContext.RouteData;
-
-                var requestContext = new RequestContext(context, routeData);
-                return requestContext;
-            }
-        }
-
         [HttpPatch]
         [AllowAnonymous]
         [Route(RouteConstants.AssignRolesToUser)]
-        public async Task<IHttpActionResult> AssignRolesToUser(
-            [FromUri] int repoId, 
-            [FromUri] int gitHubId, 
-            [FromBody] string roleToAssign)
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
             if (appUser == null)
@@ -72,28 +57,22 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             DeleteUserRepositoryRoles(repoId, appUser);
             SecurityRole role = _securityContextQuery.GetUserRole(roleToAssign);
-
             if (role == null)
             {
-                ModelState.AddModelError(
-                    RoleConstants.Role, 
-                    string.Format(RoleValidationConstants.RoleNull, roleToAssign));
-                return BadRequest(ModelState);
+                return ModelError(RoleConstants.Role, string.Format(RoleValidationConstants.RoleNull, roleToAssign));
             }
 
             UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel()
-                                                                  {
-                                                                      RepositoryId = repoId, 
-                                                                      SecurityRole = role
-                                                                  };
+            {
+                RepositoryId = repoId, 
+                SecurityRole = role
+            };
             appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToUserRepositoryRole());
 
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
-
             if (!updateResult.Succeeded)
             {
-                ModelState.AddModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
-                return BadRequest(ModelState);
+                return ModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
             }
 
             await AddUserClaim(repoId, roleToAssign, appUser);
@@ -118,7 +97,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             GitHubUserModel userReadModel = await _gitHubQuery.GetUserAsync(tokenClaim.Value);
             User user = _userManager.FindByGitHubId(userReadModel.GitHubId);
-
             if (user == null)
             {
                 user = userReadModel.ToUserEntity();
@@ -170,7 +148,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.AccountLogout)]
         public IHttpActionResult LogOut()
         {
-            var authentication = HttpContext.Current.GetOwinContext().Authentication;
+            var authentication = GetRequestContext.Authentication();
             authentication.SignOut();
 
             return Ok();
@@ -198,7 +176,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             var addClaimResult =
                 await _userManager.AddClaimAsync(appUser.Id, new Claim(roleToAssign, repoId.ToString()));
-
+            
             if (!addClaimResult.Succeeded)
             {
                 ModelState.AddModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
@@ -219,10 +197,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
             }
 
             IList<RepositoryViewModel> repositories = await _gitHubQuery.GetReposAsync(token);
-
             IList<UserRepositoryRole> repositoriesToAdd =
-                repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role })
-                    .ToList();
+                repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
 
             user.UserRepositoryRoles = repositoriesToAdd;
             IdentityResult addUserResult = await _userManager.CreateAsync(user);
@@ -231,8 +207,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return GetErrorResult(addUserResult);
             }
 
-            if (
-                repositories.Any(
+            if (repositories.Any(
                     r => !_userManager.AddClaim(user.Id, new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
             {
                 return BadRequest();

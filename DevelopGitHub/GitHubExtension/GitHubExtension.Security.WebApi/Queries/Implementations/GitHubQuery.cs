@@ -96,18 +96,13 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
 
         private static string GetEmailFromResponse(JArray emails)
         {
+            var emailEntryDefinition = new { Email = string.Empty, Primary = false };
             var email = string.Empty;
 
-            foreach (
-                var typedEntry in
-                    emails.Children()
-                        .Select(
-                            emailEntry =>
-                            JsonConvert.DeserializeAnonymousType(
-                                emailEntry.ToString(), 
-                                new { Email = string.Empty, Primary = false }))
+            foreach (var typedEntry in emails.Children().Select(emailEntry =>        
+                JsonConvert.DeserializeAnonymousType(emailEntry.ToString(), emailEntryDefinition))
                         .Where(typedEntry => typedEntry.Primary))
-            {
+        {
                 email = typedEntry.Email;
                 break;
             }

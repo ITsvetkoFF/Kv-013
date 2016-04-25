@@ -8,12 +8,12 @@ namespace GitHubExtension.Security.WebApi.Mappers
         public static User ToUserEntity(this GitHubUserModel model)
         {
             var user = new User()
-                           {
-                               Email = model.Email, 
-                               UserName = model.Login, 
-                               ProviderId = model.GitHubId, 
-                               GitHubUrl = model.Url
-                           };
+            {
+                Email = model.Email, 
+                UserName = model.Login, 
+                ProviderId = model.GitHubId, 
+                GitHubUrl = model.Url
+            };
 
             return user;
         }
@@ -21,12 +21,12 @@ namespace GitHubExtension.Security.WebApi.Mappers
         public static UserReturnModel ToUserReturnModel(this User user)
         {
             UserReturnModel userReturnModel = new UserReturnModel()
-                                                  {
-                                                      Id = user.Id, 
-                                                      Email = user.Email, 
-                                                      GitHubId = user.ProviderId, 
-                                                      UserName = user.UserName
-                                                  };
+            {
+                Id = user.Id, 
+                Email = user.Email, 
+                GitHubId = user.ProviderId, 
+                UserName = user.UserName
+            };
 
             return userReturnModel;
         }

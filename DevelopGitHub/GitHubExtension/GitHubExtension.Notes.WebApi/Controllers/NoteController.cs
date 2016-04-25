@@ -11,14 +11,14 @@ namespace GitHubExtension.Notes.WebApi.Controllers
 {
     public class NoteController : ApiController
     {
-        private INoteCommands commands;
+        private readonly INoteCommands _commands;
 
-        private INoteQueries queries;
+        private readonly INoteQueries _queries;
 
         public NoteController(INoteCommands commands, INoteQueries queries)
         {
-            this.commands = commands;
-            this.queries = queries;
+            _commands = commands;
+            _queries = queries;
         }
 
         [Route(NotesRouteConstants.CreateNoteRoute)]
@@ -40,7 +40,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             var noteModel = model.AddUserIdToModel(userId);
 
             var noteEntity = noteModel.ToEntity();
-            await commands.AddNote(noteEntity);
+            await _commands.AddNote(noteEntity);
             return Ok(noteEntity);
         }
 
@@ -49,7 +49,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
         public async Task<IHttpActionResult> GetNote([FromUri] string collaboratorId)
         {
             var userId = User.GetUserId();
-            var note = await queries.GetNote(userId, collaboratorId);
+            var note = await _queries.GetNote(userId, collaboratorId);
             if (note == null)
             {
                 return NotFound();

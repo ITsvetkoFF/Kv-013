@@ -20,34 +20,34 @@ namespace GitHubExtension.Security.Tests.TestRoutes
         [Fact]
         public void AccountGetExternalLoginTest()
         {
-            url = url.ForAccountGetExternalLogin();
+            Url = Url.ForAccountGetExternalLogin();
 
-            config.ShouldMap(url).To<AccountController>(HttpMethod.Get, x => x.GetExternalLogin("p"));
+            Config.ShouldMap(Url).To<AccountController>(HttpMethod.Get, x => x.GetExternalLogin("p"));
         }
 
         [Fact]
         public void AccountGetUserByNameTest()
         {
-            url = url.ForAccountGetUserByName();
+            Url = Url.ForAccountGetUserByName();
 
-            config.ShouldMap(url).To<AccountController>(HttpMethod.Get, x => x.GetUserByName("name"));
+            Config.ShouldMap(Url).To<AccountController>(HttpMethod.Get, x => x.GetUserByName("name"));
         }
 
         [Fact]
         public void AccountGetUserTest()
         {
-            url = url.ForAccountGetUser();
+            Url = Url.ForAccountGetUser();
 
-            config.ShouldMap(url)
+            Config.ShouldMap(Url)
                 .To<AccountController>(HttpMethod.Get, x => x.GetUser("644e1dd7-2a7f-18fb-b8ed-ed78c3f92c2b"));
         }
 
         [Fact]
         public void RepositoryAssignRolesToUserTest()
         {
-            url = url.ForAccountAssignRolesToUser();
+            Url = Url.ForAccountAssignRolesToUser();
 
-            config.ShouldMap(url)
+            Config.ShouldMap(Url)
                 .To<RepositoryController>(new HttpMethod("PATCH"), x => x.AssignRolesToUser(5, 6, null));
         }
     }

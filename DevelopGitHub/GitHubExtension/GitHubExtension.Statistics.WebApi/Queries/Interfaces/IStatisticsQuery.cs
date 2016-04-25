@@ -7,7 +7,7 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Interfaces
 {
     public interface IStatisticsQuery
     {
-        Task<ICollection<string>> GetActivityMonths();
+        ICollection<string> GetActivityMonths();
 
         Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token);
 
@@ -17,12 +17,12 @@ namespace GitHubExtension.Statistics.WebApi.Queries.Interfaces
 
         Task<int> GetFollowingCount(string userName, string token);
 
-        Task<ICollection<int>> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository);
+        ICollection<int> GetGroupCommits(ICollection<ICollection<int>> commitsEverRepository);
 
         Task<ICollection<RepositoryModel>> GetRepositories(string userName, string token);
 
         Task<int> GetRepositoriesCount(string userName, string token);
 
-        Task<ICollection<int>> GetToMonths(ICollection<int> commits);
+        ICollection<int> GetToMonths(ICollection<int> commits);
     }
 }

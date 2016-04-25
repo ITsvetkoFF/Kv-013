@@ -37,9 +37,9 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
 
         [HttpGet]
         [Route(StatisticsRouteConstants.GetActivityMonths)]
-        public async Task<ICollection<string>> GetActivityMonths()
+        public ICollection<string> GetActivityMonths()
         {
-            ICollection<string> activityMonths = await _statisticsQuery.GetActivityMonths();
+            ICollection<string> activityMonths = _statisticsQuery.GetActivityMonths();
             return activityMonths;
         }
 
@@ -64,7 +64,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
 
             ICollection<ICollection<int>> commitsRepositories = await GetCommitsRepositories(userName, token);
 
-            ICollection<int> commitsRepository = await _statisticsQuery.GetGroupCommits(commitsRepositories);
+            ICollection<int> commitsRepository = _statisticsQuery.GetGroupCommits(commitsRepositories);
             return commitsRepository;
         }
 
@@ -76,7 +76,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
             string userName = User.Identity.GetUserName();
 
             ICollection<int> commitsRepository = await _statisticsQuery.GetCommitsRepository(userName, token, name);
-            ICollection<int> commitsRepositoryMonths = await _statisticsQuery.GetToMonths(commitsRepository);
+            ICollection<int> commitsRepositoryMonths = _statisticsQuery.GetToMonths(commitsRepository);
             return commitsRepositoryMonths;
         }
 

@@ -57,6 +57,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ActivityModel.edmx</DependentUpon>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="ActivityType.cs">
       <DependentUpon>ActivityModel.tt</DependentUpon>
