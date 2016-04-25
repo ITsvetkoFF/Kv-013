@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
-using System.Windows;
-
+using GitHubExtension.LocalizationTool.Model;
+using GitHubExtension.LocalizationTool.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,32 +24,11 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string SecondOpenQuote = "\":{";
 
-        private readonly MainWindow mainWindow;
+        private readonly ObservableCollection<TranslationDataRow> _translationData;
 
-        public JsonHelper(MainWindow mainWindow)
+        public JsonHelper(ObservableCollection<TranslationDataRow> translationData)
         {
-            this.mainWindow = mainWindow;
-
-            foreach (Lang value in Enum.GetValues(typeof(Lang)))
-            {
-                ReadJsonFromFile(value);
-            }
-        }
-
-        private ObservableCollection<TranslationDataRow> TranslationData
-        {
-            get
-            {
-                return mainWindow.TranslationData;
-            }
-        }
-
-        private Translator Translator
-        {
-            get
-            {
-                return mainWindow.Translator;
-            }
+            _translationData = translationData;
         }
 
         public void ReadJsonFromFile(Lang language)
@@ -63,42 +43,53 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
             catch (JsonReaderException jsonEx)
             {
-                MainWindow.ShowErrorMessageBox("Incorrect json format", jsonEx);
+                MainWindowViewModel.ShowErrorMessageBox("Incorrect json format", jsonEx);
             }
             catch (FileNotFoundException fileNotFoundException)
             {
-                MainWindow.ShowErrorMessageBox("File is missing", fileNotFoundException);
+                MainWindowViewModel.ShowErrorMessageBox("File is missing", fileNotFoundException);
             }
             catch (Exception exception)
             {
-                MainWindow.ShowErrorMessageBox("Unknown error", exception);
+                MainWindowViewModel.ShowErrorMessageBox("Unknown error", exception);
             }
         }
 
         public string GenerateJson(Lang language)
         {
-            Translator.RemoveEmptyRows();
+            RemoveEmptyRows();
             var result = new StringBuilder();
             result.Append(FirstOpenQuote);
             result.Append(Translator.GetLang(language));
             result.Append(SecondOpenQuote);
-            if (TranslationData.Count != 0)
+            if (_translationData.Count != 0)
             {
-                for (var i = 0; i < TranslationData.Count - 1; i++)
+                for (var i = 0; i < _translationData.Count - 1; i++)
                 {
-                    result.Append(DoubleQuote + TranslationData[i].Name + DoubleQuote);
+                    result.Append(DoubleQuote + _translationData[i].Name + DoubleQuote);
                     result.Append(Ñolon);
-                    result.Append(DoubleQuote + TranslationData[i][language] + DoubleQuote);
+                    result.Append(DoubleQuote + _translationData[i][language] + DoubleQuote);
                     result.Append(Comma);
                 }
 
-                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1].Name + DoubleQuote);
+                result.Append(DoubleQuote + _translationData[_translationData.Count - 1].Name + DoubleQuote);
                 result.Append(Ñolon);
-                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1][language] + DoubleQuote);
+                result.Append(DoubleQuote + _translationData[_translationData.Count - 1][language] + DoubleQuote);
             }
 
             result.Append(CloseBrackets);
             return result.ToString();
+        }
+
+        public void RemoveEmptyRows()
+        {
+            for (var i = 0; i < _translationData.Count; i++)
+            {
+                if (string.IsNullOrWhiteSpace(_translationData[i].Name))
+                {
+                    _translationData.Remove(_translationData[i--]);
+                }
+            }
         }
 
         private void IterateJsonArray(Lang language, JObject translation)
@@ -108,20 +99,27 @@ namespace GitHubExtension.LocalizationTool.Translate
                 var index = IndexOfNamedElement(element.Key);
                 if (index == -1)
                 {
-                    Translator.AddNewRow(language, element);
+                    AddNewRow(language, element);
                 }
                 else
                 {
-                    TranslationData[index][language] = element.Value.ToString();
+                    _translationData[index][language] = element.Value.ToString();
                 }
             }
         }
 
+        public void AddNewRow(Lang language, KeyValuePair<string, JToken> element)
+        {
+            var line = new TranslationDataRow(element.Key);
+            line[language] = element.Value.ToString();
+            _translationData.Add(line);
+        }
+
         private int IndexOfNamedElement(string key)
         {
-            for (var i = 0; i < TranslationData.Count; i++)
+            for (var i = 0; i < _translationData.Count; i++)
             {
-                if (TranslationData[i].Name == key)
+                if (_translationData[i].Name == key)
                 {
                     return i;
                 }

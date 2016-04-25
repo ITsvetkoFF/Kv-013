@@ -1,8 +1,8 @@
 using System.Windows.Input;
 
-namespace GitHubExtension.LocalizationTool
+namespace GitHubExtension.LocalizationTool.ViewModel
 {
-    public partial class MainWindow
+    public static class HotKeyCommands
     {
         public static readonly RoutedCommand AddRowRoutedCmd = new RoutedCommand();
         public static readonly RoutedCommand ClearTableRoutedCmd = new RoutedCommand();

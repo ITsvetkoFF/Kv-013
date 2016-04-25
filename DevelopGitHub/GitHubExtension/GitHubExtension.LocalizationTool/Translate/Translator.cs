@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
+using GitHubExtension.LocalizationTool.Model;
+using GitHubExtension.LocalizationTool.ViewModel;
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.LocalizationTool.Translate
@@ -26,20 +26,12 @@ namespace GitHubExtension.LocalizationTool.Translate
         private const string JsonTextParameter = "text";
 
         private const string GetTextParameter = "&text=";
+        
+        private readonly ObservableCollection<TranslationDataRow> _translationData;
 
-        private readonly MainWindow mainWindow;
-
-        public Translator(MainWindow mainWindow)
+        public Translator(ObservableCollection<TranslationDataRow> translationData)
         {
-            this.mainWindow = mainWindow;
-        }
-
-        private ObservableCollection<TranslationDataRow> TranslationData
-        {
-            get
-            {
-                return mainWindow.TranslationData;
-            }
+            _translationData = translationData;
         }
 
         public static Lang GetLang(string lang)
@@ -96,13 +88,6 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        public void AddNewRow(Lang language, KeyValuePair<string, JToken> element)
-        {
-            var line = new TranslationDataRow(element.Key);
-            line[language] = element.Value.ToString();
-            TranslationData.Add(line);
-        }
-
         public async Task WebTranslate(string sourceLanguage, string targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
@@ -124,22 +109,11 @@ namespace GitHubExtension.LocalizationTool.Translate
                 }
                 catch (WebException exception)
                 {
-                    MainWindow.ShowErrorMessageBox("The waiting time of server response has expired", exception);
+                    MainWindowViewModel.ShowErrorMessageBox("The waiting time of server response has expired", exception);
                 }
             }
             
             SaveTranslationResult(result, targetLanguageEnum);
-        }
-
-        public void RemoveEmptyRows()
-        {
-            for (var i = 0; i < TranslationData.Count; i++)
-            {
-                if (string.IsNullOrWhiteSpace(TranslationData[i].Name))
-                {
-                    TranslationData.Remove(TranslationData[i--]);
-                }
-            }
         }
 
         private static void LanguageCheck(
@@ -167,7 +141,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    TranslationData[i][language] = value;
+                    _translationData[i][language] = value;
                 }
 
                 i++;
@@ -177,7 +151,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         private StringBuilder GenerateTextParameter(Lang language)
         {
             var textToTranslate = new StringBuilder();
-            foreach (var translation in TranslationData)
+            foreach (var translation in _translationData)
             {
                 textToTranslate.Append(GetTextParameter);
                 textToTranslate.Append(translation[language]);

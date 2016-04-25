@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace GitHubExtension.LocalizationTool.Translate
+namespace GitHubExtension.LocalizationTool.ViewModel
 {
     public abstract class NotifyProperyChangedBase : INotifyPropertyChanged
     {

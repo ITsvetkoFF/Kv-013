@@ -1,21 +1,13 @@
-﻿<Window x:Class="GitHubExtension.LocalizationTool.MainWindow"
+﻿<Window x:Class="GitHubExtension.LocalizationTool.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:loc="clr-namespace:GitHubExtension.LocalizationTool"
-        Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="icon.ico" MinHeight="400">
-    <Window.CommandBindings>
-        <CommandBinding Command="{x:Static loc:MainWindow.AddRowRoutedCmd}" Executed="AddEmptyRow" />
-        <CommandBinding Command="{x:Static loc:MainWindow.ClearTableRoutedCmd}" Executed="ClearTranslationData" />
-        <CommandBinding Command="{x:Static loc:MainWindow.OpenJsonRoutedCmd}" Executed="OpenJson" />
-        <CommandBinding Command="{x:Static loc:MainWindow.SaveAsJsonRoutedCmd}" Executed="SaveJson" />
-    </Window.CommandBindings>
-    <Window.InputBindings>
-        <KeyBinding Command="loc:MainWindow.AddRowRoutedCmd" Gesture="CTRL+R" />
-        <KeyBinding Command="loc:MainWindow.ClearTableRoutedCmd" Gesture="CTRL+C" />
-        <KeyBinding Command="loc:MainWindow.OpenJsonRoutedCmd" Gesture="CTRL+O" />
-        <KeyBinding Command="loc:MainWindow.SaveAsJsonRoutedCmd" Gesture="CTRL+S" />
-    </Window.InputBindings>
+        xmlns:viewModel="clr-namespace:GitHubExtension.LocalizationTool.ViewModel"
+        Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="../icon.ico" MinHeight="400">
 
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel></viewModel:MainWindowViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -27,14 +19,13 @@
         </Grid.RowDefinitions>
         <Menu FontSize="14" Grid.ColumnSpan="2">
             <MenuItem Header="File">
-                <MenuItem Header="Open" HorizontalAlignment="Left" Width="200" Click="OpenJson" InputGestureText="Ctrl+O"/>
-                <MenuItem Header="Save" HorizontalAlignment="Left" Width="200" Click="SaveJson" InputGestureText="Ctrl+S"/>
-                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="200" Click="Close"/>
+                <MenuItem Header="Open" HorizontalAlignment="Left" Width="200" Command="{Binding OpenJsonCommand}" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Save" HorizontalAlignment="Left" Width="200" Command="{Binding SaveJsonCommand}" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="200" Command="{Binding CloseCommand}" InputGestureText="Alt+F4"/>
             </MenuItem>
             <MenuItem Header="Table">
-                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Click="AddEmptyRow" InputGestureText="Ctrl+R"/>
-                <MenuItem Header="Delete row" HorizontalAlignment="Left" Width="200" InputGestureText="Del"/>
-                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Click="ClearTranslationData" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Command="{Binding AddEmptyRowCommand}" InputGestureText="Ctrl+R"/>
+                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Command="{Binding ClearTranslationDataCommand}" InputGestureText="Ctrl+N"/>
             </MenuItem>
             <MenuItem Header="Chose language" Visibility="Collapsed">
                 <MenuItem Header="UA" HorizontalAlignment="Left" Width="140"/>
@@ -49,14 +40,13 @@
                   FontSize="{Binding ElementName=FontSizeSlider, Path=Value}" 
                   Name="Table" 
                   ColumnWidth="*"
-                  Loaded="DataGridLoaded"
-                  ItemsSource="{Binding}"
+                  ItemsSource="{Binding TranslationData, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="UK" Binding="{Binding Uk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="US" Binding="{Binding Us, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="RU" Binding="{Binding Ru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Uk" Visibility="{Binding ElementName=Uk, Path=IsChecked}" Binding="{Binding Uk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Us" Visibility="{Binding ElementName=Us, Path=IsChecked}" Binding="{Binding Us, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Ru" Visibility="{Binding ElementName=Ru, Path=IsChecked}" Binding="{Binding Ru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Column="1" Margin="0" Grid.Row="1" Height="349" VerticalAlignment="Top">
@@ -76,23 +66,23 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Content="UK" Margin="6,6,3,6"/>
-            <CheckBox Name="Uk" Content="&#xA;" Grid.Row="0" Grid.Column="1" Margin="31,10,32,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="LanguageChange" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox Name="Uk" Content="&#xA;" Grid.Row="0" Grid.Column="1" Margin="31,10,32,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="US" Margin="6,6,3,6" Grid.Row="1" Grid.Column="0" />
-            <CheckBox Name="Us" Content="&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="LanguageChange" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox Name="Us" Content="&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="RU" Margin="6,6,3,6" Grid.Row="2" Grid.Column="0" />
-            <CheckBox Name="Ru" Content="&#xD;&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="LanguageChange" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox Name="Ru" Content="&#xD;&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Label Content="TranslationDataRow" Margin="6" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0"
                    HorizontalContentAlignment="Center"/>
             <Label Content="Source language" Grid.Row="4" Grid.Column="0" Margin="6,6,3,6"/>
             <Label Content="Target language" Grid.Row="5" Grid.Column="0" Margin="6,6,3,6"/>
-            <Button Name="TranslateButton" Content="WebTranslate" Margin="6" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0"
-                    Click="TranslatingButton"/>
-            <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Button Name="TranslateButton" Content="{Binding TranslateButtonContent}" IsEnabled="{Binding TranslateButtonIsEnabled}" Margin="6" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0"
+                    Command="{Binding TranslatingButtonCommand}"/>
+            <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding SourceLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <TextBlock>uk</TextBlock>
                 <TextBlock>us</TextBlock>
                 <TextBlock>ru</TextBlock>
             </ComboBox>
-            <ComboBox Name="TargetLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="5" SelectedIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <ComboBox Name="TargetLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="5" SelectedIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding TargetLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <TextBlock>uk</TextBlock>
                 <TextBlock>us</TextBlock>
                 <TextBlock>ru</TextBlock>
