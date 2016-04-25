@@ -1,6 +1,4 @@
-﻿using System.Data.Entity;
-using System.Threading.Tasks;
-
+﻿using System.Linq;
 using GitHubExtension.Notes.DAL.Model;
 
 namespace GitHubExtension.Notes.WebApi.Queries
@@ -14,12 +12,9 @@ namespace GitHubExtension.Notes.WebApi.Queries
             _notesContext = notesContext;
         }
 
-        public async Task<Note> GetNote(string userId, string collaboratorId)
+        public IOrderedQueryable<Note> Notes
         {
-            var note =
-                await
-                _notesContext.Notes.FirstOrDefaultAsync(x => x.UserId == userId && x.CollaboratorId == collaboratorId);
-            return note;
+            get {return _notesContext.Notes;}
         }
     }
 }

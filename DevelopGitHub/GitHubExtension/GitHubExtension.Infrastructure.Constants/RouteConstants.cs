@@ -14,6 +14,8 @@
         // route prefixes
         public const string ApiRoles = "api/roles";
 
+        public const string ApiNote = "api/note";
+
         public const string ApiUser = "api/user";
 
         public const string AssignRolesToUser = ApiRepository + RepositoryId + Collaborators + GitHubId;
@@ -42,6 +44,10 @@
 
         public const string UpdateProject = ApiRepository + Current;
 
+        public const string CreateNoteForCollaborator = ApiNote;
+
+        public const string GetNoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
+
         // segments
         public const string IdInt = "/{id:int}";
 
@@ -58,10 +64,13 @@
 
         public const string RepositoryId = "/{repoId}";
 
+        public const string CollaboratorId = "/{collaboratorId}";
+
         public const string RepositoryName = "/{repoName}";
 
         public const string User = "user";
 
         public const string UserName = "/{username}";
+;
     }
 }
