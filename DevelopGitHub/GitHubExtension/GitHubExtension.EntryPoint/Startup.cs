@@ -75,6 +75,7 @@ namespace GitHubExtension.EntryPoint
             jsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Filters.Add(new LoggingFilterAttribute());
+            config.Filters.Add(new ModelIsNullFilterAttribute());
 
             return config;
         }
