@@ -12,7 +12,8 @@ namespace GitHubExtension.Security.WebApi.ActionFilters
         {
             if (IsAnyArgumentNull(actionContext))
             {
-                actionContext.Response = actionContext.Request.CreateErrorResponse(HttpStatusCode.BadRequest,
+                actionContext.Response = actionContext.Request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest,
                     "Arguments cannot be null");
             }
         }
