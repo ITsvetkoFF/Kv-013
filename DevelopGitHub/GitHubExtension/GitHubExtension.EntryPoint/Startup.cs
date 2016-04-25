@@ -97,7 +97,7 @@ namespace GitHubExtension.EntryPoint
             app.UseGitHubAuthentication(GitHubAuthOptions);
         }
 
-        private HttpConfiguration ConfigureWebApi()
+        public HttpConfiguration ConfigureWebApi()
         {
             HttpConfiguration config = new HttpConfiguration();
 
