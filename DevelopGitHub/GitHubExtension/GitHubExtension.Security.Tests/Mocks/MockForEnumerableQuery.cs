@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GitHubExtension.Security.Tests.Mocks
 {
-    class MockForEnumerableQuery<T> : EnumerableQuery<T>, IDbAsyncQueryProvider
+    public class MockForEnumerableQuery<T> : EnumerableQuery<T>, IDbAsyncQueryProvider
     {
         public MockForEnumerableQuery(IEnumerable<T> collection)
             : base(collection)

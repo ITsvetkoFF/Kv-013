@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Statistics", "Statistics", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Statistics.WebApi", "GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj", "{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.Internal.Tests", "GitHubExtension.Activity.Internal.Tests\GitHubExtension.Activity.Internal.Tests.csproj", "{07C98A3E-352E-4DB6-B9E1-FE67080EA388}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,5 +138,6 @@ Global
 		{73A2445E-6FC0-4B75-A26B-1F27070AFDBA} = {679070DC-AD4C-4D15-818C-BB9373C306EA}
 		{642455C5-0A4B-4E25-A2C3-1F1304A0D7DD} = {209E6B92-CFA7-42C1-A7D6-2BD7CB0CDD12}
 		{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8} = {EB58C9DD-5C62-4F43-9C22-833830D82B9F}
+		{07C98A3E-352E-4DB6-B9E1-FE67080EA388} = {81F8C705-AC42-4E92-8877-606314287DC0}
 	EndGlobalSection
 EndGlobal
