@@ -15,11 +15,9 @@ using Xunit;
 
 namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 {
-    public class ActivityInternalQueryControllerGetUserActivitiesTests
+    public class QueryControllerGetUserActivitiesForRepositoryTests
     {
         private const string UserId = "097889d8-cc9e-41b0-8641-6ecee086bf64";
-
-        private const string FakeUserId = "063889d8-cc9e-41b0-8741-6ecee086bt87";
 
         private const string UserName = "Test";
 
@@ -51,7 +49,7 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
                         }
                     },
 
-                    UserId
+                    CurrentRepositoryId.ToString() 
                 };
             }
         }
@@ -64,7 +62,31 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
                 {
                     new List<ActivityEvent>(),
  
-                    FakeUserId
+                    CurrentRepositoryId.ToString() 
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> DataForBadRequestResult
+        {
+            get
+            {
+                yield return new object[] 
+                {
+                    new List<ActivityEvent> 
+                    {
+                        new ActivityEvent()
+                        {
+                            Id = 1,
+                            UserId = UserId,
+                            ActivityTypeId   = ActivityTypeId,
+                            CurrentRepositoryId = CurrentRepositoryId,
+                            InvokeTime = DateTime.Now,
+                            Message = Message
+                        }
+                    },
+ 
+                    "null"
                 };
             }
         }
@@ -81,15 +103,15 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
         private static IPrincipal SetUserForController(string name, string typeOfClaim, string valueOfClaim)
         {
-            var identity = Substitute.ForPartsOf<GenericIdentity>(name);
+            var identity = new GenericIdentity(name);
             identity.AddClaim(new Claim(typeOfClaim, valueOfClaim));
-            var principal = Substitute.ForPartsOf<GenericPrincipal>(identity, new[] { "user" });
+            var principal = new GenericPrincipal(identity, new[] { "user" });
             return principal;
         }
 
-        private static InternalActivityQueryController GetControllerInstance(IEnumerable<ActivityEvent> activities)
+        private static InternalActivityQueryController GetControllerInstance(IEnumerable<ActivityEvent> activities, string currentProjectId)
         {
-            var userForController = SetUserForController(UserName, TypeOfClaim, CurrentRepositoryId.ToString());
+            var userForController = SetUserForController(UserName, TypeOfClaim, currentProjectId);
 
             var activityContextQuery = MockForActivityContextQuery(activities);
 
@@ -105,13 +127,13 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
         [Theory]
         [MemberData("DataForOkResult")]
-        public void ShouldReturnOkResultWhenWeGetUserActivities(IEnumerable<ActivityEvent> activities, string userId)
+        public void ShouldReturnOkResultWhenWeGetActivities(IEnumerable<ActivityEvent> activities, string currentProjectId)
         {
             // Arrange
-            var activityController = GetControllerInstance(activities);
+            var activityController = GetControllerInstance(activities, currentProjectId);
 
             // Act
-            var response = activityController.GetUserActivities(userId);
+            var response = activityController.GetCurrentRepositoryUserActivities();
 
             // Assert
             response.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<ActivityEventModel>>>();
@@ -119,16 +141,30 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
         [Theory]
         [MemberData("DataForNotFoundResult")]
-        public void ShouldReturnNotFoundResultWhenWeHaveNoActivities(IEnumerable<ActivityEvent> activities, string userId)
+        public void ShouldReturnNotFoundResultWhenActivitiesDoesNotExist(IEnumerable<ActivityEvent> activities, string currentProjectId)
         {
             // Arrange
-            var activityController = GetControllerInstance(activities);
+            var activityController = GetControllerInstance(activities, currentProjectId);
 
             // Act
-            var response = activityController.GetUserActivities(userId);
+            var response = activityController.GetCurrentRepositoryUserActivities();
 
             // Assert
             response.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Theory]
+        [MemberData("DataForBadRequestResult")]
+        public void ShouldReturnBadRequestResultWhenWeHaveNoCurrentProjectInClaims(IEnumerable<ActivityEvent> activities, string currentProjectId)
+        {
+            // Arrange
+            var activityController = GetControllerInstance(activities, currentProjectId);
+
+            // Act
+            var response = activityController.GetCurrentRepositoryUserActivities();
+
+            // Assert
+            response.Should().BeOfType<BadRequestResult>();
         }
     }
 }

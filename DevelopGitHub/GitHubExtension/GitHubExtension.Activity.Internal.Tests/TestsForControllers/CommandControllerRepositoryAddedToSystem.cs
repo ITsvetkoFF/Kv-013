@@ -6,6 +6,7 @@ using GitHubExtension.Activity.DAL;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Activity.Internal.WebApi.Controllers;
 using GitHubExtension.Activity.Internal.WebApi.Extensions;
+using GitHubExtension.Activity.Internal.WebApi.Models;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Security.Tests.Mocks;
 using NSubstitute;
@@ -13,12 +14,9 @@ using Xunit;
 
 namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 {
-    public class ActivityInternalCommandControllerAddJoinToSystemActivityTests
+    public class CommandControllerRepositoryAddedToSystem
     {
         private const string UserId = "097889d8-cc9e-41b0-8641-6ecee086bf64";
-
-        private const string UserName = "Test";
-
 
         public static IEnumerable<object[]> DataForOkResult
         {
@@ -28,17 +26,18 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
                 { 
                    new List<ActivityType>()
                    {
-                       new ActivityType() { Id = 1, Name = "join to system"}
+                       new ActivityType() { Id = 2, Name = "repository added to system"}
                    },
 
-                   "join to system"       
+                   "repository added to system",
+
+                   new RepositoryActivityModel() { RepositoryId = 1, RepositoryName = "GitHubExtension"}               
                 };
             }
         }
 
         private static IActivityContextQuery MockForActivityContextQuery(IEnumerable<ActivityType> activityTypes)
         {
-
             IActivityContextQuery activityContextQuery = Substitute.For<IActivityContextQuery>();
 
             activityContextQuery.ActivitiesTypes.Returns(new MockForDbSet<ActivityType>(activityTypes));
@@ -54,9 +53,8 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
             return activityContextCommand;
         }
 
-        private static InternalActivityCommandController GetControllerInstance(List<ActivityType> activityTypes, string activityTypeName)
+        private static InternalActivityCommandController GetControllerInstance(List<ActivityType> activityTypes, RepositoryActivityModel repositoryActivityModel, string activityTypeName)
         {
-
             var activityContextQuery = MockForActivityContextQuery(activityTypes);
 
             var activityType = activityContextQuery.GetUserActivityType(activityTypeName);
@@ -65,11 +63,11 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
             ActivityEvent activityEvent = new ActivityEvent()
             {
-
                 UserId = UserId,
+                CurrentRepositoryId = repositoryActivityModel.RepositoryId,
                 ActivityTypeId = activityType.Id,
                 InvokeTime = DateTime.Now,
-                Message = String.Format("{0} {1}", UserName, activityType.Name)
+                Message = String.Format("{0} {1}", repositoryActivityModel.RepositoryName, activityTypeName)
             };
 
             activityContextCommand.AddActivity(activityEvent);
@@ -81,13 +79,13 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
         [Theory]
         [MemberData("DataForOkResult")]
-        public void ShouldReturnOkResultWhenJoinToSystemActivityAdded(List<ActivityType> activityTypes, string activityTypeName)
+        public void ShouldReturnOkResultWhenRepositoryAddedToSystemActivityAdded(List<ActivityType> activityTypes, string activityTypeName, RepositoryActivityModel repositoryActivityModel)
         {
             // Arrange
-            var activityController = GetControllerInstance(activityTypes, activityTypeName);
+            var activityController = GetControllerInstance(activityTypes, repositoryActivityModel, activityTypeName);
 
             // Act
-            var response = activityController.AddJoinToSystemActivity();
+            var response = activityController.AddRepositoryAddedToSystemActivity(repositoryActivityModel);
 
             // Assert
             response.Should().BeOfType<OkResult>();

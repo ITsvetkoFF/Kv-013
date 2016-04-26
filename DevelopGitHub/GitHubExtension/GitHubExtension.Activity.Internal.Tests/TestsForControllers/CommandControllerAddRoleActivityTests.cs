@@ -16,7 +16,7 @@ using Xunit;
 
 namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 {
-    public class ActivityInternalCommandControllerAddRoleActivityTests
+    public class CommandControllerAddRoleActivityTests
     {
         private const string UserId = "097889d8-cc9e-41b0-8641-6ecee086bf64";
 
@@ -87,9 +87,9 @@ namespace GitHubExtension.Activity.Internal.Tests.TestsForControllers
 
         private static IPrincipal SetUserForController(string name, string typeOfClaim, string valueOfClaim)
         {
-            var identity = Substitute.ForPartsOf<GenericIdentity>(name);
+            var identity = new GenericIdentity(name);
             identity.AddClaim(new Claim(typeOfClaim, valueOfClaim));
-            var principal = Substitute.ForPartsOf<GenericPrincipal>(identity, new[] { "user" });
+            var principal = new GenericPrincipal(identity, new[] { "user" });
             return principal;
         }
 

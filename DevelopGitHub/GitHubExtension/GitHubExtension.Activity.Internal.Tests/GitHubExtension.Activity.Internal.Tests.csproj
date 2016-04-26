@@ -92,11 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsForControllers\ActivityInternalCommandControllerAddJoinToSystemActivityTests.cs" />
-    <Compile Include="TestsForControllers\ActivityInternalCommandControllerRepositoryAddedToSystem.cs" />
-    <Compile Include="TestsForControllers\ActivityInternalQueryControllerGetUserActivitiesForCurrentProjectTests.cs" />
-    <Compile Include="TestsForControllers\ActivityInternalQueryControllerGetUserActivitiesTests.cs" />
-    <Compile Include="TestsForControllers\ActivityInternalCommandControllerAddRoleActivityTests.cs" />
+    <Compile Include="TestsForControllers\CommandControllerAddJoinToSystemActivityTests.cs" />
+    <Compile Include="TestsForControllers\CommandControllerRepositoryAddedToSystem.cs" />
+    <Compile Include="TestsForControllers\QueryControllerGetUserActivitiesRepositoryTests.cs" />
+    <Compile Include="TestsForControllers\QueryControllerGetUserActivitiesTests.cs" />
+    <Compile Include="TestsForControllers\CommandControllerAddRoleActivityTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.DAL.csproj">
@@ -118,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestRoutes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
