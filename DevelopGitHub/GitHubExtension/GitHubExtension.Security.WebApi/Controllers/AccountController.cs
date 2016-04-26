@@ -4,9 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
 
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
@@ -196,7 +194,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return InternalServerError();
             }
 
-            IList<RepositoryViewModel> repositories = await _gitHubQuery.GetReposAsync(token);
+            IList<GitHubRepositoryModel> repositories = await _gitHubQuery.GetReposAsync(token);
             IList<UserRepositoryRole> repositoriesToAdd =
                 repositories.Select(r => new UserRepositoryRole() { Repository = r.ToEntity(), SecurityRole = role }).ToList();
 
@@ -207,8 +205,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return GetErrorResult(addUserResult);
             }
 
-            if (repositories.Any(
-                    r => !_userManager.AddClaim(user.Id, new Claim(role.Name, r.GitHubId.ToString())).Succeeded))
+            if (!AddRoleToClaims(user.Id, repositories, role))
             {
                 return BadRequest();
             }
@@ -226,6 +223,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             authentication.SignIn(localIdentity);
+        }
+
+        private bool AddRoleToClaims(string userId, IEnumerable<GitHubRepositoryModel> repositories, SecurityRole role)
+        {
+            return repositories.Any(r => !_userManager.AddClaim(userId, new Claim(role.Name, r.GitHubId.ToString())).Succeeded);
         }
     }
 }
