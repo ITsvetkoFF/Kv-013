@@ -94,7 +94,7 @@
             return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
                 vm.reposData = response;
             });
-        };
+        }
     }
 })();
 

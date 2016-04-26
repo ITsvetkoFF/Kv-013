@@ -10,7 +10,6 @@
     function userService($cookies, $http, $state, API_URL, logger, i18n) {
         var RepositoryList;
         var CurrentRepository;
-        var i18n = i18n.message;
 
         function login() {
             location.href = API_URL.LOGIN;
@@ -38,9 +37,9 @@
             return $http({
                 method: 'GET',
                 url: API_URL.REPOSITORY
-            }).then( function(responce){
+            }).then(function(responce) {
                 RepositoryList = responce.data;
-                logger.info(i18n.REPOSITORIES_LOAD_MESSAGE);
+                logger.info(i18n.message.REPOSITORIES_LOAD_MESSAGE);
             });
         }
 
@@ -56,12 +55,12 @@
                 data: {
                     Id: repository.id
                 }
-            }).then( function(){
+            }).then(function() {
                 CurrentRepository = repository;
                 $state.reload();
-                logger.info(i18n.CHANGE_REPOSITORY_MESSAGE);
+                logger.info(i18n.message.CHANGE_REPOSITORY_MESSAGE);
             }, function() {
-                logger.error(i18n.CHANGE_REPOSITORY_ERROR_MESSAGE);
+                logger.error(i18n.message.CHANGE_REPOSITORY_ERROR_MESSAGE);
             });
         }
 
