@@ -7,11 +7,6 @@ namespace GitHubExtension.Notes.Tests
     {
         public string url = "/";
 
-        public TestNoteRoutesConfig(string url)
-        {
-            url = url;
-        }
-
         public HttpConfiguration GetRoutes()
         {
             var config = new Startup();

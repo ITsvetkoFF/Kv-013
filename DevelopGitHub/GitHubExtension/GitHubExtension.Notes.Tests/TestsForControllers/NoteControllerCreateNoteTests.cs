@@ -21,7 +21,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
         private const string TestCollaboratorId = "550e8400-e29b-41d4-a716-446655440000";
         private const string TypeOfClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
         
-        public static IEnumerable<object[]> DataForModel
+        public static IEnumerable<object[]> DataForAddNoteModel
         {
             get
             {
@@ -40,7 +40,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
         }
 
         [Theory]
-        [MemberData("DataForModel")]
+        [MemberData("DataForAddNoteModel")]
         public void ShouldReturnOkResponseWhenIdentityContainsUser(IEnumerable<AddNoteModel> model)
         {
             // Arrange
@@ -57,7 +57,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
         }
 
         [Theory]
-        [MemberData("DataForModel")]
+        [MemberData("DataForAddNoteModel")]
         public void ShouldReturnBadRequestWhenIdentityContainsNoUser(IEnumerable<AddNoteModel> model)
         {
             // Arrange
@@ -72,7 +72,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
         }
 
         [Theory]
-        [MemberData("DataForModel")]
+        [MemberData("DataForAddNoteModel")]
         public void NoteCommanShouldReceiveACallWhenIdentitySet(IEnumerable<AddNoteModel> model)
         {
             // Arrange
@@ -88,7 +88,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
         }
 
         [Theory]
-        [MemberData("DataForModel")]
+        [MemberData("DataForAddNoteModel")]
         public void NoteCommanShouldNotReceiveACallWhenNoUser(IEnumerable<AddNoteModel> model)
         {
             // Arrange
