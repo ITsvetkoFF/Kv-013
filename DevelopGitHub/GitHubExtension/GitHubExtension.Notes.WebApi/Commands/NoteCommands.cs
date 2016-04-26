@@ -1,21 +1,22 @@
 ﻿using System.Threading.Tasks;
+
 using GitHubExtension.Notes.DAL.Model;
 
 namespace GitHubExtension.Notes.WebApi.Commands
 {
     public class NoteCommands : INoteCommands
     {
-        private readonly NoteContext notesContext;
+        private readonly NoteContext _notesContext;
 
         public NoteCommands(NoteContext notesContext)
         {
-            this.notesContext = notesContext;
+            _notesContext = notesContext;
         }
 
         public async Task AddNote(Note noteEntity)
         {
-            notesContext.Notes.Add(noteEntity);
-            await notesContext.SaveChangesAsync();
-        } 
+            _notesContext.Notes.Add(noteEntity);
+            await _notesContext.SaveChangesAsync();
+        }
     }
 }

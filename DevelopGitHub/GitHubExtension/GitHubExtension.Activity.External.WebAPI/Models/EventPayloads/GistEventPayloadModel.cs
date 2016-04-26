@@ -5,6 +5,7 @@
     {
         // The action that was performed. Can be "create" or "update"
         public string Action { get; set; }
+
         public GistModel Gist { get; set; }
     }
 }

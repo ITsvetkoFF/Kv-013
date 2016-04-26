@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Http;
+
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Mappers;
 
@@ -9,12 +10,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
     [RoutePrefix("api/roles")]
     public class RolesController : BaseApiController
     {
+        private readonly ISecurityContext _securityContext;
+
         public RolesController(ISecurityContext securityContext)
         {
             _securityContext = securityContext;
         }
-
-        private readonly ISecurityContext _securityContext;
 
         [Route("")]
         [AllowAnonymous]

@@ -4,6 +4,7 @@
     {
         // Currently only created
         public string Action { get; set; }
+
         public CommitCommentModel Comment { get; set; }
     }
 }

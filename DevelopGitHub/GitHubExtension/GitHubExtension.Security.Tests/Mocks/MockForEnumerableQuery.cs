@@ -14,12 +14,16 @@ namespace GitHubExtension.Security.Tests.Mocks
         {
         }
 
-        async Task<object> IDbAsyncQueryProvider.ExecuteAsync(Expression expression, CancellationToken cancellationToken)
+        async Task<object> IDbAsyncQueryProvider.ExecuteAsync(
+            Expression expression, 
+            CancellationToken cancellationToken)
         {
             return ((IQueryProvider)this).Execute(expression);
         }
 
-        async Task<TResult> IDbAsyncQueryProvider.ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        async Task<TResult> IDbAsyncQueryProvider.ExecuteAsync<TResult>(
+            Expression expression, 
+            CancellationToken cancellationToken)
         {
             return ((IQueryProvider)this).Execute<TResult>(expression);
         }

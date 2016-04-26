@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Routing;
+
 using Newtonsoft.Json;
 
 namespace GitHubExtension.Statistics.WebApi.Extensions.Cookie
@@ -14,14 +10,17 @@ namespace GitHubExtension.Statistics.WebApi.Extensions.Cookie
         public static ICollection<ICollection<int>> GetCommitsRepositories(this RequestContext httpContext)
         {
             string cookieValue = httpContext.HttpContext.Request.Cookies["commitsRepositories"].Value;
-            ICollection<ICollection<int>> _commitsRepositories = JsonConvert.DeserializeObject<ICollection<ICollection<int>>>(cookieValue);
-            return _commitsRepositories;
+            ICollection<ICollection<int>> commitsRepositories =
+                JsonConvert.DeserializeObject<ICollection<ICollection<int>>>(cookieValue);
+            return commitsRepositories;
         }
 
-        public static void SetCommitsRepositories(this RequestContext httpContext, ICollection<ICollection<int>> commitsRepositories)
+        public static void SetCommitsRepositories(
+            this RequestContext httpContext, 
+            ICollection<ICollection<int>> commitsRepositories)
         {
-            httpContext.HttpContext.Response.Cookies["commitsRepositories"].Value
-                    = JsonConvert.SerializeObject(commitsRepositories);
+            httpContext.HttpContext.Response.Cookies["commitsRepositories"].Value =
+                JsonConvert.SerializeObject(commitsRepositories);
         }
     }
 }

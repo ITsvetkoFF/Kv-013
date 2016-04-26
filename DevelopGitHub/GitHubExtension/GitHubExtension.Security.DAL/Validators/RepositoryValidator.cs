@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+
 using GitHubExtension.Security.DAL.Identity;
 
 namespace GitHubExtension.Security.DAL.Validators

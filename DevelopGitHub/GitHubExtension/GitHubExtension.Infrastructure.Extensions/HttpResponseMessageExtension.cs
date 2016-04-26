@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+
 using GitHubExtension.Infrastructure.Constants;
 
 namespace GitHubExtension.Infrastructure.Extensions
@@ -12,7 +13,9 @@ namespace GitHubExtension.Infrastructure.Extensions
             return response.StatusCode == HttpStatusCode.NotFound;
         }
 
-        public static bool TryGetLinkHeaderFromResponse(this HttpResponseMessage response, out IEnumerable<string> requestLinkHeader)
+        public static bool TryGetLinkHeaderFromResponse(
+            this HttpResponseMessage response, 
+            out IEnumerable<string> requestLinkHeader)
         {
             return response.Headers.TryGetValues(GitHubConstants.LinkHeader, out requestLinkHeader);
         }

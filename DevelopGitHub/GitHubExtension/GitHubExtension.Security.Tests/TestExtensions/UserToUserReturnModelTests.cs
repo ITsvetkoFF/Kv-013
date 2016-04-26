@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+
 using FluentAssertions;
-using Xunit;
+
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
+
+using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestExtensions
 {
@@ -13,21 +16,18 @@ namespace GitHubExtension.Security.Tests.TestExtensions
         {
             get
             {
-                yield return new object[]
-                {
-                    new User
-                    { 
-                        Id="123", ProviderId=124, 
-                        Email="Email@gamil.com",
-                        UserName="Name"
-                    },
-                    new UserReturnModel
-                    { 
-                        Id="123", 
-                        GitHubId=124, 
-                        Email="Email@gamil.com", 
-                        UserName="Name"}
-                };
+                yield return
+                    new object[]
+                        {
+                            new User { Id = "123", ProviderId = 124, Email = "Email@gamil.com", UserName = "Name" }, 
+                            new UserReturnModel
+                                {
+                                    Id = "123", 
+                                    GitHubId = 124, 
+                                    Email = "Email@gamil.com", 
+                                    UserName = "Name"
+                                }
+                        };
             }
         }
 
@@ -35,10 +35,10 @@ namespace GitHubExtension.Security.Tests.TestExtensions
         [MemberData("DataForUserReturnModelTest")]
         public void UserReturnModelTest(User entityToUserReturnModelTest, UserReturnModel expectedUserReturnModel)
         {
-            //Act
+            // Act
             UserReturnModel userReturnModel = entityToUserReturnModelTest.ToUserReturnModel();
 
-            //Assert
+            // Assert
             userReturnModel.ShouldBeEquivalentTo(expectedUserReturnModel);
         }
     }

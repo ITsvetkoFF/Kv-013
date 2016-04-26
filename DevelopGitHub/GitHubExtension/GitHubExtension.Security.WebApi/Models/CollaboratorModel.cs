@@ -6,7 +6,9 @@ namespace GitHubExtension.Security.WebApi.Models
     public class CollaboratorModel
     {
         public int Id { get; set; }
-        public string Url { get; set; }
+
         public string Login { get; set; }
+
+        public string Url { get; set; }
     }
 }

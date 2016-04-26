@@ -1,17 +1,21 @@
 ﻿using System.Collections.Generic;
-using NSubstitute;
-using Xunit;
-using GitHubExtension.Security.DAL.Infrastructure;
-using Microsoft.AspNet.Identity;
-using GitHubExtension.Security.DAL.Interfaces;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-using System.Threading.Tasks;
+
 using FluentAssertions;
+
 using GitHubExtension.Security.DAL.Identity;
+using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
+
+using Microsoft.AspNet.Identity;
+
+using NSubstitute;
+
+using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
 {
@@ -21,11 +25,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] 
-                { 
-                    "1", 
-                    null,  
-                };
+                yield return new object[] { "1", null, };
             }
         }
 
@@ -33,52 +33,51 @@ namespace GitHubExtension.Security.Tests.TestForControllers
         {
             get
             {
-                yield return new object[] 
-                { 
-                    "5", 
-                    new User { ProviderId = 5 },
-                };
+                yield return new object[] { "5", new User { ProviderId = 5 }, };
             }
-        }
-
-        private static AccountController GetControllerInstance(string id, User user)
-        {
-            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
-            userManager.FindByIdAsync(id).Returns(user);
-            AccountController controller = new AccountController(Substitute.For<IGitHubQuery>(), userManager, Substitute.For<ISecurityContextQuery>());
-
-            return controller;
         }
 
         [Theory]
         [MemberData("DataForNotFountResult")]
         public void NotFoundUserTest(string findUserById, User fakeFoundUser)
         {
-            //Arrange
+            // Arrange
             AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
 
-            //Act
+            // Act
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
-            //Assert
+            // Assert
             IHttpActionResult result = response.Result;
-            result.Should().BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
+            result.Should()
+                .BeOfType<NotFoundResult>("Because user with id ={0} doesn't exists in database", findUserById);
         }
 
         [Theory]
         [MemberData("DataForOkResult")]
         public void OkResultTest(string findUserById, User fakeFoundUser)
         {
-            //Arrange
+            // Arrange
             AccountController controller = GetControllerInstance(findUserById, fakeFoundUser);
 
-            //Act
+            // Act
             Task<IHttpActionResult> response = controller.GetUser(findUserById);
 
-            //Assert
+            // Assert
             IHttpActionResult result = response.Result;
             result.Should().BeOfType<OkNegotiatedContentResult<UserReturnModel>>();
         }
 
+        private static AccountController GetControllerInstance(string id, User user)
+        {
+            var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
+            userManager.FindByIdAsync(id).Returns(user);
+            AccountController controller = new AccountController(
+                Substitute.For<IGitHubQuery>(), 
+                userManager, 
+                Substitute.For<ISecurityContextQuery>());
+
+            return controller;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GitHubExtension.Activity.External.WebAPI.Queries;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
 

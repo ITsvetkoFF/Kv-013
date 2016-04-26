@@ -9,9 +9,9 @@ namespace GitHubExtension.Security.WebApi.Mappers
         {
             var user = new User()
             {
-                Email = model.Email,
-                UserName = model.Login,
-                ProviderId = model.GitHubId,
+                Email = model.Email, 
+                UserName = model.Login, 
+                ProviderId = model.GitHubId, 
                 GitHubUrl = model.Url
             };
 
@@ -22,9 +22,9 @@ namespace GitHubExtension.Security.WebApi.Mappers
         {
             UserReturnModel userReturnModel = new UserReturnModel()
             {
-                Id = user.Id,
-                Email = user.Email,
-                GitHubId = user.ProviderId,
+                Id = user.Id, 
+                Email = user.Email, 
+                GitHubId = user.ProviderId, 
                 UserName = user.UserName
             };
 

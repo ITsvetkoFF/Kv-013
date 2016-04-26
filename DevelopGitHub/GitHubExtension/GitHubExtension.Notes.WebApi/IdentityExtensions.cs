@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Security.Principal;
+
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Notes.WebApi
