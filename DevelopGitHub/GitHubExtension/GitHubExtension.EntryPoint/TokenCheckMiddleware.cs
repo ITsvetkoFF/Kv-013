@@ -24,7 +24,7 @@ namespace GitHubExtension.EntryPoint
         {
             if (context.IsAuthenticated())
             {
-                if (!context.Authentication.User.HasClaim(c => c.Type == "ExternalAccessToken"))
+                if (!context.Authentication.User.HasClaim(c => c.Type == ClaimConstants.ExternalAccessToken))
                 {
                     context.Authentication.SignOut();
                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
