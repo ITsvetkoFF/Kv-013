@@ -12,14 +12,26 @@
         function postImage(route, files) {
             var fd = new FormData();
             fd.append('file', files[0]);
-            $http.post(route, fd, {
+            return $http.post(route, fd, {
                 transformRequest: angular.identity, //to make authomatical serialisation
-                headers: {'Content-Type': undefined} //to make content-type multipart/from-data
-            });
+                headers: { 'Content-Type': undefined } //to make content-type multipart/from-data
+            }).then(successCb);
+        }
+
+        function getImage(route) {
+            return $http({
+                method: 'GET',
+                url: route
+            }).then(successCb);
+        }
+
+        function successCb(response) {
+            return response.data;
         }
 
         return {
             postImage: postImage,
+            getImage: getImage
         };
     }
 })();

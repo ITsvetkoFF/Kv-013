@@ -16,8 +16,8 @@
                 LOGOUT: resource + 'account/logout',
                 internalActivityUrl: resource + 'activity/internal',
                 externalActivityUrl: resource + 'activity/external?page=',
-                UPLOADPHOTO: resource + 'account/avatar',
-                REPOSITORY: resource + 'user/repos',
+                UPLOADPHOTO: resource + 'user/avatar',
+				REPOSITORY: resource + 'user/repos',
                 ROLES: resource + 'roles',
                 CURRENT_REPOSITORY: resource + 'repos/current',
 
