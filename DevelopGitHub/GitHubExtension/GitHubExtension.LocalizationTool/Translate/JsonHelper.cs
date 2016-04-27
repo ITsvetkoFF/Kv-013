@@ -39,7 +39,7 @@ namespace GitHubExtension.LocalizationTool.Translate
                 var fileText = File.ReadAllText(fileName);
                 var file = JObject.Parse(fileText);
                 var translation = file.Value<JObject>(Translator.GetLang(language));
-                IterateJsonArray(language, translation);
+                FillDataFromJson(language, translation);
             }
             catch (JsonReaderException jsonEx)
             {
@@ -92,7 +92,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        private void IterateJsonArray(Lang language, JObject translation)
+        private void FillDataFromJson(Lang language, JObject translation)
         {
             foreach (var element in translation)
             {
