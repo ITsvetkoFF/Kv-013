@@ -54,6 +54,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.Internal.Tests", "GitHubExtension.Activity.Internal.Tests\GitHubExtension.Activity.Internal.Tests.csproj", "{07C98A3E-352E-4DB6-B9E1-FE67080EA388}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Templates.DAL", "GitHubExtension.Templates.DAL\GitHubExtension.Templates.DAL.csproj", "{9301AB33-C18E-4C2E-9F07-E8F99A9FD72E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Preferences", "Preferences", "{500781AD-6E27-4821-96CF-A0680639EA1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtention.Preferences.WebApi", "GitHubExtention.Preferences.WebApi\GitHubExtention.Preferences.WebApi.csproj", "{A6C88FE8-D6CE-4C61-ACF8-638A5D0F9D5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

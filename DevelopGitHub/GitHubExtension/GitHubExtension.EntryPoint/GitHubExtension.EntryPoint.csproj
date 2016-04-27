@@ -321,6 +321,10 @@
       <Project>{d2adb828-d1e5-40ed-aa12-1643fb5cd11e}</Project>
       <Name>GitHubExtension.Templates</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtention.Preferences.WebApi\GitHubExtention.Preferences.WebApi.csproj">
+      <Project>{a6c88fe8-d6ce-4c61-acf8-638a5d0f9d5c}</Project>
+      <Name>GitHubExtention.Preferences.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

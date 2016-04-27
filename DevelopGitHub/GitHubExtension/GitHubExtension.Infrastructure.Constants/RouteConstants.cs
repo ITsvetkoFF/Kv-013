@@ -52,6 +52,8 @@
 
         public const string GetNoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
 
+        public const string ChangeAvatar = ApiUser + Avatar;
+
         // segments
         public const string IdInt = "/{id:int}";
 
@@ -63,6 +65,8 @@
         public const string Register = "register";
 
         public const string RegisterExternal = "registerExternal";
+
+        public const string Avatar = "avatar";
 
         public const string Repository = "/repos";
 

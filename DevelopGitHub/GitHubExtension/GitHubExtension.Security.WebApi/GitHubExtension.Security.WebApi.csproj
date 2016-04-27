@@ -190,6 +190,10 @@
       <Project>{ac64ce56-a38a-4866-82f5-a3be35ef2ea8}</Project>
       <Name>GitHubExtension.Statistics.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtention.Preferences.WebApi\GitHubExtention.Preferences.WebApi.csproj">
+      <Project>{a6c88fe8-d6ce-4c61-acf8-638a5d0f9d5c}</Project>
+      <Name>GitHubExtention.Preferences.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
