@@ -56,6 +56,29 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route(RouteConstants.GetMailVisibility)]
+        public async Task<bool> GetMailVisibility()
+        {
+            string id = User.Identity.GetUserId();
+
+            var user = await _userManager.FindByIdAsync(id);
+            return user.IsMailVisible;
+        }
+                
+        [HttpPut]
+        [Route(RouteConstants.ChangeVisibilityMail)]
+        public async Task<IHttpActionResult> ChangeVisibilityMail()
+        {
+            string id = User.Identity.GetUserId();
+
+            var user = await _userManager.FindByIdAsync(id);
+            user.IsMailVisible = !user.IsMailVisible;
+            _userManager.Update(user);
+
+            return Ok();
+        }
+
+        [HttpGet]
         [Authorize(Roles = RoleConstants.Admin)]
         [Route(RouteConstants.GetUser)]
         public async Task<IHttpActionResult> GetUser(string id)
@@ -103,7 +126,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel(){ RepositoryId = repoId,  SecurityRole = role};
+            UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel() { RepositoryId = repoId, SecurityRole = role };
             appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToUserRepositoryRole());
 
             IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
@@ -217,7 +240,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             localIdentity.AddClaim(tokenClaim);
 
             var authentication = GetRequestContext.Authentication();
-            
+
             authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             authentication.SignIn(localIdentity);
         }

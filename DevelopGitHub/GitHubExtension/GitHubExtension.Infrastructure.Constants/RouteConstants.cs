@@ -17,6 +17,8 @@
         public const string RegisterExternal = "registerExternal";
         public const string ObtainLocalAccessToken = "obtainLocalAccessToken";
         public const string Collaborators = "/collaborators";
+        public const string MailVisibility = "mailvisibility";
+        public const string ChangeVisibilityMail = "changemail";
 
         // segments
         public const string Id_int = "/{id:int}";
@@ -36,5 +38,6 @@
         public const string GetByIdRepository = ApiRepository + Id_int;
         public const string GetRepositoryForCurrentUser = ApiUser + Repository;
         public const string GetCollaboratorsForRepository = ApiRepository + RepositoryName + Collaborators;
+        public const string GetMailVisibility = MailVisibility;
     }
 }

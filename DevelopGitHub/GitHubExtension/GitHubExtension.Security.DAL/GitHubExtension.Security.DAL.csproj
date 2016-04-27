@@ -87,6 +87,10 @@
     <Compile Include="Infrastructure\IApplicationUserManager.cs" />
     <Compile Include="Infrastructure\SecurityRoleManager.cs" />
     <Compile Include="Interfaces\ISecurityContext.cs" />
+    <Compile Include="Migrations\201604251106316_AddField_IsMailVisible.cs" />
+    <Compile Include="Migrations\201604251106316_AddField_IsMailVisible.Designer.cs">
+      <DependentUpon>201604251106316_AddField_IsMailVisible.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\RepositoryValidator.cs" />
@@ -96,6 +100,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604251106316_AddField_IsMailVisible.resx">
+      <DependentUpon>201604251106316_AddField_IsMailVisible.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

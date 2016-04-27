@@ -17,6 +17,8 @@
                 internalActivityUrl: resource + 'activity/internal',
                 externalActivityUrl: resource + 'activity/external?page=',
                 UPLOADPHOTO: resource + 'account/avatar',
+                CHECKBOXVALUE: resource + 'account/mailvisibility',
+                CHANGEVISIBILITYMAIL: resource + 'account/changemail',
 				REPOSITORY: resource + 'user/repos',
                 ROLES: resource + 'roles',
                 CURRENT_REPOSITORY: resource + 'repos/current',

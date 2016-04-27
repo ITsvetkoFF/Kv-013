@@ -15,10 +15,10 @@
     <AssemblyName>GitHubExtension.EntryPoint</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -206,7 +206,7 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
-    <Content Include="FrontEnd\src\client\app\userpreferences\file.directive.js" />
+    <Content Include="FrontEnd\src\client\app\userpreferences\ge-custom-on-change.directive.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\user-data.factory.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.controller.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.html" />

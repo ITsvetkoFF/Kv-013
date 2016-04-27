@@ -3,7 +3,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <input type="file" ge-custom-on-change="vmPreferences.uploadFile">
+                    <input type="file" ge-custom-on-change="vmPreferences.uploadFile" /> <br />
+                    <input type="checkbox" ng-change="vmPreferences.changeVisibilityMail()" ng-model="vmPreferences.isEmailPrivate" /> Show mail to everyone
                 </div>
             </div>
         </div>
