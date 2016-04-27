@@ -11,7 +11,7 @@ namespace GitHubExtension.Security.WebApi.Queries.Interfaces
 
         Task<string> GetPrimaryEmailForUser(string token);
 
-        Task<List<RepositoryViewModel>> GetReposAsync(string token);
+        Task<List<GitHubRepositoryModel>> GetReposAsync(string token);
 
         Task<GitHubUserModel> GetUserAsync(string token);
     }
