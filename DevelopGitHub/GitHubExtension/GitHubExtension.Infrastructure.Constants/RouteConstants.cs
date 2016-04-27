@@ -18,6 +18,8 @@
 
         public const string ApiUser = "api/user";
 
+        public const string ApiUsers = "api/users";
+
         public const string AssignRolesToUser = ApiRepository + RepositoryId + Collaborators + GitHubId;
 
         public const string Collaborators = "/collaborators";
@@ -41,6 +43,8 @@
         public const string IdGuid = "/{id:guid}";
 
         public const string Current = "/current";
+
+        public const string SearchUsersByName = ApiUsers + Search;
 
         public const string UpdateProject = ApiRepository + Current;
 
@@ -67,6 +71,8 @@
         public const string CollaboratorId = "/{collaboratorId}";
 
         public const string RepositoryName = "/{repoName}";
+
+        public const string Search = "/search";
 
         public const string User = "user";
 

@@ -22,10 +22,10 @@ namespace GitHubExtension.Security.WebApi.Mappers
         {
             UserReturnModel userReturnModel = new UserReturnModel()
             {
-                Id = user.Id, 
                 Email = user.Email, 
                 GitHubId = user.ProviderId, 
-                UserName = user.UserName
+                UserName = user.UserName,
+                GitHubUrl = user.GitHubUrl
             };
 
             return userReturnModel;

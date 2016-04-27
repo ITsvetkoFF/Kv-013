@@ -11,5 +11,7 @@ namespace GitHubExtension.Security.WebApi.Queries.Interfaces
         IQueryable<UserRepositoryRole> UserRepositoryRoles { get; }
 
         IQueryable<Repository> Repositories { get; }
+
+        IQueryable<User> Users { get; } 
     }
 }
