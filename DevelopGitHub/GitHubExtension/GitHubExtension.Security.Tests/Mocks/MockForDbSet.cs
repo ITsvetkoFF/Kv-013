@@ -7,8 +7,7 @@ using System.Linq.Expressions;
 
 namespace GitHubExtension.Security.Tests.Mocks
 {
-    class MockForDbSet<T> : MockForEnumerableQuery<T>, IDbSet<T>
-        where T : class
+    public class MockForDbSet<T> : MockForEnumerableQuery<T>, IDbSet<T> where T : class
     {
         private readonly IQueryable<T> _data;
 
