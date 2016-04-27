@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace GitHubExtension.LocalizationTool.ViewModel
@@ -6,6 +8,23 @@ namespace GitHubExtension.LocalizationTool.ViewModel
     public abstract class NotifyProperyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected bool CheckPropertyChanged<T>(ref T oldValue, T newValue, Expression<Func<T>> expression)
+        {
+            if (oldValue == null && newValue == null)
+            {
+                return false;
+            }
+
+            if ((oldValue == null && newValue != null) || !oldValue.Equals(newValue))
+            {
+                oldValue = newValue;
+                FirePropertyChanged(GetPropertyName(expression));
+                return true;
+            }
+
+            return false;
+        }
 
         protected bool CheckPropertyChanged<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = "")
         {
@@ -30,6 +49,12 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        protected string GetPropertyName<T>(Expression<Func<T>> expression)
+        {
+            MemberExpression memberExpression = (MemberExpression)expression.Body;
+            return memberExpression.Member.Name;
         }
     }
 }
