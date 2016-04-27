@@ -16,7 +16,7 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string CloseBrackets = "}}";
 
-        private const string Ñolon = ":";
+        private const string Colon = ":";
 
         private const string Comma = ",";
 
@@ -67,13 +67,13 @@ namespace GitHubExtension.LocalizationTool.Translate
                 for (var i = 0; i < _translationData.Count - 1; i++)
                 {
                     result.Append(DoubleQuote + _translationData[i].Name + DoubleQuote);
-                    result.Append(Ñolon);
+                    result.Append(Colon);
                     result.Append(DoubleQuote + _translationData[i][language] + DoubleQuote);
                     result.Append(Comma);
                 }
 
                 result.Append(DoubleQuote + _translationData[_translationData.Count - 1].Name + DoubleQuote);
-                result.Append(Ñolon);
+                result.Append(Colon);
                 result.Append(DoubleQuote + _translationData[_translationData.Count - 1][language] + DoubleQuote);
             }
 
