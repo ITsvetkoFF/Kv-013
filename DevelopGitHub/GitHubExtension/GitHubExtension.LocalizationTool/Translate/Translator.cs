@@ -95,11 +95,12 @@ namespace GitHubExtension.LocalizationTool.Translate
                 return;
             }
 
-            Lang sourceLanguageEnum;
-            Lang targetLanguageEnum;
-            LanguageCheck(ref sourceLanguage, ref targetLanguage, out sourceLanguageEnum, out targetLanguageEnum);
+            Lang sourceLanguageEnum = GetLang(sourceLanguage);
+            Lang targetLanguageEnum = GetLang(targetLanguage);
+            sourceLanguage = CheckUsEnLanguage(sourceLanguage);
+            targetLanguage = CheckUsEnLanguage(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
-            var result = string.Empty;
+            string result;
             using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
                 result = await webClient.DownloadStringTaskAsync(
@@ -109,16 +110,9 @@ namespace GitHubExtension.LocalizationTool.Translate
             SaveTranslationResult(result, targetLanguageEnum);
         }
 
-        private static void LanguageCheck(
-            ref string sourceLanguage, 
-            ref string targetLanguage, 
-            out Lang sourceLanguageEnum, 
-            out Lang targetLanguageEnum)
+        private static string CheckUsEnLanguage(string language)
         {
-            sourceLanguageEnum = GetLang(sourceLanguage);
-            targetLanguageEnum = GetLang(targetLanguage);
-            sourceLanguage = sourceLanguage == UsLang ? EnLang : sourceLanguage;
-            targetLanguage = targetLanguage == UsLang ? EnLang : targetLanguage;
+            return language == UsLang ? EnLang : language;
         }
 
         private void SaveTranslationResult(string result, Lang language)
