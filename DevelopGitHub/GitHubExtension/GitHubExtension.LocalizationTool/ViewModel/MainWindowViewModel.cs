@@ -18,8 +18,6 @@ namespace GitHubExtension.LocalizationTool.ViewModel
     {
         private readonly Translator _translator;
 
-        private readonly JsonHelper _jsonHelper;
-
         private string _targetLanguageText;
 
         private string _sourceLanguageText;
@@ -34,7 +32,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
             _translator = new Translator(TranslationData);
 
-            _jsonHelper = new JsonHelper(TranslationData);
+            JsonHelper.TranslationData = TranslationData;
 
             OpenJson(null);
         }
@@ -46,14 +44,6 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             get
             {
                 return _translator;
-            }
-        }
-
-        public JsonHelper JsonHelper
-        {
-            get
-            {
-                return _jsonHelper;
             }
         }
 

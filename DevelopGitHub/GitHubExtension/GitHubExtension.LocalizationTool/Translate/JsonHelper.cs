@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using GitHubExtension.LocalizationTool.Model;
-using GitHubExtension.LocalizationTool.ViewModel;
-using Newtonsoft.Json;
+
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.LocalizationTool.Translate
 {
-    public class JsonHelper
+    public static class JsonHelper
     {
         private const string DoubleQuote = "\"";
 
@@ -24,14 +22,9 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string SecondOpenQuote = "\":{";
 
-        private readonly ObservableCollection<TranslationDataRow> _translationData;
-
-        public JsonHelper(ObservableCollection<TranslationDataRow> translationData)
-        {
-            _translationData = translationData;
-        }
-
-        public void ReadJsonFromFile(Lang language)
+        public static ObservableCollection<TranslationDataRow> TranslationData { get; set; }
+        
+        public static void ReadJsonFromFile(Lang language)
         {
             var fileName = Translator.GetFileName(language);
             var fileText = File.ReadAllText(fileName);
@@ -40,44 +33,51 @@ namespace GitHubExtension.LocalizationTool.Translate
             FillDataFromJson(language, translation);
         }
 
-        public string GenerateJson(Lang language)
+        public static string GenerateJson(Lang language)
         {
             RemoveEmptyRows();
             var result = new StringBuilder();
             result.Append(FirstOpenQuote);
             result.Append(Translator.GetLang(language));
             result.Append(SecondOpenQuote);
-            if (_translationData.Count != 0)
+            if (TranslationData.Count != 0)
             {
-                for (var i = 0; i < _translationData.Count - 1; i++)
+                for (var i = 0; i < TranslationData.Count - 1; i++)
                 {
-                    result.Append(DoubleQuote + _translationData[i].Name + DoubleQuote);
+                    result.Append(DoubleQuote + TranslationData[i].Name + DoubleQuote);
                     result.Append(Colon);
-                    result.Append(DoubleQuote + _translationData[i][language] + DoubleQuote);
+                    result.Append(DoubleQuote + TranslationData[i][language] + DoubleQuote);
                     result.Append(Comma);
                 }
 
-                result.Append(DoubleQuote + _translationData[_translationData.Count - 1].Name + DoubleQuote);
+                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1].Name + DoubleQuote);
                 result.Append(Colon);
-                result.Append(DoubleQuote + _translationData[_translationData.Count - 1][language] + DoubleQuote);
+                result.Append(DoubleQuote + TranslationData[TranslationData.Count - 1][language] + DoubleQuote);
             }
 
             result.Append(CloseBrackets);
             return result.ToString();
         }
 
-        public void RemoveEmptyRows()
+        public static void RemoveEmptyRows()
         {
-            for (var i = 0; i < _translationData.Count; i++)
+            for (var i = 0; i < TranslationData.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(_translationData[i].Name))
+                if (string.IsNullOrWhiteSpace(TranslationData[i].Name))
                 {
-                    _translationData.Remove(_translationData[i--]);
+                    TranslationData.Remove(TranslationData[i--]);
                 }
             }
         }
 
-        private void FillDataFromJson(Lang language, JObject translation)
+        public static void AddNewRow(Lang language, KeyValuePair<string, JToken> element)
+        {
+            var line = new TranslationDataRow(element.Key);
+            line[language] = element.Value.ToString();
+            TranslationData.Add(line);
+        }
+
+        private static void FillDataFromJson(Lang language, JObject translation)
         {
             foreach (var element in translation)
             {
@@ -88,23 +88,16 @@ namespace GitHubExtension.LocalizationTool.Translate
                 }
                 else
                 {
-                    _translationData[index][language] = element.Value.ToString();
+                    TranslationData[index][language] = element.Value.ToString();
                 }
             }
         }
 
-        public void AddNewRow(Lang language, KeyValuePair<string, JToken> element)
+        private static int IndexOfNamedElement(string key)
         {
-            var line = new TranslationDataRow(element.Key);
-            line[language] = element.Value.ToString();
-            _translationData.Add(line);
-        }
-
-        private int IndexOfNamedElement(string key)
-        {
-            for (var i = 0; i < _translationData.Count; i++)
+            for (var i = 0; i < TranslationData.Count; i++)
             {
-                if (_translationData[i].Name == key)
+                if (TranslationData[i].Name == key)
                 {
                     return i;
                 }

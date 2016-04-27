@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.LocalizationTool.Model;
-using GitHubExtension.LocalizationTool.ViewModel;
+
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.LocalizationTool.Translate
