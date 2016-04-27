@@ -124,7 +124,8 @@ namespace GitHubExtension.LocalizationTool.Translate
 
             var jsonResult = JObject.Parse(result);
             var i = 0;
-            foreach (var value in jsonResult.GetValue(JsonTextParameter).Select(item => item.ToString()))
+            var jsonResultObjects = jsonResult.GetValue(JsonTextParameter).Select(item => item.ToString());
+            foreach (var value in jsonResultObjects)
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
