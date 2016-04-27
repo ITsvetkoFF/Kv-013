@@ -26,7 +26,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         private const string JsonTextParameter = "text";
 
         private const string GetTextParameter = "&text=";
-        
+
         private readonly ObservableCollection<TranslationDataRow> _translationData;
 
         public Translator(ObservableCollection<TranslationDataRow> translationData)
@@ -102,17 +102,10 @@ namespace GitHubExtension.LocalizationTool.Translate
             var result = string.Empty;
             using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
             {
-                try
-                {
-                    result = await webClient.DownloadStringTaskAsync(
+                result = await webClient.DownloadStringTaskAsync(
                                 YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate);
-                }
-                catch (WebException exception)
-                {
-                    MainWindowViewModel.ShowErrorMessageBox("The waiting time of server response has expired", exception);
-                }
             }
-            
+
             SaveTranslationResult(result, targetLanguageEnum);
         }
 

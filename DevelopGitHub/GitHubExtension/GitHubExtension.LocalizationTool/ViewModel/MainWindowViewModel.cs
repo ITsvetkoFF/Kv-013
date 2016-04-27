@@ -1,12 +1,16 @@
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight;
+
 using GitHubExtension.LocalizationTool.Model;
 using GitHubExtension.LocalizationTool.Translate;
+
+using Newtonsoft.Json;
 
 namespace GitHubExtension.LocalizationTool.ViewModel
 {
@@ -133,6 +137,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     addEmptyRowCommand = new DelegateCommand(AddEmptyRow);
                 }
+
                 return addEmptyRowCommand;
             }
         }
@@ -152,6 +157,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     saveJsonCommand = new DelegateCommand(SaveJson);
                 }
+
                 return saveJsonCommand;
             }
         }
@@ -177,6 +183,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     openJsonCommand = new DelegateCommand(OpenJson);
                 }
+
                 return openJsonCommand;
             }
         }
@@ -186,7 +193,22 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             TranslationData.Clear();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
-                JsonHelper.ReadJsonFromFile(value);
+                try
+                {
+                    JsonHelper.ReadJsonFromFile(value);
+                }
+                catch (JsonReaderException jsonEx)
+                {
+                    ShowErrorMessageBox("Incorrect json format", jsonEx);
+                }
+                catch (FileNotFoundException fileNotFoundException)
+                {
+                    ShowErrorMessageBox("File is missing", fileNotFoundException);
+                }
+                catch (Exception exception)
+                {
+                    ShowErrorMessageBox("Unknown error", exception);
+                }
             }
 
             JsonHelper.RemoveEmptyRows();
@@ -203,6 +225,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     clearTranslationDataCommand = new DelegateCommand(ClearTranslationData);
                 }
+
                 return clearTranslationDataCommand;
             }
         }
@@ -222,6 +245,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     translatingButtonCommand = new DelegateCommand(TranslatingButton);
                 }
+
                 return translatingButtonCommand;
             }
         }
@@ -230,7 +254,15 @@ namespace GitHubExtension.LocalizationTool.ViewModel
         {
             TranslateButtonIsEnabled = false;
             TranslateButtonContent = "Translating...";
-            await Translator.WebTranslate(SourceLanguageText, TargetLanguageText);
+            try
+            {
+                await Translator.WebTranslate(SourceLanguageText, TargetLanguageText);
+            }
+            catch (WebException exception)
+            {
+                ShowErrorMessageBox("The waiting time of server response has expired", exception);
+            }
+
             TranslateButtonIsEnabled = true;
             TranslateButtonContent = "WebTranslate";
         }
@@ -245,6 +277,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 {
                     closeCommand = new DelegateCommand(Close);
                 }
+
                 return closeCommand;
             }
         }

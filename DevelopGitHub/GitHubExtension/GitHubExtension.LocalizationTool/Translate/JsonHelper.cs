@@ -34,25 +34,10 @@ namespace GitHubExtension.LocalizationTool.Translate
         public void ReadJsonFromFile(Lang language)
         {
             var fileName = Translator.GetFileName(language);
-            try
-            {
-                var fileText = File.ReadAllText(fileName);
-                var file = JObject.Parse(fileText);
-                var translation = file.Value<JObject>(Translator.GetLang(language));
-                FillDataFromJson(language, translation);
-            }
-            catch (JsonReaderException jsonEx)
-            {
-                MainWindowViewModel.ShowErrorMessageBox("Incorrect json format", jsonEx);
-            }
-            catch (FileNotFoundException fileNotFoundException)
-            {
-                MainWindowViewModel.ShowErrorMessageBox("File is missing", fileNotFoundException);
-            }
-            catch (Exception exception)
-            {
-                MainWindowViewModel.ShowErrorMessageBox("Unknown error", exception);
-            }
+            var fileText = File.ReadAllText(fileName);
+            var file = JObject.Parse(fileText);
+            var translation = file.Value<JObject>(Translator.GetLang(language));
+            FillDataFromJson(language, translation);
         }
 
         public string GenerateJson(Lang language)
