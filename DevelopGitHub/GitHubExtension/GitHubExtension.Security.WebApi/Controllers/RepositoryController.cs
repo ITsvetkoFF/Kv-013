@@ -37,7 +37,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpPatch]
-        [AllowAnonymous]
         [Route(RouteConstants.AssignRolesToUser)]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
@@ -77,7 +76,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
@@ -91,7 +89,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route(RouteConstants.GetRepositoryForCurrentUser)]
         public IHttpActionResult GetRepositoryForCurrentUser()
         {
@@ -107,7 +104,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return Ok(repositoryViewModels);
         }
 
-        [Authorize]
         [Route(RouteConstants.UpdateProject)]
         [HttpPatch]
         public async Task<IHttpActionResult> UpdateProject(Repository repository)

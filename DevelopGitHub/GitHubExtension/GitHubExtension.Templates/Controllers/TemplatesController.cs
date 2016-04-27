@@ -25,7 +25,6 @@ namespace GitHubExtension.Templates.Controllers
             _templateService = templateService;
         }
 
-        [Authorize]
         [HttpGet]
         [Route(RouteTemplatesConstants.IssueTemplate)]
         public async Task<IHttpActionResult> GetIssueTemplate()
@@ -47,7 +46,6 @@ namespace GitHubExtension.Templates.Controllers
             return Ok(content);
         }
 
-        [Authorize]
         [HttpGet]
         [Route(RouteTemplatesConstants.PullRequestTemplate)]
         public async Task<IHttpActionResult> GetPullRequestTemplate()
