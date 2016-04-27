@@ -71,6 +71,5 @@
         public const string User = "user";
 
         public const string UserName = "/{username}";
-;
     }
 }

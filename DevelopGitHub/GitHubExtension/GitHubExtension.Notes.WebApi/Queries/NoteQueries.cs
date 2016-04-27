@@ -14,7 +14,7 @@ namespace GitHubExtension.Notes.WebApi.Queries
 
         public IOrderedQueryable<Note> Notes
         {
-            get {return _notesContext.Notes;}
+            get { return _notesContext.Notes; }
         }
     }
 }
