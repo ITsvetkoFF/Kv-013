@@ -227,7 +227,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         private bool AddRoleToClaims(string userId, IEnumerable<GitHubRepositoryModel> repositories, SecurityRole role)
         {
-            return repositories.Any(r => !_userManager.AddClaim(userId, new Claim(role.Name, r.GitHubId.ToString())).Succeeded);
+            return repositories.All(r => _userManager.AddClaim(userId, new Claim(role.Name, r.GitHubId.ToString())).Succeeded);
         }
     }
 }
