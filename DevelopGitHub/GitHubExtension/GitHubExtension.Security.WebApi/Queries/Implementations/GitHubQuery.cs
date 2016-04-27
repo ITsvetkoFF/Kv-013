@@ -8,9 +8,11 @@ using GitHubExtension.Security.WebApi.Exceptions;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Constant;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
-
+using GitHubExtention.Preferences.WebApi.Constants;
+using GitHubExtention.Preferences.WebApi.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using GitHubExtention.Preferences.WebApi.Models;
 
 namespace GitHubExtension.Security.WebApi.Queries.Implementations
 {
@@ -109,5 +111,16 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
 
             return email;
         }
+
+        public async Task<FileModel> GetAvatar(string url)
+        {
+            using (var response = _httpClient.GetAsync(url))
+            {
+                var content = await response.Result.Content.ReadAsByteArrayAsync();
+                var type = response.GetContentType();
+                var file = new FileModel(type, AvatarConstants.ImageExtension, content);
+                return file;
+            }
+        } 
     }
 }

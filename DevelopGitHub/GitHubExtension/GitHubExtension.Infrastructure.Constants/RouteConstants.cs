@@ -54,6 +54,8 @@
 
         public const string GetNoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
 
+        public const string ChangeAvatar = ApiUser + Avatar;
+
         public const string DeleteNote = ApiNote + NoteId;
 
         // segments
@@ -67,6 +69,8 @@
         public const string Register = "register";
 
         public const string RegisterExternal = "registerExternal";
+
+        public const string Avatar = "avatar";
 
         public const string MailVisibility = "mailvisibility";
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using GitHubExtension.Security.WebApi.Models;
+using GitHubExtention.Preferences.WebApi.Models;
 
 namespace GitHubExtension.Security.WebApi.Queries.Interfaces
 {
@@ -14,5 +14,7 @@ namespace GitHubExtension.Security.WebApi.Queries.Interfaces
         Task<List<GitHubRepositoryModel>> GetReposAsync(string token);
 
         Task<GitHubUserModel> GetUserAsync(string token);
+
+        Task<FileModel> GetAvatar(string url);
     }
 }

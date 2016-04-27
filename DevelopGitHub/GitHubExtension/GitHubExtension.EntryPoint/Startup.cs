@@ -14,7 +14,7 @@ using GitHubExtension.Security.DAL.Migrations;
 using GitHubExtension.Security.WebApi.ActionFilters;
 using GitHubExtension.Security.WebApi.Provider;
 using GitHubExtension.Security.WebApi.Validators.ValidatorFactories;
-
+using GitHubExtention.Preferences.WebApi.Formatters;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -75,6 +75,7 @@ namespace GitHubExtension.EntryPoint
             config.Filters.Add(new LoggingFilterAttribute());
             config.Filters.Add(new ModelIsNullFilterAttribute());
             config.Filters.Add(new AuthorizeAttribute());
+            config.Formatters.Add(new FileMediaFormatter()); 
 
             return config;
         }
