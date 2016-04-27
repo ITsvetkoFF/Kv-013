@@ -9,6 +9,7 @@
 
     function UserPreferencesController(userData, logger, API_URL) {
         var vm = this;
+        vm.isEmailPrivate = false;
 
         activate();
 
@@ -17,8 +18,14 @@
         }
 
         vm.uploadFile = function (event) {
-            userData.postImage(API_URL.UPLOADPHOTO, event.target.files);
+            userData.postImage(event.target.files);
         };
 
+        vm.changeVisibilityMail = function () {
+            userData.changeVisibilityMail();
+        } 
+
+        userData.getCheckboxValue()
+            .then(function (data) { vm.isEmailPrivate = data; });
     }
 }());
