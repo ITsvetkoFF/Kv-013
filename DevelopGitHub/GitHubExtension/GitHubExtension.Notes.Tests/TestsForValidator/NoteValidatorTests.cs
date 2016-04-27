@@ -21,14 +21,14 @@ namespace GitHubExtension.Notes.Tests.TestsForValidator
         }
 
         [Fact]
-        public void ShouldNotHaveErrorWhenBodyIsSpecified()
+        public void ValidModelWhenBodyIsSpecified()
         {
             var noteValidator = new AddNoteModelValidator();
             noteValidator.ShouldNotHaveValidationErrorFor(note => note.Body, "Great Coder");
         }
 
         [Fact]
-        public void ShouldNotHaveErrorWhenCollaboratorIdIsSpecified()
+        public void ValidModelWhenCollaboratorIdIsSpecified()
         {
             var noteValidator = new AddNoteModelValidator();
             noteValidator.ShouldNotHaveValidationErrorFor(note => note.Body, "550e8400-e29b-41d4-a716-446655440000");
