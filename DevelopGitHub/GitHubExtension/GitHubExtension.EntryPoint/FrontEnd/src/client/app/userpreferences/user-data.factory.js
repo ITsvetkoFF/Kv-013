@@ -5,23 +5,23 @@
 
     module.factory('userData', userData);
 
-    userData.$inject = ['$http'];
+    userData.$inject = ['$http', 'API_URL'];
 
-    function userData($http) {
+    function userData($http, API_URL) {
 
-        function postImage(route, files) {
+        function postImage(files) {
             var fd = new FormData();
             fd.append('file', files[0]);
-            return $http.post(route, fd, {
+            return $http.post(API_URL.USER_PHOTO, fd, {
                 transformRequest: angular.identity, //to make authomatical serialisation
                 headers: { 'Content-Type': undefined } //to make content-type multipart/from-data
             }).then(successCb);
         }
 
-        function getImage(route) {
+        function getImage() {
             return $http({
                 method: 'GET',
-                url: route
+                url: API_URL.USER_PHOTO
             }).then(successCb);
         }
 
