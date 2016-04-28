@@ -1,5 +1,5 @@
 ﻿<br/>
-<h3 ng-show="!vmPrTemplates.pullRequestTemplate">What kind of Pull Request do you accept?</h3>
+<h3 ng-show="!vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.TYPE_PULL_REQUEST}}</h3>
 <button ng-click="vmPrTemplates.prtoggle()" ng-show="vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.SHOWPULLREQUESTTEMPLATE}}</button>
 <button ng-click="vmPrTemplates.predit()" ng-show="vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.EDIT_PR}}</button>
 <h4 ng-show ="vmPrTemplates.prVar"> {{vmPrTemplates.i18n.message.CURRENT_PR}}</h4>

@@ -1,5 +1,5 @@
 ﻿<br/>
-<h3 ng-show="!vmIssueTemplates.issueTemplate">Please, choose the reasons of issue on your project?</h3>
+<h3 ng-show="!vmIssueTemplates.issueTemplate">{{vmIssueTemplates.i18n.message.TYPE_ISSUE}}</h3>
 <button ng-click="vmIssueTemplates.itoggle()" ng-show="vmIssueTemplates.issueTemplate">{{vmIssueTemplates.i18n.message.SHOWISSUETEMPLATE}}</button>
 <button ng-click="vmIssueTemplates.iedit()" ng-show="vmIssueTemplates.issueTemplate">{{vmIssueTemplates.i18n.message.EDIT_ISSUE}}</button>
 <h4 ng-show="vmIssueTemplates.iVar"> {{vmIssueTemplates.category.CURRENT_ISSUE}}</h4>
@@ -8,8 +8,8 @@
     <button ng-click="vmIssueTemplates.showIssueByCategory($index+1,buttons)">{{buttons.categoryDescription}}</button>
 </span>
 <div ng-show="vmIssueTemplates.showPr1">
-    <h3>Your choise : {{vmIssueTemplates.category.categoryDescription}}</h3>
-    <h3>Please choose, where is your code running?</h3>
+    <h3>{{vmIssueTemplates.i18n.message.CHOISE}} : {{vmIssueTemplates.category.categoryDescription}}</h3>
+    <h3>{{vmIssueTemplates.i18n.message.CATEGOTY_QUESTION}}</h3>
 </div>
 <span ng-show="vmIssueTemplates.showPr1" ng-repeat="buttons in vmIssueTemplates.issueTemplateByCategoryId ">
     <button ng-click="vmIssueTemplates.showIssueTemplate($index) ">{{buttons.templateDescription}}</button>

@@ -68,6 +68,12 @@
         "ISSUE_EDIT_BUTTON": "Оновити шаблон Issue",
         "ADD_ISSUE_BUTTON": "Додати шаблон Issue",
         "EDIT_ISSUE": "Редагувати шаблон Issue",
-        "EDIT_PR" : "Редагувати шаблон Pull Request"
+        "EDIT_PR": "Редагувати шаблон Pull Request",
+        "TYPE_PULL_REQUEST": "Який тип Pull Request ви приймаєте?",
+        "TYPE_ISSUE": "Оберіть будь-ласка issue на вашому проекті?",
+        "CHOISE": "Ваш вибір",
+        "CATEGOTY_QUESTION": "Де працює ваш код?",
+        "ACTIVE_PR" : "Активовано відображення Pull Request Template",
+        "ACTIVE_ISSUE" : "Активовано відображення Issue"  
     }
 }

@@ -77,7 +77,7 @@
         }
 
         function activate() {
-            logger.info('Activated Issue View');
+            logger.info(vm.i18n.message.ACTIVE_ISSUE);
             githubTemplates.getIssueTemplate().success(onGetIssueTemplate, onError).error(onGetIssueTemplate);
             githubTemplates.getIssueCategories().success(onGetIssueCategories, onError).error(onGetIssueCategories);
         }

@@ -54,11 +54,11 @@
         }
 
         function activate() {
-            logger.info('Activated PR View');
-            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).error(onGetPullRequestTemplate);
-            githubTemplates.getPr().success(function(data) {
-                vm.pr = data;
-            });
+            logger.info(vm.i18n.message.ACTIVE_PR);
+                githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).error(onGetPullRequestTemplate);
+                githubTemplates.getPr().success(function (data) {
+                    vm.pr = data;
+                });
         }
 
         function onError(reason) {
