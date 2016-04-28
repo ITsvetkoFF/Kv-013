@@ -85,7 +85,9 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
 
-            return Ok(gitHubCollaborators);
+            var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
+
+            return Ok(gitHubCollaboratorsExceptUser);
         }
 
         [HttpGet]

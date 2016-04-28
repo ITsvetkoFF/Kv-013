@@ -41,41 +41,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
             _securityContextQuery = securityContextQuery;
         }
 
-        [HttpPatch]
-        [AllowAnonymous]
-        [Route(RouteConstants.AssignRolesToUser)]
-        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
-        {
-            User appUser = await _userManager.Users.FirstOrDefaultAsync(u => u.ProviderId == gitHubId);
-            if (appUser == null)
-            {
-                return NotFound();
-            }
-
-            DeleteUserRepositoryRoles(repoId, appUser);
-            SecurityRole role = _securityContextQuery.GetUserRole(roleToAssign);
-            if (role == null)
-            {
-                return ModelError(RoleConstants.Role, string.Format(RoleValidationConstants.RoleNull, roleToAssign));
-            }
-
-            UpdateSecurityRoleModel updateSecurityRoleModel = new UpdateSecurityRoleModel()
-            {
-                RepositoryId = repoId, 
-                SecurityRole = role
-            };
-            appUser.UserRepositoryRoles.Add(updateSecurityRoleModel.ToUserRepositoryRole());
-
-            IdentityResult updateResult = await _userManager.UpdateAsync(appUser);
-            if (!updateResult.Succeeded)
-            {
-                return ModelError(RoleConstants.Role, RoleValidationConstants.FailedRemoveRole);
-            }
-
-            await AddUserClaim(repoId, roleToAssign, appUser);
-            return Ok();
-        }
-
         [HttpGet]
         [AllowAnonymous]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
