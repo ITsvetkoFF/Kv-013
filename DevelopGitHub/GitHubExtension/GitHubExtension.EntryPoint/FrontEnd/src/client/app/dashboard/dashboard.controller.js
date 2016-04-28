@@ -28,7 +28,7 @@
         function activate() {
             var promises = [];
 
-            if (userService.isAuthenticated()) {
+            if (userService.isAuthenticated() && !!userService.getCurrentRepository()) {
                 promises.push(getExternalActivity(vm.currentPage), getInternalActivity());
             }
             $q.all(promises).then(dashboardActivated);

@@ -1,6 +1,6 @@
 ﻿<section id="dashboard-view" class="mainbar">
     <section class="matter">
-        <div class="container">
+        <div class="container" ng-show="!!vm.repo">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel-body">
@@ -83,13 +83,6 @@
                             <form class="form-inline" role="form">
                                 <span class="glyphicon glyphicon-bookmark"/>
                                     {{vm.i18n.message.STATISTICS_REPOSITORY_YEAR}}
-                                <div class="dropdown pull-right form-group">    
-                                    <div>
-                                        <select ng-model="repo" ng-options="repo as repo.name for repo in vm.repositories" ng-change="vm.getCommitsFromCurrent(repo)">
-                                            <option value="">---Please select---</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                         <div class="panel panel-primary" >

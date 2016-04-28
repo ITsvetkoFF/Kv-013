@@ -16,20 +16,16 @@
             return $http.get(API_URL.GET_FOLLOWING);
         }
 
-        function getRepositoriesCount() {
-            return $http.get(API_URL.GET_REPOSITORIESCOUNT);
+        function getRepositoriesCount(repositoryList) {
+            return Object.keys(repositoryList).length;
         }
 
         function getActivityMonths() {
             return $http.get(API_URL.GET_ACTIVITYMONTHS);
         }
 
-        function getRepositories() {
-            return $http.get(API_URL.GET_REPOSITORIES);
-        }
-
-        function getRepositoriesNames() {
-            return $http.get(API_URL.GET_REPOSITORIES).then(mapToNames);
+        function getRepositoriesNames(repositoryList) {
+            return mapToNames(repositoryList);
         }
 
         function getCommitsRepositories() {
@@ -48,8 +44,8 @@
             return [response.data];
         }
 
-        function mapToNames(response) {
-            return response.data.map(function(el) {
+        function mapToNames(repositoryList) {
+            return repositoryList.map(function(el) {
                 return el.name;
             });
         }
@@ -59,7 +55,6 @@
             getFollowing: getFollowing,
             getRepositoriesCount: getRepositoriesCount,
             getActivityMonths: getActivityMonths,
-            getRepositories: getRepositories,
             getRepositoriesNames: getRepositoriesNames,
             getCommitsRepositories: getCommitsRepositories,
             getGroupCommits: getGroupCommits,
