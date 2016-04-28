@@ -205,6 +205,13 @@
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.route.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\ge-custom-on-change.directive.js" />
+    <Content Include="FrontEnd\src\client\app\templates\PullRequestTemplate.html" />
+    <Content Include="FrontEnd\src\client\app\templates\IssueTemplate.html" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.conntroller.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.factory.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.html" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.module.js" />
+    <Content Include="FrontEnd\src\client\app\templates\templates.route.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\user-data.factory.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.controller.js" />
     <Content Include="FrontEnd\src\client\app\userpreferences\userpreferences.html" />

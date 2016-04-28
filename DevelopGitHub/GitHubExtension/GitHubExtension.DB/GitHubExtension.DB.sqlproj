@@ -63,8 +63,14 @@
     <Build Include="ActivitiesTypes.sql" />
     <Build Include="Users.sql" />
     <Build Include="Notes.sql" />
+    <Build Include="Categories.sql" />
+    <Build Include="Templates.sql" />
+    <None Include="TemplatesScript.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="SeedActivityTypes.sql" />
+    <None Include="SeedActivityTypes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
