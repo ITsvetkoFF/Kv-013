@@ -46,35 +46,36 @@
             }
         };
 
-        vm.createIssue = function (template) {
+        vm.createIssue = function(template) {
             githubTemplates.createIssueTemplate(template);
-            $state.go('templates.issue').then(function () {
+            $state.go('templates.issue').then(function() {
                 $state.reload();
             });
             githubTemplates.getIssueTemplate().success(onGetIssueTemplate, onError).error(onGetIssueTemplate);
-        }
+        };
 
-        vm.editIssue = function (template) {
+        vm.editIssue = function(template) {
             githubTemplates.updateIssueTemplate(template);
-            $state.go('templates.issue').then(function () {
+            $state.go('templates.issue').then(function() {
                 $state.reload();
             });
             githubTemplates.getIssueTemplate().success(onGetIssueTemplate, onError).error(onGetIssueTemplate);
-        }
+        };
 
-        vm.showIssueByCategory = function (index, category) {
+        vm.showIssueByCategory = function(index, category) {
             vm.issueArray = [false, false, false];
             vm.showPr1 = true;
             vm.category = category;
 
-            githubTemplates.getIssueTemplateByCategoryId(index).success(onGetIssueTemplateByCategoryId, onError).error(onGetIssueTemplateByCategoryId);
-        }
+            githubTemplates.getIssueTemplateByCategoryId(index).success(onGetIssueTemplateByCategoryId, onError).
+                error(onGetIssueTemplateByCategoryId);
+        };
 
-        vm.showIssueTemplate = function (index) {
+        vm.showIssueTemplate = function(index) {
             vm.issueArray = [false, false, false];
             vm.index = index;
             vm.issueArray[index] = true;
-        }
+        };
 
         function activate() {
             logger.info(vm.i18n.message.ACTIVE_ISSUE);

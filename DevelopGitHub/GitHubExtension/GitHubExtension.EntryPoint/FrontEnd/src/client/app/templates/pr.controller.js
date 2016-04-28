@@ -8,7 +8,6 @@
 
     PrController.$inject = ['githubTemplates', 'logger', 'i18n', '$state'];
 
-    /* @ngInject */
     function PrController(githubTemplates, logger, i18n, $state) {
         var vm = this;
         vm.i18n = i18n;
@@ -30,32 +29,35 @@
             }
         };
 
-        vm.showPrTemplate = function (index) {
+        vm.showPrTemplate = function(index) {
             vm.prArray = [false, false];
             vm.prIndex = index;
             vm.prArray[index] = true;
-        }
+        };
 
-        vm.createPr = function (template) {
+        vm.createPr = function(template) {
             githubTemplates.createPrTemplate(template);
 
-            $state.go('templates.pr').then(function () {
+            $state.go('templates.pr').then(function() {
                 $state.reload();
             });
-            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).error(onGetPullRequestTemplate);
-        }
+            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).
+                error(onGetPullRequestTemplate);
+        };
 
-        vm.editPr = function (template) {
+        vm.editPr = function(template) {
             githubTemplates.updatePrTemplate(template);
-            $state.go('templates.pr').then(function () {
+            $state.go('templates.pr').then(function() {
                 $state.reload();
             });
-            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).error(onGetPullRequestTemplate);
-        }
+            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).
+                error(onGetPullRequestTemplate);
+        };
 
         function activate() {
             logger.info(vm.i18n.message.ACTIVE_PR);
-                githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).error(onGetPullRequestTemplate);
+            githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).
+                error(onGetPullRequestTemplate);
                 githubTemplates.getPr().success(function (data) {
                     vm.pr = data;
                 });

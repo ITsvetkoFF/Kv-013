@@ -6,7 +6,6 @@
 
     githubTemplates.$inject = ['$http', 'API_URL'];
 
-    /* @ngInject */
     function githubTemplates($http, API_URL) {
            
         function getPullRequestTemplate() {
@@ -16,7 +15,7 @@
             }).success(function (response) {
                 return response.data;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -28,7 +27,7 @@
             }).success(function (response) {
                 return response.data;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -40,7 +39,7 @@
             }).success(function (response) {
                 return  response.data;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -53,7 +52,7 @@
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
         function createIssueTemplate(issueTemplate) {
@@ -65,7 +64,7 @@
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -78,7 +77,7 @@
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -91,7 +90,7 @@
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -103,7 +102,7 @@
             }).success(function (response) {
                 return response.data;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 
@@ -115,7 +114,7 @@
             }).success(function (response) {
                 return response.data;
             }).error(function (response) {
-                return "";
+                return '';
             });
         }
 

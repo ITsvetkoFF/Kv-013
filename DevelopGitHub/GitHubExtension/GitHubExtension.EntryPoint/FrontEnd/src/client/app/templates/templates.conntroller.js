@@ -8,7 +8,6 @@
 
     TemplatesController.$inject = ['githubTemplates', 'logger', 'i18n', 'userService'];
 
-    /* @ngInject */
     function TemplatesController(githubTemplates, logger, i18n, userService) {
         var vm = this;
         vm.i18n = i18n;
@@ -18,7 +17,7 @@
         vm.editorOptions = {
             lineWrapping: true,
             lineNumbers: true,
-            mode: "markdown",
+            mode: 'markdown',
             viewportMargin: Infinity
         };
 

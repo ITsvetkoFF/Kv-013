@@ -1,13 +1,10 @@
-﻿/// <reference path="templates.conntroller.js" />
-/// <reference path="PullRequestTemplate.html" />
-/// <reference path="PullRequestTemplate.html" />
-(function () {
+﻿(function () {
     'use strict';
     angular.module('app.templates')
     .run(appRun);
 
     appRun.$inject = ['routerHelper', '$cookies', 'i18n', 'userService'];
-    /* @ngInject */
+
     function appRun(routerHelper, $cookies, i18n, userService) {
        routerHelper.configureStates(getStates(i18n, userService));
     }
