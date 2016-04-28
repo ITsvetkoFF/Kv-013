@@ -80,6 +80,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [HttpGet]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [Route(RouteConstants.GetExternalLogin)]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetExternalLogin(string provider)
         {
             if (!User.Identity.IsAuthenticated)

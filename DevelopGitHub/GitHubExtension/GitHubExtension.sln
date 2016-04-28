@@ -50,12 +50,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Statistics.WebApi", "GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj", "{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Notes.Tests", "GitHubExtension.Notes.Tests\GitHubExtension.Notes.Tests.csproj", "{FEF89135-5ECD-4D37-B19D-F6D3685411CA}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.Internal.Tests", "GitHubExtension.Activity.Internal.Tests\GitHubExtension.Activity.Internal.Tests.csproj", "{07C98A3E-352E-4DB6-B9E1-FE67080EA388}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{88991CFC-C91B-4E6F-9CCB-489BC3ADE65F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.Internal.Tests", "GitHubExtension.Activity.Internal.Tests\GitHubExtension.Activity.Internal.Tests.csproj", "{07C98A3E-352E-4DB6-B9E1-FE67080EA388}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

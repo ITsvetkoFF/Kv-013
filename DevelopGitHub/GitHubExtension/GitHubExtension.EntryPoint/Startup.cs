@@ -73,7 +73,7 @@ namespace GitHubExtension.EntryPoint
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Filters.Add(new LoggingFilterAttribute());
             config.Filters.Add(new ModelIsNullFilterAttribute());
-			config.Filters.Add(new AuthorizeAttribute());
+            config.Filters.Add(new AuthorizeAttribute());
 
             return config;
         }
