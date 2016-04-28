@@ -72,7 +72,9 @@
         return {
             getCollaborators: getCollaborators,
             getRoles: getRoles,
-            assignRole: assignRole
+            assignRole: assignRole,
+            getPrivateNote: getPrivateNote,
+            createPrivateNote: createPrivateNote
         };
     }
 })();

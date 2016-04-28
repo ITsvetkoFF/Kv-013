@@ -20,6 +20,8 @@
                 REPOSITORY: resource + 'user/repos',
                 ROLES: resource + 'roles',
                 CURRENT_REPOSITORY: resource + 'repos/current',
+                NOTE: resource + 'note',
+                COLLABORATORS: '/collaborators/',
 
                 GET_REPOBYNAME: baseUserStats + '/commits',
                 GET_FOLLOWERS: baseUserStatsInfo + '/followers',
