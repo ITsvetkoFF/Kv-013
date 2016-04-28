@@ -41,6 +41,12 @@
         "WAITING": "wait",
         "CHANGE_REPOSITORY_MESSAGE": "Repository changed",
         "CHANGE_REPOSITORY_ERROR_MESSAGE": "Failed to change repository",
-        "REPOSITORIES_LOAD_MESSAGE": "Repositories loaded"
+        "REPOSITORIES_LOAD_MESSAGE": "Repositories loaded",
+        "ACTIVATED_ROLE_VIEW": "Activated role view",
+        "COLLABORATORS_LOADED": "Collaborators loaded",
+        "ROLES_SUCCEDED": "Roles succeded",
+        "COULD_NOT_GET_COLLABORATORS": "Could not get collaborators",
+        "ACTIVATE_USER_PREFERENCES": "Activated user preferences view",
+        "LOADED":  " loaded!"
     }
 }

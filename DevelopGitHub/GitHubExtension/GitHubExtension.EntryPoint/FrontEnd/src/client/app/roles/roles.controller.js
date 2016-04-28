@@ -17,7 +17,7 @@
         activate();
 
         function activate() {
-            logger.info('Activated Roles View');
+            logger.info(vm.i18n.ACTIVATED_ROLE_VIEW);
             vm.repo = userService.getCurrentRepository();
             if (!!vm.repo) {
                 githubCollaborators.getRoles().then(onGetRoles, onError);
@@ -26,12 +26,12 @@
         }
 
         function onGetCollaborators (data) {
-            logger.info('Collaborators Loaded');
+            logger.info(vm.i18n.COLLABORATORS_LOADED);
             vm.collaborators = data;
         }
 
         function onGetRoles(data) {
-            logger.info('Roles Succeded');
+            logger.info(vm.i18n.ROLES_SUCCEDED);
             vm.roles = data;
         }
 
@@ -40,7 +40,7 @@
         };
 
         function onError(reason) {
-            vm.error = 'Could not get collaborators.';
+            vm.error = vm.i18n.COULD_NOT_GET_COLLABORATORS;
         }
     }
 }());

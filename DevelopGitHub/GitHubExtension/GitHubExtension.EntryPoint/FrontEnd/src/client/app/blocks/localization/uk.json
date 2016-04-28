@@ -41,6 +41,12 @@
         "WAITING": "Зачекай",
         "CHANGE_REPOSITORY_MESSAGE": "Репозиторій змінено",
         "CHANGE_REPOSITORY_ERROR_MESSAGE": "Помилка при зміні репозиторію",
-        "REPOSITORIES_LOAD_MESSAGE": "Репозиторії завантажені"
+        "REPOSITORIES_LOAD_MESSAGE": "Репозиторії завантажені",
+        "ACTIVATED_ROLE_VIEW": "Активовано відображення ролей",
+        "COLLABORATORS_LOADED": "Коллабораторів завантажено",
+        "ROLES_SUCCEDED": "Ролі успішно завантажені",
+        "COULD_NOT_GET_COLLABORATORS": "Помилка при отриманні коллабораторів",
+        "ACTIVATE_USER_PREFERENCES": "Активовано налаштування користувача",
+        "LOADED": " завантажено!"
     }
 }
