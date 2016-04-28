@@ -10,7 +10,6 @@ namespace GitHubExtension.Templates.ExtensionMethods
             HttpRequestMessage httpRequestMessage)
         {
             var response = await httpClient.SendAsync(httpRequestMessage);
-
             return response;
         }
     }

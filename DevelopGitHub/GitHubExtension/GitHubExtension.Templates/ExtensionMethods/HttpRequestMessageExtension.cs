@@ -19,14 +19,36 @@ namespace GitHubExtension.Templates.ExtensionMethods
             }
         };
 
-        public static HttpRequestMessage CreateMessage(this HttpRequestMessage message)
+        public static HttpRequestMessage
+        CreateTemplateMessage(this HttpRequestMessage requestMessage, string gitHubMessage, string content)
+        {
+            requestMessage.AddHeadersToMessage();
+
+            var requestContent = content.GetRequestCreateContent(gitHubMessage);
+
+            requestMessage.Content = new StringContent(requestContent);
+
+            return requestMessage;
+        }
+
+        public static HttpRequestMessage
+        UpdateTemplateMessage(this HttpRequestMessage requestMessage, string gitHubMessage, string content, string sha)
+        {
+            requestMessage.AddHeadersToMessage();
+
+            var requestContent = content.GetRequestUpdateContent(gitHubMessage, sha);
+
+            requestMessage.Content = new StringContent(requestContent);
+
+            return requestMessage;
+        }
+
+        private static void AddHeadersToMessage(this HttpRequestMessage requestMessage)
         {
             foreach (var header in DefaultHeaders)
             {
-                message.Headers.Add(header.Key, header.Value);
+                requestMessage.Headers.Add(header.Key, header.Value);
             }
-
-            return message;
-        }
+        } 
     }
 }

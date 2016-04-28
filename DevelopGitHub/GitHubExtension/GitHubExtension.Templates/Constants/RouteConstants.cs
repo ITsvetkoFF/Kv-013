@@ -3,9 +3,12 @@
     public class RouteTemplatesConstants
     {
         public const string GetGitHubTemplatesRoute = "api/templates";
-
-        public const string IssueTemplate = "issueTemplate";
-
-        public const string PullRequestTemplate = "pullRequestTemplate";
+        public const string PullRequestTemplate = "pull-request";
+        public const string IssueTemplate = "issue";
+        public const string GetPullRequests = "pr";
+        public const string GetIssueTemplateCategories = "categories";
+        public const string GetIssueTemplateByCategoryId = "categories/{id}";
+        public const string AddUpdateRequestTemplate = "pull-request-template";
+        public const string AddUpdateIssueTemplate = "issue-template";
     }
 }

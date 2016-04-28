@@ -178,6 +178,18 @@
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Templates.DAL\GitHubExtension.Templates.DAL.csproj">
+      <Project>{9301ab33-c18e-4c2e-9f07-e8f99a9fd72e}</Project>
+      <Name>GitHubExtension.Templates.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Templates\GitHubExtension.Templates.csproj">
+      <Project>{d2adb828-d1e5-40ed-aa12-1643fb5cd11e}</Project>
+      <Name>GitHubExtension.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
+      <Project>{ac64ce56-a38a-4866-82f5-a3be35ef2ea8}</Project>
+      <Name>GitHubExtension.Statistics.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

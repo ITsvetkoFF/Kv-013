@@ -70,5 +70,9 @@
 
         public const string UserAgentHeaderValue =
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36";
+
+        public const string Message = "message";
+        public const string Content = "content";
+        public const string Sha = "sha";
     }
 }

@@ -1,5 +1,6 @@
-﻿using GitHubExtension.Templates.Services;
-
+﻿using GitHubExtension.Templates.Commands;
+using GitHubExtension.Templates.DAL.Model;
+using GitHubExtension.Templates.Queries;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
@@ -9,7 +10,9 @@ namespace GitHubExtension.Templates.Package
     {
         public void RegisterServices(Container container)
         {
-            container.Register<ITemplateService, TemplatesService>(Lifestyle.Singleton);
+            container.Register<ITemplatesQuery, TemplatesQuery>(Lifestyle.Scoped);
+            container.Register<ITemplatesCommand, TemplatesCommand>(Lifestyle.Scoped);
+            container.Register<TemplatesContext>(Lifestyle.Singleton);
         }
     }
 }
