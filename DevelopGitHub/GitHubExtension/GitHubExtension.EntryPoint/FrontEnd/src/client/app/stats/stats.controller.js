@@ -5,9 +5,9 @@
         .module('app.stats')
         .controller('StatsController', StatsController);
 
-    StatsController.$inject = ['$q', 'statsFactory', 'i18n'];
+    StatsController.$inject = ['$q', 'statsFactory', 'i18n', 'userService'];
 
-    function StatsController($q, statsFactory, i18n) {
+    function StatsController($q, statsFactory, i18n, userService) {
         var vm = this;
         vm.i18n = i18n;
 
@@ -20,24 +20,27 @@
         vm.eachData = [];
         vm.barData = [];
         vm.reposData = [];
-        vm.getCommitsFromCurrent = getCommitsFromCurrent;
         vm.rep = '';
 
         activate();
 
         function activate() {
-            var promises = [];
-            promises.push(
-                getFollowers(),
-                getFollowing(),
-                getRepositoriesCount(),
-                getActivityMonths(),
-                getRepositories(),
-                getRepositoriesNames(),
-                getCommitsRepositories(),
-                getGroupCommits());
+            vm.repo = userService.getCurrentRepository();
+            if (!!vm.repo) {
+                var promises = [];
+                promises.push(
+                    getFollowers(),
+                    getFollowing(),
+                    getActivityMonths(),
+                    getRepositories(),
+                    getRepositoriesNames(vm.repositories),
+                    getRepositoriesCount(vm.repositories),
+                    getCommitsRepositories(),
+                    getCommitsFromCurrent(userService.getCurrentRepository()),
+                    getGroupCommits());
 
-            $q.all(promises);
+                $q.all(promises);
+            }
         }
 
         function getFollowers() {
@@ -52,10 +55,8 @@
             });
         }
 
-        function getRepositoriesCount() {
-            return statsFactory.getRepositoriesCount().then(function (response) {
-                vm.repositoriesCount = response.data;
-            });
+        function getRepositoriesCount(repositoryList) {
+            vm.repositoriesCount = statsFactory.getRepositoriesCount(repositoryList);
         }
 
         function getActivityMonths() {
@@ -65,16 +66,11 @@
         }
 
         function getRepositories() {
-            return statsFactory.getRepositories().then(function (response) {
-                vm.repositories = response.data;
-                vm.eachSeries = response.data;
-            });
+            vm.repositories = userService.getRepositoryList();
         }
 
-        function getRepositoriesNames() {
-            return statsFactory.getRepositoriesNames().then(function (response) {
-                vm.eachSeries = response;
-            });
+        function getRepositoriesNames(repositoryList) {
+            vm.eachSeries = statsFactory.getRepositoriesNames(repositoryList);
         }
 
         function getCommitsRepositories() {
@@ -86,12 +82,11 @@
         function getGroupCommits() {
             return statsFactory.getGroupCommits().then(function (response) {
                 vm.barData = response;
-                vm.reposData = response;
             });
         }
 
-        function getCommitsFromCurrent(repo) {
-            return statsFactory.getCommitsFromCurrentRepo(repo).then(function (response) {
+        function getCommitsFromCurrent(repository) {
+            return statsFactory.getCommitsFromCurrentRepo(repository).then(function (response) {
                 vm.reposData = response;
             });
         }
