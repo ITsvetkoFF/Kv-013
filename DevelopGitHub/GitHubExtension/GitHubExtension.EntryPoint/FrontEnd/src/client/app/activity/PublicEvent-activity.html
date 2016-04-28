@@ -6,8 +6,7 @@
     </div>
     <div class="media-body">
         <h4 class="media-heading">
-            {{activity.actor.login}} {{i18n.DELETED}} {{activity.payload.ref_type}} {{activity.payload.ref}} {{i18n.AT}}
-            {{activity.repo.name}}
+            {{activity.actor.login}} {{i18n.MADE_PUBLIC}} {{i18n.REPOSITORY}} {{activity.repo.name}}
         </h4>
         <time class="pull-right" datetime="{{activity.created_at}}">
             {{formatDate(activity.created_at)}}

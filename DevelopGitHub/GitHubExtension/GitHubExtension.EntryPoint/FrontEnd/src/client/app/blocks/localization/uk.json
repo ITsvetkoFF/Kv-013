@@ -6,6 +6,8 @@
         "LOGOUT":  "Вихід з системи",
         "WELCOME": "Привіт",
         "CURRENT_REPOSITORY": "Ваш поточний репозиторій",
+        "MADE_PUBLIC" : "зробив публічним",
+        "REPOSITORY": "репозиторій",
         "REPOS": "Сховища",
         "COLLABORATORS": "Коллаборатори",
         "Repositories" :  "Репозиторії",

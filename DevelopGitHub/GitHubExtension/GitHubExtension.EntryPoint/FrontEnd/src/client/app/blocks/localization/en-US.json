@@ -6,6 +6,8 @@
         "LOGOUT":  "Logout",
         "WELCOME": "Welcome",
         "CURRENT_REPOSITORY": "Your current repository",
+        "MADE_PUBLIC" : "made public",
+        "REPOSITORY": "repository",
         "REPOS": "Repositories",
         "COLLABORATORS": "Collaborators",
         "Repositories" : "Repositories",
