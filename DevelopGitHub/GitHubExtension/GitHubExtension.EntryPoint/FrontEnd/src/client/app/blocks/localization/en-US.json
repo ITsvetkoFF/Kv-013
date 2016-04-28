@@ -47,6 +47,7 @@
         "ROLES_SUCCEDED": "Roles succeded",
         "COULD_NOT_GET_COLLABORATORS": "Could not get collaborators",
         "ACTIVATE_USER_PREFERENCES": "Activated user preferences view",
-        "LOADED":  " loaded!"
+        "LOADED": " loaded!",
+        "PLEASE_WAIT":  "Please wait ..."
     }
 }

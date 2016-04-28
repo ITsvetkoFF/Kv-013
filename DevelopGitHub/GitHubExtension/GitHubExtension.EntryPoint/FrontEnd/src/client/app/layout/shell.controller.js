@@ -13,7 +13,7 @@
 
         // add i18n for localization
         vm.i18n = i18n.message;
-        vm.busyMessage = 'Please wait ...';
+        vm.busyMessage = vm.i18n.PLEASE_WAIT;
         vm.isBusy = true;
         $rootScope.showSplash = true;
         vm.navline = {
