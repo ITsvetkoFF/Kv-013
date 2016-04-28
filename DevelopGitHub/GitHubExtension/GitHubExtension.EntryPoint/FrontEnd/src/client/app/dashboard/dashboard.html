@@ -2,7 +2,7 @@
     <section class="matter">
         <div class="container">
 
-            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.numberOfPages > 0">
+            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.numberOfPages > 0 && !!userService.getCurrentRepository()">
                 <div class="col-md-12">
                     <h2>{{vm.i18n.GITHUB_ACTIVITY}}</h2>
                     <ge-activity ng-repeat="activity in vm.externalActivities" activity="activity"></ge-activity>
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities">
+            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities && !!userService.getCurrentRepository()">
                 <div class="col-md-12">
                     <h2>{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
                     <table class="table table-striped">
