@@ -10,7 +10,7 @@ using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestExtensions
 {
-    public class UserToUserReturnModelTests
+    public class UserMapperTests
     {
         public static IEnumerable<object[]> DataForUserReturnModelTest
         {
