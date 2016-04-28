@@ -1,0 +1,16 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Templates</h2>
+                    <ul class="nav nav-tabs">
+                        <li ui-sref-active="active"><a ui-sref="templates.pr">{{vmTemplates.i18n.message.PULLREQUESTTEMPLATE}}</a></li>
+                        <li ui-sref-active="active"><a ui-sref="templates.issue">{{vmTemplates.i18n.message.ISSUETEMPLATE}}</a></li>
+                    </ul>
+                    <ui-view></ui-view>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

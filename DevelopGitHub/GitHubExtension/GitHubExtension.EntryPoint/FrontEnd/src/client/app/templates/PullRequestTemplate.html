@@ -1,0 +1,30 @@
+﻿<br/>
+<h3 ng-show="!vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.TYPE_PULL_REQUEST}}</h3>
+<button ng-click="vmPrTemplates.prtoggle()" ng-show="vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.SHOWPULLREQUESTTEMPLATE}}</button>
+<button ng-click="vmPrTemplates.predit()" ng-show="vmPrTemplates.pullRequestTemplate">{{vmPrTemplates.i18n.message.EDIT_PR}}</button>
+<h4 ng-show ="vmPrTemplates.prVar"> {{vmPrTemplates.i18n.message.CURRENT_PR}}</h4>
+<pre ng-show="vmPrTemplates.prVar">{{vmPrTemplates.pullRequestTemplate}}</pre>
+<div ng-show="!vmPrTemplates.pullRequestTemplate">
+    <span ng-show="!vmPrTemplates.pullRequestTemplate" ng-repeat="buttons in vmPrTemplates.pr">
+        <button ng-click="vmPrTemplates.showPrTemplate($index)">{{buttons.templateDescription}}</button>
+    </span>
+    <form name="prAdd" ng-show="vmPrTemplates.prArray[vmPrTemplates.prIndex]">
+        <br />
+        <h4> {{vmPrTemplates.i18n.message.ADD_PR_FIELD}}</h4>
+        <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.pr[vmPrTemplates.prIndex].content" ui-codemirror="vmTemplates.editorOptions"></textarea>
+        <br />
+        <h4> {{vmPrTemplates.i18n.message.ADD_MESSAGE}}</h4>
+        <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.pr[vmPrTemplates.prIndex].comment" ui-codemirror="vmTemplates.editorOptions"></textarea>
+        <br />
+        <button ng-disabled="prAdd.$invalid" ng-click="vmPrTemplates.createPr(vmPrTemplates.pr[vmPrTemplates.prIndex])">{{vmPrTemplates.i18n.message.ADD_PR_BUTTON}}</button>
+    </form>
+</div>
+<form name="prEdit" ng-show="vmPrTemplates.showEdit">
+    <h4> {{vmPrTemplates.i18n.message.PR_EDIT_FIELD}}</h4>
+    <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.pullRequestTemplate" ui-codemirror="vmTemplates.editorOptions"></textarea>
+    <br />
+    <h4> {{vmPrTemplates.i18n.message.ADD_MESSAGE}}</h4>
+    <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.commentEdit" ui-codemirror="vmTemplates.editorOptions"></textarea>
+    <br />
+    <button ng-disabled="prEdit.$invalid" ng-click="vmPrTemplates.editPr(vmPrTemplates)">{{vmPrTemplates.i18n.message.PR_EDIT_BUTTON}}</button>
+</form>

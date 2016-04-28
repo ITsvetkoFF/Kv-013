@@ -5,13 +5,13 @@
         .module('app.userpreferences')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'i18n'];
+    appRun.$inject = ['routerHelper', 'i18n', 'userService'];
 
-    function appRun(routerHelper, i18n) {
-        routerHelper.configureStates(getStates(i18n));
+    function appRun(routerHelper, i18n, userService) {
+        routerHelper.configureStates(getStates(i18n, userService));
     }
 
-    function getStates(i18n) {
+    function getStates(i18n, userService) {
         return [
             {
                 state: 'userpreferences',
@@ -23,7 +23,8 @@
                     title: 'Preferences',
                     settings: {
                         nav: 6,
-                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.PREFERENCES
+                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.PREFERENCES,
+                        show: userService.isAuthenticated()
                     }
                 }
             }

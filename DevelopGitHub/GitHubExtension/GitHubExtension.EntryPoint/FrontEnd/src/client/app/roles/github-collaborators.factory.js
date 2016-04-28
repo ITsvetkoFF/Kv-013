@@ -24,13 +24,13 @@
         }
 
         function addActivityRole(roleToAssign, collaboratorName) {
-            return function () {
+            return function() {
                 return $http({
                     method: 'POST',
                     url: API_URL.internalActivityUrl + '/addRole',
                     data: { roleToAssign: roleToAssign, collaboratorName: collaboratorName }
                 });
-            }
+            };
         }
 
         function assignRole(repository, collaborator, role) {

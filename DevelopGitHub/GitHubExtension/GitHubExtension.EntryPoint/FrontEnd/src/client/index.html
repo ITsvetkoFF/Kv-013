@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./Frontend/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="./Frontend/bower_components/toastr/toastr.css" />
     <link rel="stylesheet" href="./Frontend/bower_components/angular-chart.js/dist/angular-chart.css" />
+    <link rel="stylesheet" href="./Frontend/bower_components/codemirror/lib/codemirror.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css styles/app.css -->
@@ -55,8 +56,11 @@
         <script src="./Frontend/bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="./Frontend/bower_components/Chart.js/Chart.js"></script>
         <script src="./Frontend/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        <script src="./Frontend/bower_components/codemirror/lib/codemirror.js"></script>
+        <script src="./Frontend/bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+        <script src="./FrontEnd/bower_components/codemirror/mode/markdown/markdown.js"></script>
         <!-- build:js js/app.js -->
         <!-- inject:js -->
         <script src="./FrontEnd/src/client/app/app.module.js"></script>
@@ -71,6 +75,7 @@
         <script src="./FrontEnd/src/client/app/layout/layout.module.js"></script>
         <script src="./FrontEnd/src/client/app/roles/roles.module.js"></script>
         <script src="./FrontEnd/src/client/app/stats/stats.module.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/templates.module.js"></script>
         <script src="./FrontEnd/src/client/app/user/user.module.js"></script>
         <script src="./FrontEnd/src/client/app/userpreferences/userpreferences.module.js"></script>
         <script src="./FrontEnd/src/client/app/widgets/widgets.module.js"></script>
@@ -101,6 +106,11 @@
         <script src="./FrontEnd/src/client/app/stats/stats.controller.js"></script>
         <script src="./FrontEnd/src/client/app/stats/stats.factory.js"></script>
         <script src="./FrontEnd/src/client/app/stats/stats.route.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/issue.controller.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/pr.controller.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/templates.conntroller.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/templates.factory.js"></script>
+        <script src="./FrontEnd/src/client/app/templates/templates.route.js"></script>
         <script src="./FrontEnd/src/client/app/user/user.service.js"></script>
         <script src="./FrontEnd/src/client/app/userpreferences/ge-custom-on-change.directive.js"></script>
         <script src="./FrontEnd/src/client/app/userpreferences/user-data.factory.js"></script>
