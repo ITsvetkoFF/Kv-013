@@ -18,10 +18,10 @@
                 collaboratorsExtended.forEach(function (collaborator) {
                     getPrivateNote(collaborator).then(function (data) {
                         collaborator.note = data.data.body;
-                    })
+                    });
                 });
                 return collaboratorsExtended;
-            });
+            }) ;
         }
 
         function getRoles() {
@@ -36,7 +36,7 @@
                 return $http({
                     method: 'POST',
                     url: API_URL.internalActivityUrl + '/addRole',
-                    data: { roleToAssign: roleToAssign, collaboratorName: collaboratorName }
+                    data: {roleToAssign: roleToAssign, collaboratorName: collaboratorName}
                 });
             };
         }
