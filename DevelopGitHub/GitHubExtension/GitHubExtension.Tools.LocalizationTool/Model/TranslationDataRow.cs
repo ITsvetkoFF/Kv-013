@@ -13,10 +13,6 @@ namespace GitHubExtension.LocalizationTool.Model
 
         private string _us;
 
-        public TranslationDataRow()
-        {
-        }
-
         public TranslationDataRow(string name)
         {
             Name = name;
