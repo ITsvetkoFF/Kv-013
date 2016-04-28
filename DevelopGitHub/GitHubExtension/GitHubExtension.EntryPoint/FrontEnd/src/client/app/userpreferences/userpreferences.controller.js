@@ -1,21 +1,22 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
     .module('app.userpreferences')
     .controller('UserPreferencesController', UserPreferencesController);
 
-    UserPreferencesController.$inject = ['userData', 'logger'];
+    UserPreferencesController.$inject = ['userData', 'logger', 'i18n'];
 
-    function UserPreferencesController(userData, logger) {
+    function UserPreferencesController(userData, logger, i18n) {
         var vm = this;
         vm.imageSource = ''; 
+
+        vm.i18n = i18n.message;
 
         activate();
 
         function activate() {
-            uploadPhoto();
-            logger.info('Activate User Preferences View');
+            logger.info(vm.i18n.ACTIVATE_USER_PREFERENCES);
         }
 
         function uploadPhoto() {
