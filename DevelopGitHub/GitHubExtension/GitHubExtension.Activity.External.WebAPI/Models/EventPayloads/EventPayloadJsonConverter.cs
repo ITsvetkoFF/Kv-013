@@ -14,81 +14,33 @@ namespace GitHubExtension.Activity.External.WebAPI.Models.EventPayloads
 
         private const string UnknownType = "Unknown event type. Incoming type: {0}";
 
+        private const string Payload = "payload";
+
         private static readonly Dictionary<string, Func<IPayloadModel>> PayloadExtractors =
             new Dictionary<string, Func<IPayloadModel>>
-                {
-                    {
-                        GitHubEventTypeConstants.CommitCommentEvent, 
-                        () => new CommitCommentEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.CreateEvent, 
-                        () => new CreateEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.DeleteEvent, 
-                        () => new DeleteEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.DownloadEvent, 
-                        () => new DownloadEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.FollowEvent, 
-                        () => new FollowEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.ForkEvent, 
-                        () => new ForkEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.ForkApplyEvent, 
-                        () => new ForkApplyEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.GistEvent, 
-                        () => new GistEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.GollumEvent, 
-                        () => new GollumEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.IssueCommentEvent, 
-                        () => new IssueCommentEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.IssuesEvent, 
-                        () => new IssuesEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.MemberEvent, 
-                        () => new MemberEventPayloadModel()
-                    }, 
-                    { GitHubEventTypeConstants.PublicEvent, () => null }, 
-                    {
-                        // public event has empty payload
-                        // example can be found here https://gist.github.com/senioroman4uk/f9d7fc52de8d3332dff22d468fd7a57e
-                        GitHubEventTypeConstants.PullRequestEvent, 
-                        () => new PullRequestEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.PullRequestReviewCommentEvent, 
-                        () => new PullRequestReviewCommentEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.PushEvent, 
-                        () => new PushEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.ReleaseEvent, 
-                        () => new ReleaseEventPayloadModel()
-                    }, 
-                    {
-                        GitHubEventTypeConstants.WatchEvent, 
-                        () => new WatchEventPayloadModel()
-                    }
-                };
+            {
+                { GitHubEventTypeConstants.CommitCommentEvent, () => new CommitCommentEventPayloadModel() }, 
+                { GitHubEventTypeConstants.CreateEvent, () => new CreateEventPayloadModel() }, 
+                { GitHubEventTypeConstants.DeleteEvent, () => new DeleteEventPayloadModel() }, 
+                { GitHubEventTypeConstants.DownloadEvent, () => new DownloadEventPayloadModel() }, 
+                { GitHubEventTypeConstants.FollowEvent, () => new FollowEventPayloadModel() }, 
+                { GitHubEventTypeConstants.ForkEvent, () => new ForkEventPayloadModel() }, 
+                { GitHubEventTypeConstants.ForkApplyEvent, () => new ForkApplyEventPayloadModel() }, 
+                { GitHubEventTypeConstants.GistEvent, () => new GistEventPayloadModel() }, 
+                { GitHubEventTypeConstants.GollumEvent, () => new GollumEventPayloadModel() }, 
+                { GitHubEventTypeConstants.IssueCommentEvent, () => new IssueCommentEventPayloadModel() }, 
+                { GitHubEventTypeConstants.IssuesEvent, () => new IssuesEventPayloadModel() }, 
+                { GitHubEventTypeConstants.MemberEvent, () => new MemberEventPayloadModel() }, 
+
+                // public event has empty payload
+                // example can be found here https://gist.github.com/senioroman4uk/f9d7fc52de8d3332dff22d468fd7a57e
+                { GitHubEventTypeConstants.PublicEvent, () => null }, 
+                { GitHubEventTypeConstants.PullRequestEvent, () => new PullRequestEventPayloadModel() }, 
+                { GitHubEventTypeConstants.PullRequestReviewCommentEvent, () => new PullRequestReviewCommentEventPayloadModel() }, 
+                { GitHubEventTypeConstants.PushEvent, () => new PushEventPayloadModel() }, 
+                { GitHubEventTypeConstants.ReleaseEvent, () => new ReleaseEventPayloadModel() }, 
+                { GitHubEventTypeConstants.WatchEvent, () => new WatchEventPayloadModel() }
+            };
 
         // Use default converter for writing
         public override bool CanWrite
@@ -118,6 +70,12 @@ namespace GitHubExtension.Activity.External.WebAPI.Models.EventPayloads
             if (extractor == null)
             {
                 throw new ExtractorNotFoundException(string.Format(UnknownType, type));
+            }
+
+            // Public event has empty payload removing it to avoid deserialization
+            if (type == GitHubEventTypeConstants.PublicEvent)
+            {
+                jobject.Remove(Payload);
             }
 
             IPayloadModel payload = extractor();
