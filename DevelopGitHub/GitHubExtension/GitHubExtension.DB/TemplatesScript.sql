@@ -110,7 +110,7 @@ USING (VALUES
 * Environment name and version (e.g. Chrome 39, node.js 5.4):
 * Operating System and version (desktop or mobile):
 * Link to your project:
-','Issue', 1, 'My code runs equally well on the serve, as well as the browser'),
+','Issue', 1, 'My code runs equally well on the server, as well as the browser'),
 		(4, '<!--- Provide a general summary of the issue in the Title above -->
 
 ## Detailed Description
@@ -168,7 +168,7 @@ USING (VALUES
 * Environment name and version (e.g. Chrome 39, node.js 5.4):
 * Operating System and version (desktop or mobile):
 * Link to your project:
-','Issue', 2, 'My code runs equally well on the serve, as well as the browser'),
+','Issue', 2, 'My code runs equally well on the server, as well as the browser'),
 		(7, '<!--- Provide a general summary of the issue in the Title above -->
 
 ## Expected Behavior
@@ -268,7 +268,7 @@ USING (VALUES
 * Environment name and version (e.g. Chrome 39, node.js 5.4):
 * Operating System and version (desktop or mobile):
 * Link to your project:
-','Issue', 3, 'My code runs equally well on the serve, as well as the browser')
+','Issue', 3, 'My code runs equally well on the server, as well as the browser')
 ) 
 AS Source (ID, Content, Type, CategoryId, Description) 
 ON Target.ID = Source.ID 
