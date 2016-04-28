@@ -29,9 +29,26 @@
             return response.data;
         }
 
+        function getCheckboxValue() {
+
+            return $http.get(API_URL.CHECKBOXVALUE)
+                        .then(function (response) {
+                            return response.data;
+                        });
+        }
+
+        function changeVisibilityMail() {
+            $http.put(API_URL.CHANGEVISIBILITYMAIL);
+        }        
+
         return {
             postImage: postImage,
+<<<<<<< 9af4be1f9eb83e400c4213a96222bc4a8cbfd1a1
             getImage: getImage
+=======
+            getCheckboxValue: getCheckboxValue,
+            changeVisibilityMail: changeVisibilityMail
+>>>>>>> Add front end
         };
     }
 })();

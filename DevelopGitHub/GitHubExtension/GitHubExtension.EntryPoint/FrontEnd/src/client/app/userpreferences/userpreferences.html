@@ -5,6 +5,7 @@
                 <div class="col-md-12">
                     <img ng-src="{{vmPreferences.imageSource}}">
                     <input type="file" ge-custom-on-change="vmPreferences.uploadFile" accept="image/*">
+                    <input type="checkbox" ng-change="vmPreferences.changeVisibilityMail()" ng-model="vmPreferences.isEmailPrivate" /> Show mail to everyone
                 </div>
             </div>
         </div>

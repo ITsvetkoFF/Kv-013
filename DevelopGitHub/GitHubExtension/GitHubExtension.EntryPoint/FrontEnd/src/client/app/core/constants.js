@@ -18,6 +18,8 @@
                 externalActivityUrl: resource + 'activity/external?page=',
                 USER_PHOTO: resource + 'user/avatar',
                 REPOSITORY: resource + 'user/repos',
+                CHECKBOXVALUE: resource + 'account/mailvisibility',
+                CHANGEVISIBILITYMAIL: resource + 'account/changemail',
                 ROLES: resource + 'roles',
                 CURRENT_REPOSITORY: resource + 'repos/current',
 
