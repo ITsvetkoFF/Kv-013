@@ -5,9 +5,9 @@
     .module('app.userpreferences')
     .controller('UserPreferencesController', UserPreferencesController);
 
-    UserPreferencesController.$inject = ['userData', 'logger', 'API_URL', 'i18n'];
+    UserPreferencesController.$inject = ['userData', 'logger', 'i18n'];
 
-    function UserPreferencesController(userData, logger, API_URL, i18n) {
+    function UserPreferencesController(userData, logger, i18n) {
         var vm = this;
         vm.imageSource = ''; 
 
