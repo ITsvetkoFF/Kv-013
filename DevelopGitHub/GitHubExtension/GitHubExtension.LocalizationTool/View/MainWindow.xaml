@@ -1,13 +1,19 @@
 ﻿<Window x:Class="GitHubExtension.LocalizationTool.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:loc="clr-namespace:GitHubExtension.LocalizationTool"
         xmlns:viewModel="clr-namespace:GitHubExtension.LocalizationTool.ViewModel"
         Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="../icon.ico" MinHeight="400">
 
     <Window.DataContext>
         <viewModel:MainWindowViewModel></viewModel:MainWindowViewModel>
     </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding AddEmptyRowCommand}" Gesture="CTRL+R" />
+        <KeyBinding Command="{Binding ClearTranslationDataCommand}" Gesture="CTRL+C" />
+        <KeyBinding Command="{Binding OpenJsonCommand}" Gesture="CTRL+O" />
+        <KeyBinding Command="{Binding SaveJsonCommand}" Gesture="CTRL+S" />
+    </Window.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
