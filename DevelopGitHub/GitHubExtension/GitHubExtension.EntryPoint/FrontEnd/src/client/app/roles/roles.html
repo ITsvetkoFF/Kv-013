@@ -3,9 +3,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>{{message}}</h1>
-                    <div>{{error}}</div>
-                    <div ng-include="'FrontEnd/src/client/app/roles/collaboratorsdetails.html'" ng-show="!!vmRoles.repo"></div>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>Login</th>
+                            <th>Roles to assign</th>
+                            <th>Notes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="collaborator in vmRoles.collaborators">
+                            <td>{{collaborator.login}}</td>
+                            <td>
+                                <select ng-model="vmRoles.roleName[$index]"
+                                        ng-options="role.name for role in vmRoles.roles.data"
+                                        ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
+                                    <option value="">---Please select---</option>
+                                </select>
+                            </td>
+                            <td>
+                                <form name="noteForm" ng-init="collaborator.note"
+                                      ng-submit="noteForm.$valid && vmRoles.createPrivateNote(collaborator)">
+                                    <input type="text" name="newNote" ng-model="collaborator.note" required
+                                           ng-minlength="5">
+                                    <button type="submit" class="btn btn-primary btn-large"
+                                            ng-click="noteForm.newNote.$error.minlength
+                                            && vmRoles.formError('Length must be greater than 5 characters')">
+                                        Add New Note
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
