@@ -1,0 +1,36 @@
+﻿<br/>
+<h3 ng-show="!vmIssueTemplates.issueTemplate">Please, choose the reasons of issue on your project?</h3>
+<button ng-click="vmIssueTemplates.itoggle()" ng-show="vmIssueTemplates.issueTemplate">{{vmIssueTemplates.i18n.message.SHOWISSUETEMPLATE}}</button>
+<button ng-click="vmIssueTemplates.iedit()" ng-show="vmIssueTemplates.issueTemplate">{{vmIssueTemplates.i18n.message.EDIT_ISSUE}}</button>
+<h4 ng-show="vmIssueTemplates.iVar"> {{vmIssueTemplates.category.CURRENT_ISSUE}}</h4>
+<pre ng-show="vmIssueTemplates.iVar">{{vmIssueTemplates.issueTemplate}}</pre>
+<span ng-show="!vmIssueTemplates.issueTemplate" ng-repeat="buttons in vmIssueTemplates.issueCategories">
+    <button ng-click="vmIssueTemplates.showIssueByCategory($index+1,buttons)">{{buttons.categoryDescription}}</button>
+</span>
+<div ng-show="vmIssueTemplates.showPr1">
+    <h3>Your choise : {{vmIssueTemplates.category.categoryDescription}}</h3>
+    <h3>Please choose, where is your code running?</h3>
+</div>
+<span ng-show="vmIssueTemplates.showPr1" ng-repeat="buttons in vmIssueTemplates.issueTemplateByCategoryId ">
+    <button ng-click="vmIssueTemplates.showIssueTemplate($index) ">{{buttons.templateDescription}}</button>
+</span>
+<form name="issueAdd" ng-show="vmIssueTemplates.issueArray[vmIssueTemplates.index]">
+    <br />
+    <h4> {{vmIssueTemplates.i18n.message.ADD_ISSUE_FIELD}}</h4>
+    <textarea ng-required="true" name="issue_text" class="CodeMirror" ng-model="vmIssueTemplates.issueTemplateByCategoryId[vmIssueTemplates.index].content" ui-codemirror="vmTemplates.editorOptions"></textarea>
+        <br />
+        <h4> {{vmIssueTemplates.i18n.message.ADD_MESSAGE}}</h4>
+    <textarea ng-required="true" name="comment_issue" class="CodeMirror" ng-model="vmIssueTemplates.issueTemplateByCategoryId[vmIssueTemplates.index].comments" ui-codemirror="vmTemplates.editorOptions"></textarea>
+        <br />
+        <button ng-disabled="issueAdd.$invalid" ng-click="vmIssueTemplates.createIssue(vmIssueTemplates.issueTemplateByCategoryId[vmIssueTemplates.index])">{{vmIssueTemplates.i18n.message.ADD_ISSUE_BUTTON}}</button>
+</form>
+
+<form name="issueEdit" ng-show=" vmIssueTemplates.showEditIssue">
+    <h4> {{vmIssueTemplates.i18n.message.EDIT_ISSUE_FIELD}}</h4>
+    <textarea ng-required="true" class="CodeMirror" ng-model="vmIssueTemplates.issueTemplate" required ui-codemirror="vmTemplates.editorOptions"></textarea>
+    <br />
+    <h4> {{vmIssueTemplates.i18n.message.ADD_MESSAGE}}</h4>
+    <textarea ng-required="true" class="CodeMirror" ng-model="vmIssueTemplates.commentsEdit" ui-codemirror="vmTemplates.editorOptions"></textarea>
+    <br />
+    <button ng-disabled="issueEdit.$invalid" ng-click="vmIssueTemplates.editIssue(vmIssueTemplates)">{{vmIssueTemplates.i18n.message.ISSUE_EDIT_BUTTON}}</button>
+</form>

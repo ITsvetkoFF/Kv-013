@@ -23,7 +23,8 @@
                     title: 'dashboard',
                     settings: {
                         nav: 1,
-                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.DASHBOARD
+                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.DASHBOARD,
+                        show: true
                     }
                 }
             }

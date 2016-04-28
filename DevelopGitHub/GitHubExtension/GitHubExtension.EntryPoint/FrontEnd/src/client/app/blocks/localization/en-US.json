@@ -48,6 +48,26 @@
         "COULD_NOT_GET_COLLABORATORS": "Could not get collaborators",
         "ACTIVATE_USER_PREFERENCES": "Activated user preferences view",
         "LOADED": " loaded!",
-        "PLEASE_WAIT":  "Please wait ..."
+        "PLEASE_WAIT":  "Please wait ...",
+		"TEMPLATES": "Templates",
+        "PULLREQUESTTEMPLATE": "Pull Request Template",
+        "SHOWPULLREQUESTTEMPLATE": "Show Pull Request template",
+        "ADDPULLREQUESTTEMPLATE": "Add Pull Request template",
+        "ISSUETEMPLATE": "Issue Template",
+        "SHOWISSUETEMPLATE": "Show Issue template",
+        "ADDISSUETEMPLATE": "Add Issue template",
+        "CURRENT_PR": "Current Pull Request template",
+        "ADD_PR_FIELD": "Add Pull Request template(required field)",
+        "ADD_MESSAGE": "Add commit message(required field)",
+        "ADD_PR_BUTTON": "Add Pull Request Template",
+        "PR_EDIT_FIELD": "Edit current Pull Request template(required field)",
+        "PR_EDIT_BUTTON": "Update Pull Request Template",
+        "CURRENT_ISSUE": "Current Issue template",
+        "ADD_ISSUE_FIELD": "Add Issue template(required field)",
+        "EDIT_ISSUE_FIELD": "Edit Issue template(required field)",
+        "ISSUE_EDIT_BUTTON": "Update Issue Template",
+        "ADD_ISSUE_BUTTON": "Add Issue Template",
+        "EDIT_ISSUE": "Edit Issue Template",
+        "EDIT_PR" : "Edit Pull Request Template"
     }
 }

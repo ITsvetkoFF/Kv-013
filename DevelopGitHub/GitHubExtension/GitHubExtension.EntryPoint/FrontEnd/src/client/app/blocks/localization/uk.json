@@ -48,6 +48,26 @@
         "COULD_NOT_GET_COLLABORATORS": "Помилка при отриманні коллабораторів",
         "ACTIVATE_USER_PREFERENCES": "Активовано налаштування користувача",
         "LOADED": " завантажено!",
-        "PLEASE_WAIT":  "Будь ласка, зачекайте ..."
+        "PLEASE_WAIT":  "Будь ласка, зачекайте ...",
+		"TEMPLATES": "Шаблони",
+        "PULLREQUESTTEMPLATE": "Шаблон Pull Request",
+        "SHOWPULLREQUESTTEMPLATE": "Показати шаблон Pull Request",
+        "ADDPULLREQUESTTEMPLATE": "Додати шаблон Pull Request",
+        "ISSUETEMPLATE": "Шаблон Issue",
+        "SHOWISSUETEMPLATE": "Показати шаблон Issue",
+        "ADDISSUETEMPLATE": "Додати Issue template",
+        "CURRENT_PR": "Поточний шаблон Pull Request",
+        "ADD_PR_FIELD": "Додати шаблон Pull Request (обовязкове поле)",
+        "ADD_MESSAGE": "Додати commit message (обовязкове поле)",
+        "ADD_PR_BUTTON": "Додати Pull Request Template",
+        "PR_EDIT_FIELD": "Редагувати поточний шаблон Pull Request (обовязкове поле)",
+        "PR_EDIT_BUTTON": "Оновити шаблон Pull Request",
+        "CURRENT_ISSUE": "Поточний шаблон Issue",
+        "ADD_ISSUE_FIELD": "Додати шаблон Issue (обовязкове поле)",
+        "EDIT_ISSUE_FIELD": "Редагувати шаблон Issue (обовязкове поле)",
+        "ISSUE_EDIT_BUTTON": "Оновити шаблон Issue",
+        "ADD_ISSUE_BUTTON": "Додати шаблон Issue",
+        "EDIT_ISSUE": "Редагувати шаблон Issue",
+        "EDIT_PR" : "Редагувати шаблон Pull Request"
     }
 }

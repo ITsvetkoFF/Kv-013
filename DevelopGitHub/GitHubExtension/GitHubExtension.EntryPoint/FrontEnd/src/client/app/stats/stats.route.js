@@ -5,13 +5,13 @@
         .module('app.stats')
         .run(appRun);
 
-    appRun.$inject = ['routerHelper', 'i18n'];
+    appRun.$inject = ['routerHelper', 'i18n','userService'];
     /* @ngInject */
-    function appRun(routerHelper, i18n) {
-        routerHelper.configureStates(getStates(i18n));
+    function appRun(routerHelper, i18n, userService) {
+        routerHelper.configureStates(getStates(i18n, userService));
     }
 
-    function getStates(i18n) {
+    function getStates(i18n, userService) {
         return [
             {
                 state: 'stats',
@@ -23,7 +23,8 @@
                     title: 'Stats',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-lock"></i>' + i18n.message.STATISTICS
+                        content: '<i class="fa fa-lock"></i>' + i18n.message.STATISTICS,
+                        show : userService.isAuthenticated()
                     }
                 }
             }
