@@ -7,6 +7,7 @@ using System.Web.Http.Results;
 
 using FluentAssertions;
 
+using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
@@ -27,7 +28,7 @@ namespace GitHubExtension.Security.Tests.TestForControllers
 {
     public class RepositoryControllerAssignRolesToUserTests
     {
-        private const string ExpectedErrorForInvalidRole = "Roles '{0}' does not exists in the system";
+        private const string ExpectedErrorForInvalidRole = RoleValidationConstants.RoleNotExist;
 
         private const string RoleIndex = "role";
 
