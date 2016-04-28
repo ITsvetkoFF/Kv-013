@@ -80,6 +80,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [HttpGet]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [Route(RouteConstants.GetExternalLogin)]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> GetExternalLogin(string provider)
         {
             if (!User.Identity.IsAuthenticated)
@@ -113,7 +114,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleConstants.Admin)]
         [Route(RouteConstants.GetUser)]
         public async Task<IHttpActionResult> GetUser(string id)
         {
@@ -128,7 +128,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleConstants.Admin)]
         [Route(RouteConstants.GetUserByName)]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {

@@ -1,13 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Http;
-
+using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.WebApi.Mappers;
 
 namespace GitHubExtension.Security.WebApi.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [RoutePrefix("api/roles")]
     public class RolesController : BaseApiController
     {
         private readonly ISecurityContext _securityContext;
@@ -17,8 +15,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
             _securityContext = securityContext;
         }
 
-        [Route("")]
-        [AllowAnonymous]
+        [Route(RouteConstants.ApiRoles)]
+        [HttpGet]
         public IHttpActionResult GetAllRoles()
         {
             var roles = _securityContext.SecurityRoles.AsEnumerable().Select(r => r.ToRoleViewModel());

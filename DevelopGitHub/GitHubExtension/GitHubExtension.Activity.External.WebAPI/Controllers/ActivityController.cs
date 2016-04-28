@@ -9,7 +9,6 @@ using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Activity.External.WebAPI.Controllers
 {
-    [Authorize]
     public class ActivityController : ApiController
     {
         const string AccessTokenClaimType = "ExternalAccessToken";
