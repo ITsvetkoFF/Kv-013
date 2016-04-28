@@ -126,16 +126,6 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             }
         }
 
-        private void RegisterCommands()
-        {
-            CloseCommand = new RelayCommand(Close);
-            TranslatingButtonCommand = new RelayCommand(WebTranslate);
-            AddEmptyRowCommand = new RelayCommand(AddEmptyRow);
-            SaveJsonCommand = new RelayCommand(SaveJson);
-            OpenJsonCommand = new RelayCommand(OpenJson);
-            ClearTranslationDataCommand = new RelayCommand(ClearTranslationData);
-        }
-
         public static void ShowErrorMessageBox(string error, Exception exception)
         {
             MessageBox.Show(
@@ -148,6 +138,16 @@ namespace GitHubExtension.LocalizationTool.ViewModel
         public static void ShowInformationMessageBox(string information)
         {
             MessageBox.Show(information, "OK - Localization Tool", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void RegisterCommands()
+        {
+            CloseCommand = new RelayCommand(Close);
+            TranslatingButtonCommand = new RelayCommand(WebTranslate);
+            AddEmptyRowCommand = new RelayCommand(AddEmptyRow);
+            SaveJsonCommand = new RelayCommand(SaveJson);
+            OpenJsonCommand = new RelayCommand(OpenJson);
+            ClearTranslationDataCommand = new RelayCommand(ClearTranslationData);
         }
 
         private void AddEmptyRow()
