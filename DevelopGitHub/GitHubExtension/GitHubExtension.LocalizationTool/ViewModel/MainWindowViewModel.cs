@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 using GitHubExtension.LocalizationTool.Model;
 using GitHubExtension.LocalizationTool.Translate;
@@ -30,6 +31,8 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
         public MainWindowViewModel()
         {
+            RegisterCommands();
+
             _translationDataTable = new TranslationDataTable
                 {
                     TranslationData = new ObservableCollection<TranslationDataRow>()
@@ -41,6 +44,18 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
             OpenJson();
         }
+
+        public ICommand CloseCommand { get; set; }
+
+        public ICommand TranslatingButtonCommand { get; set; }
+
+        public ICommand AddEmptyRowCommand { get; set; }
+
+        public ICommand SaveJsonCommand { get; set; }
+
+        public ICommand OpenJsonCommand { get; set; }
+
+        public ICommand ClearTranslationDataCommand { get; set; }
 
         public ObservableCollection<TranslationDataRow> TranslationData
         {
@@ -111,6 +126,16 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             }
         }
 
+        private void RegisterCommands()
+        {
+            CloseCommand = new RelayCommand(Close);
+            TranslatingButtonCommand = new RelayCommand(WebTranslate);
+            AddEmptyRowCommand = new RelayCommand(AddEmptyRow);
+            SaveJsonCommand = new RelayCommand(SaveJson);
+            OpenJsonCommand = new RelayCommand(OpenJson);
+            ClearTranslationDataCommand = new RelayCommand(ClearTranslationData);
+        }
+
         public static void ShowErrorMessageBox(string error, Exception exception)
         {
             MessageBox.Show(
@@ -125,42 +150,12 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             MessageBox.Show(information, "OK - Localization Tool", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private DelegateCommand addEmptyRowCommand;
-
-        public ICommand AddEmptyRowCommand
-        {
-            get
-            {
-                if (addEmptyRowCommand == null)
-                {
-                    addEmptyRowCommand = new DelegateCommand(AddEmptyRow);
-                }
-
-                return addEmptyRowCommand;
-            }
-        }
-
-        private void AddEmptyRow(object param)
+        private void AddEmptyRow()
         {
             TranslationData.Add(new TranslationDataRow());
         }
 
-        private DelegateCommand saveJsonCommand;
-
-        public ICommand SaveJsonCommand
-        {
-            get
-            {
-                if (saveJsonCommand == null)
-                {
-                    saveJsonCommand = new DelegateCommand(SaveJson);
-                }
-
-                return saveJsonCommand;
-            }
-        }
-
-        private void SaveJson(object param)
+        private void SaveJson()
         {
             JsonHelper.RemoveEmptyRows();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
@@ -171,22 +166,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             ShowInformationMessageBox("Saved!");
         }
 
-        private DelegateCommand openJsonCommand;
-
-        public ICommand OpenJsonCommand
-        {
-            get
-            {
-                if (openJsonCommand == null)
-                {
-                    openJsonCommand = new DelegateCommand(OpenJson);
-                }
-
-                return openJsonCommand;
-            }
-        }
-
-        private void OpenJson(object param = null)
+        private void OpenJson()
         {
             TranslationData.Clear();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
@@ -213,42 +193,12 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             ShowInformationMessageBox("Oppened!");
         }
 
-        private DelegateCommand clearTranslationDataCommand;
-
-        public ICommand ClearTranslationDataCommand
-        {
-            get
-            {
-                if (clearTranslationDataCommand == null)
-                {
-                    clearTranslationDataCommand = new DelegateCommand(ClearTranslationData);
-                }
-
-                return clearTranslationDataCommand;
-            }
-        }
-
-        private void ClearTranslationData(object param)
+        private void ClearTranslationData()
         {
             TranslationData.Clear();
         }
 
-        private DelegateCommand translatingButtonCommand;
-
-        public ICommand TranslatingButtonCommand
-        {
-            get
-            {
-                if (translatingButtonCommand == null)
-                {
-                    translatingButtonCommand = new DelegateCommand(TranslatingButton);
-                }
-
-                return translatingButtonCommand;
-            }
-        }
-
-        private async void TranslatingButton(object param)
+        private async void WebTranslate()
         {
             TranslateButtonIsEnabled = false;
             TranslateButtonContent = "Translating...";
@@ -264,25 +214,10 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             TranslateButtonIsEnabled = true;
             TranslateButtonContent = "WebTranslate";
         }
-
-        private DelegateCommand closeCommand;
-
-        public ICommand CloseCommand
+        
+        private void Close()
         {
-            get
-            {
-                if (closeCommand == null)
-                {
-                    closeCommand = new DelegateCommand(Close);
-                }
-
-                return closeCommand;
-            }
-        }
-
-        private void Close(object param)
-        {
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
     }
 }

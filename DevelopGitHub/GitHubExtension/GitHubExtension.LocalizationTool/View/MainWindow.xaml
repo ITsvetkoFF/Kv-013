@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModel="clr-namespace:GitHubExtension.LocalizationTool.ViewModel"
         Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="../icon.ico" MinHeight="400">
-
+    
     <Window.DataContext>
         <viewModel:MainWindowViewModel></viewModel:MainWindowViewModel>
     </Window.DataContext>
