@@ -39,5 +39,13 @@ namespace GitHubExtension.Security.WebApi.Queries.Implementations
                 return _securityContext.Repositories;
             }
         }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                return _securityContext.Users;
+            }
+        }
     }
 }

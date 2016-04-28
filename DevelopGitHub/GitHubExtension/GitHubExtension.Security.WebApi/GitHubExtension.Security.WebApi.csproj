@@ -124,10 +124,12 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\OwinContext\OwinContextAuthentication.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRepositoryExtension.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRoleExtension.cs" />
+    <Compile Include="Extensions\SecurityContext\SecurityContextUserExtension.cs" />
     <Compile Include="Helpers\JSONHelper.cs" />
     <Compile Include="Helpers\NLogger.cs" />
     <Compile Include="Helpers\StringBuilderExtension.cs" />

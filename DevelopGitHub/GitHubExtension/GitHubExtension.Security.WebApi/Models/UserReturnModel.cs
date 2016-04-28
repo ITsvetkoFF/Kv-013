@@ -6,8 +6,8 @@
 
         public int GitHubId { get; set; }
 
-        public string Id { get; set; }
-
         public string UserName { get; set; }
+
+        public string GitHubUrl { get; set; }
     }
 }
