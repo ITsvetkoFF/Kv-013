@@ -87,10 +87,6 @@
       <Project>{E8B59A6B-7115-479D-AF6E-B9047499EBE9}</Project>
       <Name>GitHubExtension.Activity.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
-      <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
-      <Name>GitHubExtension.Security.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

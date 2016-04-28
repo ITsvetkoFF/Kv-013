@@ -7,7 +7,7 @@ using System.Web.Http;
 using FluentValidation.WebApi;
 
 using GitHubExtension.EntryPoint;
-using GitHubExtension.Infrastructure.Extensions;
+using GitHubExtension.Infrastructure.Extensions.Owin;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Migrations;
@@ -46,6 +46,7 @@ namespace GitHubExtension.EntryPoint
 
             ConfigureOauth(app);
             ConfigureCookies(app);
+            app.Use<TokenCheckMiddleware>();
 
             var config = ConfigureWebApi();
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);

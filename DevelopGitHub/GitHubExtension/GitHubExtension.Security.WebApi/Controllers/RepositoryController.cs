@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 using GitHubExtension.Infrastructure.Constants;
+using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
@@ -79,8 +80,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
-            var claims = User.Identity as ClaimsIdentity;
-            string token = claims.FindFirstValue("ExternalAccessToken");
+            string token = User.Identity.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);

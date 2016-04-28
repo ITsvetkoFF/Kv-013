@@ -265,6 +265,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleInjectorConfiguration.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TokenCheckMiddleware.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
@@ -277,6 +278,10 @@
     <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
       <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
+      <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
+      <Name>GitHubExtension.Infrastructure.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Infrastructure.Extensions\GitHubExtension.Infrastructure.Extensions.csproj">
       <Project>{D6C328E6-DB94-4FFF-A775-BD7C2F42C56F}</Project>

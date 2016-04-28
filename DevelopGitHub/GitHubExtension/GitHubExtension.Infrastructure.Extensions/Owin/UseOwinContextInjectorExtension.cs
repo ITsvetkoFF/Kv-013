@@ -3,7 +3,7 @@
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 
-namespace GitHubExtension.Infrastructure.Extensions
+namespace GitHubExtension.Infrastructure.Extensions.Owin
 {
     public static class UseOwinContextInjectorExtension
     {

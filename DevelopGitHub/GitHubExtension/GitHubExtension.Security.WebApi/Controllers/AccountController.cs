@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 using GitHubExtension.Infrastructure.Constants;
+using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
-using GitHubExtension.Security.WebApi.Exceptions;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
 using GitHubExtension.Security.WebApi.Extensions.OwinContext;
 using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
@@ -17,7 +17,6 @@ using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using GitHubExtension.Security.WebApi.Results;
-using GitHubExtension.Statistics.WebApi.Extensions.Identity;
 
 using Microsoft.AspNet.Identity;
 
@@ -88,11 +87,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            Claim tokenClaim = User.Identity.GetClaim();
-            if (tokenClaim == null)
-            {
-                throw new TokenNotFoundException();
-            }
+            Claim tokenClaim = User.Identity.GetExternalAccessTokenClaim();
 
             GitHubUserModel userReadModel = await _gitHubQuery.GetUserAsync(tokenClaim.Value);
             User user = _userManager.FindByGitHubId(userReadModel.GitHubId);

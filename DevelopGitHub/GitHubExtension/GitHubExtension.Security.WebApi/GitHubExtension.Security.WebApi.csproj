@@ -136,7 +136,6 @@
     <Compile Include="Mappers\RepositoryMapper.cs" />
     <Compile Include="Mappers\RoleMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
-    <Compile Include="Exceptions\TokenNotFoundException.cs" />
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="Mappers\UserRepositoryRoleMapper.cs" />
     <Compile Include="Models\CollaboratorModel.cs" />
@@ -167,18 +166,6 @@
     <Folder Include="Helpers\Authentication\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitHubExtension.Activity.External.WebAPI\GitHubExtension.Activity.External.WebAPI.csproj">
-      <Project>{ecd25131-e98d-437c-ba1a-f8ebc60fa266}</Project>
-      <Name>GitHubExtension.Activity.External.WebAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Activity.DAL\GitHubExtension.Activity.DAL.csproj">
-      <Project>{E8B59A6B-7115-479D-AF6E-B9047499EBE9}</Project>
-      <Name>GitHubExtension.Activity.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
-      <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
-      <Name>GitHubExtension.Activity.Internal.WebApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
       <Project>{642455C5-0A4B-4E25-A2C3-1F1304A0D7DD}</Project>
       <Name>GitHubExtension.Infrastructure.Constants</Name>
@@ -187,25 +174,9 @@
       <Project>{D6C328E6-DB94-4FFF-A775-BD7C2F42C56F}</Project>
       <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
-      <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
-      <Name>GitHubExtension.Notes.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
-      <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
-      <Name>GitHubExtension.Notes.WebApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Templates\GitHubExtension.Templates.csproj">
-      <Project>{d2adb828-d1e5-40ed-aa12-1643fb5cd11e}</Project>
-      <Name>GitHubExtension.Templates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
-      <Project>{ac64ce56-a38a-4866-82f5-a3be35ef2ea8}</Project>
-      <Name>GitHubExtension.Statistics.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

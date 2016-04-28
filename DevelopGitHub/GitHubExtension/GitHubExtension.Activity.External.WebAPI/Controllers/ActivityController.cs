@@ -4,6 +4,7 @@ using System.Web.Http;
 
 using GitHubExtension.Activity.External.WebAPI.Models;
 using GitHubExtension.Activity.External.WebAPI.Queries;
+using GitHubExtension.Infrastructure.Extensions.Identity;
 
 using Microsoft.AspNet.Identity;
 
@@ -11,8 +12,6 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
 {
     public class ActivityController : ApiController
     {
-        const string AccessTokenClaimType = "ExternalAccessToken";
-
         const string CurrentProjectNameClaimType = "CurrentProjectName";
 
         const string YouHaveNoRepositorySelected = "You have no repository selected";
@@ -35,7 +34,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
                 return BadRequest(YouHaveNoRepositorySelected);
             }
 
-            Claim tokenClaim = claimsIdentity.FindFirst(AccessTokenClaimType);
+            Claim tokenClaim = claimsIdentity.GetExternalAccessTokenClaim();
 
             EventsPaginationModel model =
                 await _eventsQuery.GetGitHubEventsAsync(fullRepositoryName, tokenClaim.Value, page);
