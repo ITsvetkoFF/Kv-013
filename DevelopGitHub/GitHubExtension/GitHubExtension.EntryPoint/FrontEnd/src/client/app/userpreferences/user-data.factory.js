@@ -43,12 +43,9 @@
 
         return {
             postImage: postImage,
-<<<<<<< 9af4be1f9eb83e400c4213a96222bc4a8cbfd1a1
-            getImage: getImage
-=======
+            getImage: getImage,
             getCheckboxValue: getCheckboxValue,
             changeVisibilityMail: changeVisibilityMail
->>>>>>> Add front end
         };
     }
 })();
