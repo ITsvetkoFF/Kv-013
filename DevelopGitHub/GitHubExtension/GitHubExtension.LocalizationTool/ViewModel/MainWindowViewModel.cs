@@ -16,6 +16,8 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private readonly ITranslationData _translationDataTable;
+
         private readonly Translator _translator;
 
         private string _targetLanguageText;
@@ -28,22 +30,28 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
         public MainWindowViewModel()
         {
-            TranslationData = new ObservableCollection<TranslationDataRow>();
+            _translationDataTable = new TranslationDataTable
+                {
+                    TranslationData = new ObservableCollection<TranslationDataRow>()
+                };
 
-            _translator = new Translator(TranslationData);
+            _translator = new Translator(_translationDataTable);
 
-            JsonHelper.TranslationData = TranslationData;
+            JsonHelper.TranslationDataTable = _translationDataTable;
 
-            OpenJson(null);
+            OpenJson();
         }
 
-        public ObservableCollection<TranslationDataRow> TranslationData { get; set; }
-
-        public Translator Translator
+        public ObservableCollection<TranslationDataRow> TranslationData
         {
             get
             {
-                return _translator;
+                return _translationDataTable.TranslationData;
+            }
+
+            set
+            {
+                _translationDataTable.TranslationData = value;
             }
         }
 
@@ -178,7 +186,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             }
         }
 
-        private void OpenJson(object param)
+        private void OpenJson(object param = null)
         {
             TranslationData.Clear();
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
@@ -246,7 +254,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             TranslateButtonContent = "Translating...";
             try
             {
-                await Translator.WebTranslate(SourceLanguageText, TargetLanguageText);
+                await _translator.WebTranslate(SourceLanguageText, TargetLanguageText);
             }
             catch (WebException exception)
             {

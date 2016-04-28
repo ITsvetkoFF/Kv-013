@@ -27,11 +27,19 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string GetTextParameter = "&text=";
 
-        private readonly ObservableCollection<TranslationDataRow> _translationData;
+        private readonly ITranslationData _translationDataTable;
 
-        public Translator(ObservableCollection<TranslationDataRow> translationData)
+        private ObservableCollection<TranslationDataRow> TranslationData
         {
-            _translationData = translationData;
+            get
+            {
+                return _translationDataTable.TranslationData;
+            }
+        }
+
+        public Translator(ITranslationData translationDataTable)
+        {
+            _translationDataTable = translationDataTable;
         }
 
         public static Lang GetLang(string lang)
@@ -129,7 +137,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    _translationData[i][language] = value;
+                    TranslationData[i][language] = value;
                 }
 
                 i++;
@@ -139,7 +147,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         private StringBuilder GenerateTextParameter(Lang language)
         {
             var textToTranslate = new StringBuilder();
-            foreach (var translation in _translationData)
+            foreach (var translation in TranslationData)
             {
                 textToTranslate.Append(GetTextParameter);
                 textToTranslate.Append(translation[language]);

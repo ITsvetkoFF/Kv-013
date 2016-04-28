@@ -80,6 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ITranslationData.cs" />
+    <Compile Include="Model\TranslationDataTable.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\HotKeyCommands.cs" />
     <Compile Include="Translate\JsonHelper.cs" />

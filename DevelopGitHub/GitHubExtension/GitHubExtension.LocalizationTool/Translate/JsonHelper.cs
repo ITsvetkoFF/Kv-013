@@ -22,8 +22,24 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string SecondOpenQuote = "\":{";
 
-        public static ObservableCollection<TranslationDataRow> TranslationData { get; set; }
-        
+        private static ITranslationData _translationDataTable;
+
+        public static ITranslationData TranslationDataTable
+        {
+            set
+            {
+                _translationDataTable = value;
+            }
+        }
+
+        private static ObservableCollection<TranslationDataRow> TranslationData
+        {
+            get
+            {
+                return _translationDataTable.TranslationData;
+            }
+        }
+
         public static void ReadJsonFromFile(Lang language)
         {
             var fileName = Translator.GetFileName(language);
