@@ -8,8 +8,7 @@ namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
     {
         public static string ForAccountAssignRolesToUser(this string url)
         {
-            return url
-                   + Regex.Replace(
+            return "/" + Regex.Replace(
                        Regex.Replace(RouteConstants.AssignRolesToUser, RouteConstants.RepositoryId, "/5"), 
                        RouteConstants.GitHubId, 
                        "/6");
