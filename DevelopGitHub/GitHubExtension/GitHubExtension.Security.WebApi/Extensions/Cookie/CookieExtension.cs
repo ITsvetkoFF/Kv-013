@@ -8,5 +8,10 @@ namespace GitHubExtension.Security.WebApi.Extensions.Cookie
         {
             httpContext.HttpContext.Response.Cookies["userName"].Value = userName;
         }
+
+        public static void SetCookie(this RequestContext requestContext, string cookieName, string value)
+        {
+            requestContext.HttpContext.Response.Cookies[cookieName].Value = value;
+        }
     }
 }

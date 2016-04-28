@@ -7,6 +7,7 @@ using System.Web.Http;
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.WebApi.Extensions.Cookie;
 using GitHubExtension.Security.WebApi.Extensions.OwinContext;
 using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
 using GitHubExtension.Security.WebApi.Mappers;
@@ -136,6 +137,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return ModelError(RepositoryValidationConstants.CurrentProject, RepositoryValidationConstants.CurrentProjectUpdateFailed);
             }
 
+            AddClaimsToCookie(claimsToUpdate);
             ReSignInWithIdentity(claimsIdentity);
             return Ok();
         }
@@ -197,6 +199,14 @@ namespace GitHubExtension.Security.WebApi.Controllers
                     _userManager.RemoveClaim(userId, existingClaim);
                     claimsIdentity.RemoveClaim(existingClaim);
                 }
+            }
+        }
+
+        private void AddClaimsToCookie(Claim[] claims)
+        {
+            foreach (var claim in claims)
+            {
+                GetRequestContext.SetCookie(claim.Type, claim.Value);
             }
         }
     }
