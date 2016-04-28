@@ -1,6 +1,26 @@
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
         <div class="container">
+            
+            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities && !!vm.userService.getCurrentRepository()">
+                <div class="col-md-12">
+                    <h2>{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{vm.i18n.ACTIVITY_MESSAGE}}</th>
+                            <th>{{vm.i18n.DATE_TIME}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="activity in vm.internalActivities">
+                            <td>{{activity.message}}</td>
+                            <td>{{activity.invokeTime | date:'H:mm:ss dd.MM.yyyy'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <div class="row" ng-show="vm.userService.isAuthenticated() && vm.numberOfPages > 0 && !!vm.userService.getCurrentRepository()">
                 <div class="col-md-12">
@@ -13,26 +33,6 @@
                                     ng-change="vm.pageChanged()"
                                     max-size="10" ng-disabled="vm.paginationDisabled">
                     </uib-pagination>
-                </div>
-            </div>
-
-            <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities && !!vm.userService.getCurrentRepository()">
-                <div class="col-md-12">
-                    <h2>{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>{{vm.i18n.ACTIVITY_MESSAGE}}</th>
-                            <th>{{vm.i18n.DATE_TIME}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="activity in vm.internalActivities">
-                                <td>{{activity.message}}</td>
-                                <td>{{activity.invokeTime | date:'H:mm:ss dd.MM.yyyy'}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
