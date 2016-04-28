@@ -4,12 +4,15 @@
         "ADMIN": "Admin",
         "LOGIN": "Login",
         "LOGOUT":  "Logout",
+        "USER_LOGIN": "Login",
         "WELCOME": "Welcome",
         "CURRENT_REPOSITORY": "Your current repository",
         "REPOS": "Repositories",
         "COLLABORATORS": "Collaborators",
         "Repositories" : "Repositories",
         "MESSAGES": "Messages",
+        "ADD_ROLES": "Roles to assign",
+        "NOTES": "Notes",
         "PUSHED_TO": "pushed to",
         "AT": "at",
         "ADD_STAR_TO": "add star to",
@@ -75,7 +78,11 @@
         "CHOISE": "Your choise",
         "CATEGOTY_QUESTION": "Please choose, where is your code running?",
          "ACTIVE_PR" : "Activated Pull Request Template view",
-        "ACTIVE_ISSUE" : "Activated відображення Issue view"
+        "ACTIVE_ISSUE" : "Activated відображення Issue view",
+        "NOTE_MIN_LENGTH": "Length must be greater than 5 characters",
+        "NOTE_CREATED": "Note created",
+        "NOTE_FAILED": "Note failed to be created",
+        "ADD_NEW_NOTE": "Add New Note"
 
     }
 }

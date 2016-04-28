@@ -52,11 +52,11 @@
         };
 
         function onNoteCreated() {
-            logger.info('Note created');
+            logger.info(vm.i18n.NOTE_CREATED);
         }
 
         function onNoteError() {
-            logger.error('Note failed to be created');
+            logger.error(vm.i18n.NOTE_FAILED);
         }
 
         function onError(reason) {

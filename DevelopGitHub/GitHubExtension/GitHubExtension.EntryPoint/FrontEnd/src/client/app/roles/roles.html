@@ -6,9 +6,9 @@
                     <table class="table table-condensed">
                         <thead>
                         <tr>
-                            <th>Login</th>
-                            <th>Roles to assign</th>
-                            <th>Notes</th>
+                            <th>{{vmRoles.i18n.USER_LOGIN}}</th>
+                            <th>{{vmRoles.i18n.ADD_ROLES}}</th>
+                            <th>{{vmRoles.i18n.NOTES}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -28,11 +28,12 @@
                                            ng-minlength="5">
                                     <button type="submit" class="btn btn-primary btn-large"
                                             ng-click="noteForm.newNote.$error.minlength
-                                            && vmRoles.formError('Length must be greater than 5 characters')">
-                                        Add New Note
+                                            && vmRoles.formError(vmRoles.i18n.NOTE_MIN_LENGTH)">
+                                        {{vmRoles.i18n.ADD_NEW_NOTE}}
                                     </button>
                                 </form>
                             </td>
+                            <td>
                         </tr>
                         </tbody>
                     </table>
