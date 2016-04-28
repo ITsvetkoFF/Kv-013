@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 using Microsoft.AspNet.Identity;
 
-namespace GitHubExtension.Notes.WebApi
+namespace GitHubExtension.Notes.WebApi.Extensions
 {
     public static class IdentityExtensions
     {

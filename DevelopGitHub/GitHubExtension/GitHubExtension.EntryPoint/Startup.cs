@@ -60,6 +60,23 @@ namespace GitHubExtension.EntryPoint
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecurityContext, Configuration>());
         }
 
+        public HttpConfiguration ConfigureWebApi()
+        {
+            HttpConfiguration config = new HttpConfiguration();
+
+            config.MapHttpAttributeRoutes();
+
+            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
+            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SerializerSettings.PreserveReferencesHandling =
+                Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Filters.Add(new LoggingFilterAttribute());
+            config.Filters.Add(new ModelIsNullFilterAttribute());
+
+            return config;
+        }
+
         void ConfigureCookies(IAppBuilder app)
         {
             app.UseCookieAuthentication(
@@ -95,23 +112,6 @@ namespace GitHubExtension.EntryPoint
 
             GitHubAuthOptions.Scope.Add("user,repo");
             app.UseGitHubAuthentication(GitHubAuthOptions);
-        }
-
-        private HttpConfiguration ConfigureWebApi()
-        {
-            HttpConfiguration config = new HttpConfiguration();
-
-            config.MapHttpAttributeRoutes();
-
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            jsonFormatter.SerializerSettings.PreserveReferencesHandling =
-                Newtonsoft.Json.PreserveReferencesHandling.Objects;
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
-            config.Filters.Add(new LoggingFilterAttribute());
-            config.Filters.Add(new ModelIsNullFilterAttribute());
-
-            return config;
         }
     }
 }

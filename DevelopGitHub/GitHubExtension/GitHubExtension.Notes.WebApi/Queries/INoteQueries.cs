@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-
+﻿using System.Linq;
 using GitHubExtension.Notes.DAL.Model;
 
 namespace GitHubExtension.Notes.WebApi.Queries
 {
     public interface INoteQueries
     {
-        Task<Note> GetNote(string userId, string collaboratorId);
+        IOrderedQueryable<Note> Notes { get; }
     }
 }
