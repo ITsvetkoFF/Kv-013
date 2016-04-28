@@ -197,9 +197,7 @@
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
-    <Content Include="FrontEnd\src\client\app\roles\collaboratorsdetails.html" />
     <Content Include="FrontEnd\src\client\app\roles\github-collaborators.factory.js" />
-    <Content Include="FrontEnd\src\client\app\roles\reposdetails.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.controller.js" />
     <Content Include="FrontEnd\src\client\app\roles\roles.html" />
     <Content Include="FrontEnd\src\client\app\roles\roles.module.js" />
