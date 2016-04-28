@@ -6,14 +6,12 @@
         'app.widgets',
         'app.dashboard',
         'app.layout',
-        'app.repos',
         'app.roles',
         'app.user',
         'app.activity',
         'app.userpreferences',
+        'app.stats',
         'ui.bootstrap',
-        'ngCookies',
-        'app.user',
-        'app.stats'
+        'ngCookies'
     ]);
 })();

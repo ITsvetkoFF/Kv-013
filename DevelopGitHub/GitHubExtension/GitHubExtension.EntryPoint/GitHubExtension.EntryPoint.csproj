@@ -137,6 +137,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\raml.html" />
     <Content Include="FrontEnd\gulp.config.js" />
     <Content Include="FrontEnd\gulp.png" />
     <Content Include="FrontEnd\gulpfile.js" />
@@ -196,12 +197,6 @@
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.controller.spec.js" />
     <Content Include="FrontEnd\src\client\app\layout\sidebar.html" />
-    <Content Include="FrontEnd\src\client\app\repos\github-data.factory.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.controller.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.html" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.module.js" />
-    <Content Include="FrontEnd\src\client\app\repos\repos.route.js" />
-    <Content Include="FrontEnd\src\client\app\repos\userdetails.html" />
     <Content Include="FrontEnd\src\client\app\roles\collaboratorsdetails.html" />
     <Content Include="FrontEnd\src\client\app\roles\github-collaborators.factory.js" />
     <Content Include="FrontEnd\src\client\app\roles\reposdetails.html" />
@@ -249,6 +244,14 @@
     <Content Include="FrontEnd\src\client\app\blocks\localization\en-US.json" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\template.ejs" />
     <Content Include="FrontEnd\src\client\app\blocks\localization\uk.json" />
+    <Content Include="docs\raml\account.raml" />
+    <Content Include="docs\raml\activity.raml" />
+    <Content Include="docs\raml\api.raml" />
+    <Content Include="docs\raml\note.raml" />
+    <Content Include="docs\raml\repos.raml" />
+    <Content Include="docs\raml\roles.raml" />
+    <Content Include="docs\raml\templates.raml" />
+    <Content Include="docs\raml\user.raml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
