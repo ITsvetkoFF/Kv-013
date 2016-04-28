@@ -39,6 +39,26 @@
             githubCollaborators.assignRole(vm.repo, collaborator, role);
         };
 
+        vm.getPrivateNote = function(collaborator) {
+            githubCollaborators.getPrivateNote(collaborator).then(onGetPrivateNote);
+        };
+
+        vm.createPrivateNote = function(collaborator, note) {
+            githubCollaborators.createPrivateNote(collaborator, note).then(onNoteCreated, onNoteError);
+        };
+
+        vm.formError = function (reason){
+            logger.error(reason);
+        };
+
+        function onNoteCreated(){
+            logger.info('Note created')
+        };
+
+        function onNoteError(){
+            logger.error('Note failed to be created');
+        };
+
         function onError(reason) {
             vm.error = vm.i18n.COULD_NOT_GET_COLLABORATORS;
         }
