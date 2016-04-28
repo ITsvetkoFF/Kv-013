@@ -75,7 +75,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4E5BCB58-0467-4312-9FAC-582423D624F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.LocalizationTool", "GitHubExtension.LocalizationTool\GitHubExtension.LocalizationTool.csproj", "{58FBD06F-B682-4BED-8A55-7A41B4140A65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Tools.LocalizationTool", "GitHubExtension.Tools.LocalizationTool\GitHubExtension.Tools.LocalizationTool.csproj", "{58FBD06F-B682-4BED-8A55-7A41B4140A65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
