@@ -57,7 +57,6 @@
 
         function getInternalActivity() {
             return activityService.getInternalActivity().then(function(activity) {
-                console.log(activity);
                 vm.internalActivities = activity;
             });
         }
