@@ -4,6 +4,7 @@
         "ADMIN": "Адміністратор",
         "LOGIN": "Вхід в систему",
         "LOGOUT":  "Вихід з системи",
+        "USER_LOGIN": "Логін",
         "WELCOME": "Привіт",
         "CURRENT_REPOSITORY": "Ваш поточний репозиторій",
         "MADE_PUBLIC" : "зробив публічним",
@@ -12,6 +13,8 @@
         "COLLABORATORS": "Коллаборатори",
         "Repositories" :  "Репозиторії",
         "MESSAGES": "Повідомлення",
+        "ADD_ROLES": "Додати ролі",
+        "NOTES": "Коментарі",
         "PUSHED_TO": "завантажив в",
         "AT": "від",
         "ADD_STAR_TO": "додав зірку до",
@@ -76,6 +79,10 @@
         "CHOISE": "Ваш вибір",
         "CATEGOTY_QUESTION": "Де працює ваш код?",
         "ACTIVE_PR" : "Активовано відображення Pull Request Template",
-        "ACTIVE_ISSUE" : "Активовано відображення Issue"  
+        "ACTIVE_ISSUE" : "Активовано відображення Issue",
+        "NOTE_MIN_LENGTH" : "Довжина коментаря має бути більше 5 символів",
+        "NOTE_CREATED": "Коментар додано",
+        "NOTE_FAILED": "Коментар не було додано",
+        "ADD_NEW_NOTE": "Додати коментар"
     }
 }

@@ -14,7 +14,7 @@
             fd.append('file', files[0]);
             return $http.post(API_URL.USER_PHOTO, fd, {
                 transformRequest: angular.identity, //to make authomatical serialisation
-                headers: { 'Content-Type': undefined } //to make content-type multipart/from-data
+                headers: {'Content-Type': undefined} //to make content-type multipart/from-data
             }).then(successCb);
         }
 

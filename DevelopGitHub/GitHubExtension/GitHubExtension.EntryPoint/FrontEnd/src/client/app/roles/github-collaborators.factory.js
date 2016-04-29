@@ -13,7 +13,15 @@
             return $http({
                 method: 'GET',
                 url: baseUrl + '/repos/' + repo.name + '/collaborators'
-            }).then(function (response) { return response.data; });
+            }).then(function (response) {
+                var collaboratorsExtended = response.data;
+                collaboratorsExtended.forEach(function (collaborator) {
+                    getPrivateNote(collaborator).then(function (data) {
+                        collaborator.note = data.data.body;
+                    });
+                });
+                return collaboratorsExtended;
+            }) ;
         }
 
         function getRoles() {
@@ -28,7 +36,7 @@
                 return $http({
                     method: 'POST',
                     url: API_URL.internalActivityUrl + '/addRole',
-                    data: { roleToAssign: roleToAssign, collaboratorName: collaboratorName }
+                    data: {roleToAssign: roleToAssign, collaboratorName: collaboratorName}
                 });
             };
         }
@@ -42,10 +50,31 @@
             }).then(addActivityRole(role.name, collaborator.login));
         }
 
+        function createPrivateNote(collaborator) {
+            return $http({
+                method: 'POST',
+                dataType: 'json',
+                url: API_URL.NOTE,
+                data: {
+                    collaboratorGitHubId: collaborator.id,
+                    body: collaborator.note
+                }
+            });
+        }
+
+        function getPrivateNote(collaborator) {
+            return $http({
+                method: 'GET',
+                url: API_URL.NOTE + API_URL.COLLABORATORS + collaborator.id
+            });
+        }
+
         return {
             getCollaborators: getCollaborators,
             getRoles: getRoles,
-            assignRole: assignRole
+            assignRole: assignRole,
+            getPrivateNote: getPrivateNote,
+            createPrivateNote: createPrivateNote
         };
     }
 })();
