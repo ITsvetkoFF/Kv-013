@@ -60,7 +60,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         {
             for (var i = 0; i < translationData.TranslationTable.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(translationData.TranslationTable[i].Name))
+                if (translationData.TranslationTable[i].IsRowEmpty)
                 {
                     translationData.TranslationTable.Remove(translationData.TranslationTable[i--]);
                 }

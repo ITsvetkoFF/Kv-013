@@ -42,6 +42,17 @@ namespace GitHubExtension.LocalizationTool.Model
             set { CheckPropertyChanged(ref _ru, value); }
         }
 
+        public bool IsRowEmpty
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Name)
+                    && string.IsNullOrWhiteSpace(Uk)
+                    && string.IsNullOrWhiteSpace(Us)
+                    && string.IsNullOrWhiteSpace(Ru);
+            }
+        }
+
         public string this[Lang index]
         {
             get
