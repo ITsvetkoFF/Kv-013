@@ -1,6 +1,5 @@
 ﻿using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.WebApi.Models;
-using GitHubExtention.Preferences.WebApi;
 
 namespace GitHubExtension.Security.WebApi.Mappers
 {
@@ -13,8 +12,7 @@ namespace GitHubExtension.Security.WebApi.Mappers
                 Email = model.Email, 
                 UserName = model.Login, 
                 ProviderId = model.GitHubId, 
-                GitHubUrl = model.Url,
-                AvatarUrl = model.AvatarUrl.SaveAvatarToBlobStorage(model.Login)
+                GitHubUrl = model.Url
             };
 
             return user;

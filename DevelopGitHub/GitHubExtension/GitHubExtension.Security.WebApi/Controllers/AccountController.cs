@@ -17,7 +17,8 @@ using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using GitHubExtension.Security.WebApi.Results;
-
+using GitHubExtention.Preferences.WebApi;
+using GitHubExtention.Preferences.WebApi.Queries;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Controllers
@@ -31,14 +32,18 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         private readonly ApplicationUserManager _userManager;
 
+        private readonly IAzureContainerQuery _blobContainer;
+
         public AccountController(
             IGitHubQuery gitHubQuery, 
             ApplicationUserManager userManager, 
-            ISecurityContextQuery securityContextQuery)
+            ISecurityContextQuery securityContextQuery,
+            IAzureContainerQuery blobContainer)
         {
             _gitHubQuery = gitHubQuery;
             _userManager = userManager;
             _securityContextQuery = securityContextQuery;
+            _blobContainer = blobContainer;
         }
 
         [HttpPatch]
@@ -94,6 +99,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (user == null)
             {
                 user = userReadModel.ToUserEntity();
+                user.AvatarUrl = AvatarOperations.GetNewAvatarUrl(_blobContainer, userReadModel.AvatarUrl, user.UserName);
                 IHttpActionResult registrationResult = await RegisterUser(user, tokenClaim.Value);
                 if (registrationResult != null)
                 {

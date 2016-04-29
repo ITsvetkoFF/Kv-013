@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage.Blob;
+﻿using GitHubExtention.Preferences.WebApi.Queries;
+using Microsoft.WindowsAzure.Storage.Blob;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,11 +8,11 @@ namespace GitHubExtention.Preferences.WebApi
 {
     public class AzureBlobStorageMultipartProvider: MultipartFileStreamProvider
     {
-        private CloudBlobContainer _container;
+        private IAzureContainerQuery _container;
         private string _userName;
         public string _fileLocation;
 
-        public AzureBlobStorageMultipartProvider(CloudBlobContainer container, string userName)
+        public AzureBlobStorageMultipartProvider(IAzureContainerQuery container, string userName)
             : base(Path.GetTempPath())
         {
             _container = container;
@@ -32,7 +33,7 @@ namespace GitHubExtention.Preferences.WebApi
 
         public void UpdateBlob(byte[] content, string contentType, string extension)
         {
-            CloudBlockBlob blob = _container.GetBlockBlobReference(_userName + extension);
+            CloudBlockBlob blob = _container.GetBlobReference(_userName + extension);
             blob.Properties.ContentType = contentType;
             int length = content.Length-1;
             blob.UploadFromByteArrayAsync(content, 0, length);
@@ -41,8 +42,8 @@ namespace GitHubExtention.Preferences.WebApi
 
         internal void DeleteBlob(string absoluteUri)
         {
-            string blobName = absoluteUri.Substring(_container.Uri.AbsoluteUri.Length+1);
-            CloudBlockBlob blob = _container.GetBlockBlobReference(blobName);
+            string blobName = absoluteUri.Substring(_container.AbsoluteUrl.Length + 1);
+            CloudBlockBlob blob = _container.GetBlobReference(blobName);
             blob.Delete();
         }
     }

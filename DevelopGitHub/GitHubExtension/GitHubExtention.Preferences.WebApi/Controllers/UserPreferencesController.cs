@@ -8,18 +8,23 @@ using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtention.Preferences.WebApi.Constants;
+using Microsoft.WindowsAzure.Storage.Blob;
+using GitHubExtention.Preferences.WebApi.Queries;
 
 
 namespace GitHubExtention.Preferences.WebApi.Controllers
 {
     [RoutePrefix(RouteConstants.ApiUser)]
-    public class UserController : ApiController
+    public class UserPreferencesController : ApiController
     {      
         private readonly ApplicationUserManager _userManager;
 
-        public UserController(ApplicationUserManager userManager)
+        private readonly IAzureContainerQuery _blobContainer;
+
+        public UserPreferencesController(ApplicationUserManager userManager, IAzureContainerQuery blobContainer)
         {
             _userManager = userManager;
+            _blobContainer = blobContainer;
         }
 
 
@@ -34,12 +39,13 @@ namespace GitHubExtention.Preferences.WebApi.Controllers
             }
 
             string currentUserId = User.Identity.GetUserId();
-            User user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
+            User user = await _userManager.FindByIdAsync(currentUserId);
             if (user == null)
                 return NotFound();
 
-            var multipartStreamProvider = new AzureBlobStorageMultipartProvider(BlobHelper.GetWebApiContainer(), User.Identity.Name);
-            var readDate = await Request.Content.ReadAsMultipartAsync<AzureBlobStorageMultipartProvider>(multipartStreamProvider);
+            var multipartStreamProvider = new AzureBlobStorageMultipartProvider(_blobContainer, User.Identity.Name);
+            
+            await Request.Content.ReadAsMultipartAsync<AzureBlobStorageMultipartProvider>(multipartStreamProvider);
             if ((!string.IsNullOrEmpty(multipartStreamProvider._fileLocation) && !user.AvatarUrl.Equals(multipartStreamProvider._fileLocation)))
             {
                 multipartStreamProvider.DeleteBlob(user.AvatarUrl);

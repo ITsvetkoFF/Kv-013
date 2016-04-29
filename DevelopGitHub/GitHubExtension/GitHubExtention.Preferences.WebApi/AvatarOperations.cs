@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using GitHubExtention.Preferences.WebApi.Constants; 
+using GitHubExtention.Preferences.WebApi.Constants;
+using Microsoft.WindowsAzure.Storage.Blob;
+using GitHubExtention.Preferences.WebApi.Queries; 
 
 namespace GitHubExtention.Preferences.WebApi
 {
-    public static class StringExtentions
+    public class AvatarOperations
     {
-        public static string SaveAvatarToBlobStorage(this string url,  string userName)
+        public static string GetNewAvatarUrl(IAzureContainerQuery container, string url, string userName)
         {
-            var provider = new AzureBlobStorageMultipartProvider(BlobHelper.GetWebApiContainer(), userName);
+            var provider = new AzureBlobStorageMultipartProvider(container, userName);
             byte[] content;
             string contentType;
             using (var client = new HttpClient())

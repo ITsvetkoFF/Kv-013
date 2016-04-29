@@ -10,9 +10,8 @@ using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
-
+using GitHubExtention.Preferences.WebApi.Queries;
 using Microsoft.AspNet.Identity;
-
 using NSubstitute;
 
 using Xunit;
@@ -73,9 +72,10 @@ namespace GitHubExtension.Security.Tests.TestForControllers
             var userManager = Substitute.For<ApplicationUserManager>(Substitute.For<IUserStore<User>>());
             userManager.FindByNameAsync(name).Returns(user);
             AccountController controller = new AccountController(
-                Substitute.For<IGitHubQuery>(), 
-                userManager, 
-                Substitute.For<ISecurityContextQuery>());
+                Substitute.For<IGitHubQuery>(),
+                userManager,
+                Substitute.For<ISecurityContextQuery>(),
+                Substitute.For<IAzureContainerQuery>());
 
             return controller;
         }

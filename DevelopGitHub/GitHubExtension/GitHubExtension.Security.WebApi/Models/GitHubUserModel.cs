@@ -17,6 +17,7 @@ namespace GitHubExtension.Security.WebApi.Models
 
         public string Url { get; set; }
 
+        [JsonProperty(PropertyName = GitHubConstants.AvatarUrl)]
         public string AvatarUrl { get; set; }
     }
 }

@@ -144,6 +144,10 @@
       <Project>{7E05EAF8-B822-493D-81E7-50A054BD5CE4}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtention.Preferences.WebApi\GitHubExtention.Preferences.WebApi.csproj">
+      <Project>{a6c88fe8-d6ce-4c61-acf8-638a5d0f9d5c}</Project>
+      <Name>GitHubExtention.Preferences.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
