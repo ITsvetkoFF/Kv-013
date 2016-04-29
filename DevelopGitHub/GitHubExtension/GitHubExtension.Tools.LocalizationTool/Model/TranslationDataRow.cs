@@ -1,4 +1,6 @@
-﻿using GitHubExtension.LocalizationTool.Translate;
+﻿using System;
+
+using GitHubExtension.LocalizationTool.Translate;
 using GitHubExtension.LocalizationTool.ViewModel;
 
 namespace GitHubExtension.LocalizationTool.Model
@@ -21,25 +23,25 @@ namespace GitHubExtension.LocalizationTool.Model
         public string Name
         {
             get { return _name; }
-            set { CheckPropertyChanged(ref _name, value, () => Name); }
+            set { CheckPropertyChanged(ref _name, value); }
         }
 
         public string Uk
         {
             get { return _uk; }
-            set { CheckPropertyChanged(ref _uk, value, () => Uk); }
+            set { CheckPropertyChanged(ref _uk, value); }
         }
 
         public string Us
         {
             get { return _us; }
-            set { CheckPropertyChanged(ref _us, value, () => Us); }
+            set { CheckPropertyChanged(ref _us, value); }
         }
 
         public string Ru
         {
             get { return _ru; }
-            set { CheckPropertyChanged(ref _ru, value, () => Ru); }
+            set { CheckPropertyChanged(ref _ru, value); }
         }
 
         public string this[Lang index]
