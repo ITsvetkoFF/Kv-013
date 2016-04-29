@@ -4,6 +4,6 @@ namespace GitHubExtension.LocalizationTool.Model
 {
     public interface ITranslationData
     {
-        ObservableCollection<TranslationDataRow> TranslationData { get; set; }
+        ObservableCollection<TranslationDataRow> TranslationTable { get; set; }
     }
 }

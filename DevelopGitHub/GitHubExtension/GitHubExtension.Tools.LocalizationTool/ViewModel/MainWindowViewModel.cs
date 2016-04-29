@@ -35,12 +35,10 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
             _translationDataTable = new TranslationDataTable
                 {
-                    TranslationData = new ObservableCollection<TranslationDataRow>()
+                    TranslationTable = new ObservableCollection<TranslationDataRow>()
                 };
 
             _translator = new Translator(_translationDataTable);
-
-            JsonHelper.TranslationDataTable = _translationDataTable;
 
             OpenJson();
         }
@@ -61,12 +59,12 @@ namespace GitHubExtension.LocalizationTool.ViewModel
         {
             get
             {
-                return _translationDataTable.TranslationData;
+                return _translationDataTable.TranslationTable;
             }
 
             set
             {
-                _translationDataTable.TranslationData = value;
+                _translationDataTable.TranslationTable = value;
             }
         }
 
@@ -152,15 +150,15 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
         private void AddEmptyRow()
         {
-            TranslationData.Add(new TranslationDataRow());
+            TranslationData.Add(new TranslationDataRow(string.Empty));
         }
 
         private void SaveJson()
         {
-            JsonHelper.RemoveEmptyRows();
+            JsonHelper.RemoveEmptyRows(_translationDataTable);
             foreach (Lang value in Enum.GetValues(typeof(Lang)))
             {
-                File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJson(value));
+                File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJson(value, _translationDataTable));
             }
 
             ShowInformationMessageBox("Saved!");
@@ -173,7 +171,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             {
                 try
                 {
-                    JsonHelper.ReadJsonFromFile(value);
+                    JsonHelper.ReadJsonFromFile(value, _translationDataTable);
                 }
                 catch (JsonReaderException jsonEx)
                 {
@@ -189,7 +187,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 }
             }
 
-            JsonHelper.RemoveEmptyRows();
+            JsonHelper.RemoveEmptyRows(_translationDataTable);
             ShowInformationMessageBox("Oppened!");
         }
 

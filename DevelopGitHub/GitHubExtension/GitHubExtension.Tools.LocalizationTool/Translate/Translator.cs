@@ -33,7 +33,7 @@ namespace GitHubExtension.LocalizationTool.Translate
         {
             get
             {
-                return _translationDataTable.TranslationData;
+                return _translationDataTable.TranslationTable;
             }
         }
 

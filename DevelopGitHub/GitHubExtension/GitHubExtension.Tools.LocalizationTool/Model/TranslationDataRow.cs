@@ -1,6 +1,4 @@
-﻿using System;
-
-using GitHubExtension.LocalizationTool.Translate;
+﻿using GitHubExtension.LocalizationTool.Translate;
 using GitHubExtension.LocalizationTool.ViewModel;
 
 namespace GitHubExtension.LocalizationTool.Model
