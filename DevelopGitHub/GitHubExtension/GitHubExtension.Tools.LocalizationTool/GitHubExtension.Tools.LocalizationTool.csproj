@@ -82,7 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\ITranslationData.cs" />
     <Compile Include="Model\TranslationDataTable.cs" />
-    <Compile Include="Translate\JsonHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Translate\Language.cs" />
     <Compile Include="ViewModel\NotifyProperyChangedBase.cs" />
     <Compile Include="Model\TranslationDataRow.cs" />
