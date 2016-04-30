@@ -8,6 +8,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
+using GitHubExtension.LocalizationTool.Helper;
 using GitHubExtension.LocalizationTool.Model;
 using GitHubExtension.LocalizationTool.Translate;
 
@@ -150,15 +151,15 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
         private void AddEmptyRow()
         {
-            TranslationData.Add(new TranslationDataRow(string.Empty));
+            TranslationData.Add(new TranslationDataRow());
         }
 
         private void SaveJson()
         {
             JsonHelper.RemoveEmptyRows(_translationDataTable);
-            foreach (Lang value in Enum.GetValues(typeof(Lang)))
+            foreach (Language value in Enum.GetValues(typeof(Language)))
             {
-                File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJson(value, _translationDataTable));
+                File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJsonFromData(value, _translationDataTable));
             }
 
             ShowInformationMessageBox("Saved!");
@@ -167,7 +168,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
         private void OpenJson()
         {
             TranslationData.Clear();
-            foreach (Lang value in Enum.GetValues(typeof(Lang)))
+            foreach (Language value in Enum.GetValues(typeof(Language)))
             {
                 try
                 {

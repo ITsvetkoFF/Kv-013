@@ -1,6 +1,6 @@
 ﻿namespace GitHubExtension.LocalizationTool.Translate
 {
-    public enum Lang
+    public enum Language
     {
         Uk,
         Us,

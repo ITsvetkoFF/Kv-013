@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using GitHubExtension.LocalizationTool.Model;
+using GitHubExtension.LocalizationTool.Translate;
 
 using Newtonsoft.Json.Linq;
 
-namespace GitHubExtension.LocalizationTool.Translate
+namespace GitHubExtension.LocalizationTool.Helper
 {
     public static class JsonHelper
     {
@@ -21,21 +22,21 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private const string SecondOpenQuote = "\":{";
 
-        public static void ReadJsonFromFile(Lang language, ITranslationData translationData)
+        public static void ReadJsonFromFile(Language language, ITranslationData translationData)
         {
             var fileName = Translator.GetFileName(language);
             var fileText = File.ReadAllText(fileName);
             var file = JObject.Parse(fileText);
-            var translation = file.Value<JObject>(Translator.GetLang(language));
+            var translation = file.Value<JObject>(Translator.GetLanguage(language));
             FillDataFromJson(language, translation, translationData);
         }
 
-        public static string GenerateJson(Lang language, ITranslationData translationData)
+        public static string GenerateJsonFromData(Language language, ITranslationData translationData)
         {
             RemoveEmptyRows(translationData);
             var result = new StringBuilder();
             result.Append(FirstOpenQuote);
-            result.Append(Translator.GetLang(language));
+            result.Append(Translator.GetLanguage(language));
             result.Append(SecondOpenQuote);
             if (translationData.TranslationTable.Count != 0)
             {
@@ -67,34 +68,34 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        public static void AddNewRow(Lang language, KeyValuePair<string, JToken> element, ITranslationData translationData)
+        public static void AddNewRow(Language language, KeyValuePair<string, JToken> jsonRow, ITranslationData translationData)
         {
-            var line = new TranslationDataRow(element.Key);
-            line[language] = element.Value.ToString();
+            var line = new TranslationDataRow(jsonRow.Key);
+            line[language] = jsonRow.Value.ToString();
             translationData.TranslationTable.Add(line);
         }
 
-        private static void FillDataFromJson(Lang language, JObject translation, ITranslationData translationData)
+        private static void FillDataFromJson(Language language, JObject jsonTable, ITranslationData translationData)
         {
-            foreach (var element in translation)
+            foreach (var jsonRow in jsonTable)
             {
-                var index = IndexOfNamedElement(element.Key, translationData);
+                var index = IndexOfNamedElement(jsonRow.Key, translationData);
                 if (index == -1)
                 {
-                    AddNewRow(language, element, translationData);
+                    AddNewRow(language, jsonRow, translationData);
                 }
                 else
                 {
-                    translationData.TranslationTable[index][language] = element.Value.ToString();
+                    translationData.TranslationTable[index][language] = jsonRow.Value.ToString();
                 }
             }
         }
 
-        private static int IndexOfNamedElement(string key, ITranslationData translationData)
+        private static int IndexOfNamedElement(string keyName, ITranslationData translationData)
         {
             for (var i = 0; i < translationData.TranslationTable.Count; i++)
             {
-                if (translationData.TranslationTable[i].Name == key)
+                if (translationData.TranslationTable[i].Name == keyName)
                 {
                     return i;
                 }

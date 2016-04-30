@@ -17,9 +17,9 @@ namespace GitHubExtension.LocalizationTool.Translate
             "key=trnsl.1.1.20160322T103501Z.10b2b142f2f8bf7f.66c4f9f75232ede5cb9d8cc5ce17df5fd1d02d32&" +
             "lang=";
 
-        private const string UsLang = "us";
+        private const string UsLanguage = "us";
 
-        private const string EnLang = "en";
+        private const string EnLanguage = "en";
 
         private const string Dash = "-";
 
@@ -42,57 +42,57 @@ namespace GitHubExtension.LocalizationTool.Translate
             _translationDataTable = translationDataTable;
         }
 
-        public static Lang GetLang(string lang)
+        public static Language GetLanguage(string language)
         {
-            switch (lang)
+            switch (language)
             {
                 case "uk":
                 case "UK":
                 case "uk-UK":
                 case "uk-UK.json":
-                    return Lang.Uk;
+                    return Language.Uk;
                 case "us":
                 case "US":
                 case "en-Us":
                 case "en-Us.json":
-                    return Lang.Us;
+                    return Language.Us;
                 case "ru":
                 case "RU":
                 case "ru-RU":
                 case "ru-RU.json":
-                    return Lang.Ru;
+                    return Language.Ru;
                 default:
-                    throw new Exception("Incorrect Lang in Method GetLang");
+                    throw new Exception("Incorrect Language in Method GetLanguage");
             }
         }
 
-        public static string GetLang(Lang lang)
+        public static string GetLanguage(Language language)
         {
-            switch (lang)
+            switch (language)
             {
-                case Lang.Uk:
+                case Language.Uk:
                     return "uk-UK";
-                case Lang.Us:
+                case Language.Us:
                     return "en-US";
-                case Lang.Ru:
+                case Language.Ru:
                     return "ru-RU";
                 default:
-                    throw new Exception("Incorrect Lang in Method GetLang");
+                    throw new Exception("Incorrect Language in Method GetLanguage");
             }
         }
 
-        public static string GetFileName(Lang lang)
+        public static string GetFileName(Language language)
         {
-            switch (lang)
+            switch (language)
             {
-                case Lang.Uk:
+                case Language.Uk:
                     return "uk-UK.json";
-                case Lang.Us:
+                case Language.Us:
                     return "en-US.json";
-                case Lang.Ru:
+                case Language.Ru:
                     return "ru-RU.json";
                 default:
-                    throw new Exception("Incorrect Lang in Method GetLang");
+                    throw new Exception("Incorrect Language in Method GetFileName");
             }
         }
 
@@ -103,8 +103,8 @@ namespace GitHubExtension.LocalizationTool.Translate
                 return;
             }
 
-            Lang sourceLanguageEnum = GetLang(sourceLanguage);
-            Lang targetLanguageEnum = GetLang(targetLanguage);
+            Language sourceLanguageEnum = GetLanguage(sourceLanguage);
+            Language targetLanguageEnum = GetLanguage(targetLanguage);
             sourceLanguage = CheckUsEnLanguage(sourceLanguage);
             targetLanguage = CheckUsEnLanguage(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
@@ -120,10 +120,10 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private static string CheckUsEnLanguage(string language)
         {
-            return language == UsLang ? EnLang : language;
+            return language == UsLanguage ? EnLanguage : language;
         }
 
-        private void SaveTranslationResult(string result, Lang language)
+        private void SaveTranslationResult(string result, Language language)
         {
             if (string.IsNullOrWhiteSpace(result))
             {
@@ -144,13 +144,13 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        private StringBuilder GenerateTextParameter(Lang language)
+        private StringBuilder GenerateTextParameter(Language language)
         {
             var textToTranslate = new StringBuilder();
-            foreach (var translation in TranslationData)
+            foreach (var translationRow in TranslationData)
             {
                 textToTranslate.Append(GetTextParameter);
-                textToTranslate.Append(translation[language]);
+                textToTranslate.Append(translationRow[language]);
             }
 
             return textToTranslate;

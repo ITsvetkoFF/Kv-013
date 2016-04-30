@@ -13,6 +13,10 @@ namespace GitHubExtension.LocalizationTool.Model
 
         private string _us;
 
+        public TranslationDataRow()
+        {
+        }
+
         public TranslationDataRow(string name)
         {
             Name = name;
@@ -53,17 +57,17 @@ namespace GitHubExtension.LocalizationTool.Model
             }
         }
 
-        public string this[Lang index]
+        public string this[Language index]
         {
             get
             {
                 switch (index)
                 {
-                    case Lang.Uk:
+                    case Language.Uk:
                         return Uk;
-                    case Lang.Us:
+                    case Language.Us:
                         return Us;
-                    case Lang.Ru:
+                    case Language.Ru:
                         return Ru;
                     default:
                         return string.Empty;
@@ -74,13 +78,13 @@ namespace GitHubExtension.LocalizationTool.Model
             {
                 switch (index)
                 {
-                    case Lang.Uk:
+                    case Language.Uk:
                         Uk = value;
                         break;
-                    case Lang.Us:
+                    case Language.Us:
                         Us = value;
                         break;
-                    case Lang.Ru:
+                    case Language.Ru:
                         Ru = value;
                         break;
                 }
