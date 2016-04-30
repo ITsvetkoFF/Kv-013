@@ -49,8 +49,8 @@ namespace GitHubExtension.LocalizationTool.Translate
                 return;
             }
 
-            Language sourceLanguageEnum = sourceLanguage.GetLanguage();
-            Language targetLanguageEnum = targetLanguage.GetLanguage();
+            Language sourceLanguageEnum = sourceLanguage.GetLanguageEnum();
+            Language targetLanguageEnum = targetLanguage.GetLanguageEnum();
             sourceLanguage = CheckUsEnLanguage(sourceLanguage);
             targetLanguage = CheckUsEnLanguage(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);

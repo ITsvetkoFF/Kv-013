@@ -11,7 +11,7 @@ namespace GitHubExtension.LocalizationTool.Translate
 
     public static class LanguageExtension
     {
-        public static Language GetLanguage(this string language)
+        public static Language GetLanguageEnum(this string language)
         {
             switch (language)
             {
@@ -35,7 +35,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
         }
 
-        public static string GetLanguage(this Language language)
+        public static string GetLanguageString(this Language language)
         {
             switch (language)
             {
