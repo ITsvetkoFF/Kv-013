@@ -156,10 +156,10 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
         private void SaveJson()
         {
-            JsonHelper.RemoveEmptyRows(_translationDataTable);
+            _translationDataTable.RemoveEmptyRows();
             foreach (Language value in Enum.GetValues(typeof(Language)))
             {
-                File.WriteAllText(Translator.GetFileName(value), JsonHelper.GenerateJsonFromData(value, _translationDataTable));
+                File.WriteAllText(Translator.GetFileName(value), _translationDataTable.GenerateJsonFromData(value));
             }
 
             ShowInformationMessageBox("Saved!");
@@ -172,7 +172,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             {
                 try
                 {
-                    JsonHelper.ReadJsonFromFile(value, _translationDataTable);
+                    _translationDataTable.ReadJsonFromFile(value);
                 }
                 catch (JsonReaderException jsonEx)
                 {
@@ -188,7 +188,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 }
             }
 
-            JsonHelper.RemoveEmptyRows(_translationDataTable);
+            _translationDataTable.RemoveEmptyRows();
             ShowInformationMessageBox("Oppened!");
         }
 

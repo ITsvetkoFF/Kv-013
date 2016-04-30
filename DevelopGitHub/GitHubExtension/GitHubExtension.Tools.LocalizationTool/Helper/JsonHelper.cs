@@ -22,7 +22,7 @@ namespace GitHubExtension.LocalizationTool.Helper
 
         private const string SecondOpenQuote = "\":{";
 
-        public static void ReadJsonFromFile(Language language, ITranslationData translationData)
+        public static void ReadJsonFromFile(this ITranslationData translationData, Language language)
         {
             var fileName = Translator.GetFileName(language);
             var fileText = File.ReadAllText(fileName);
@@ -31,9 +31,9 @@ namespace GitHubExtension.LocalizationTool.Helper
             FillDataFromJson(language, translation, translationData);
         }
 
-        public static string GenerateJsonFromData(Language language, ITranslationData translationData)
+        public static string GenerateJsonFromData(this ITranslationData translationData, Language language)
         {
-            RemoveEmptyRows(translationData);
+            translationData.RemoveEmptyRows();
             var result = new StringBuilder();
             result.Append(FirstOpenQuote);
             result.Append(Translator.GetLanguage(language));
@@ -57,7 +57,7 @@ namespace GitHubExtension.LocalizationTool.Helper
             return result.ToString();
         }
 
-        public static void RemoveEmptyRows(ITranslationData translationData)
+        public static void RemoveEmptyRows(this ITranslationData translationData)
         {
             for (var i = 0; i < translationData.TranslationTable.Count; i++)
             {
@@ -68,7 +68,7 @@ namespace GitHubExtension.LocalizationTool.Helper
             }
         }
 
-        public static void AddNewRow(Language language, KeyValuePair<string, JToken> jsonRow, ITranslationData translationData)
+        public static void AddNewRow(this ITranslationData translationData, Language language, KeyValuePair<string, JToken> jsonRow)
         {
             var line = new TranslationDataRow(jsonRow.Key);
             line[language] = jsonRow.Value.ToString();
@@ -79,10 +79,10 @@ namespace GitHubExtension.LocalizationTool.Helper
         {
             foreach (var jsonRow in jsonTable)
             {
-                var index = IndexOfNamedElement(jsonRow.Key, translationData);
+                var index = translationData.IndexOfNamedElement(jsonRow.Key);
                 if (index == -1)
                 {
-                    AddNewRow(language, jsonRow, translationData);
+                    translationData.AddNewRow(language, jsonRow);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace GitHubExtension.LocalizationTool.Helper
             }
         }
 
-        private static int IndexOfNamedElement(string keyName, ITranslationData translationData)
+        private static int IndexOfNamedElement(this ITranslationData translationData, string keyName)
         {
             for (var i = 0; i < translationData.TranslationTable.Count; i++)
             {
