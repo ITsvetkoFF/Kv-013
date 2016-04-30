@@ -9,23 +9,6 @@ namespace GitHubExtension.LocalizationTool.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected bool CheckPropertyChanged<T>(ref T oldValue, T newValue, Expression<Func<T>> expression)
-        {
-            if (oldValue == null && newValue == null)
-            {
-                return false;
-            }
-
-            if ((oldValue == null && newValue != null) || !oldValue.Equals(newValue))
-            {
-                oldValue = newValue;
-                FirePropertyChanged(GetPropertyName(expression));
-                return true;
-            }
-
-            return false;
-        }
-
         protected bool CheckPropertyChanged<T>(ref T oldValue, T newValue, [CallerMemberName] string propertyName = "")
         {
             if (oldValue == null && newValue == null)
