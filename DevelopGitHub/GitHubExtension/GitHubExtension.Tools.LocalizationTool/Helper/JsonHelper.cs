@@ -10,18 +10,6 @@ namespace GitHubExtension.LocalizationTool.Helper
 {
     public static class JsonHelper
     {
-        private const string DoubleQuote = "\"";
-
-        private const string CloseBrackets = "}}";
-
-        private const string Colon = ":";
-
-        private const string Comma = ",";
-
-        private const string FirstOpenQuote = "{\"";
-
-        private const string SecondOpenQuote = "\":{";
-
         public static void ReadJsonFromFile(this ITranslationData translationData, Language language)
         {
             var fileName = Translator.GetFileName(language);
@@ -34,27 +22,14 @@ namespace GitHubExtension.LocalizationTool.Helper
         public static string GenerateJsonFromData(this ITranslationData translationData, Language language)
         {
             translationData.RemoveEmptyRows();
-            var result = new StringBuilder();
-            result.Append(FirstOpenQuote);
-            result.Append(Translator.GetLanguage(language));
-            result.Append(SecondOpenQuote);
-            if (translationData.TranslationTable.Count != 0)
+            var jsonTable = new JObject();
+            foreach (var translationRow in translationData.TranslationTable)
             {
-                for (var i = 0; i < translationData.TranslationTable.Count - 1; i++)
-                {
-                    result.Append(DoubleQuote + translationData.TranslationTable[i].Name + DoubleQuote);
-                    result.Append(Colon);
-                    result.Append(DoubleQuote + translationData.TranslationTable[i][language] + DoubleQuote);
-                    result.Append(Comma);
-                }
-
-                result.Append(DoubleQuote + translationData.TranslationTable[translationData.TranslationTable.Count - 1].Name + DoubleQuote);
-                result.Append(Colon);
-                result.Append(DoubleQuote + translationData.TranslationTable[translationData.TranslationTable.Count - 1][language] + DoubleQuote);
+                jsonTable.Add(translationRow.Name, translationRow[language]);
             }
 
-            result.Append(CloseBrackets);
-            return result.ToString();
+            var jsonFile = new JObject { { Translator.GetLanguage(language), jsonTable } };
+            return jsonFile.ToString();
         }
 
         public static void RemoveEmptyRows(this ITranslationData translationData)
