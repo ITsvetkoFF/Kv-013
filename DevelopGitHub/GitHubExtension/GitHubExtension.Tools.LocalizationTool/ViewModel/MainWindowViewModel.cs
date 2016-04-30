@@ -159,7 +159,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             _translationDataTable.RemoveEmptyRows();
             foreach (Language value in Enum.GetValues(typeof(Language)))
             {
-                File.WriteAllText(Translator.GetFileName(value), _translationDataTable.GenerateJsonFromData(value));
+                File.WriteAllText(value.GetFileName(), _translationDataTable.GenerateJsonFromData(value));
             }
 
             ShowInformationMessageBox("Saved!");

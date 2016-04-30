@@ -12,10 +12,10 @@ namespace GitHubExtension.LocalizationTool.Helper
     {
         public static void ReadJsonFromFile(this ITranslationData translationData, Language language)
         {
-            var fileName = Translator.GetFileName(language);
+            var fileName = language.GetFileName();
             var fileText = File.ReadAllText(fileName);
             var file = JObject.Parse(fileText);
-            var translation = file.Value<JObject>(Translator.GetLanguage(language));
+            var translation = file.Value<JObject>(language.GetLanguage());
             FillDataFromJson(language, translation, translationData);
         }
 
@@ -28,7 +28,7 @@ namespace GitHubExtension.LocalizationTool.Helper
                 jsonTable.Add(translationRow.Name, translationRow[language]);
             }
 
-            var jsonFile = new JObject { { Translator.GetLanguage(language), jsonTable } };
+            var jsonFile = new JObject { { language.GetLanguage(), jsonTable } };
             return jsonFile.ToString();
         }
 
