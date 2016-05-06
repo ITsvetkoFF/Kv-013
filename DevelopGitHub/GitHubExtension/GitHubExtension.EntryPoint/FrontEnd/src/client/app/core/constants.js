@@ -21,6 +21,8 @@
                 ROLES: resource + 'roles',
                 CURRENT_REPOSITORY: resource + 'repos/current',
                 NOTE: resource + 'note',
+                ACCOUNT: resource + 'account',
+                COLLABORATOR: '/collaborator/',
                 COLLABORATORS: '/collaborators/',
 
                 GET_REPOBYNAME: baseUserStats + '/commits',
