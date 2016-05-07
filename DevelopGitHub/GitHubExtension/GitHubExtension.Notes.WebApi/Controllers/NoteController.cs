@@ -63,7 +63,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             var noteModel = model.AddUserIdToModel(userId);
 
             var noteEntity = noteModel.ToEntity();
-            await _commands.AddNote(noteEntity);
+            await _commands.AddOrUpdateNote(noteEntity);
             return Ok(noteEntity);
         }
     }
