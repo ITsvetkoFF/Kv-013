@@ -80,14 +80,16 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
-            string token = User.Identity.GetExternalAccessToken();
-            string userName = User.Identity.GetUserName();
+            var token = User.Identity.GetExternalAccessToken();
+            var userName = User.Identity.GetUserName();
 
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
 
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
 
-            return Ok(gitHubCollaboratorsExceptUser);
+            var collaboratorsWithUserId = AddUserIdToCollaboratorIfExists(gitHubCollaboratorsExceptUser);
+
+            return Ok(collaboratorsWithUserId);
         }
 
         [HttpGet]
@@ -206,6 +208,27 @@ namespace GitHubExtension.Security.WebApi.Controllers
             {
                 GetRequestContext.SetCookie(claim.Type, claim.Value);
             }
+        }
+
+        List<CollaboratorWithUserIdModel> AddUserIdToCollaboratorIfExists(IEnumerable<CollaboratorModel> gitHubCollaboratorsExceptUser)
+        {
+            var collaborators = new List<CollaboratorWithUserIdModel>();
+
+            foreach (var collaborator in gitHubCollaboratorsExceptUser)
+            {
+                var user = _userManager.FindByGitHubId(collaborator.Id);
+                if (user != null)
+                {
+                    var collaboratorWithUserId = collaborator.ToCollaboratorWithUserId(user.Id);
+                    collaborators.Add(collaboratorWithUserId);
+                }
+                else
+                {
+                    collaborators.Add(collaborator.ToCollaboratorWithUserId(null));
+                }
+            }
+
+            return collaborators;
         }
     }
 }
