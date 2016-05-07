@@ -84,7 +84,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
             noteController.CreateNote(model.FirstOrDefault());
 
             // Assert
-            noteCommand.ReceivedWithAnyArgs().AddNote(new Note{});
+            noteCommand.ReceivedWithAnyArgs().AddOrUpdateNote(new Note{});
         }
 
         [Theory]
@@ -99,7 +99,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
             noteController.CreateNote(model.Single());
 
             // Assert
-            noteCommand.DidNotReceiveWithAnyArgs().AddNote(new Note{});
+            noteCommand.DidNotReceiveWithAnyArgs().AddOrUpdateNote(new Note { });
         }
     }
 }

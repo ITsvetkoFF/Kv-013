@@ -6,6 +6,6 @@ namespace GitHubExtension.Notes.WebApi.Commands
 {
     public interface INoteCommands
     {
-        Task AddNote(Note noteEntity);
+        Task AddOrUpdateNote(Note noteEntity);
     }
 }
