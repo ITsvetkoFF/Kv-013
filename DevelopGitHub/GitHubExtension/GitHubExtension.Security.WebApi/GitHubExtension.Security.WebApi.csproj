@@ -139,6 +139,7 @@
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="Mappers\UserRepositoryRoleMapper.cs" />
     <Compile Include="Models\CollaboratorModel.cs" />
+    <Compile Include="Models\CollaboratorWithUserIdModel.cs" />
     <Compile Include="Models\GitHubRepositoryModel.cs" />
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />
