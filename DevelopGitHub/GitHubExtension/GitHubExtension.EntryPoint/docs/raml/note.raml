@@ -5,8 +5,7 @@ post:
     application/json:
       example: |
         {
-          "UserId": "5",
-          "CollaboratorId": "100",
+          "CollaboratorId": "550e8400-e29b-41d4-a716-446655440000",
           "Body": "Great coder!"
         }
       schema: |
@@ -14,13 +13,9 @@ post:
           "type": "object",
           "required": true,
           "properties": {
-            "UserId": {
-                "type": "string",
-                "required": false
-            },
             "CollaboratorId": {
                 "type": "string",
-                "required": false
+                "required": true
             },
             "Body": {
                 "type": "string",
@@ -30,6 +25,18 @@ post:
         }
   responses:
     200:
+      body:
+        application/json:
+          example: |
+            {
+              "$id": "1",
+              "id": 1,
+              "userId": "550e8400-e29b-41d4-a716-446655441111",
+              "collaboratorId": "550e8400-e29b-41d4-a716-446655440000",
+              "body": "Great coder!",
+              "collaborator": null,
+              "user": null
+            }
     400:
       body:
         application/json:
@@ -39,15 +46,43 @@ post:
               "message": "The request is invalid.",
               "modelState": {
                 "$id": "2",
+                "model.CollaboratorId": [
+                "'Collaborator Id' must not be empty."
+                ],
                 "model.Body": [
-                  "'Body' не должно быть пусто."
+                  "'Body' must not be empty",
+                  "'Body' must be between 5 and 2048 characters. You entered 0 characters."
                 ]
               }
             }
-/{noteId}:
+    401:
+      body:
+        application/json:
+          example: |
+            {
+              "$id": "1",
+              "message": "Authorization has been denied for this request."
+            }
+/collaborators/{collaboratorId}:
   get:
-    description: Get note about chosen collaborator
+    description: Get note of user about chosen collaborator
     responses:
       200:
-      400:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "body": "Great coder!",
+                "collaboratorId": "550e8400-e29b-41d4-a716-446655440000",
+                "userId": "550e8400-e29b-41d4-a716-446655441111"
+              }
+      401:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "message": "Authorization has been denied for this request."
+              }
       404:
