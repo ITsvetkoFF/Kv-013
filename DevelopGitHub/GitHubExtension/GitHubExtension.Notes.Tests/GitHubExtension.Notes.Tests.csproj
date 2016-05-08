@@ -122,6 +122,8 @@
     <Compile Include="TestNoteRoutesConfig.cs" />
     <Compile Include="TestsForControllers\NoteControllerCreateNoteTests.cs" />
     <Compile Include="TestsForControllers\NoteControllerGetNoteTests.cs" />
+    <Compile Include="TestsForMappers\AddUserIdToModelMapperTests.cs" />
+    <Compile Include="TestsForMappers\NoteMapperTests.cs" />
     <Compile Include="TestsForRoutes\NoteRouteTests.cs" />
     <Compile Include="TestsForRoutes\TestRoutesMappers\ForGetNoteForCollaborator.cs" />
     <Compile Include="TestsForValidator\NoteValidatorTests.cs" />
