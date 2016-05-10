@@ -115,6 +115,7 @@
     <Compile Include="Extensions\InvalidModelStateResultExtentions.cs" />
     <Compile Include="Mocks\MockForDbSet.cs" />
     <Compile Include="Mocks\MockForEnumerableQuery.cs" />
+    <Compile Include="TestExtensions\SecurityContextUserExtensionTests.cs" />
     <Compile Include="TestExtensions\UserMapperTests.cs" />
     <Compile Include="TestForControllers\RepositoryControllerAssignRolesToUserTests.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByIdTests.cs" />
