@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using GitHubExtension.LocalizationTool.Model;
 using GitHubExtension.LocalizationTool.Translate;
 

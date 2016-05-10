@@ -1,11 +1,9 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using GitHubExtension.LocalizationTool.Model;
-
 using Newtonsoft.Json.Linq;
 
 namespace GitHubExtension.LocalizationTool.Translate
@@ -42,7 +40,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             _translationDataTable = translationDataTable;
         }
 
-        public async Task WebTranslate(string sourceLanguage, string targetLanguage)
+        public async Task PerformWebTranslation(string sourceLanguage, string targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
             {
@@ -55,9 +53,9 @@ namespace GitHubExtension.LocalizationTool.Translate
             targetLanguage = CheckUsEnLanguage(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
             string result;
-            using (var webClient = new WebClient { Encoding = Encoding.UTF8 })
+            using (var httpClient = new HttpClient())
             {
-                result = await webClient.DownloadStringTaskAsync(
+                result = await httpClient.GetStringAsync(
                                 YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate);
             }
 

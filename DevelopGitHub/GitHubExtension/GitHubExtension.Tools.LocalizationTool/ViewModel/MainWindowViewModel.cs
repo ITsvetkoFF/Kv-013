@@ -203,7 +203,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             TranslateButtonContent = "Translating...";
             try
             {
-                await _translator.WebTranslate(SourceLanguageText, TargetLanguageText);
+                await _translator.PerformWebTranslation(SourceLanguageText, TargetLanguageText);
             }
             catch (WebException exception)
             {
@@ -211,7 +211,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             }
 
             TranslateButtonIsEnabled = true;
-            TranslateButtonContent = "WebTranslate";
+            TranslateButtonContent = "Web Translate";
         }
         
         private void Close()
