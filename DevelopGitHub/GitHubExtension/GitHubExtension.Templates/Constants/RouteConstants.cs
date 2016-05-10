@@ -8,7 +8,5 @@
         public const string GetPullRequests = "pr";
         public const string GetIssueTemplateCategories = "categories";
         public const string GetIssueTemplateByCategoryId = "categories/{id}";
-        public const string AddUpdateRequestTemplate = "pull-request-template";
-        public const string AddUpdateIssueTemplate = "issue-template";
     }
 }
