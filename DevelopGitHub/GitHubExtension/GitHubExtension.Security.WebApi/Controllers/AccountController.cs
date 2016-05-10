@@ -109,8 +109,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route(RouteConstants.GetMailVisibility)]
-        public async Task<bool> GetMailVisibility()
+        [Route(RouteConstants.MailVisibility)]
+        public async Task<bool> MailVisibility()
         {
             string id = User.Identity.GetUserId();
 
