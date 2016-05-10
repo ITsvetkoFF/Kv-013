@@ -33,11 +33,5 @@ namespace GitHubExtension.LocalizationTool.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        protected string GetPropertyName<T>(Expression<Func<T>> expression)
-        {
-            MemberExpression memberExpression = (MemberExpression)expression.Body;
-            return memberExpression.Member.Name;
-        }
     }
 }
