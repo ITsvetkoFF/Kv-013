@@ -118,7 +118,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return user.IsMailVisible;
         }
                 
-        [HttpPut]
+        [HttpPost]
         [Route(RouteConstants.ChangeVisibilityMail)]
         public async Task<IHttpActionResult> ChangeVisibilityMail()
         {
