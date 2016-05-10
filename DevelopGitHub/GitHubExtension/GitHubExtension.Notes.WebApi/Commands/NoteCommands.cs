@@ -23,7 +23,7 @@ namespace GitHubExtension.Notes.WebApi.Commands
 
         public async Task<bool> DeleteNote(string userId, string collaboratorId)
         {
-            var note = _notesContext.Notes.SingleOrDefault(n => n.UserId == userId 
+            var note = _notesContext.Notes.FirstOrDefault(n => n.UserId == userId 
                 && n.CollaboratorId == collaboratorId);
 
             if (note == null)
