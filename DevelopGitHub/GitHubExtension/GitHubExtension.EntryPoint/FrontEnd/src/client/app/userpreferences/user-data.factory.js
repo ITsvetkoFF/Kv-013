@@ -38,7 +38,7 @@
         }
 
         function changeVisibilityMail() {
-            $http.put(API_URL.CHANGEVISIBILITYMAIL);
+            $http.post(API_URL.CHANGEVISIBILITYMAIL);
         }        
 
         return {
