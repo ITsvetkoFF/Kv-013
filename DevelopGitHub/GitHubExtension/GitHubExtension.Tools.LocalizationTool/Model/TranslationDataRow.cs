@@ -11,7 +11,7 @@ namespace GitHubExtension.LocalizationTool.Model
 
         private string _uk;
 
-        private string _us;
+        private string _en;
 
         public TranslationDataRow()
         {
@@ -34,10 +34,10 @@ namespace GitHubExtension.LocalizationTool.Model
             set { CheckPropertyChanged(ref _uk, value); }
         }
 
-        public string Us
+        public string En
         {
-            get { return _us; }
-            set { CheckPropertyChanged(ref _us, value); }
+            get { return this._en; }
+            set { CheckPropertyChanged(ref _en, value); }
         }
 
         public string Ru
@@ -52,7 +52,7 @@ namespace GitHubExtension.LocalizationTool.Model
             {
                 return string.IsNullOrWhiteSpace(Name)
                     && string.IsNullOrWhiteSpace(Uk)
-                    && string.IsNullOrWhiteSpace(Us)
+                    && string.IsNullOrWhiteSpace(En)
                     && string.IsNullOrWhiteSpace(Ru);
             }
         }
@@ -65,8 +65,8 @@ namespace GitHubExtension.LocalizationTool.Model
                 {
                     case Language.Uk:
                         return Uk;
-                    case Language.Us:
-                        return Us;
+                    case Language.En:
+                        return En;
                     case Language.Ru:
                         return Ru;
                     default:
@@ -81,8 +81,8 @@ namespace GitHubExtension.LocalizationTool.Model
                     case Language.Uk:
                         Uk = value;
                         break;
-                    case Language.Us:
-                        Us = value;
+                    case Language.En:
+                        En = value;
                         break;
                     case Language.Ru:
                         Ru = value;

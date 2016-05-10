@@ -51,7 +51,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Uk" Visibility="{Binding ElementName=Uk, Path=IsChecked}" Binding="{Binding Uk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Us" Visibility="{Binding ElementName=Us, Path=IsChecked}" Binding="{Binding Us, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="En" Visibility="{Binding ElementName=En, Path=IsChecked}" Binding="{Binding En, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Ru" Visibility="{Binding ElementName=Ru, Path=IsChecked}" Binding="{Binding Ru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -85,12 +85,12 @@
                     Command="{Binding TranslatingButtonCommand}"/>
             <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding SourceLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <TextBlock>uk</TextBlock>
-                <TextBlock>us</TextBlock>
+                <TextBlock>en</TextBlock>
                 <TextBlock>ru</TextBlock>
             </ComboBox>
             <ComboBox Name="TargetLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="5" SelectedIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding TargetLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                 <TextBlock>uk</TextBlock>
-                <TextBlock>us</TextBlock>
+                <TextBlock>en</TextBlock>
                 <TextBlock>ru</TextBlock>
             </ComboBox>
             <Label Content="Text size" Margin="6" Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0"

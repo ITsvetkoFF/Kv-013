@@ -5,7 +5,7 @@ namespace GitHubExtension.LocalizationTool.Translate
     public enum Language
     {
         Uk,
-        Us,
+        En,
         Ru
     }
 
@@ -16,19 +16,10 @@ namespace GitHubExtension.LocalizationTool.Translate
             switch (language)
             {
                 case "uk":
-                case "UK":
-                case "uk-UK":
-                case "uk-UK.json":
                     return Language.Uk;
-                case "us":
-                case "US":
-                case "en-Us":
-                case "en-Us.json":
-                    return Language.Us;
+                case "en":
+                    return Language.En;
                 case "ru":
-                case "RU":
-                case "ru-RU":
-                case "ru-RU.json":
                     return Language.Ru;
                 default:
                     throw new Exception("Incorrect Language in Method GetLanguage");
@@ -41,7 +32,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             {
                 case Language.Uk:
                     return "uk-UK";
-                case Language.Us:
+                case Language.En:
                     return "en-US";
                 case Language.Ru:
                     return "ru-RU";
@@ -56,7 +47,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             {
                 case Language.Uk:
                     return "uk-UK.json";
-                case Language.Us:
+                case Language.En:
                     return "en-US.json";
                 case Language.Ru:
                     return "ru-RU.json";

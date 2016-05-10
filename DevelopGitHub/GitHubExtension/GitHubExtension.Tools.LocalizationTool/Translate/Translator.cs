@@ -15,10 +15,6 @@ namespace GitHubExtension.LocalizationTool.Translate
             "key=trnsl.1.1.20160322T103501Z.10b2b142f2f8bf7f.66c4f9f75232ede5cb9d8cc5ce17df5fd1d02d32&" +
             "lang=";
 
-        private const string UsLanguage = "us";
-
-        private const string EnLanguage = "en";
-
         private const string Dash = "-";
 
         private const string JsonTextParameter = "text";
@@ -49,8 +45,6 @@ namespace GitHubExtension.LocalizationTool.Translate
 
             Language sourceLanguageEnum = sourceLanguage.GetLanguageEnum();
             Language targetLanguageEnum = targetLanguage.GetLanguageEnum();
-            sourceLanguage = CheckUsEnLanguage(sourceLanguage);
-            targetLanguage = CheckUsEnLanguage(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
             string result;
             using (var httpClient = new HttpClient())
@@ -60,11 +54,6 @@ namespace GitHubExtension.LocalizationTool.Translate
             }
 
             SaveTranslationResult(result, targetLanguageEnum);
-        }
-
-        private static string CheckUsEnLanguage(string language)
-        {
-            return language == UsLanguage ? EnLanguage : language;
         }
 
         private void SaveTranslationResult(string result, Language language)

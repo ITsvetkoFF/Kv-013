@@ -35,9 +35,9 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             RegisterCommands();
 
             _translationDataTable = new TranslationDataTable
-                {
-                    TranslationTable = new ObservableCollection<TranslationDataRow>()
-                };
+            {
+                TranslationTable = new ObservableCollection<TranslationDataRow>()
+            };
 
             _translator = new Translator(_translationDataTable);
 
