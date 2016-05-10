@@ -15,14 +15,16 @@
                         <tr ng-repeat="collaborator in vmRoles.collaborators">
                             <td>{{collaborator.login}}</td>
                             <td>
-                                <select ng-model="vmRoles.roleName[$index]"
+                                <select ng-hide="collaborator.userId === null" ng-model="vmRoles.roleName[$index]"
                                         ng-options="role.name for role in vmRoles.roles.data"
                                         ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
                                     <option value="">---Please select---</option>
                                 </select>
+                                <button ng-if="collaborator.userId === null" type="submit"
+                                        class="btn btn-primary btn-large"> Invite to GitHubExtension </button>
                             </td>
                             <td>
-                                <form name="noteForm" ng-init="collaborator.note"
+                                <form ng-if="collaborator.userId !== null" name="noteForm" ng-init="collaborator.note"
                                       ng-submit="noteForm.$valid && vmRoles.createPrivateNote(collaborator)">
                                     <input type="text" name="newNote" ng-model="collaborator.note" required
                                            ng-minlength="5">
@@ -33,7 +35,6 @@
                                     </button>
                                 </form>
                             </td>
-                            <td>
                         </tr>
                         </tbody>
                     </table>
