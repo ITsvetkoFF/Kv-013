@@ -8,7 +8,7 @@
     <span ng-show="!vmPrTemplates.pullRequestTemplate" ng-repeat="buttons in vmPrTemplates.pr">
         <button ng-click="vmPrTemplates.showPrTemplate($index)">{{buttons.templateDescription}}</button>
     </span>
-    <form name="prAdd" ng-show="vmPrTemplates.prArray[vmPrTemplates.prIndex]">
+    <form name="prAdd" ng-show="vmPrTemplates.prArray[vmPrTemplates.prIndex]" novalidate>
         <br />
         <h4> {{vmPrTemplates.i18n.message.ADD_PR_FIELD}}</h4>
         <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.pr[vmPrTemplates.prIndex].content" ui-codemirror="vmTemplates.editorOptions"></textarea>
@@ -19,7 +19,7 @@
         <button ng-disabled="prAdd.$invalid" ng-click="vmPrTemplates.createPr(vmPrTemplates.pr[vmPrTemplates.prIndex])">{{vmPrTemplates.i18n.message.ADD_PR_BUTTON}}</button>
     </form>
 </div>
-<form name="prEdit" ng-show="vmPrTemplates.showEdit">
+<form name="prEdit" ng-show="vmPrTemplates.showEdit" novalidate>
     <h4> {{vmPrTemplates.i18n.message.PR_EDIT_FIELD}}</h4>
     <textarea ng-required="true" class="CodeMirror" ng-model="vmPrTemplates.pullRequestTemplate" ui-codemirror="vmTemplates.editorOptions"></textarea>
     <br />
