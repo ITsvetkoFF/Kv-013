@@ -1,9 +1,221 @@
 #%RAML 0.8 Resource
-/pullRequestTemplate:
+/pr:
   get:
+    description: Get pull request templates from database
     responses:
       200:
-/issueTemplate:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "$id": "1",
+                  "id": 10,
+                  "templateType": "PullRequest",
+                  "content" : "Pull Request template content",
+                  "categoryId": null,
+                  "templateDescription": "We accept pull requests even without issues"
+                  },
+                  {
+                    "$id": "2",
+                    "id": 11,
+                    "templateType": "PullRequest",
+                    "content" : "Pull Request template content",
+                    "categoryId": null,
+                    "templateDescription": "We also only accept pull requests after the matter has been discussed in an issue"
+                  }
+              ]
+      404:
+/categories:
   get:
+    description: Get category of issue template from database
     responses:
       200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "$id": "1",
+                  "id": 1,
+                  "categoryDescription": "Bug Reports"
+                },
+                {
+                  "$id": "2",
+                  "id": 2,
+                  "categoryDescription": "New Features,improvements and changes"
+                },
+                {
+                  "$id": "3",
+                  "id": 3,
+                  "categoryDescription": "Bug Reports, as well as proposals for new features, improvements and changes"
+                }
+              ]
+      404:
+/categories/{id}:
+  get:
+    description: Get issue templates from database by categoryID
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "$id": "1",
+                  "id": 7,
+                  "content": "Issue template content",
+                  "templateType": "Issue",
+                  "categoryId": 3,
+                  "templateDescription": "My project runs in the browser"
+                },
+                {
+                  "$id": "2",
+                  "id": 8,
+                  "content": "Issue template content",
+                  "templateType": "Issue",
+                  "categoryId": 3,
+                  "templateDescription": "My project all about the server"
+                },
+                {
+                  "$id": "3",
+                  "id": 9,
+                  "content": "Issue template content",
+                  "templateType": "Issue",
+                  "categoryId": 3,
+                  "templateDescription": "My code runs equally well on the serve, as well as the browser"
+                }
+              ]
+      404:
+/pull-request:
+  get:
+    description: Get pull request template from GitHub repository
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+              "content": "Pull Request template content"
+              }
+      404:
+  post:
+    description: Create pull request template in GitHub repository
+    body:
+      application/json:
+        example: |
+          {
+            "message" : "Create PullRequest template",
+            "content": "Pull Request template content"
+          }
+        schema: |
+          {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "message": {
+                "type": "string",
+                "required": true
+                },
+              "content": {
+                "type": "string",
+                "required": true
+                }
+              }
+            }
+    responses:
+      201:
+      422:
+  put:
+    description: Update pull request template in GitHub repository
+    body:
+      application/json:
+        example: |
+          {
+            "message" : "Update PullRequest template",
+            "content": "Pull Request template content"
+          }
+        schema: |
+          {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "message": {
+                "type": "string",
+                "required": true
+               },
+              "content": {
+                "type": "string",
+                "required": true
+                }
+            }
+          }
+    responses:
+      200:
+      422:
+/issue:
+  get:
+    description: Get issue template from GitHub repository
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "content" : "Issue template content"
+              }
+      404:
+  post:
+    description: Create issue template in GitHub repository
+    body:
+      application/json:
+        example: |
+          {
+            "message" : "Create Issue template",
+            "content": "Issue template content"
+          }
+        schema: |
+          {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "message": {
+              "type": "string",
+              "required": true
+              },
+            "content": {
+              "type": "string",
+              "required": true
+              }
+            }
+          }
+    responses:
+      201:
+      422:
+  put:
+    description: Update issue template in GitHub repository
+    body:
+      application/json:
+        example: |
+          {
+            "message" : "Update Issue template",
+            "content": "Issue template content"
+          }
+        schema: |
+          {
+          "type": "object",
+          "required": true,
+          "properties": {
+            "message": {
+              "type": "string",
+              "required": true
+              },
+            "content": {
+              "type": "string",
+              "required": true
+              }
+            }
+          }
+    responses:
+      200:
+      422:
