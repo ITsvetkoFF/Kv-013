@@ -23,7 +23,7 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             _queries = queries;
         }
 
-        [Route(RouteConstants.GetNoteForCollaborator)]
+        [Route(RouteConstants.NoteForCollaborator)]
         [HttpGet]
         public IHttpActionResult GetNote([FromUri] string collaboratorId)
         {
@@ -63,8 +63,28 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             var noteModel = model.AddUserIdToModel(userId);
 
             var noteEntity = noteModel.ToEntity();
-            await _commands.AddOrUpdateNote(noteEntity);
+            await _commands.AddNote(noteEntity);
             return Ok(noteEntity);
         }
+
+        [Route(RouteConstants.NoteForCollaborator)]
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteNote([FromUri] string collaboratorId)
+        {
+            var userId = User.GetUserId();
+            if (userId == null)
+            {
+                ModelState.AddModelError(ValidationConstants.UserId, ValidationConstants.UserIdError);
+                return BadRequest(ModelState);
+            }
+
+            var isNoteDeleted = await _commands.DeleteNote(userId, collaboratorId);
+            if (!isNoteDeleted)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        } 
     }
 }

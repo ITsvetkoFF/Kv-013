@@ -50,7 +50,7 @@
 
         public const string CreateNoteForCollaborator = ApiNote;
 
-        public const string GetNoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
+        public const string NoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
 
         // segments
         public const string IdInt = "/{id:int}";

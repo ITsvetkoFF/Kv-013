@@ -8,7 +8,7 @@ namespace GitHubExtension.Notes.Tests.TestsForRoutes.TestRoutesMappers
         public static string ForGetNoteForCollaborator(this string url)
         {
             return url + Regex.Replace(
-                RouteConstants.GetNoteForCollaborator,
+                RouteConstants.NoteForCollaborator,
                 RouteConstants.CollaboratorId,
                 "/550e8400-e29b-41d4-a716-446655440000");
         }
