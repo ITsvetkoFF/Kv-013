@@ -16,9 +16,197 @@
 /external:
   get:
     description: Get GitHub activity history for chosen repository
+    queryParameters:
+      page:
+        displayName: Page
+        type: number
+        description: number of page in GitHub activity log
+        example: 1
+        required: true
+        minimum: 1
+        maximum: 10
     responses:
       200:
         body:
           application/json:
+            example: |
+              {
+                 "$id":"1",
+                 "amountOfPages":null,
+                 "events":[
+                    {
+                       "$id":"2",
+                       "actor":{
+                          "$id":"3",
+                          "avatar_url":"https://avatars.githubusercontent.com/u/15123688?",
+                          "gravatar_id":"",
+                          "id":15123688,
+                          "login":"craHUNzyTER",
+                          "url":"https://api.github.com/users/craHUNzyTER"
+                       },
+                       "created_at":"2016-02-28T19:24:32Z",
+                       "id":"3699092972",
+                       "payload":{
+                          "$id":"4",
+                          "before":"5334b21c5275bb8d91d05f803471890702ae0948",
+                          "distinct_size":1,
+                          "head":"dc2299fe5f49f7e163ead78040a516a7f339ed6c",
+                          "ref":"refs/heads/master",
+                          "size":1
+                       },
+                       "repo":{
+                          "$id":"5",
+                          "id":52696371,
+                          "name":"craHUNzyTER/MvcOAuthSimple",
+                          "url":"https://api.github.com/repos/craHUNzyTER/MvcOAuthSimple"
+                       },
+                       "type":"PushEvent"
+                    },
+                    {
+                       "$id":"6",
+                       "actor":{
+                          "$id":"7",
+                          "avatar_url":"https://avatars.githubusercontent.com/u/15123688?",
+                          "gravatar_id":"",
+                          "id":15123688,
+                          "login":"craHUNzyTER",
+                          "url":"https://api.github.com/users/craHUNzyTER"
+                       },
+                       "created_at":"2016-02-28T01:01:11Z",
+                       "id":"3697961239",
+                       "payload":{
+                          "$id":"8",
+                          "description":"",
+                          "master_branch":"master",
+                          "pusher_type":"user",
+                          "ref":"master",
+                          "ref_type":"branch"
+                       },
+                       "repo":{
+                          "$id":"9",
+                          "id":52696371,
+                          "name":"craHUNzyTER/MvcOAuthSimple",
+                          "url":"https://api.github.com/repos/craHUNzyTER/MvcOAuthSimple"
+                       },
+                       "type":"CreateEvent"
+                    },
+                    {
+                       "$id":"10",
+                       "actor":{
+                          "$id":"11",
+                          "avatar_url":"https://avatars.githubusercontent.com/u/15123688?",
+                          "gravatar_id":"",
+                          "id":15123688,
+                          "login":"craHUNzyTER",
+                          "url":"https://api.github.com/users/craHUNzyTER"
+                       },
+                       "created_at":"2016-02-28T00:41:48Z",
+                       "id":"3697942881",
+                       "payload":{
+                          "$id":"12",
+                          "description":"",
+                          "master_branch":"master",
+                          "pusher_type":"user",
+                          "ref":null,
+                          "ref_type":"repository"
+                       },
+                       "repo":{
+                          "$id":"13",
+                          "id":52696371,
+                          "name":"craHUNzyTER/MvcOAuth",
+                          "url":"https://api.github.com/repos/craHUNzyTER/MvcOAuth"
+                       },
+                       "type":"CreateEvent"
+                    }
+                 ]
+              }
+            schema: |
+              {
+                 "type": "object",
+                 "required": true,
+                 "properties": {
+                   "amountOfPages": {
+                     "type": ["number", "null"],
+                     "required": true
+                   },
+                   "events": {
+                     "type": "array",
+                     "required": true,
+                     "maxItems": 30,
+                     "items": {
+                       "title": "Event",
+                       "type": "object",
+                       "properties": {
+                         "id": {
+                           "type": "string",
+                           "required": true
+                         },
+                         "created_at": {
+                           "type": "string",
+                           "format": "date-time",
+                           "required": true
+                         },
+                         "repo" : {
+                            "type": "object",
+                            "required": true,
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "required": true
+                                  },
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                  },
+                                "url": {
+                                  "type": "string",
+                                  "required": true
+                                  }
+                              }
+                           },
+                         "type": {
+                           "type": "string",
+                           "required": true
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
       400:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "message": "You have no repository selected"
+              }
+            schema: |
+              {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "required": true
+                      }
+                  }
+              }
+      401:
+        body:
+          application/json:
+            example: |
+              {
+                "$id": "1",
+                "message": "Authorization has been denied for this request."
+              }
+            schema: |
+              {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "required": true
+                      }
+                  }
+              }
       404:
