@@ -13,5 +13,6 @@ CREATE TABLE [dbo].[Users] (
     [LockoutEnabled]       BIT            NOT NULL,
     [AccessFailedCount]    INT            NOT NULL,
     [UserName]             NVARCHAR (MAX) NULL,
+    [IsMailVisible] BIT NOT NULL, 
     CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([Id] ASC)
 );

@@ -18,6 +18,8 @@ namespace GitHubExtension.Security.DAL.Identity
 
         public int ProviderId { get; set; }
 
+        public bool IsMailVisible { get; set; }
+        
         public virtual ICollection<UserRepositoryRole> UserRepositoryRoles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
