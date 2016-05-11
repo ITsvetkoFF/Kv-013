@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
