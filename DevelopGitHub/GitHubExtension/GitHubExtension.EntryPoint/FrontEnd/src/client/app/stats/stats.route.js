@@ -23,7 +23,7 @@
                     title: 'Stats',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-lock"></i>' + i18n.message.STATISTICS,
+                        content: '<i class="fa fa-area-chart"></i>' + i18n.message.STATISTICS,
                         show : userService.isAuthenticated()
                     }
                 }
