@@ -35,9 +35,7 @@
                 PULL_REQUEST: resource + 'templates/pull-request',
                 ISSUE: resource + 'templates/issue',
                 PR: resource + 'templates/pr',
-                CREATE_UPDATE_PR: resource + 'templates/pull-request-template',
-                ISSUE_CATEGORIES: resource + 'templates/categories',
-                CREATE_UPDATE_ISSUE: resource + 'templates/issue-template'
+                ISSUE_CATEGORIES: resource + 'templates/categories'
             };
         })());
 })();

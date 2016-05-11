@@ -47,7 +47,7 @@
             return $http({
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
-                url: API_URL.CREATE_UPDATE_PR,
+                url: API_URL.PULL_REQUEST,
                 data : { message : prTemplate.comment, content : prTemplate.content}
             }).success(function (response) {
                 return response.status;
@@ -59,7 +59,7 @@
             return $http({
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
-                url: API_URL.CREATE_UPDATE_ISSUE,
+                url: API_URL.ISSUE,
                 data: { message: issueTemplate.comments, content: issueTemplate.content }
             }).success(function (response) {
                 return response.status;
@@ -72,7 +72,7 @@
             return $http({
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT',
-                url: API_URL.CREATE_UPDATE_PR,
+                url: API_URL.PULL_REQUEST,
                 data: { message: prTemplate.commentEdit, content: prTemplate.pullRequestTemplate }
             }).success(function (response) {
                 return response.status;
@@ -85,7 +85,7 @@
             return $http({
                 headers: { 'Content-Type': 'application/json' },
                 method: 'PUT',
-                url: API_URL.CREATE_UPDATE_ISSUE,
+                url: API_URL.ISSUE,
                 data: { message: issueTemplate.commentsEdit, content: issueTemplate.issueTemplate }
             }).success(function (response) {
                 return response.status;
