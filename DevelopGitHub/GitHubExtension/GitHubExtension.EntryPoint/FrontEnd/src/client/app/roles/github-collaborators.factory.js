@@ -31,23 +31,13 @@
             });
         }
 
-        function addActivityRole(roleToAssign, collaboratorName) {
-            return function() {
-                return $http({
-                    method: 'POST',
-                    url: API_URL.internalActivityUrl + '/addRole',
-                    data: {roleToAssign: roleToAssign, collaboratorName: collaboratorName}
-                });
-            };
-        }
-
         function assignRole(repository, collaborator, role) {
             return $http({
                 method: 'PATCH',
                 dataType: 'string',
                 url: baseUrl + '/repos/' + repository.id + '/collaborators/' + collaborator.id,
                 data: '"' + role.name + '"'
-            }).then(addActivityRole(role.name, collaborator.login));
+            });
         }
 
         function createPrivateNote(collaborator) {
