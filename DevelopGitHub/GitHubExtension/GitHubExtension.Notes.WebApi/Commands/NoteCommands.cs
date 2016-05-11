@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 
 using GitHubExtension.Notes.DAL.Model;
@@ -21,21 +20,16 @@ namespace GitHubExtension.Notes.WebApi.Commands
             await _notesContext.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteNote(string userId, string collaboratorId)
+        public async Task DeleteNote(int noteId)
         {
-            var note = _notesContext.Notes.FirstOrDefault(n => n.UserId == userId 
-                && n.CollaboratorId == collaboratorId);
-
-            if (note == null)
+            var note = new Note
             {
-                return false;
-            }
+                Id = noteId
+            };
 
-            _notesContext.Notes.Remove(note);
             _notesContext.Entry(note).State = EntityState.Deleted;
+            _notesContext.Notes.Remove(note);
             await _notesContext.SaveChangesAsync();
-
-            return true;
         }
     }
 }

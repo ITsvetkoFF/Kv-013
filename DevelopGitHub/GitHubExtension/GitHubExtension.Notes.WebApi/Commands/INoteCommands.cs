@@ -8,6 +8,6 @@ namespace GitHubExtension.Notes.WebApi.Commands
     {
         Task AddNote(Note noteEntity);
 
-        Task<bool> DeleteNote(string userId, string collaboratorId);
+        Task DeleteNote(int noteId);
     }
 }
