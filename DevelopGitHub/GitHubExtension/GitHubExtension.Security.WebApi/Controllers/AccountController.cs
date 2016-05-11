@@ -132,7 +132,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = RoleConstants.Admin)]
         [Route(RouteConstants.GetUser)]
         public async Task<IHttpActionResult> GetUser(string id)
         {
