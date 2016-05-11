@@ -214,9 +214,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
         {
             var collaborators = new List<CollaboratorWithUserIdModel>();
 
+            var users = _securityContextQuery.GetAllUsers();
+
             foreach (var collaborator in gitHubCollaboratorsExceptUser)
             {
-                var user = _userManager.FindByGitHubId(collaborator.Id);
+                var user = users.FirstOrDefault(u => u.ProviderId == collaborator.Id);
                 if (user != null)
                 {
                     var collaboratorWithUserId = collaborator.ToCollaboratorWithUserId(user.Id);
