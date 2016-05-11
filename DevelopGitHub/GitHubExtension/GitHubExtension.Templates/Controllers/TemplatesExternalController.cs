@@ -5,23 +5,64 @@ using GitHubExtension.Templates.CommunicationModels;
 using GitHubExtension.Templates.Constants;
 using GitHubExtension.Templates.ExtensionMethods;
 using GitHubExtension.Templates.Mappers;
+using GitHubExtension.Templates.Queries;
 
 namespace GitHubExtension.Templates.Controllers
 {
     [RoutePrefix(RouteTemplatesConstants.GetGitHubTemplatesRoute)]
-    public class TemplatesCommandController : ApiController
+    public class TemplatesExternalController : ApiController
     {
         private const string PathToPullRequestTemplate = ".github/PULL_REQUEST_TEMPLATE.md";
         private const string PathToIssueTemplate = ".github/ISSUE_TEMPLATE.md";
         private readonly ITemplatesCommand _templatesCommand;
+        private readonly ITemplatesQuery _templateQuery;
 
-        public TemplatesCommandController(ITemplatesCommand templatesCommand)
+        public TemplatesExternalController(ITemplatesCommand templatesCommand, ITemplatesQuery templatesQuery)
         {
             _templatesCommand = templatesCommand;
+            _templateQuery = templatesQuery;  
+        }
+
+        [HttpGet]
+        [Route(RouteTemplatesConstants.PullRequestTemplate)]
+        public async Task<IHttpActionResult> GetPullRequestTemplate()
+        {
+            var repositoryName = User.GetCurrentProjectName();
+            var token = User.GetExternalToken();
+            var model = repositoryName.ToGetTemplateModel(PathToPullRequestTemplate, token);
+            var content =
+                await
+                    _templateQuery.GetTemplatesAsync(model);
+
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(content);
+        }
+
+        [HttpGet]
+        [Route(RouteTemplatesConstants.IssueTemplate)]
+        public async Task<IHttpActionResult> GetIssueTemplate()
+        {
+            var repositoryName = User.GetCurrentProjectName();
+            var token = User.GetExternalToken();
+            var model = repositoryName.ToGetTemplateModel(PathToIssueTemplate, token);
+            var content =
+                await
+                    _templateQuery.GetTemplatesAsync(model);
+
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(content);
         }
 
         [HttpPost]
-        [Route(RouteTemplatesConstants.AddUpdateRequestTemplate)]
+        [Route(RouteTemplatesConstants.PullRequestTemplate)]
         public async Task<IHttpActionResult> CreatePullRequestTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -37,7 +78,7 @@ namespace GitHubExtension.Templates.Controllers
         }
 
         [HttpPost]
-        [Route(RouteTemplatesConstants.AddUpdateIssueTemplate)]
+        [Route(RouteTemplatesConstants.IssueTemplate)]
         public async Task<IHttpActionResult> CreateIssueTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -51,9 +92,8 @@ namespace GitHubExtension.Templates.Controllers
             return StatusCode(statusCode);
         }
 
-        [Authorize]
         [HttpPut]
-        [Route(RouteTemplatesConstants.AddUpdateRequestTemplate)]
+        [Route(RouteTemplatesConstants.PullRequestTemplate)]
         public async Task<IHttpActionResult> UpdatePullRequestTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -68,7 +108,7 @@ namespace GitHubExtension.Templates.Controllers
         }
 
         [HttpPut]
-        [Route(RouteTemplatesConstants.AddUpdateIssueTemplate)]
+        [Route(RouteTemplatesConstants.IssueTemplate)]
         public async Task<IHttpActionResult> UpdateIssueTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
