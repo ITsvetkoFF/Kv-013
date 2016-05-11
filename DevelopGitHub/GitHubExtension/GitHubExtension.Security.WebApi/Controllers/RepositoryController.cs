@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-
+using GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters;
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
@@ -40,6 +40,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         [HttpPatch]
         [Route(RouteConstants.AssignRolesToUser)]
+        [AssignRoleToUserActivity]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             User appUser = _userManager.FindByGitHubId(gitHubId);

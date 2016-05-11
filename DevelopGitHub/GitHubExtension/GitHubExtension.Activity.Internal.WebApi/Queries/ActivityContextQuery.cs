@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Queries
 {
-    public class ActivityContextQuery : IActivityContextQuery
+    public class ActivityContextQuery : IActivityContextQuery, IDisposable
     {
         private readonly ActivityContext _activityContext;
 
@@ -27,6 +28,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Queries
             {
                 return _activityContext.ActivitiesTypes;
             }
+        }
+
+        public void Dispose()
+        {
+            _activityContext.Dispose();
         }
     }
 }

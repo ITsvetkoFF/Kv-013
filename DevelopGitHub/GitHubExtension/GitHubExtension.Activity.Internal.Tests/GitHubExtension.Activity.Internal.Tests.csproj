@@ -127,7 +127,6 @@
   <ItemGroup>
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsForControllers\InternalActivityCommandControllerTests.cs" />
     <Compile Include="TestsForControllers\InternalActivityQueryControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>

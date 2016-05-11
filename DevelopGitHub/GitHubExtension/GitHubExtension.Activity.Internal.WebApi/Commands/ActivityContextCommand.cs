@@ -1,8 +1,9 @@
-﻿using GitHubExtension.Activity.DAL;
+﻿using System;
+using GitHubExtension.Activity.DAL;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Commands
 {
-    public class ActivityContextCommand : IActivityContextCommand
+    public class ActivityContextCommand : IActivityContextCommand, IDisposable
     {
         private readonly ActivityContext _activityContext;
 
@@ -16,6 +17,11 @@ namespace GitHubExtension.Activity.Internal.WebApi.Commands
             _activityContext.Activities.Add(activityEvent);
 
             _activityContext.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _activityContext.Dispose();
         }
     }
 }

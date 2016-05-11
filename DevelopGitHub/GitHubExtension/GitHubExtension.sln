@@ -64,6 +64,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Templates.Tests", "GitHubExtension.Templates.Tests\GitHubExtension.Templates.Tests.csproj", "{D2AA6FBD-E444-453E-9723-60967CE8AF86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{1C5E1DBD-4A2A-498E-B1D1-6FB3C8B3839A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Infrastructure.ActionFilters", "GitHubExtension.Infrastructure.ActionFilters\GitHubExtension.Infrastructure.ActionFilters.csproj", "{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Tests.Infrastructure", "GitHubExtension.Tests.Infrastructure\GitHubExtension.Tests.Infrastructure.csproj", "{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}"
 EndProject
@@ -159,6 +160,11 @@ Global
 		{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,5 +192,7 @@ Global
 		{D2AA6FBD-E444-453E-9723-60967CE8AF86} = {81F8C705-AC42-4E92-8877-606314287DC0}
 		{1C5E1DBD-4A2A-498E-B1D1-6FB3C8B3839A} = {81F8C705-AC42-4E92-8877-606314287DC0}
 		{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56} = {1C5E1DBD-4A2A-498E-B1D1-6FB3C8B3839A}
+		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6} = {209E6B92-CFA7-42C1-A7D6-2BD7CB0CDD12}
+
 	EndGlobalSection
 EndGlobal
