@@ -30,7 +30,7 @@
                     controllerAs: 'vmPrTemplates',
                     settings: {
                         nav: 4,
-                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.TEMPLATES,
+                        content: '<i class="fa fa-file-o"></i>' + i18n.message.TEMPLATES,
                         show: userService.isAuthenticated()
                     }
                 }

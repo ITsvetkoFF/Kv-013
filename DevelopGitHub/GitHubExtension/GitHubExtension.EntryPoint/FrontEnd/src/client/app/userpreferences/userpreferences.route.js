@@ -23,7 +23,7 @@
                     title: 'Preferences',
                     settings: {
                         nav: 6,
-                        content: '<i class="fa fa-dashboard"></i>' + i18n.message.PREFERENCES,
+                        content: '<i class="fa fa-cogs"></i>' + i18n.message.PREFERENCES,
                         show: userService.isAuthenticated()
                     }
                 }
