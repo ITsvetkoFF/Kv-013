@@ -11,6 +11,7 @@
         var vm = this;
         vm.imageSource = '';
         vm.i18n = i18n.message;
+        vm.isEmailPrivate = false;
 
         activate();
 
@@ -31,5 +32,11 @@
             });
         };
 
+        vm.changeVisibilityMail = function () {
+            userData.changeVisibilityMail();
+        } 
+
+        userData.getCheckboxValue()
+            .then(function (data) { vm.isEmailPrivate = data; });
     }
 }());
