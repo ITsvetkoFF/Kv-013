@@ -64,6 +64,10 @@
 
         public const string RegisterExternal = "registerExternal";
 
+        public const string MailVisibility = "mailvisibility";
+
+        public const string ChangeVisibilityMail = "changemail";
+
         public const string Repository = "/repos";
 
         public const string RepositoryId = "/{repoId}";

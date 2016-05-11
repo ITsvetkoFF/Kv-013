@@ -109,6 +109,30 @@ namespace GitHubExtension.Security.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route(RouteConstants.MailVisibility)]
+        public async Task<bool> MailVisibility()
+        {
+            string id = User.Identity.GetUserId();
+
+            var user = await _userManager.FindByIdAsync(id);
+            return user.IsMailVisible;
+        }
+                
+        [HttpPut]
+        [Route(RouteConstants.ChangeVisibilityMail)]
+        public async Task<IHttpActionResult> ChangeVisibilityMail()
+        {
+            string id = User.Identity.GetUserId();
+
+            var user = await _userManager.FindByIdAsync(id);
+            user.IsMailVisible = !user.IsMailVisible;
+            _userManager.Update(user);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = RoleConstants.Admin)]
         [Route(RouteConstants.GetUser)]
         public async Task<IHttpActionResult> GetUser(string id)
         {
