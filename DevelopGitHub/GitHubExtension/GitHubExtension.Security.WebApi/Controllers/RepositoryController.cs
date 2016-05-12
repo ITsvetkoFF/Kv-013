@@ -40,6 +40,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         [HttpPatch]
         [Route(RouteConstants.AssignRolesToUser)]
+        [AssignRoleToUserActivity]
         public async Task<IHttpActionResult> AssignRolesToUser([FromUri] int repoId, [FromUri] int gitHubId, [FromBody] string roleToAssign)
         {
             User appUser = _userManager.FindByGitHubId(gitHubId);

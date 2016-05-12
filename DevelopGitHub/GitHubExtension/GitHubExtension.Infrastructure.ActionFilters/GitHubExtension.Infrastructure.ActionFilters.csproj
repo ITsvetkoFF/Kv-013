@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ActionFilterConstansts.cs" />
+    <Compile Include="Extensions\ActivityFiltersExtensions.cs" />
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
