@@ -87,7 +87,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
 
-            var collaboratorsWithUserId = AddUserIdToCollaboratorIfExists(gitHubCollaboratorsExceptUser);
+            var users = _securityContextQuery.GetAllUsers();
+            var collaboratorsWithUserId = AddUserIdToCollaboratorIfExists(gitHubCollaboratorsExceptUser, users);
 
             return Ok(collaboratorsWithUserId);
         }
@@ -210,11 +211,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
             }
         }
 
-        List<CollaboratorWithUserIdModel> AddUserIdToCollaboratorIfExists(IEnumerable<CollaboratorModel> gitHubCollaboratorsExceptUser)
+        IEnumerable<CollaboratorWithUserIdModel> AddUserIdToCollaboratorIfExists(
+            IEnumerable<CollaboratorModel> gitHubCollaboratorsExceptUser, 
+            IEnumerable<User> users)
         {
             var collaborators = new List<CollaboratorWithUserIdModel>();
-
-            var users = _securityContextQuery.GetAllUsers();
 
             foreach (var collaborator in gitHubCollaboratorsExceptUser)
             {
