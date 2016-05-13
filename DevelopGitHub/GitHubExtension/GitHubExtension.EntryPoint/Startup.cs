@@ -44,8 +44,6 @@ namespace GitHubExtension.EntryPoint
             app.UseSimpleInjectorContext(container);
             app.CreatePerOwinContext(container.GetInstance<SecurityContext>);
             app.CreatePerOwinContext(container.GetInstance<ApplicationUserManager>);
-            app.CreatePerOwinContext(container.GetInstance<ActivityContextCommand>);
-            app.CreatePerOwinContext(container.GetInstance<ActivityContextQuery>);
           
             ConfigureOauth(app);
             ConfigureCookies(app);

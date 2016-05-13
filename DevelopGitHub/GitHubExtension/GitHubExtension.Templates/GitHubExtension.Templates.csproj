@@ -112,6 +112,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.ActionFilters\GitHubExtension.Infrastructure.ActionFilters.csproj">
+      <Project>{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}</Project>
+      <Name>GitHubExtension.Infrastructure.ActionFilters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
       <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
       <Name>GitHubExtension.Infrastructure.Constants</Name>

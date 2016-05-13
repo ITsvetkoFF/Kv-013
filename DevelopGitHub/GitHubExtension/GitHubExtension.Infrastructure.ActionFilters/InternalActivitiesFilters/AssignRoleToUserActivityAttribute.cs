@@ -12,7 +12,7 @@ using GitHubExtension.Security.DAL.Infrastructure;
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class AssignRoleToUserActivityAttribute : InternalActivityFilter
+    public class AssignRoleToUserActivityAttribute : ActionFilterAttribute, IInternalActivityFilter
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
@@ -23,15 +23,15 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             var applicationUserManager = dependencyResolver.GetService<ApplicationUserManager>();
             User appUser = applicationUserManager.FindByGitHubId(gitHubId);
             string collaboratorName = appUser.UserName;
-            var activityContextQuery = dependencyResolver.GetService<ActivityContextQuery>();
-            var activityContextCommand = dependencyResolver.GetService<ActivityContextCommand>();
+            var activityContextQuery = dependencyResolver.GetService<IActivityContextQuery>();
+            var activityContextCommand = dependencyResolver.GetService<IActivityContextCommand>();
             var user = actionExecutedContext.GetUserModel();
 
             AddRoleActivity(activityContextQuery, activityContextCommand, user, repoId, roleToAssign, collaboratorName); 
         }
 
-        public void AddRoleActivity(ActivityContextQuery activityContextQuery, 
-                                    ActivityContextCommand activityContextCommand, 
+        public void AddRoleActivity(IActivityContextQuery activityContextQuery, 
+                                    IActivityContextCommand activityContextCommand, 
                                     UserModel user, 
                                     int repoId, 
                                     string roleToAssign,

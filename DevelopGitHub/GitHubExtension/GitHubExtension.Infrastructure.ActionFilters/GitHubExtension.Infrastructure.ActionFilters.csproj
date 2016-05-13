@@ -101,7 +101,13 @@
     <Compile Include="Constants\ActionFilterConstansts.cs" />
     <Compile Include="Extensions\ActivityFiltersExtensions.cs" />
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\CreateIssueTemplateActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\CreatePullRequestTemplateActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
+    <Compile Include="InternalActivitiesFilters\TemplateActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\UpdateIssueTemplateActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\UpdatePullRequestTemplateActivityAttribute.cs" />
+    <Compile Include="Models\RepositoryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

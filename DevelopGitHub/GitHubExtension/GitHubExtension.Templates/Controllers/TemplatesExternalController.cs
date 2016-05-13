@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters;
 using GitHubExtension.Templates.Commands;
 using GitHubExtension.Templates.CommunicationModels;
 using GitHubExtension.Templates.Constants;
@@ -62,6 +63,7 @@ namespace GitHubExtension.Templates.Controllers
 
         [HttpPost]
         [Route(RouteTemplatesConstants.PullRequestTemplate)]
+        [CreatePullRequestTemplateActivity]
         public async Task<IHttpActionResult> CreatePullRequestTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
