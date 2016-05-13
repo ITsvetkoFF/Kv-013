@@ -15,7 +15,8 @@
                         <tbody>
                             <tr ng-repeat="collaborator in vmRoles.collaborators">
                                 <td>{{collaborator.login}}</td>
-                                <td>{{collaborator.mail}}</td>
+                                <td ng-if="collaborator.mail == null">{{collaborator.mail}}</td>
+                                <td ng-if="collaborator.mail != null">{{vmRoles.i18n.HIDDEN}}</td>
                                 <td>
                                     <select ng-model="vmRoles.roleName[$index]"
                                             ng-options="role.name for role in vmRoles.roles.data"
