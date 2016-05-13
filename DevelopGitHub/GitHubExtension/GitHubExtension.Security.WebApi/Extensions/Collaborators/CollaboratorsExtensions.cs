@@ -8,23 +8,23 @@ namespace GitHubExtension.Security.WebApi.Extensions.Collaborators
 {
     public static class CollaboratorsExtensions
     {
-        public static IEnumerable<CollaboratorWithUserIdModel> AddUserIdToCollaboratorIfExists( 
+        public static IEnumerable<CollaboratorWithUserDataModel> AddUserDataToCollaboratorIfExists( 
             this IEnumerable<CollaboratorModel> gitHubCollaboratorsExceptUser,
            IEnumerable<User> users)
         {
-            var collaborators = new List<CollaboratorWithUserIdModel>();
+            var collaborators = new List<CollaboratorWithUserDataModel>();
 
             foreach (var collaborator in gitHubCollaboratorsExceptUser)
             {
                 var user = users.FirstOrDefault(u => u.ProviderId == collaborator.Id);
                 if (user != null)
                 {
-                    var collaboratorWithUserId = collaborator.ToCollaboratorWithUserId(user.Id);
-                    collaborators.Add(collaboratorWithUserId);
+                    var collaboratorWithUserData = collaborator.ToCollaboratorWithUserData(user.Id, user.Email);
+                    collaborators.Add(collaboratorWithUserData);
                 }
                 else
                 {
-                    collaborators.Add(collaborator.ToCollaboratorWithUserId(null));
+                    collaborators.Add(collaborator.ToCollaboratorWithUserData(null, null));
                 }
             }
 
