@@ -8,6 +8,7 @@ using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.WebApi.Extensions.Collaborators;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
 using GitHubExtension.Security.WebApi.Extensions.OwinContext;
 using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
@@ -80,14 +81,17 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
-            string token = User.Identity.GetExternalAccessToken();
-            string userName = User.Identity.GetUserName();
+            var token = User.Identity.GetExternalAccessToken();
+            var userName = User.Identity.GetUserName();
 
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
 
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
 
-            return Ok(gitHubCollaboratorsExceptUser);
+            var users = _securityContextQuery.GetAllUsers();
+            var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserIdToCollaboratorIfExists(users);
+
+            return Ok(collaboratorsWithUserId);
         }
 
         [HttpGet]

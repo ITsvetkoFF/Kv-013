@@ -99,7 +99,7 @@ namespace GitHubExtension.Notes.Tests.TestsForControllers
             noteController.CreateNote(model.Single());
 
             // Assert
-            noteCommand.DidNotReceiveWithAnyArgs().AddNote(new Note{});
+            noteCommand.DidNotReceiveWithAnyArgs().AddNote(new Note { });
         }
     }
 }

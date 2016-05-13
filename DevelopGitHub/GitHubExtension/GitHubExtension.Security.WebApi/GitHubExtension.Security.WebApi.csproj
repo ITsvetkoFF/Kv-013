@@ -125,6 +125,7 @@
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extensions\Collaborators\CollaboratorsExtensions.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\OwinContext\OwinContextAuthentication.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRepositoryExtension.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Exceptions\UnsuccessfullGitHubRequestException.cs" />
     <Compile Include="Mappers\UserRepositoryRoleMapper.cs" />
     <Compile Include="Models\CollaboratorModel.cs" />
+    <Compile Include="Models\CollaboratorWithUserIdModel.cs" />
     <Compile Include="Models\GitHubRepositoryModel.cs" />
     <Compile Include="Models\GitHubUserModel.cs" />
     <Compile Include="Models\RepositoryViewModel.cs" />

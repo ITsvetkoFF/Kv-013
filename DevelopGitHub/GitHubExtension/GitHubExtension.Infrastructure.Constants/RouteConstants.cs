@@ -42,6 +42,8 @@
 
         public const string IdGuid = "/{id:guid}";
 
+        public const string NoteId = "/{noteId}";
+
         public const string Current = "/current";
 
         public const string SearchUsersByName = ApiUsers + Search;
@@ -51,6 +53,8 @@
         public const string CreateNoteForCollaborator = ApiNote;
 
         public const string GetNoteForCollaborator = ApiNote + Collaborators + CollaboratorId;
+
+        public const string DeleteNote = ApiNote + NoteId;
 
         // segments
         public const string IdInt = "/{id:int}";

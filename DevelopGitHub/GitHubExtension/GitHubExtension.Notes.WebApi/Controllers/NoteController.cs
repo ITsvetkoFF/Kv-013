@@ -66,5 +66,21 @@ namespace GitHubExtension.Notes.WebApi.Controllers
             await _commands.AddNote(noteEntity);
             return Ok(noteEntity);
         }
+
+        [Route(RouteConstants.DeleteNote)]
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteNote([FromUri] int noteId)
+        {
+            var userId = User.GetUserId();
+            if (userId == null)
+            {
+                ModelState.AddModelError(ValidationConstants.UserId, ValidationConstants.UserIdError);
+                return BadRequest(ModelState);
+            }
+
+            await _commands.DeleteNote(noteId);
+
+            return Ok();
+        } 
     }
 }

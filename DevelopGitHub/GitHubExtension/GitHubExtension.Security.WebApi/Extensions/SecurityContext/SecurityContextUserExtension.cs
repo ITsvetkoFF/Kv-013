@@ -8,6 +8,12 @@ namespace GitHubExtension.Security.WebApi.Extensions.SecurityContext
 {
     public static class SecurityContextUserExtension
     {
+        public static IEnumerable<User> GetAllUsers(this ISecurityContextQuery securityContextQuery)
+        {
+            var users = securityContextQuery.Users.AsNoTracking();
+            return users;
+        } 
+
         public static IEnumerable<User> GetUsersByName(this ISecurityContextQuery securityContextQuery, string userName)
         {
             IEnumerable<User> users =
