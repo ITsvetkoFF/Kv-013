@@ -5,15 +5,17 @@
                 <div class="col-md-12">
                     <table class="table table-condensed">
                         <thead>
-                        <tr>
-                            <th>{{vmRoles.i18n.USER_LOGIN}}</th>
-                            <th>{{vmRoles.i18n.ADD_ROLES}}</th>
-                            <th>{{vmRoles.i18n.NOTES}}</th>
-                        </tr>
+                            <tr>
+                                <th>{{vmRoles.i18n.USER_LOGIN}}</th>
+                                <th>{{vmRoles.i18n.MAIL}}</th>
+                                <th>{{vmRoles.i18n.ADD_ROLES}}</th>
+                                <th>{{vmRoles.i18n.NOTES}}</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="collaborator in vmRoles.collaborators">
                             <td style="vertical-align: middle;">{{collaborator.login}}</td>
+                            <td>{{collaborator.mail}}</td>
                             <td ng-if="collaborator.userId !== null">
                                 <select ng-model="vmRoles.roleName[$index]"
                                         ng-options="role.name for role in vmRoles.roles.data"
@@ -44,14 +46,14 @@
                                     </label>
                                     <input id="newNoteSubmit" type="submit" ng-click="noteForm.newNote.$error.minlength
                                     && vmRoles.formError(vmRoles.i18n.NOTE_MIN_LENGTH)" class="hidden">
-                                    <label for="deleteNoteSubmit">
-                                        <i class="fa fa-times-circle" style="font-size:24px;color:red;"></i>
-                                    </label>
-                                    <input id="deleteNoteSubmit"
-                                           ng-click="vmRoles.deletePrivateNote(collaborator)" class="hidden">
-                                </form>
-                            </td>
-                        </tr>
+                                        <label for="deleteNoteSubmit">
+                                            <i class="fa fa-times-circle" style="font-size:24px;color:red;"></i>
+                                        </label>
+                                        <input id="deleteNoteSubmit"
+                                               ng-click="vmRoles.deletePrivateNote(collaborator)" class="hidden">
+                                    </form>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
