@@ -8,6 +8,7 @@ using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
+using GitHubExtension.Security.WebApi.Extensions.Collaborators;
 using GitHubExtension.Security.WebApi.Extensions.Cookie;
 using GitHubExtension.Security.WebApi.Extensions.OwinContext;
 using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
@@ -88,7 +89,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
 
             var users = _securityContextQuery.GetAllUsers();
-            var collaboratorsWithUserId = AddUserIdToCollaboratorIfExists(gitHubCollaboratorsExceptUser, users);
+            var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserIdToCollaboratorIfExists(users);
 
             return Ok(collaboratorsWithUserId);
         }
@@ -209,29 +210,6 @@ namespace GitHubExtension.Security.WebApi.Controllers
             {
                 GetRequestContext.SetCookie(claim.Type, claim.Value);
             }
-        }
-
-        IEnumerable<CollaboratorWithUserIdModel> AddUserIdToCollaboratorIfExists(
-            IEnumerable<CollaboratorModel> gitHubCollaboratorsExceptUser, 
-            IEnumerable<User> users)
-        {
-            var collaborators = new List<CollaboratorWithUserIdModel>();
-
-            foreach (var collaborator in gitHubCollaboratorsExceptUser)
-            {
-                var user = users.FirstOrDefault(u => u.ProviderId == collaborator.Id);
-                if (user != null)
-                {
-                    var collaboratorWithUserId = collaborator.ToCollaboratorWithUserId(user.Id);
-                    collaborators.Add(collaboratorWithUserId);
-                }
-                else
-                {
-                    collaborators.Add(collaborator.ToCollaboratorWithUserId(null));
-                }
-            }
-
-            return collaborators;
         }
     }
 }

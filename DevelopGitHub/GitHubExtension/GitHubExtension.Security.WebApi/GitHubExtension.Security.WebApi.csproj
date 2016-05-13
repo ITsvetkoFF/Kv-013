@@ -125,6 +125,7 @@
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extensions\Collaborators\CollaboratorsExtensions.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\OwinContext\OwinContextAuthentication.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRepositoryExtension.cs" />
