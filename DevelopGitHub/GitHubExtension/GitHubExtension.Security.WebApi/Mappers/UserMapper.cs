@@ -31,18 +31,14 @@ namespace GitHubExtension.Security.WebApi.Mappers
             return userReturnModel;
         }
 
-        public static CollaboratorWithUserDataModel ToCollaboratorWithUserData(
-            this CollaboratorModel collaborator, 
-            string userId, 
-            string userMail)
+        public static CollaboratorWithUserDataModel ToCollaboratorWithUserData(this CollaboratorModel collaborator, string userId)
         {
             var collaboratorWithUserDataModel = new CollaboratorWithUserDataModel
             {
                 UserId = userId,
                 GitHubId = collaborator.Id,
                 Login = collaborator.Login,
-                Url = collaborator.Url,
-                Mail = userMail
+                Url = collaborator.Url
             };
 
             return collaboratorWithUserDataModel;

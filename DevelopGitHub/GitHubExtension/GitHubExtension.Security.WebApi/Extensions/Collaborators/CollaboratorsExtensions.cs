@@ -19,12 +19,13 @@ namespace GitHubExtension.Security.WebApi.Extensions.Collaborators
                 var user = users.FirstOrDefault(u => u.ProviderId == collaborator.Id);
                 if (user != null)
                 {
-                    var collaboratorWithUserData = collaborator.ToCollaboratorWithUserData(user.Id, user.Email);
+                    var collaboratorWithUserData = collaborator.ToCollaboratorWithUserData(user.Id);
+                    collaboratorWithUserData.Mail = user.IsMailVisible ? user.Email : null;
                     collaborators.Add(collaboratorWithUserData);
                 }
                 else
                 {
-                    collaborators.Add(collaborator.ToCollaboratorWithUserData(null, null));
+                    collaborators.Add(collaborator.ToCollaboratorWithUserData(null));
                 }
             }
 

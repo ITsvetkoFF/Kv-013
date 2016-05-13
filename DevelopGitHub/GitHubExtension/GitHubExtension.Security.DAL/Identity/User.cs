@@ -20,23 +20,10 @@ namespace GitHubExtension.Security.DAL.Identity
 
         public bool IsMailVisible { get; set; }
 
-        public override string Email
-        {
-            get
-            {
-                return IsMailVisible ? base.Email : null;
-            }
-
-            set
-            {
-                base.Email = value;
-            }
-        }
-
         public virtual ICollection<UserRepositoryRole> UserRepositoryRoles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
-            UserManager<User> manager, 
+            UserManager<User> manager,
             string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
