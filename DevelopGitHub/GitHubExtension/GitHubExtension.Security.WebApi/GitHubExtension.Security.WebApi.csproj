@@ -164,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APILog\" />
-    <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
     <Folder Include="Helpers\Authentication\" />
   </ItemGroup>
   <ItemGroup>

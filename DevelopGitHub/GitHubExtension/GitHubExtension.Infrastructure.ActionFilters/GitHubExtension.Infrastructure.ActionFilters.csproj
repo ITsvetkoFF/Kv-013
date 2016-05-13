@@ -102,6 +102,7 @@
     <Compile Include="Extensions\ActivityFiltersExtensions.cs" />
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

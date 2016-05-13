@@ -1,6 +1,7 @@
 ﻿using System.Web.Http.Dependencies;
 using System.Web.Http.Filters;
 using GitHubExtension.Infrastructure.ActionFilters.Constants;
+using GitHubExtension.Infrastructure.ActionFilters.Models;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
@@ -51,6 +52,14 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
             string collaboratorName = appUser.UserName;
            
             return collaboratorName;
+        }
+
+        public static UserModel GetUserModel(this HttpActionExecutedContext actionExecutedContext)
+        {
+            string userId = actionExecutedContext.GetUserId();
+            string userName = actionExecutedContext.GetUserName();
+
+            return new UserModel() {UserId = userId, UserName = userName};
         }
     }
 }
