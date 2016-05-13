@@ -35,7 +35,7 @@
             return $http({
                 method: 'PATCH',
                 dataType: 'string',
-                url: baseUrl + '/repos/' + repository.id + '/collaborators/' + collaborator.id,
+                url: baseUrl + 'repos/' + repository.id + '/collaborators/' + collaborator.gitHubId,
                 data: '"' + role.name + '"'
             });
         }
@@ -46,7 +46,7 @@
                 dataType: 'json',
                 url: API_URL.NOTE,
                 data: {
-                    collaboratorGitHubId: collaborator.id,
+                    collaboratorId: collaborator.userId,
                     body: collaborator.note
                 }
             });
@@ -55,7 +55,7 @@
         function getPrivateNote(collaborator) {
             return $http({
                 method: 'GET',
-                url: API_URL.NOTE + API_URL.COLLABORATORS + collaborator.id
+                url: API_URL.NOTE + API_URL.COLLABORATORS + collaborator.userId
             });
         }
 
