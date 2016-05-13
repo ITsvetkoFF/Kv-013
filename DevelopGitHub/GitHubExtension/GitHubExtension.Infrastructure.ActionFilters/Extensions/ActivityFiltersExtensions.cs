@@ -2,8 +2,6 @@
 using System.Web.Http.Filters;
 using GitHubExtension.Infrastructure.ActionFilters.Constants;
 using GitHubExtension.Infrastructure.ActionFilters.Models;
-using GitHubExtension.Security.DAL.Identity;
-using GitHubExtension.Security.DAL.Infrastructure;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
@@ -43,15 +41,6 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
         public static T GetService<T>(this IDependencyResolver dependencyResolver) where T : class 
         {
             return dependencyResolver.GetService(typeof(T)) as T;
-        }
-
-        public static string GetCollaboratorName(this IDependencyResolver dependencyResolver, int gitHubId)
-        {
-            var applicationUserManager = dependencyResolver.GetService<ApplicationUserManager>();
-            User appUser = applicationUserManager.FindByGitHubId(gitHubId);
-            string collaboratorName = appUser.UserName;
-           
-            return collaboratorName;
         }
 
         public static UserModel GetUserModel(this HttpActionExecutedContext actionExecutedContext)

@@ -6,6 +6,8 @@ using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Infrastructure.ActionFilters.Extensions;
 using GitHubExtension.Infrastructure.ActionFilters.Models;
+using GitHubExtension.Security.DAL.Identity;
+using GitHubExtension.Security.DAL.Infrastructure;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
@@ -16,9 +18,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
         {
             int repoId = actionExecutedContext.GetRepositoryId();
             string roleToAssign = actionExecutedContext.GetRoleToAssign();
-            int gitHubId = actionExecutedContext.GetGitHubId();      
+            int gitHubId = actionExecutedContext.GetGitHubId();
             var dependencyResolver = actionExecutedContext.GetDependencyResolver();
-            var collaboratorName = dependencyResolver.GetCollaboratorName(gitHubId);
+            var applicationUserManager = dependencyResolver.GetService<ApplicationUserManager>();
+            User appUser = applicationUserManager.FindByGitHubId(gitHubId);
+            string collaboratorName = appUser.UserName;
             var activityContextQuery = dependencyResolver.GetService<ActivityContextQuery>();
             var activityContextCommand = dependencyResolver.GetService<ActivityContextCommand>();
             var user = actionExecutedContext.GetUserModel();
