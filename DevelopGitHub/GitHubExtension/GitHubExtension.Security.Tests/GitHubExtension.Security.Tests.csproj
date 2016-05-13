@@ -112,15 +112,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Extensions\InvalidModelStateResultExtentions.cs" />
     <Compile Include="Mocks\MockForDbSet.cs" />
     <Compile Include="Mocks\MockForEnumerableQuery.cs" />
-    <Compile Include="TestExtensions\SecurityContextUserExtensionTests.cs" />
     <Compile Include="TestExtensions\UserMapperTests.cs" />
     <Compile Include="TestForControllers\RepositoryControllerAssignRolesToUserTests.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByIdTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestForControllers\AccountControllerGetUserByNameTests.cs" />
+    <Compile Include="TestForControllers\UserControllerGetAllUsersByNameTests.cs" />
     <Compile Include="TestRoutes\AccountTestRoutes.cs" />
     <Compile Include="TestRoutes\RepositoryTestRoutes.cs" />
     <Compile Include="TestRoutes\RolesTestRoutes.cs" />
