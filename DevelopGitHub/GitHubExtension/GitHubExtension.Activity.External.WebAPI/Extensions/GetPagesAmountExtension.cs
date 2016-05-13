@@ -8,7 +8,7 @@ using GitHubExtension.Activity.External.WebAPI.Queries;
 
 namespace GitHubExtension.Activity.External.WebAPI.Extensions
 {
-    static class GetPagesAmountExtension
+    public static class GetPagesAmountExtension
     {
         private const string LastLinkRelRegex = "last";
 

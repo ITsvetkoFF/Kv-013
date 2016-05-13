@@ -1,6 +1,6 @@
 namespace GitHubExtension.Activity.External.WebAPI
 {
-    static class GitHubEventTypeConstants
+    public static class GitHubEventTypeConstants
     {
         public const string CommitCommentEvent = "CommitCommentEvent";
 

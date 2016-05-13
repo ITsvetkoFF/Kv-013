@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace GitHubExtension.Activity.External.WebAPI.Exceptions
 {
-    class LinkHeaderMissingException : ApplicationException
+    public class LinkHeaderMissingException : ApplicationException
     {
         public LinkHeaderMissingException()
             : base()
