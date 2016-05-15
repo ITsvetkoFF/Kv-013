@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
@@ -17,7 +16,8 @@ using GitHubExtension.Security.WebApi.Mappers;
 using GitHubExtension.Security.WebApi.Models;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using GitHubExtension.Security.WebApi.Results;
-
+using GitHubExtention.Preferences.WebApi;
+using GitHubExtention.Preferences.WebApi.Queries;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Security.WebApi.Controllers
@@ -31,14 +31,18 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         private readonly ApplicationUserManager _userManager;
 
+        private readonly IAzureContainerQuery _container;
+
         public AccountController(
             IGitHubQuery gitHubQuery, 
             ApplicationUserManager userManager, 
-            ISecurityContextQuery securityContextQuery)
+            ISecurityContextQuery securityContextQuery,
+            IAzureContainerQuery container)
         {
             _gitHubQuery = gitHubQuery;
             _userManager = userManager;
             _securityContextQuery = securityContextQuery;
+            _container = container;
         }
 
         [HttpGet]
@@ -59,9 +63,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
             if (user == null)
             {
                 user = userReadModel.ToUserEntity();
+                var file = await _gitHubQuery.GetAvatar(userReadModel.AvatarUrl);
+                user.AvatarUrl = await _container.SaveAvatar(file);
                 IHttpActionResult registrationResult = await RegisterUser(user, tokenClaim.Value);
                 if (registrationResult != null)
                 {
+                    _container.DeleteBlob(user.AvatarUrl);
                     return registrationResult;
                 }
             }
