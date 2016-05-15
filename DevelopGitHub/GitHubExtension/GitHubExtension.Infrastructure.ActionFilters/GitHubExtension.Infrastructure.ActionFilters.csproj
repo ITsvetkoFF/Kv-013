@@ -103,6 +103,7 @@
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
     <Compile Include="InternalActivitiesFilters\TemplateActivityAttribute.cs" />
+    <Compile Include="InternalActivitiesFilters\UserJoinToSystemActivityAttribute.cs" />
     <Compile Include="Models\RepositoryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

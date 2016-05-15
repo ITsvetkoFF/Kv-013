@@ -64,8 +64,7 @@
   <ItemGroup>
     <Compile Include="HttpMessageExtensions.cs" />
     <Compile Include="HttpResponseMessageExtension.cs" />
-    <Compile Include="Identity\AccessTokenExtensions.cs" />
-    <Compile Include="Identity\CurrentProjectExtensions.cs" />
+    <Compile Include="Identity\IdentityExtensions.cs" />
     <Compile Include="Owin\AuthenticationExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Owin\UseOwinContextInjectorExtension.cs" />
