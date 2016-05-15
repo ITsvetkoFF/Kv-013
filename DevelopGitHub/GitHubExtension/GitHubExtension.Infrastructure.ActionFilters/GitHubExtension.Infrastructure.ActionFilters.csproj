@@ -101,12 +101,8 @@
     <Compile Include="Constants\ActionFilterConstansts.cs" />
     <Compile Include="Extensions\ActivityFiltersExtensions.cs" />
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
-    <Compile Include="InternalActivitiesFilters\CreateIssueTemplateActivityAttribute.cs" />
-    <Compile Include="InternalActivitiesFilters\CreatePullRequestTemplateActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
     <Compile Include="InternalActivitiesFilters\TemplateActivityAttribute.cs" />
-    <Compile Include="InternalActivitiesFilters\UpdateIssueTemplateActivityAttribute.cs" />
-    <Compile Include="InternalActivitiesFilters\UpdatePullRequestTemplateActivityAttribute.cs" />
     <Compile Include="Models\RepositoryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +119,10 @@
     <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
       <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
       <Name>GitHubExtension.Activity.Internal.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Extensions\GitHubExtension.Infrastructure.Extensions.csproj">
+      <Project>{D6C328E6-DB94-4FFF-A775-BD7C2F42C56F}</Project>
+      <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>

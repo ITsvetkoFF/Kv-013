@@ -1,54 +1,38 @@
 ﻿using System;
-using System.Security.Claims;
-using System.Security.Principal;
 using System.Web.Http.Dependencies;
 using System.Web.Http.Filters;
 using GitHubExtension.Infrastructure.ActionFilters.Constants;
 using GitHubExtension.Infrastructure.ActionFilters.Models;
+using GitHubExtension.Infrastructure.Extensions.Identity;
 using Microsoft.AspNet.Identity;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
 {
     public static class ActivityFiltersExtensions
     {
-        private const string CurrentProjectName = "CurrentProjectName";
-        private const string CurrentProjectId = "CurrentProjectId";
-
-        public static string GetCurrentProjectName(this IPrincipal user)
+        private static string GetUserId(this HttpActionExecutedContext actionExecutedContext)
         {
-            var claimsIdentity = user.Identity as ClaimsIdentity;
-            return claimsIdentity.FindFirstValue(CurrentProjectName);
+            return actionExecutedContext.ActionContext.RequestContext.Principal.Identity.GetUserId();
         }
 
-        public static int GetCurrentProjectId(this IPrincipal user)
+        private static string GetUserName(this HttpActionExecutedContext actionExecutedContext)
         {
-            var claimsIdentity = user.Identity as ClaimsIdentity;
-            return Int32.Parse(claimsIdentity.FindFirstValue(CurrentProjectId));
+            return actionExecutedContext.ActionContext.RequestContext.Principal.Identity.Name;
+        }
+
+        private static int GetCurrentRepositoryId(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return Int32.Parse(actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectId());
+        }
+
+        private static string GetCurrentRepositoryName(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectName();
         }
 
         public static IDependencyResolver GetDependencyResolver(this HttpActionExecutedContext actionExecutedContext)
         {
             return actionExecutedContext.ActionContext.RequestContext.Configuration.DependencyResolver;
-        }
-
-        public static string GetUserId(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.ActionContext.RequestContext.Principal.Identity.GetUserId();
-        }
-
-        public static string GetUserName(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.ActionContext.RequestContext.Principal.Identity.Name;
-        }
-
-        public static int GetCurrentRepositoryId(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectId();
-        }
-
-        public static string GetCurrentRepositoryName(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectName();
         }
 
         public static int GetRepositoryId(this HttpActionExecutedContext actionExecutedContext)

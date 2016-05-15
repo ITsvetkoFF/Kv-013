@@ -9,9 +9,17 @@ using GitHubExtension.Infrastructure.ActionFilters.Models;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
+    [AttributeUsage(AttributeTargets.Method)]
     public class TemplateActivityAttribute : ActionFilterAttribute, IInternalActivityFilter
     {
-        public void SaveTemplateActivity(HttpActionExecutedContext actionExecutedContext, string activityTypeName)
+        public string ActivityTypeName { get; set; }
+
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            SaveTemplateActivity(actionExecutedContext);
+        }
+
+        private void SaveTemplateActivity(HttpActionExecutedContext actionExecutedContext)
         {
             var dependencyResolver = actionExecutedContext.GetDependencyResolver();
             var activityContextQuery = dependencyResolver.GetService<IActivityContextQuery>();
@@ -20,10 +28,10 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             var user = actionExecutedContext.GetUserModel();
             var repository = actionExecutedContext.GetRepositoryModel();
 
-            AddTemplateActivity(activityContextQuery, activityContextCommand, user, repository, activityTypeName);
+            SaveActivityEvent(activityContextQuery, activityContextCommand, user, repository, ActivityTypeName);
         }
 
-        private void AddTemplateActivity(IActivityContextQuery activityContextQuery,
+        private void SaveActivityEvent(IActivityContextQuery activityContextQuery,
                                 IActivityContextCommand activityContextCommand,
                                 UserModel user,
                                 RepositoryModel repository,
