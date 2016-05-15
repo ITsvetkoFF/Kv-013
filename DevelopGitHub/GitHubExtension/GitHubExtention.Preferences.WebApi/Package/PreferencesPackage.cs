@@ -1,7 +1,7 @@
 ﻿using GitHubExtension.Preferences.DAL.Model;
 using GitHubExtention.Preferences.WebApi.Constants;
 using GitHubExtention.Preferences.WebApi.Queries;
-using Microsoft.WindowsAzure;
+using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using SimpleInjector;
