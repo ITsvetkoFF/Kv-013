@@ -1,6 +1,4 @@
-﻿
-
-namespace GitHubExtension.Infrastructure.ActionFilters.Constants
+﻿namespace GitHubExtension.Infrastructure.ActionFilters.Constants
 {
     public static class ActionFilterConstansts
     {

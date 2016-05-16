@@ -20,10 +20,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 
             SeedCommonMembers(actionExecutedContext);
 
-            AddRoleActivity(_activityContextQuery, _activityContextCommand, _user, repoId, roleToAssign, collaboratorName); 
+            AddRoleActivity(ActivityContextQuery, ActivityContextCommand, User, repoId, roleToAssign, collaboratorName); 
         }
 
-        private void AddRoleActivity(IActivityContextQuery activityContextQuery, 
+        private void AddRoleActivity(
+                                    IActivityContextQuery activityContextQuery, 
                                     IActivityContextCommand activityContextCommand, 
                                     UserModel user, 
                                     int repoId, 
@@ -35,6 +36,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             string message = CreateActivityMessage(user.UserName, activityType.Name, roleToAssign, collaboratorName);
 
             if (activityContextCommand != null)
+            {
                 activityContextCommand.AddActivity(new ActivityEvent()
                 {
                     UserId = user.UserId,
@@ -42,8 +44,8 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
                     CurrentRepositoryId = repoId,
                     InvokeTime = DateTime.Now,
                     Message = message
-
                 });
+            }         
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Http.Dependencies;
+﻿using System.Web.Http.Dependencies;
 using System.Web.Http.Filters;
 using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
@@ -14,6 +13,51 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
 {
     public static class ActivityFiltersExtensions
     {
+        public static int GetRepositoryId(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return (int)actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.RepositoryId];
+        }
+
+        public static string GetRoleToAssign(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return (string)actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.RoleToAssign];
+        }
+
+        public static User GetUserByGitHubId(this HttpActionExecutedContext actionExecutedContext)
+        {
+            int gitHubId = actionExecutedContext.GetGitHubId();
+            var applicationUserManager = actionExecutedContext.GetApplicationUserManager();
+            User appUser = applicationUserManager.FindByGitHubId(gitHubId);
+
+            return appUser;
+        }
+
+        public static UserModel GetUserModel(this HttpActionExecutedContext actionExecutedContext)
+        {
+            string userId = actionExecutedContext.GetUserId();
+            string userName = actionExecutedContext.GetUserName();
+
+            return new UserModel() { UserId = userId, UserName = userName };
+        }
+
+        public static RepositoryModel GetRepositoryModel(this HttpActionExecutedContext actionExecutedContext)
+        {
+            int repositoryId = actionExecutedContext.GetCurrentRepositoryId();
+            string repositoryName = actionExecutedContext.GetCurrentRepositoryName();
+
+            return new RepositoryModel() { Id = repositoryId, Name = repositoryName };
+        }
+
+        public static IActivityContextQuery GetIActivityContextQuery(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return actionExecutedContext.GetDependencyResolver().GetService<IActivityContextQuery>();
+        }
+
+        public static IActivityContextCommand GetIActivityContextCommand(this HttpActionExecutedContext actionExecutedContext)
+        {
+            return actionExecutedContext.GetDependencyResolver().GetService<IActivityContextCommand>();
+        }
+
         private static string GetUserId(this HttpActionExecutedContext actionExecutedContext)
         {
             return actionExecutedContext.ActionContext.RequestContext.Principal.Identity.GetUserId();
@@ -26,7 +70,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
 
         private static int GetCurrentRepositoryId(this HttpActionExecutedContext actionExecutedContext)
         {
-            return Int32.Parse(actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectId());
+            return int.Parse(actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectId());
         }
 
         private static string GetCurrentRepositoryName(this HttpActionExecutedContext actionExecutedContext)
@@ -49,54 +93,9 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
             return actionExecutedContext.GetDependencyResolver().GetService<ApplicationUserManager>();
         }
 
-        public static int GetRepositoryId(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return (int) actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.RepositoryId];
-        }
-
-        public static string GetRoleToAssign(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return (string) actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.RoleToAssign];
-        }
-
         private static int GetGitHubId(this HttpActionExecutedContext actionExecutedContext)
         {
-            return (int) actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.GitHubId];
-        }
-
-        public static User GetUserByGitHubId(this HttpActionExecutedContext actionExecutedContext)
-        {
-            int gitHubId = actionExecutedContext.GetGitHubId();
-            var applicationUserManager = actionExecutedContext.GetApplicationUserManager();
-            User appUser = applicationUserManager.FindByGitHubId(gitHubId);
-
-            return appUser;
-        }
-
-        public static UserModel GetUserModel(this HttpActionExecutedContext actionExecutedContext)
-        {
-            string userId = actionExecutedContext.GetUserId();
-            string userName = actionExecutedContext.GetUserName();
-
-            return new UserModel() {UserId = userId, UserName = userName};
-        }
-
-        public static RepositoryModel GetRepositoryModel(this HttpActionExecutedContext actionExecutedContext)
-        {
-            int repositoryId = actionExecutedContext.GetCurrentRepositoryId();
-            string repositoryName = actionExecutedContext.GetCurrentRepositoryName();
-
-            return new RepositoryModel() { Id = repositoryId, Name = repositoryName};
-        }
-
-        public static IActivityContextQuery GetIActivityContextQuery(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.GetDependencyResolver().GetService<IActivityContextQuery>();
-        }
-
-        public static IActivityContextCommand GetIActivityContextCommand(this HttpActionExecutedContext actionExecutedContext)
-        {
-            return actionExecutedContext.GetDependencyResolver().GetService<IActivityContextCommand>();
+            return (int)actionExecutedContext.ActionContext.ActionArguments[ActionFilterConstansts.GitHubId];
         }
     }
 }

@@ -13,11 +13,12 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            SeedCommonMembers(actionExecutedContext);
-            AddRoleActivity(_activityContextQuery, _activityContextCommand, _user);
+            SeedCommonMembers(actionExecutedContext); 
+            AddRoleActivity(ActivityContextQuery, ActivityContextCommand, User);
         }
 
-        private void AddRoleActivity(IActivityContextQuery activityContextQuery,
+        private void AddRoleActivity(
+                                    IActivityContextQuery activityContextQuery,
                                     IActivityContextCommand activityContextCommand,
                                     UserModel user)
         {
@@ -26,6 +27,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             string message = CreateActivityMessage(user.UserName, activityType.Name);
 
             if (activityContextCommand != null)
+            {
                 activityContextCommand.AddActivity(new ActivityEvent()
                 {
                     UserId = user.UserId,
@@ -33,6 +35,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
                     InvokeTime = DateTime.Now,
                     Message = message
                 });
+            }
         }
     }
 }

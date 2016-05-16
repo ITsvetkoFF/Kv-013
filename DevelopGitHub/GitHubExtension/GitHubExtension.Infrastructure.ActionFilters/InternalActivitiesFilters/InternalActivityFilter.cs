@@ -8,15 +8,17 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
     public class InternalActivityFilter : ActionFilterAttribute
     {
-        protected IActivityContextQuery _activityContextQuery;
-        protected IActivityContextCommand _activityContextCommand;
-        protected UserModel _user;
+        public IActivityContextQuery ActivityContextQuery { get; set; }
+
+        public IActivityContextCommand ActivityContextCommand { get; set; }
+
+        public UserModel User { get; set; }
 
         protected void SeedCommonMembers(HttpActionExecutedContext actionExecutedContext)
         {
-            _activityContextQuery = actionExecutedContext.GetIActivityContextQuery();
-            _activityContextCommand = actionExecutedContext.GetIActivityContextCommand();
-            _user = actionExecutedContext.GetUserModel();
+            ActivityContextQuery = actionExecutedContext.GetIActivityContextQuery();
+            ActivityContextCommand = actionExecutedContext.GetIActivityContextCommand();
+            User = actionExecutedContext.GetUserModel();
         }
 
         protected virtual string CreateActivityMessage(string userName, string activityTypeName, string repositoryName)
@@ -40,10 +42,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             return message;
         }
 
-        protected virtual string CreateActivityMessage(string userName,
-                                     string activityTypeName,
-                                     string roleToAssign,
-                                     string collaboratorName)
+        protected virtual string CreateActivityMessage(
+                                                      string userName,
+                                                      string activityTypeName,
+                                                      string roleToAssign,
+                                                      string collaboratorName)
         {
             string messsage = string.Format(
                 "{0} {1} {2} to {3}",
@@ -54,7 +57,5 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 
             return messsage;
         }
-
-
     }
 }

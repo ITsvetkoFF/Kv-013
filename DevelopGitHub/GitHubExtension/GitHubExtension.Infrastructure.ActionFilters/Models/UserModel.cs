@@ -1,9 +1,9 @@
-﻿
-namespace GitHubExtension.Infrastructure.ActionFilters.Models
+﻿namespace GitHubExtension.Infrastructure.ActionFilters.Models
 {
     public class UserModel
     {
         public string UserId { get; set; }
+
         public string UserName { get; set; }
     }
 }

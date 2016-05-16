@@ -24,28 +24,31 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
         {
             var repository = actionExecutedContext.GetRepositoryModel();
 
-            SaveActivityEvent(_activityContextQuery, _activityContextCommand, _user, repository, ActivityTypeName);
+            SaveActivityEvent(ActivityContextQuery, ActivityContextCommand, User, repository, ActivityTypeName);
         }
 
-        private void SaveActivityEvent(IActivityContextQuery activityContextQuery,
-                                IActivityContextCommand activityContextCommand,
-                                UserModel user,
-                                RepositoryModel repository,
-                                string activityTypeName)
+        private void SaveActivityEvent(
+                                        IActivityContextQuery activityContextQuery,
+                                        IActivityContextCommand activityContextCommand,
+                                        UserModel user,
+                                        RepositoryModel repository,
+                                        string activityTypeName)
         {
             var activityType = activityContextQuery.GetUserActivityType(activityTypeName);
 
             string message = CreateActivityMessage(user.UserName, activityType.Name, repository.Name);
 
             if (activityContextCommand != null)
+            {
                 activityContextCommand.AddActivity(new ActivityEvent()
                 {
                     UserId = user.UserId,
                     ActivityTypeId = activityType.Id,
                     CurrentRepositoryId = repository.Id,
                     InvokeTime = DateTime.Now,
-                    Message = message       
+                    Message = message
                 });
+            }         
         }
     }
 }
