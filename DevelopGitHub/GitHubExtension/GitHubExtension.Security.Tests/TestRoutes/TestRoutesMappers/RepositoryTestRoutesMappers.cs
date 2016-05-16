@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-
 using GitHubExtension.Infrastructure.Constants;
 
 namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers

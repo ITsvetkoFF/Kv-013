@@ -143,9 +143,9 @@
       <Project>{b5f77285-e213-4564-bd65-caa3242f9f5b}</Project>
       <Name>GitHubExtension.EntryPoint</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Security.Tests2\GitHubExtension.Security.Tests2.csproj">
+    <ProjectReference Include="..\GitHubExtension.Security.Tests\GitHubExtension.Security.Tests.csproj">
       <Project>{589E771F-F7E4-4960-8588-89CDD6F6F991}</Project>
-      <Name>GitHubExtension.Security.Tests2</Name>
+      <Name>GitHubExtension.Security.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
