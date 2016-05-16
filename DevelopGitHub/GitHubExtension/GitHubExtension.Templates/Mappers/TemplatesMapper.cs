@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using GitHubExtension.Templates.CommunicationModels;
+﻿using GitHubExtension.Templates.CommunicationModels;
 using GitHubExtension.Templates.DAL.Model;
 
 namespace GitHubExtension.Templates.Mappers
