@@ -83,13 +83,13 @@ namespace GitHubExtension.Security.WebApi.Controllers
         {
             var token = User.Identity.GetExternalAccessToken();
             var userName = User.Identity.GetUserName();
-
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
-
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
-
             var users = _securityContextQuery.GetAllUsers();
             var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserIdToCollaboratorIfExists(users);
+            User currentUser = await _userManager.FindByNameAsync(userName);
+            string currentProgectId = currentUser.Claims.Where(el => el.ClaimType == "CurrentProjectId")
+                .Select(el => el.ClaimValue).FirstOrDefault();
 
             foreach (var item in collaboratorsWithUserId)
             {
@@ -97,8 +97,12 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
                 if (user != null)
                 {
-                    int id = user.UserRepositoryRoles.Select(el => el.SecurityRoleId).FirstOrDefault();
-                    item.Role = _securityContextQuery.SecurityRoles.FirstOrDefault(el => el.Id == id).Name;
+                    int securieyRoleId = user.UserRepositoryRoles.Where(el => el.RepositoryId.ToString() == currentProgectId)
+                        .Select(el => el.SecurityRoleId).FirstOrDefault();
+                    if (securieyRoleId != 0)
+                    {
+                        item.Role = _securityContextQuery.SecurityRoles.FirstOrDefault(el => el.Id == securieyRoleId).Name;
+                    }
                 }
             }
 
