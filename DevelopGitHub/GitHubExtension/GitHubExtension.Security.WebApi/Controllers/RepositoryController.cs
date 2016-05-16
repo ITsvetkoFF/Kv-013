@@ -29,8 +29,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
         private readonly ISecurityContextQuery _securityContextQuery;
 
         public RepositoryController(
-            IGitHubQuery gitHubQuery, 
-            ISecurityContextQuery securityContextQuery, 
+            IGitHubQuery gitHubQuery,
+            ISecurityContextQuery securityContextQuery,
             ApplicationUserManager userManager)
         {
             _gitHubQuery = gitHubQuery;
@@ -84,13 +84,29 @@ namespace GitHubExtension.Security.WebApi.Controllers
         {
             var token = User.GetExternalAccessToken();
             var userName = User.Identity.GetUserName();
-
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
-
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
-
             var users = _securityContextQuery.GetAllUsers();
             var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserDataToCollaboratorIfExists(users);
+
+            User currentUser = await _userManager.FindByNameAsync(userName);
+            string currentProgectId = currentUser.Claims.Where(el => el.ClaimType == "CurrentProjectId")
+                .Select(el => el.ClaimValue).FirstOrDefault();
+
+            foreach (var item in collaboratorsWithUserId)
+            {
+                User user = _userManager.Users.FirstOrDefault(el => el.Id == item.UserId);
+
+                if (user != null)
+                {
+                    int securieyRoleId = user.UserRepositoryRoles.Where(el => el.RepositoryId.ToString() == currentProgectId)
+                        .Select(el => el.SecurityRoleId).FirstOrDefault();
+                    if (securieyRoleId != 0)
+                    {
+                        item.Role = _securityContextQuery.SecurityRoles.FirstOrDefault(el => el.Id == securieyRoleId).Name;
+                    }
+                }
+            }
 
             return Ok(collaboratorsWithUserId);
         }
