@@ -10,19 +10,17 @@ using GitHubExtension.Infrastructure.ActionFilters.Models;
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class AssignRoleToUserActivityAttribute : ActionFilterAttribute, IInternalActivityFilter
+    public class AssignRoleToUserActivityAttribute : InternalActivityFilter
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             int repoId = actionExecutedContext.GetRepositoryId();
             string roleToAssign = actionExecutedContext.GetRoleToAssign();
-
             string collaboratorName = actionExecutedContext.GetUserByGitHubId().UserName;
-            var activityContextQuery = actionExecutedContext.GetIActivityContextQuery();
-            var activityContextCommand = actionExecutedContext.GetIActivityContextCommand();
-            var user = actionExecutedContext.GetUserModel();
 
-            AddRoleActivity(activityContextQuery, activityContextCommand, user, repoId, roleToAssign, collaboratorName); 
+            SeedCommonMembers(actionExecutedContext);
+
+            AddRoleActivity(_activityContextQuery, _activityContextCommand, _user, repoId, roleToAssign, collaboratorName); 
         }
 
         private void AddRoleActivity(IActivityContextQuery activityContextQuery, 
@@ -34,6 +32,8 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
         {
             var activityType = activityContextQuery.GetUserActivityType(ActivityTypeNames.AddRole);
 
+            string message = CreateActivityMessage(user.UserName, activityType.Name, roleToAssign, collaboratorName);
+
             if (activityContextCommand != null)
                 activityContextCommand.AddActivity(new ActivityEvent()
                 {
@@ -41,12 +41,8 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
                     ActivityTypeId = activityType.Id,
                     CurrentRepositoryId = repoId,
                     InvokeTime = DateTime.Now,
-                    Message = string.Format(
-                        "{0} {1} {2} to {3}",
-                        user.UserName,
-                        activityType.Name,
-                        roleToAssign,
-                        collaboratorName)
+                    Message = message
+
                 });
         }
     }
