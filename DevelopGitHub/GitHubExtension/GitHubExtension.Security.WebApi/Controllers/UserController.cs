@@ -21,9 +21,11 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         [HttpGet]
         [Route(RouteConstants.SearchUsersByName)]
-        public IHttpActionResult GetAllUsersByName(string username)
+        public IHttpActionResult GetAllUsersByName(string userName)
         {
-            IEnumerable<User> users = _securityContextQuery.GetUsersByName(username).ToList();
+            var currentUserName = User.Identity.Name;
+            IEnumerable<User> users = 
+                _securityContextQuery.GetUsersByNameExceptCurrent(userName, currentUserName).ToList();
             if (!users.Any())
             {
                 return NotFound();

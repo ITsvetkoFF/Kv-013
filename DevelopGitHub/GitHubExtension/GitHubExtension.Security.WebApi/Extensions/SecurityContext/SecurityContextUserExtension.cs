@@ -12,12 +12,16 @@ namespace GitHubExtension.Security.WebApi.Extensions.SecurityContext
         {
             var users = securityContextQuery.Users.AsNoTracking();
             return users;
-        } 
+        }
 
-        public static IEnumerable<User> GetUsersByName(this ISecurityContextQuery securityContextQuery, string userName)
+        public static IEnumerable<User> GetUsersByNameExceptCurrent(
+            this ISecurityContextQuery securityContextQuery,
+            string searchName,
+            string currentUserName)
         {
             IEnumerable<User> users =
-                securityContextQuery.Users.Select(u => u).Where(u => u.UserName.Contains(userName)).AsNoTracking();
+                securityContextQuery.Users.Where(u => u.UserName.Contains(searchName) && u.UserName != currentUserName)
+                    .AsNoTracking();
             return users;
         }
     }
