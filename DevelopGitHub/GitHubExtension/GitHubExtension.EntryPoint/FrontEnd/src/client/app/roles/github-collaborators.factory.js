@@ -17,7 +17,8 @@
                 var collaboratorsExtended = response.data;
                 collaboratorsExtended.forEach(function (collaborator) {
                     getPrivateNote(collaborator).then(function (data) {
-                        collaborator.note = data.data.body;
+                        collaborator.noteId = data.data.id;
+                        collaborator.noteBody = data.data.body;
                     });
                 });
                 return collaboratorsExtended;
@@ -47,8 +48,11 @@
                 url: API_URL.NOTE,
                 data: {
                     collaboratorId: collaborator.userId,
-                    body: collaborator.note
+                    body: collaborator.noteBody
                 }
+            }).then (function (response) {
+                collaborator.noteId = response.data.id;
+                collaborator.noteBody = response.data.body;
             });
         }
 
@@ -59,12 +63,20 @@
             });
         }
 
+        function deletePrivateNote(collaborator) {
+            return $http({
+                method: 'DELETE',
+                url: API_URL.DELETE_NOTE + collaborator.noteId
+            });
+        }
+
         return {
             getCollaborators: getCollaborators,
             getRoles: getRoles,
             assignRole: assignRole,
             getPrivateNote: getPrivateNote,
-            createPrivateNote: createPrivateNote
+            createPrivateNote: createPrivateNote,
+            deletePrivateNote: deletePrivateNote
         };
     }
 })();

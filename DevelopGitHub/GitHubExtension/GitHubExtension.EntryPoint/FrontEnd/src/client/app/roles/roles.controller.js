@@ -43,8 +43,23 @@
             githubCollaborators.getPrivateNote(collaborator);
         };
 
-        vm.createPrivateNote = function(collaborator, note) {
-            githubCollaborators.createPrivateNote(collaborator, note).then(onNoteCreated, onNoteError);
+        vm.createPrivateNote = function(collaborator) {
+            var noteId = collaborator.noteId;
+            if (typeof noteId === 'undefined') {
+                githubCollaborators.createPrivateNote(collaborator).then(onNoteCreated, onNoteError);
+            }
+            else {
+                githubCollaborators.deletePrivateNote(collaborator).then(function () {
+                    githubCollaborators.createPrivateNote(collaborator).then(onNoteCreated, onNoteError);
+                });
+            }
+        };
+
+        vm.deletePrivateNote = function (collaborator) {
+            githubCollaborators.deletePrivateNote(collaborator).then(function () {
+                delete collaborator.noteId;
+                delete collaborator.noteBody;
+            });
         };
 
         vm.formError = function (reason) {
