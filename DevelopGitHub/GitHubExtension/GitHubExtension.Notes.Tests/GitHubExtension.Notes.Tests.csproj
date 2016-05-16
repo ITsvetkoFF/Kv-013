@@ -119,7 +119,6 @@
   <ItemGroup>
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestNoteRoutesConfig.cs" />
     <Compile Include="TestsForControllers\NoteControllerCreateNoteTests.cs" />
     <Compile Include="TestsForControllers\NoteControllerGetNoteTests.cs" />
     <Compile Include="TestsForRoutes\NoteRouteTests.cs" />
@@ -142,6 +141,10 @@
     <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
       <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
       <Name>GitHubExtension.Notes.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Tests.Infrastructure\GitHubExtension.Tests.Infrastructure.csproj">
+      <Project>{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}</Project>
+      <Name>GitHubExtension.Tests.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

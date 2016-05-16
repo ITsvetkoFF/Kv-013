@@ -1,14 +1,14 @@
 ﻿using System.Net.Http;
-using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Notes.Tests.TestsForRoutes.TestRoutesMappers;
 using GitHubExtension.Notes.WebApi.Controllers;
 using GitHubExtension.Notes.WebApi.ViewModels;
+using GitHubExtension.Tests.Infrastructure;
 using MvcRouteTester;
 using Xunit;
 
 namespace GitHubExtension.Notes.Tests.TestsForRoutes
 {
-    public class NoteRouteTests : TestNoteRoutesConfig
+    public class NoteRouteTests : TestsRoutesConfig
     {
         [Fact]
         public void GetNoteForCollaboratorRoute()

@@ -1,9 +1,9 @@
 ﻿using System.Web.Http;
 using GitHubExtension.EntryPoint;
 
-namespace GitHubExtension.Notes.Tests
+namespace GitHubExtension.Tests.Infrastructure
 {
-    public class TestNoteRoutesConfig
+    public class TestsRoutesConfig
     {
         public string url = "/";
 
