@@ -7,7 +7,6 @@ using System.Web.Routing;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Statistics.WebApi.CommunicationModels;
 using GitHubExtension.Statistics.WebApi.Constant;
-using GitHubExtension.Statistics.WebApi.Extensions.Cookie;
 using GitHubExtension.Statistics.WebApi.Queries.Interfaces;
 
 using Microsoft.AspNet.Identity;
@@ -126,21 +125,8 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
 
         private async Task<ICollection<ICollection<int>>> GetCommitsRepositories(string userName, string token)
         {
-            string paramCookie = "commitsRepositories";
-            ICollection<ICollection<int>> commitsRepositories;
-
-            var cookieCommitsRepositories = GetRequestContext.HttpContext.Request.Cookies[paramCookie];
-
-            if (cookieCommitsRepositories == null)
-            {
-                commitsRepositories = await _statisticsQuery.GetCommitsRepositories(userName, token);
-                GetRequestContext.SetCommitsRepositories(commitsRepositories);
-            }
-            else
-            {
-                commitsRepositories = GetRequestContext.GetCommitsRepositories();
-            }
-
+            ICollection<ICollection<int>> commitsRepositories =
+                await _statisticsQuery.GetCommitsRepositories(userName, token);
             return commitsRepositories;
         }
     }
