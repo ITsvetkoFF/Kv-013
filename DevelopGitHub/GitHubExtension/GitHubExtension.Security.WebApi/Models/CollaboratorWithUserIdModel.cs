@@ -9,5 +9,7 @@ namespace GitHubExtension.Security.WebApi.Models
         public string Login { get; set; }
 
         public string Url { get; set; }
+
+        public string Role { get; set; }
     }
 }

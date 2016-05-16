@@ -29,8 +29,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
         private readonly ISecurityContextQuery _securityContextQuery;
 
         public RepositoryController(
-            IGitHubQuery gitHubQuery, 
-            ISecurityContextQuery securityContextQuery, 
+            IGitHubQuery gitHubQuery,
+            ISecurityContextQuery securityContextQuery,
             ApplicationUserManager userManager)
         {
             _gitHubQuery = gitHubQuery;
@@ -90,6 +90,17 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
             var users = _securityContextQuery.GetAllUsers();
             var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserIdToCollaboratorIfExists(users);
+
+            foreach (var item in collaboratorsWithUserId)
+            {
+                User user = _userManager.Users.FirstOrDefault(el => el.Id == item.UserId);
+
+                if (user != null)
+                {
+                    int id = user.UserRepositoryRoles.Select(el => el.SecurityRoleId).FirstOrDefault();
+                    item.Role = _securityContextQuery.SecurityRoles.FirstOrDefault(el => el.Id == id).Name;
+                }
+            }
 
             return Ok(collaboratorsWithUserId);
         }
