@@ -17,9 +17,9 @@
                                 <td style="vertical-align: middle;">{{collaborator.login}}</td>
                                 <td>{{collaborator.mail || vmRoles.i18n.HIDDEN}}</td>
                                 <td ng-if="collaborator.userId !== null">
-                                    <select ng-model="vmRoles.roleName[$index]"
-                                            ng-options="role.name for role in vmRoles.roles.data"
-                                            ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])"
+                                    <select ng-model="vmRoles.collaborators[$index].role"
+                                            ng-options="role.name as role.name for role in vmRoles.roles.data"
+                                            ng-change="vmRoles.assignRole(collaborator, { name: vmRoles.collaborators[$index].role })"
                                             style="margin-top: 0px">
                                         <option value="">---Please select---</option>
                                     </select>
