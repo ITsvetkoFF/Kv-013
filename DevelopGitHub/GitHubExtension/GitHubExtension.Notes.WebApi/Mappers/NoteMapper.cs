@@ -31,6 +31,7 @@ namespace GitHubExtension.Notes.WebApi.Mappers
         {
             var noteModel = new NoteModel
                                 {
+                                    Id = noteEntity.Id,
                                     UserId = noteEntity.UserId, 
                                     CollaboratorId = noteEntity.CollaboratorId, 
                                     Body = noteEntity.Body
