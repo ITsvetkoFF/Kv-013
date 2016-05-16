@@ -6,8 +6,6 @@ using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.Infrastructure.ActionFilters.Extensions;
 using GitHubExtension.Infrastructure.ActionFilters.Models;
-using GitHubExtension.Security.DAL.Identity;
-using GitHubExtension.Security.DAL.Infrastructure;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
@@ -18,19 +16,16 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
         {
             int repoId = actionExecutedContext.GetRepositoryId();
             string roleToAssign = actionExecutedContext.GetRoleToAssign();
-            int gitHubId = actionExecutedContext.GetGitHubId();
-            var dependencyResolver = actionExecutedContext.GetDependencyResolver();
-            var applicationUserManager = dependencyResolver.GetService<ApplicationUserManager>();
-            User appUser = applicationUserManager.FindByGitHubId(gitHubId);
-            string collaboratorName = appUser.UserName;
-            var activityContextQuery = dependencyResolver.GetService<IActivityContextQuery>();
-            var activityContextCommand = dependencyResolver.GetService<IActivityContextCommand>();
+
+            string collaboratorName = actionExecutedContext.GetUserByGitHubId().UserName;
+            var activityContextQuery = actionExecutedContext.GetIActivityContextQuery();
+            var activityContextCommand = actionExecutedContext.GetIActivityContextCommand();
             var user = actionExecutedContext.GetUserModel();
 
             AddRoleActivity(activityContextQuery, activityContextCommand, user, repoId, roleToAssign, collaboratorName); 
         }
 
-        public void AddRoleActivity(IActivityContextQuery activityContextQuery, 
+        private void AddRoleActivity(IActivityContextQuery activityContextQuery, 
                                     IActivityContextCommand activityContextCommand, 
                                     UserModel user, 
                                     int repoId, 

@@ -101,7 +101,7 @@
     <Compile Include="Constants\ActionFilterConstansts.cs" />
     <Compile Include="Extensions\ActivityFiltersExtensions.cs" />
     <Compile Include="InternalActivitiesFilters\AssignRoleToUserActivityAttribute.cs" />
-    <Compile Include="InternalActivitiesFilters\InternalActivityFilter.cs" />
+    <Compile Include="InternalActivitiesFilters\IInternalActivityFilter.cs" />
     <Compile Include="InternalActivitiesFilters\TemplateActivityAttribute.cs" />
     <Compile Include="InternalActivitiesFilters\UserJoinToSystemActivityAttribute.cs" />
     <Compile Include="Models\RepositoryModel.cs" />

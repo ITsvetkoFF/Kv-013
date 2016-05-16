@@ -21,9 +21,8 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 
         private void SaveTemplateActivity(HttpActionExecutedContext actionExecutedContext)
         {
-            var dependencyResolver = actionExecutedContext.GetDependencyResolver();
-            var activityContextQuery = dependencyResolver.GetService<IActivityContextQuery>();
-            var activityContextCommand = dependencyResolver.GetService<IActivityContextCommand>();
+            var activityContextQuery = actionExecutedContext.GetIActivityContextQuery();
+            var activityContextCommand = actionExecutedContext.GetIActivityContextCommand();
 
             var user = actionExecutedContext.GetUserModel();
             var repository = actionExecutedContext.GetRepositoryModel();

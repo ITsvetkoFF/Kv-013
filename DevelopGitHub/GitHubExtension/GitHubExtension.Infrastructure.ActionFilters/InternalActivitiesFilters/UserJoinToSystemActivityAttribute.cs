@@ -13,16 +13,15 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
     public class UserJoinToSystemActivityAttribute : ActionFilterAttribute, IInternalActivityFilter
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {  
-            var dependencyResolver = actionExecutedContext.GetDependencyResolver(); 
-            var activityContextQuery = dependencyResolver.GetService<IActivityContextQuery>();
-            var activityContextCommand = dependencyResolver.GetService<IActivityContextCommand>();
+        {
+            var activityContextQuery = actionExecutedContext.GetIActivityContextQuery();
+            var activityContextCommand = actionExecutedContext.GetIActivityContextCommand();
             var user = actionExecutedContext.GetUserModel();
 
             AddRoleActivity(activityContextQuery, activityContextCommand, user);
         }
 
-        public void AddRoleActivity(IActivityContextQuery activityContextQuery,
+        private void AddRoleActivity(IActivityContextQuery activityContextQuery,
                                     IActivityContextCommand activityContextCommand,
                                     UserModel user)
         {
