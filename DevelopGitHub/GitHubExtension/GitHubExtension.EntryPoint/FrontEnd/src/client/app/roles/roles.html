@@ -17,23 +17,31 @@
                             <td>
                                 <select ng-model="vmRoles.roleName[$index]"
                                         ng-options="role.name for role in vmRoles.roles.data"
-                                        ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])">
+                                        ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])"
+                                        style="margin-top: 0px">
                                     <option value="">---Please select---</option>
                                 </select>
                             </td>
                             <td>
-                                <form name="noteForm" ng-init="collaborator.note"
-                                      ng-submit="noteForm.$valid && vmRoles.createPrivateNote(collaborator)">
-                                    <input type="text" name="newNote" ng-model="collaborator.note" required
-                                           ng-minlength="5">
-                                    <button type="submit" class="btn btn-primary btn-large"
-                                            ng-click="noteForm.newNote.$error.minlength
-                                            && vmRoles.formError(vmRoles.i18n.NOTE_MIN_LENGTH)">
-                                        {{vmRoles.i18n.ADD_NEW_NOTE}}
-                                    </button>
+                                <form name="noteForm"
+                                      ng-submit="noteForm.$valid && vmRoles.createPrivateNote(collaborator)"
+                                      style="margin: 0px">
+                                    <input type="text" name="newNote"
+                                           ng-model="collaborator.noteBody" required ng-minlength="5"
+                                           style="margin-top: 0px">
+                                    <label for="newNoteSubmit">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"
+                                           style="font-size:24px;color:darkgreen;"></i>
+                                    </label>
+                                    <input id="newNoteSubmit" type="submit" ng-click="noteForm.newNote.$error.minlength
+                                    && vmRoles.formError(vmRoles.i18n.NOTE_MIN_LENGTH)" class="hidden">
+                                    <label for="deleteNoteSubmit">
+                                        <i class="fa fa-times-circle" style="font-size:24px;color:red;"></i>
+                                    </label>
+                                    <input id="deleteNoteSubmit"
+                                           ng-click="vmRoles.deletePrivateNote(collaborator)" class="hidden">
                                 </form>
                             </td>
-                            <td>
                         </tr>
                         </tbody>
                     </table>

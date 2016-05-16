@@ -24,6 +24,7 @@
                 CURRENT_REPOSITORY: resource + 'repos/current',
                 NOTE: resource + 'note',
                 COLLABORATORS: '/collaborators/',
+                DELETE_NOTE: resource + 'note/',
 
                 GET_REPOBYNAME: baseUserStats + '/commits',
                 GET_FOLLOWERS: baseUserStatsInfo + '/followers',
