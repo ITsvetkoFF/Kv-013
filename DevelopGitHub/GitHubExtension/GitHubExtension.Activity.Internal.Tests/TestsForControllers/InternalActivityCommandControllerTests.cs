@@ -9,7 +9,7 @@ using GitHubExtension.Activity.Internal.WebApi.Controllers;
 using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Models;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
-using GitHubExtension.Security.Tests.Mocks;
+using GitHubExtension.Security.Tests2.Mocks;
 using NSubstitute;
 using Xunit;
 
