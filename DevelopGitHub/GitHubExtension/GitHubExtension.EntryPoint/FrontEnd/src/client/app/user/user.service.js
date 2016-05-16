@@ -4,10 +4,10 @@
         .module('app.user')
         .factory('userService', userService);
 
-    userService.$inject = ['$cookies', '$http', '$state', 'API_URL', 'logger', 'i18n','$window'];
+    userService.$inject = ['$cookies', '$http', '$state', 'API_URL', 'logger', 'i18n','$window', 'localStorageService'];
 
     /* @ngInject */
-    function userService($cookies, $http, $state, API_URL, logger, i18n, $window) {
+    function userService($cookies, $http, $state, API_URL, logger, i18n, $window, localStorage) {
         var RepositoryList;
         var CurrentRepository;
 
@@ -21,6 +21,7 @@
                 angular.forEach(cookies, function (value, key) {
                     $cookies.remove(key);
                 });
+                localStorage.clearAll();
                 $state.go('dashboard').then(function () {
                     $state.reload();
                 });
