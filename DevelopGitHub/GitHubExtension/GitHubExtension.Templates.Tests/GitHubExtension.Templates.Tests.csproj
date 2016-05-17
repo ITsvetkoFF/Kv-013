@@ -1,19 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\StyleCopPlus.MSBuild.4.7.49.5\build\StyleCopPlus.MSBuild.props" Condition="Exists('..\packages\StyleCopPlus.MSBuild.4.7.49.5\build\StyleCopPlus.MSBuild.props')" />
+  <Import Project="..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props" Condition="Exists('..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" />
   <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FEF89135-5ECD-4D37-B19D-F6D3685411CA}</ProjectGuid>
+    <ProjectGuid>{D2AA6FBD-E444-453E-9723-60967CE8AF86}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GitHubExtension.Notes.Tests</RootNamespace>
-    <AssemblyName>GitHubExtension.Notes.Tests</AssemblyName>
+    <RootNamespace>GitHubExtension.Templates.Tests</RootNamespace>
+    <AssemblyName>GitHubExtension.Templates.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>ee5f5e8a</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>3810f1f7</NuGetPackageImportStamp>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,10 +44,6 @@
       <HintPath>..\packages\FluentAssertions.4.4.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -57,9 +56,8 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+    <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -98,6 +96,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
@@ -117,42 +118,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\IdentityExtensions.cs" />
+    <Compile Include="Extensions\IdentityExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsForControllers\NoteControllerCreateNoteTests.cs" />
-    <Compile Include="TestsForControllers\NoteControllerGetNoteTests.cs" />
-    <Compile Include="TestsForRoutes\NoteRouteTests.cs" />
-    <Compile Include="TestsForRoutes\TestRoutesMappers\ForGetNoteForCollaborator.cs" />
-    <Compile Include="TestsForValidator\NoteValidatorTests.cs" />
+    <Compile Include="TestExtensions\MapperTests.cs" />
+    <Compile Include="TestForControllers\TemplatesExternalControllerTests.cs" />
+    <Compile Include="TestForControllers\TemplatesInternalControllerTests.cs" />
+    <Compile Include="TestRoutes\TemplatesRouteTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitHubExtension.EntryPoint\GitHubExtension.EntryPoint.csproj">
-      <Project>{B5F77285-E213-4564-BD65-CAA3242F9F5B}</Project>
-      <Name>GitHubExtension.EntryPoint</Name>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Templates.DAL\GitHubExtension.Templates.DAL.csproj">
+      <Project>{9301AB33-C18E-4C2E-9F07-E8F99A9FD72E}</Project>
+      <Name>GitHubExtension.Templates.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
-      <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
-      <Name>GitHubExtension.Infrastructure.Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
-      <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>
-      <Name>GitHubExtension.Notes.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.Notes.WebApi\GitHubExtension.Notes.WebApi.csproj">
-      <Project>{819015c6-b19c-4240-9049-cafa965cef0d}</Project>
-      <Name>GitHubExtension.Notes.WebApi</Name>
+    <ProjectReference Include="..\GitHubExtension.Templates\GitHubExtension.Templates.csproj">
+      <Project>{D2ADB828-D1E5-40ED-AA12-1643FB5CD11E}</Project>
+      <Name>GitHubExtension.Templates</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Tests.Infrastructure\GitHubExtension.Tests.Infrastructure.csproj">
       <Project>{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56}</Project>
       <Name>GitHubExtension.Tests.Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -162,7 +156,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props'))" />
     <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCopPlus.MSBuild.4.7.49.5\build\StyleCopPlus.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCopPlus.MSBuild.4.7.49.5\build\StyleCopPlus.MSBuild.props'))" />
   </Target>
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

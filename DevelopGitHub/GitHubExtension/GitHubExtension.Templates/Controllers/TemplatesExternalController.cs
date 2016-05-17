@@ -9,7 +9,6 @@ using GitHubExtension.Templates.Queries;
 
 namespace GitHubExtension.Templates.Controllers
 {
-    [RoutePrefix(RouteTemplatesConstants.GetGitHubTemplatesRoute)]
     public class TemplatesExternalController : ApiController
     {
         private const string PathToPullRequestTemplate = ".github/PULL_REQUEST_TEMPLATE.md";

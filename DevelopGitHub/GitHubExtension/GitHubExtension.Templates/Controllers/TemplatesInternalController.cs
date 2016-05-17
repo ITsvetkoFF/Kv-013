@@ -1,10 +1,10 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 using GitHubExtension.Templates.Constants;
 using GitHubExtension.Templates.Queries;
 
 namespace GitHubExtension.Templates.Controllers
 {
-    [RoutePrefix(RouteTemplatesConstants.GetGitHubTemplatesRoute)]
     public class TemplatesInternalController : ApiController
     {
          private readonly ITemplatesQuery _templateQuery;
