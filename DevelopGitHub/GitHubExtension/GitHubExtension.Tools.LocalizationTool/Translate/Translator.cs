@@ -43,8 +43,8 @@ namespace GitHubExtension.LocalizationTool.Translate
                 return;
             }
 
-            Language sourceLanguageEnum = sourceLanguage.GetLanguageEnum();
-            Language targetLanguageEnum = targetLanguage.GetLanguageEnum();
+            Language sourceLanguageEnum = LanguageExtension.GetLanguageEnum(sourceLanguage);
+            Language targetLanguageEnum = LanguageExtension.GetLanguageEnum(targetLanguage);
             StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
             string result;
             using (var httpClient = new HttpClient())
