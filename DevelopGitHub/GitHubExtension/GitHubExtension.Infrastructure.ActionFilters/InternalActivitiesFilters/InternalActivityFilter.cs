@@ -8,11 +8,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
     public class InternalActivityFilter : ActionFilterAttribute
     {
-        public IActivityContextQuery ActivityContextQuery { get; set; }
+        protected IActivityContextQuery ActivityContextQuery { get; set; }
 
-        public IActivityContextCommand ActivityContextCommand { get; set; }
+        protected IActivityContextCommand ActivityContextCommand { get; set; }
 
-        public UserModel User { get; set; }
+        protected UserModel User { get; set; }
 
         protected void SeedCommonMembers(HttpActionExecutedContext actionExecutedContext)
         {
@@ -21,18 +21,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             User = actionExecutedContext.GetUserModel();
         }
 
-        protected virtual string CreateActivityMessage(string userName, string activityTypeName, string repositoryName)
-        {
-            string message = string.Format(
-                "{0} {1} for {2}",
-                userName,
-                activityTypeName,
-                repositoryName);
-
-            return message;
-        }
-
-        protected virtual string CreateActivityMessage(string userName, string activityTypeName)
+        protected string CreateActivityMessage(string userName, string activityTypeName)
         {
             string message = string.Format(
                                     "{0} {1}",
@@ -40,22 +29,6 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
                                     activityTypeName);
 
             return message;
-        }
-
-        protected virtual string CreateActivityMessage(
-                                                      string userName,
-                                                      string activityTypeName,
-                                                      string roleToAssign,
-                                                      string collaboratorName)
-        {
-            string messsage = string.Format(
-                "{0} {1} {2} to {3}",
-                userName,
-                activityTypeName,
-                roleToAssign,
-                collaboratorName);
-
-            return messsage;
         }
     }
 }

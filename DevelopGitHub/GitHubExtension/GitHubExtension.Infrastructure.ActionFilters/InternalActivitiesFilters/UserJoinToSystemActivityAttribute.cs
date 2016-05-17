@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Web.Http.Filters;
 using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.Internal.WebApi.Commands;
 using GitHubExtension.Activity.Internal.WebApi.Extensions;
-using GitHubExtension.Activity.Internal.WebApi.Queries;
-using GitHubExtension.Infrastructure.ActionFilters.Models;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
@@ -13,24 +10,21 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            SeedCommonMembers(actionExecutedContext); 
-            AddRoleActivity(ActivityContextQuery, ActivityContextCommand, User);
+            SeedCommonMembers(actionExecutedContext);
+            AddJoinToSystemActivity();
         }
 
-        private void AddRoleActivity(
-                                    IActivityContextQuery activityContextQuery,
-                                    IActivityContextCommand activityContextCommand,
-                                    UserModel user)
+        private void AddJoinToSystemActivity()
         {
-            var activityType = activityContextQuery.GetUserActivityType(ActivityTypeNames.AddRole);
+            var activityType = ActivityContextQuery.GetUserActivityType(ActivityTypeNames.AddRole);
 
-            string message = CreateActivityMessage(user.UserName, activityType.Name);
+            string message = CreateActivityMessage(User.UserName, activityType.Name);
 
-            if (activityContextCommand != null)
+            if (ActivityContextCommand != null)
             {
-                activityContextCommand.AddActivity(new ActivityEvent()
+                ActivityContextCommand.AddActivity(new ActivityEvent()
                 {
-                    UserId = user.UserId,
+                    UserId = User.UserId,
                     ActivityTypeId = activityType.Id,
                     InvokeTime = DateTime.Now,
                     Message = message
