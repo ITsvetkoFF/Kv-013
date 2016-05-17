@@ -9,7 +9,7 @@ using Xunit;
 
 namespace GitHubExtension.Templates.Tests.TestExtensions
 {
-    public class MapperTests
+    public class GitHubTemplatesMappersTests
     {
         private const string TestDescription = "description";
         private const int TestId = 1;

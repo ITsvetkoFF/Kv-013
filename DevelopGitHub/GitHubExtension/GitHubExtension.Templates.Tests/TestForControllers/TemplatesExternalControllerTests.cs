@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -30,6 +31,9 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
         private const string MessageNull = null;
         private const string Sha = "sha";
         private const string ShaNull = null;
+        private const HttpStatusCode CreatedStatusCode = HttpStatusCode.Created;
+        private const HttpStatusCode UnprocessableEntityStatusCode = (HttpStatusCode)422; 
+        private const HttpStatusCode OkStatusCode = HttpStatusCode.OK;
 
         public static IEnumerable<object[]> DataForIssueNotFoundResult
         {
@@ -91,22 +95,6 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
             }
         }
 
-        public static IEnumerable<object[]> DataForGetIssueUnprocessableEntityResult
-        {
-            get
-            {
-                yield return new object[]
-                {
-                        new CreateUpdateTemplateModel()
-                        {
-                            Message = MessageNull,
-                            Content = ContentNull,
-                            Path = PathToIssueTemplate
-                        },
-                };
-            }
-        }
-
         public static IEnumerable<object[]> DataForIssueCreatedResult
         {
             get
@@ -119,6 +107,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Content = Content,
                             Path = PathToIssueTemplate
                         },
+                     CreatedStatusCode
                 };
             }
         }
@@ -135,6 +124,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Content = Content,
                             Path = PathToPullRequestTemplate
                         },
+                        CreatedStatusCode
                 };
             }
         }
@@ -152,6 +142,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Sha = ShaNull,
                             Path = PathToIssueTemplate
                         },
+                        UnprocessableEntityStatusCode
                 };
             }
         }
@@ -169,6 +160,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Sha = Sha,
                             Path = PathToIssueTemplate
                         },
+                        OkStatusCode
                 };
             }
         }
@@ -186,6 +178,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Sha = ShaNull,
                             Path = PathToPullRequestTemplate
                         },
+                        UnprocessableEntityStatusCode
                 };
             }
         }
@@ -203,6 +196,7 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
                             Sha = Sha,
                             Path = PathToPullRequestTemplate
                         },
+                        OkStatusCode
                 };
             }
         }
@@ -289,146 +283,154 @@ namespace GitHubExtension.Templates.Tests.TestForControllers
 
         [Theory]
         [MemberData("DataForIssueCreatedResult")]
-        public async void ShoudReturnCreatedForCreateIssueTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnCreatedForCreateIssueTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.CreateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult(HttpStatusCode.Created));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = HttpStatusCode.Created;
 
             // Act
             IHttpActionResult result = await controller.CreateIssueTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForIssueUnprocessableEntityResult")]
-        public async void ShoudReturnUnprocessableEntityForCreateIssueTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnUnprocessableEntityForCreateIssueTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.CreateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult((HttpStatusCode)422));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = (HttpStatusCode)422;
 
             // Act
             IHttpActionResult result = await controller.CreateIssueTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForPullRequestCreatedResult")]
-        public async void ShoudReturnCreatedForCreatePullRequestTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnCreatedForCreatePullRequestTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.CreateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult(HttpStatusCode.Created));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = HttpStatusCode.Created;
 
             // Act
             IHttpActionResult result = await controller.CreatePullRequestTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForPullRequestUnprocessableEntityResult")]
-        public async void ShoudReturnUnprocessableEntityForCreatePullRequestTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnUnprocessableEntityForCreatePullRequestTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.CreateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult((HttpStatusCode)422));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = (HttpStatusCode)422;
 
             // Act
             IHttpActionResult result = await controller.CreatePullRequestTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForIssueOkResult")]
-        public async void ShoudReturnOkForIssueTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnOkForIssueTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.UpdateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult(HttpStatusCode.OK));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = HttpStatusCode.OK;
 
             // Act
             IHttpActionResult result = await controller.UpdateIssueTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForIssueUnprocessableEntityResult")]
-        public async void ShoudReturnUnprocessableEntityForIssueTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnUnprocessableEntityForIssueTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.UpdateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult((HttpStatusCode)422));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = (HttpStatusCode)422;
 
             // Act
             IHttpActionResult result = await controller.UpdateIssueTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForPullRequestOkResult")]
-        public async void ShoudReturnOkForPullRequestTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnOkForPullRequestTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.UpdateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult(HttpStatusCode.OK));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = HttpStatusCode.OK;
 
             // Act
             IHttpActionResult result = await controller.UpdatePullRequestTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
 
         [Theory]
         [MemberData("DataForPullRequestUnprocessableEntityResult")]
-        public async void ShoudReturnUnprocessableEntityForPullRequestTemplate(CreateUpdateTemplateModel model)
+        public async void ShoudReturnUnprocessableEntityForPullRequestTemplate(
+            CreateUpdateTemplateModel model,
+            HttpStatusCode expectedStatusCode)
         {
             // Arrange
             var templatesCommand = Substitute.For<ITemplatesCommand>();
             templatesCommand.UpdateTemplateAsync(model).ReturnsForAnyArgs(Task.FromResult((HttpStatusCode)422));
             TemplatesExternalController controller = new TemplatesExternalController(templatesCommand, Substitute.For<ITemplatesQuery>());
             controller.SetUserForController(TestUserName, Claims);
-            var expectedResult = (HttpStatusCode)422;
 
             // Act
             IHttpActionResult result = await controller.UpdatePullRequestTemplate(model);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedResult);
+            result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(expectedStatusCode);
         }
     }
 }
