@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http.Filters;
 using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Infrastructure.ActionFilters.Extensions;
 
 namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
@@ -9,47 +8,36 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
     [AttributeUsage(AttributeTargets.Method)]
     public class AssignRoleToUserActivityAttribute : InternalActivityFilter
     {
+        private string _roleToAssign;
+        private string _collaboratorName;
+        private int _repoId;
+
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            int repoId = actionExecutedContext.GetRepositoryId();
-            string roleToAssign = actionExecutedContext.GetRoleToAssign();
-            string collaboratorName = actionExecutedContext.GetUserByGitHubId().UserName;
+            _roleToAssign = actionExecutedContext.GetRoleToAssign();
+            _collaboratorName = actionExecutedContext.GetUserByGitHubId().UserName;
+            _repoId = actionExecutedContext.GetRepositoryId();
 
-            SeedCommonMembers(actionExecutedContext);
-
-            AddRoleActivity(repoId, roleToAssign, collaboratorName); 
+            base.OnActionExecuted(actionExecutedContext);
         }
 
-        private void AddRoleActivity(int repoId, string roleToAssign, string collaboratorName)
+        public override string ActivityTypeName
         {
-            var activityType = ActivityContextQuery.GetUserActivityType(ActivityTypeNames.AddRole);
-
-            string message = CreateActivityMessage(User.UserName, activityType.Name, roleToAssign, collaboratorName);
-
-            if (ActivityContextCommand != null)
-            {
-                ActivityContextCommand.AddActivity(new ActivityEvent()
-                {
-                    UserId = User.UserId,
-                    ActivityTypeId = activityType.Id,
-                    CurrentRepositoryId = repoId,
-                    InvokeTime = DateTime.Now,
-                    Message = message
-                });
-            }         
+            get { return ActivityTypeNames.AddRole; }
         }
 
-        private string CreateActivityMessage(
-                                               string userName,
-                                               string activityTypeName,
-                                               string roleToAssign,
-                                               string collaboratorName)
+        protected override string BuildActivityMessage()
         {
-            string baseMessage = base.CreateActivityMessage(userName, activityTypeName);
+            return string.Format("{0} to {1}", _roleToAssign, _collaboratorName);
+        }
 
-            string message = string.Format("{0} {1} to {2}", baseMessage, roleToAssign, collaboratorName);
+        protected override ActivityEvent BuildPartOfActivityEvent()
+        {
+            var activityEvent = base.BuildPartOfActivityEvent();
 
-            return message;
+            activityEvent.CurrentRepositoryId = _repoId;
+
+            return activityEvent;
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http.Filters;
 using GitHubExtension.Activity.DAL;
-using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Infrastructure.ActionFilters.Extensions;
 using GitHubExtension.Infrastructure.ActionFilters.Models;
 
@@ -10,47 +9,27 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
     [AttributeUsage(AttributeTargets.Method)]
     public class TemplateActivityAttribute : InternalActivityFilter
     {
-        public string ActivityTypeName { get; set; }
+        private RepositoryModel _repository;
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            SeedCommonMembers(actionExecutedContext);
-            SaveTemplateActivity(actionExecutedContext);
+            _repository = actionExecutedContext.GetRepositoryModel();
+
+            base.OnActionExecuted(actionExecutedContext);
         }
 
-        private void SaveTemplateActivity(HttpActionExecutedContext actionExecutedContext)
+        protected override string BuildActivityMessage()
         {
-            var repository = actionExecutedContext.GetRepositoryModel();
-
-            SaveActivityEvent(repository);
+            return string.Format("for {0}", _repository.Name);
         }
 
-        private void SaveActivityEvent(RepositoryModel repository)
+        protected override ActivityEvent BuildPartOfActivityEvent()
         {
-            var activityType = ActivityContextQuery.GetUserActivityType(ActivityTypeName);
+            var activityEvent = base.BuildPartOfActivityEvent();
 
-            string message = CreateActivityMessage(User.UserName, activityType.Name, repository.Name);
+            activityEvent.CurrentRepositoryId = _repository.Id;
 
-            if (ActivityContextCommand != null)
-            {
-                ActivityContextCommand.AddActivity(new ActivityEvent()
-                {
-                    UserId = User.UserId,
-                    ActivityTypeId = activityType.Id,
-                    CurrentRepositoryId = repository.Id,
-                    InvokeTime = DateTime.Now,
-                    Message = message
-                });
-            }         
-        }
-
-        private string CreateActivityMessage(string userName, string activityTypeName, string repositoryName)
-        {
-            string baseMessage = base.CreateActivityMessage(userName, activityTypeName);
-
-            string message = string.Format("{0} for {1}", baseMessage, repositoryName);
-
-            return message;
+            return activityEvent;
         }
     }
 }
