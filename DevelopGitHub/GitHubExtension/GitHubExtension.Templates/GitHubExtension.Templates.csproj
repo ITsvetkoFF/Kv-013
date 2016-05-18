@@ -97,7 +97,6 @@
     <Compile Include="ExtensionMethods\HttpClientExtension.cs" />
     <Compile Include="ExtensionMethods\HttpRequestMessageExtension.cs" />
     <Compile Include="ExtensionMethods\HttpResponseMessageExtension.cs" />
-    <Compile Include="ExtensionMethods\IdentityExtensions.cs" />
     <Compile Include="ExtensionMethods\StringExtensions.cs" />
     <Compile Include="ExtensionMethods\TemplatesContextExtensions.cs" />
     <Compile Include="Mappers\TemplatesMapper.cs" />

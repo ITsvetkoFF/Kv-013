@@ -56,7 +56,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            Claim tokenClaim = User.Identity.GetExternalAccessTokenClaim();
+            Claim tokenClaim = User.GetExternalAccessTokenClaim();
 
             GitHubUserModel userReadModel = await _gitHubQuery.GetUserAsync(tokenClaim.Value);
             User user = _userManager.FindByGitHubId(userReadModel.GitHubId);

@@ -34,10 +34,10 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
                 return BadRequest(YouHaveNoRepositorySelected);
             }
 
-            Claim tokenClaim = claimsIdentity.GetExternalAccessTokenClaim();
+            var token = User.GetExternalAccessToken();
 
             EventsPaginationModel model =
-                await _eventsQuery.GetGitHubEventsAsync(fullRepositoryName, tokenClaim.Value, page);
+                await _eventsQuery.GetGitHubEventsAsync(fullRepositoryName, token, page);
 
             if (model == null)
             {

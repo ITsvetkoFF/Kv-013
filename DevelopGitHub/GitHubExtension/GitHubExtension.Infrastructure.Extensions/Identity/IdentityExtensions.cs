@@ -7,29 +7,40 @@ namespace GitHubExtension.Infrastructure.Extensions.Identity
 {
     public static class IdentityExtensions
     {
-        private const string CurrentProjectName = "CurrentProjectName";
-        private const string CurrentProjectId = "CurrentProjectId";
+        public static Claim GetExternalAccessTokenClaim(this IPrincipal user)
+        {
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.FindFirst(ClaimConstants.ExternalAccessToken);
+        }
+
+        public static Claim GetCurrentProjectIdClaim(this IPrincipal user)
+        {
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.FindFirst(ClaimConstants.CurrentProjectId);
+        }
+
+        public static string GetExternalAccessToken(this IPrincipal user)
+        {
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.FindFirstValue(ClaimConstants.ExternalAccessToken);
+        }
 
         public static string GetCurrentProjectName(this IPrincipal user)
         {
-            var claimsIdentity = user.Identity as ClaimsIdentity;
-            return claimsIdentity.FindFirstValue(CurrentProjectName);
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.FindFirstValue(ClaimConstants.CurrentProjectName);
         }
 
         public static string GetCurrentProjectId(this IPrincipal user)
         {
-            var claimsIdentity = user.Identity as ClaimsIdentity;
-            return claimsIdentity.FindFirstValue(CurrentProjectId);
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.FindFirstValue(ClaimConstants.CurrentProjectId);
         }
 
-        public static Claim GetExternalAccessTokenClaim(this IIdentity identity)
+        public static string GetUserId(this IPrincipal user)
         {
-            return (identity as ClaimsIdentity).FindFirst(ClaimConstants.ExternalAccessToken);
-        }
-
-        public static string GetExternalAccessToken(this IIdentity identity)
-        {
-            return (identity as ClaimsIdentity).FindFirstValue(ClaimConstants.ExternalAccessToken);
+            var claims = user.Identity as ClaimsIdentity;
+            return claims.GetUserId();
         }
     }
 }

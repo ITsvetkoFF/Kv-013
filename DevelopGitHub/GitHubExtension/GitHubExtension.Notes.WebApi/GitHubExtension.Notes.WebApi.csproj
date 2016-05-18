@@ -101,7 +101,6 @@
     <Compile Include="Commands\INoteCommands.cs" />
     <Compile Include="Commands\NoteCommands.cs" />
     <Compile Include="Controllers\NoteController.cs" />
-    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Extensions\NoteQueriesExtensions.cs" />
     <Compile Include="Mappers\NoteMapper.cs" />
     <Compile Include="Package\NotesPackage.cs" />
@@ -118,6 +117,10 @@
     <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
       <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
       <Name>GitHubExtension.Infrastructure.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Extensions\GitHubExtension.Infrastructure.Extensions.csproj">
+      <Project>{d6c328e6-db94-4fff-a775-bd7c2f42c56f}</Project>
+      <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
       <Project>{72035e1a-fcfd-48f1-81dd-7dbc724dd8e9}</Project>

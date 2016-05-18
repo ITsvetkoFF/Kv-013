@@ -85,7 +85,6 @@
     <Compile Include="Commands\IActivityContextCommand.cs" />
     <Compile Include="Controllers\InternalActivityQueryController.cs" />
     <Compile Include="Extensions\ActivityContexQueryExtension.cs" />
-    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Mappers\ActivityEventMapper.cs" />
     <Compile Include="Models\ActivityEventModel.cs" />
     <Compile Include="Models\RepositoryActivityModel.cs" />
@@ -107,6 +106,10 @@
     <ProjectReference Include="..\GitHubExtension.Security.DAL\GitHubExtension.Security.DAL.csproj">
       <Project>{7C74E58B-B1D7-4C8F-B0AD-9528E07FC3DB}</Project>
       <Name>GitHubExtension.Security.DAL</Name>
+	</ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Extensions\GitHubExtension.Infrastructure.Extensions.csproj">
+      <Project>{d6c328e6-db94-4fff-a775-bd7c2f42c56f}</Project>
+      <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
