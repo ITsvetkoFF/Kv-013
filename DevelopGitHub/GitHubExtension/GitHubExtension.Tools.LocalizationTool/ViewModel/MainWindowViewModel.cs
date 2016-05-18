@@ -44,7 +44,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
             _translator = new Translator(_translationDataTable);
 
-            //OpenJson();
+            OpenJson();
         }
 
         public ICommand CloseCommand { get; set; }
