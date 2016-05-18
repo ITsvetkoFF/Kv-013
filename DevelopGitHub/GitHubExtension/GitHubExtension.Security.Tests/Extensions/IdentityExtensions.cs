@@ -1,6 +1,6 @@
 ﻿using System.Security.Principal;
 
-namespace GitHubExtension.Security.Tests.Extensions
+namespace GitHubExtension.Security.Test.Extensions
 {
     public static class IdentityExtensions
     {

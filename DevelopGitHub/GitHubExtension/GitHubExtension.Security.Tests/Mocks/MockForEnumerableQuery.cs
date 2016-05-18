@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GitHubExtension.Security.Tests.Mocks
+namespace GitHubExtension.Security.Test.Mocks
 {
     public class MockForEnumerableQuery<T> : EnumerableQuery<T>, IDbAsyncQueryProvider
     {

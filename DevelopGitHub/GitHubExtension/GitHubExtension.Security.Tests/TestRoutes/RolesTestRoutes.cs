@@ -4,7 +4,7 @@ using GitHubExtension.Security.WebApi.Controllers;
 using MvcRouteTester;
 using Xunit;
 
-namespace GitHubExtension.Security.Tests.TestRoutes
+namespace GitHubExtension.Security.Test.TestRoutes
 {
     public class RolesTestRoutes : TestRoutesConfig
     {

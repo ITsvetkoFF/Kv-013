@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace GitHubExtension.Security.Tests.Mocks
+namespace GitHubExtension.Security.Test.Mocks
 {
     public class MockForDbSet<T> : MockForEnumerableQuery<T>, IDbSet<T> where T : class
     {

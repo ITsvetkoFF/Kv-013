@@ -9,15 +9,15 @@ using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
 using GitHubExtension.Security.DAL.Infrastructure;
 using GitHubExtension.Security.DAL.Interfaces;
-using GitHubExtension.Security.Tests.Extensions;
-using GitHubExtension.Security.Tests.Mocks;
+using GitHubExtension.Security.Test.Extensions;
+using GitHubExtension.Security.Test.Mocks;
 using GitHubExtension.Security.WebApi.Controllers;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
 using Microsoft.AspNet.Identity;
 using NSubstitute;
 using Xunit;
 
-namespace GitHubExtension.Security.Tests.TestForControllers
+namespace GitHubExtension.Security.Test.TestForControllers
 {
     public class RepositoryControllerAssignRolesToUserTests
     {

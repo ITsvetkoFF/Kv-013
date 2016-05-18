@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using GitHubExtension.Security.WebApi;
 
-namespace GitHubExtension.Security.Tests.TestRoutes
+namespace GitHubExtension.Security.Test.TestRoutes
 {
     public class TestRoutesConfig
     {

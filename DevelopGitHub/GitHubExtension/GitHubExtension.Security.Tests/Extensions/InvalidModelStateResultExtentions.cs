@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http.Results;
 
-namespace GitHubExtension.Security.Tests.Extensions
+namespace GitHubExtension.Security.Test.Extensions
 {
     public static class InvalidModelStateResultExtentions
     {

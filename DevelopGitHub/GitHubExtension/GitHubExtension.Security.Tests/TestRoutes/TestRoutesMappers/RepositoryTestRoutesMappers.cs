@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using GitHubExtension.Infrastructure.Constants;
 
-namespace GitHubExtension.Security.Tests.TestRoutes.TestRoutesMappers
+namespace GitHubExtension.Security.Test.TestRoutes.TestRoutesMappers
 {
     public static class RepositoryTestRoutesMappers
     {
