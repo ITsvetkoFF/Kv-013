@@ -2,6 +2,7 @@ using GitHubExtension.Activity.External.WebAPI.Package;
 using GitHubExtension.Activity.Internal.WebApi.Package;
 using GitHubExtension.Notes.WebApi.Package;
 using GitHubExtension.Security.WebApi.Package;
+using GitHubExtension.SendEmail.WebApi.Package;
 using GitHubExtension.Statistics.WebApi.Package;
 using GitHubExtension.Templates.Package;
 using GitHubExtention.Preferences.WebApi.Package;
@@ -28,7 +29,7 @@ namespace GitHubExtension.EntryPoint
                         typeof(ExternalActivityPackage).Assembly, typeof(SecurityPackage).Assembly, 
                         typeof(NotesPackage).Assembly, typeof(ActivityPackage).Assembly, 
                         typeof(WebApiTemplatesPackage).Assembly, typeof(StatisticsPackage).Assembly,
-                        typeof(PreferencesPackage).Assembly
+                        typeof(PreferencesPackage).Assembly, typeof(EmailPackage).Assembly
                     });
             container.Verify();
 
