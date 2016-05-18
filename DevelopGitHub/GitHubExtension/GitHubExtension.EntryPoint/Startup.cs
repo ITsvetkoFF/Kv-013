@@ -5,7 +5,8 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 
 using FluentValidation.WebApi;
-
+using GitHubExtension.Activity.Internal.WebApi.Commands;
+using GitHubExtension.Activity.Internal.WebApi.Queries;
 using GitHubExtension.EntryPoint;
 using GitHubExtension.Infrastructure.Extensions.Owin;
 using GitHubExtension.Security.DAL.Context;
@@ -43,7 +44,7 @@ namespace GitHubExtension.EntryPoint
             app.UseSimpleInjectorContext(container);
             app.CreatePerOwinContext(container.GetInstance<SecurityContext>);
             app.CreatePerOwinContext(container.GetInstance<ApplicationUserManager>);
-
+          
             ConfigureOauth(app);
             ConfigureCookies(app);
             app.Use<TokenCheckMiddleware>();

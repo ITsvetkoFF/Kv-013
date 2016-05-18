@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters;
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Security.DAL.Identity;
@@ -173,6 +173,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             return null;
         }
 
+        [UserJoinToSystemActivity]
         private async Task<IHttpActionResult> RegisterUser(User user, string token)
         {
             string userRole = RoleConstants.Admin;

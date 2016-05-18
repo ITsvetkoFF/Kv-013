@@ -164,10 +164,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="APILog\" />
-    <Folder Include="FrontEnd\src\client\app\widgets\layout\" />
     <Folder Include="Helpers\Authentication\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Activity.Internal.WebApi\GitHubExtension.Activity.Internal.WebApi.csproj">
+      <Project>{73A2445E-6FC0-4B75-A26B-1F27070AFDBA}</Project>
+      <Name>GitHubExtension.Activity.Internal.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.ActionFilters\GitHubExtension.Infrastructure.ActionFilters.csproj">
+      <Project>{A32113BC-F69A-4DBE-8790-DF1757B7D2E6}</Project>
+      <Name>GitHubExtension.Infrastructure.ActionFilters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
       <Project>{642455C5-0A4B-4E25-A2C3-1F1304A0D7DD}</Project>
       <Name>GitHubExtension.Infrastructure.Constants</Name>

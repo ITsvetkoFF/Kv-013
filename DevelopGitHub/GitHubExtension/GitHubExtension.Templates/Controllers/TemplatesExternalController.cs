@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
+using GitHubExtension.Activity.DAL;
+using GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters;
 using GitHubExtension.Templates.Commands;
 using GitHubExtension.Templates.CommunicationModels;
 using GitHubExtension.Templates.Constants;
@@ -62,6 +64,7 @@ namespace GitHubExtension.Templates.Controllers
 
         [HttpPost]
         [Route(RouteTemplatesConstants.PullRequestTemplate)]
+        [TemplateActivity(ActivityTypeName = ActivityTypeNames.CreatePullRequestTemplate)]
         public async Task<IHttpActionResult> CreatePullRequestTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -78,6 +81,7 @@ namespace GitHubExtension.Templates.Controllers
 
         [HttpPost]
         [Route(RouteTemplatesConstants.IssueTemplate)]
+        [TemplateActivity(ActivityTypeName = ActivityTypeNames.CreateIssueRequestTemplate)]
         public async Task<IHttpActionResult> CreateIssueTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -93,6 +97,7 @@ namespace GitHubExtension.Templates.Controllers
 
         [HttpPut]
         [Route(RouteTemplatesConstants.PullRequestTemplate)]
+        [TemplateActivity(ActivityTypeName = ActivityTypeNames.UpdatePullRequestTemplate)]
         public async Task<IHttpActionResult> UpdatePullRequestTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();
@@ -108,6 +113,7 @@ namespace GitHubExtension.Templates.Controllers
 
         [HttpPut]
         [Route(RouteTemplatesConstants.IssueTemplate)]
+        [TemplateActivity(ActivityTypeName = ActivityTypeNames.UpdateIssueRequestTemplate)]
         public async Task<IHttpActionResult> UpdateIssueTemplate([FromBody]CreateUpdateTemplateModel model)
         {
             var repositoryName = User.GetCurrentProjectName();

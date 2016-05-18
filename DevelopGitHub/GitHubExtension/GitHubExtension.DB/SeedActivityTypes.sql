@@ -12,5 +12,6 @@ Post-Deployment Script Template
 USE [GitHubExtension];
 GO
 INSERT INTO ActivitiesTypes
-VALUES ('join to system'), ('repository added to system'), ('add role'), ('comment');
+VALUES ('join to system'), ('repository added to system'), ('add role'), ('comment'), 
+('create pull request template'), ('create issue request template'), ('update pull request template'), ('update issue request template');
 GO
