@@ -311,6 +311,10 @@
       <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.SendEmail.WebApi\GitHubExtension.SendEmail.WebApi.csproj">
+      <Project>{d09ac4f4-1635-40f2-9329-d05be7b59f07}</Project>
+      <Name>GitHubExtension.SendEmail.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
       <Project>{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}</Project>
       <Name>GitHubExtension.Statistics.WebApi</Name>
