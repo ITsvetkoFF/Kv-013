@@ -24,7 +24,11 @@ namespace GitHubExtension.LocalizationTool.Model
 
         public string Name
         {
-            get { return _name; }
+            get
+            {
+                return _name;
+            }
+
             set
             {
                 _name = value;
@@ -34,7 +38,11 @@ namespace GitHubExtension.LocalizationTool.Model
 
         public string Uk
         {
-            get { return _uk; }
+            get
+            {
+                return _uk;
+            }
+
             set
             {
                 _uk = value;
@@ -44,7 +52,11 @@ namespace GitHubExtension.LocalizationTool.Model
 
         public string En
         {
-            get { return _en; }
+            get
+            {
+                return _en;
+            }
+
             set
             {
                 _en = value;
@@ -54,7 +66,11 @@ namespace GitHubExtension.LocalizationTool.Model
 
         public string Ru
         {
-            get { return _ru; }
+            get
+            {
+                return _ru;
+            }
+
             set
             {
                 _ru = value;

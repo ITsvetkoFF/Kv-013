@@ -23,17 +23,17 @@ namespace GitHubExtension.LocalizationTool.Translate
 
         private readonly ITranslationData _translationDataTable;
 
+        public Translator(ITranslationData translationDataTable)
+        {
+            _translationDataTable = translationDataTable;
+        }
+
         private ObservableCollection<TranslationDataRow> TranslationData
         {
             get
             {
                 return _translationDataTable.TranslationTable;
             }
-        }
-
-        public Translator(ITranslationData translationDataTable)
-        {
-            _translationDataTable = translationDataTable;
         }
 
         public async Task PerformWebTranslation(Language sourceLanguage, Language targetLanguage)

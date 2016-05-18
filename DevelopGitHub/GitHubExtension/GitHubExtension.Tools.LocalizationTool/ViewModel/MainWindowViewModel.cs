@@ -18,7 +18,6 @@ using Newtonsoft.Json;
 
 namespace GitHubExtension.LocalizationTool.ViewModel
 {
-
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly ITranslationData _translationDataTable;
