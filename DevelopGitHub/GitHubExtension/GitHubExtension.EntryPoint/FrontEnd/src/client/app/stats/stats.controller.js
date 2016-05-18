@@ -5,9 +5,9 @@
         .module('app.stats')
         .controller('StatsController', StatsController);
 
-    StatsController.$inject = ['$q', '$state', 'statsFactory', 'i18n', 'userService', 'localStorageService' ];
+    StatsController.$inject = ['$q', 'statsFactory', 'i18n', 'userService', 'localStorageService'];
 
-    function StatsController($q, $state, statsFactory, i18n, userService, localStorage) {
+    function StatsController($q, statsFactory, i18n, userService, localStorage) {
         var vm = this;
         vm.i18n = i18n;
 
@@ -125,7 +125,7 @@
         vm.refreshData = function() {
             localStorage.clearAll();
             activate();
-        }
+        };
 
         function getDate() {
             if (!!localStorage.get('lastUpdateDate')) {

@@ -18,9 +18,9 @@
             templateUrl: 'FrontEnd/src/client/app/layout/ht-top-nav.html'
         };
 
-        TopNavController.$inject = ['userService', 'i18n', '$state', 'routerHelper'];
+        TopNavController.$inject = ['userService', 'i18n', 'routerHelper'];
         /* @ngInject */
-        function TopNavController(userService, i18n, $state, routerHelper) {
+        function TopNavController(userService, i18n, routerHelper) {
             var vm = this;
             vm.i18n = i18n.message;
             var states = routerHelper.getStates();
@@ -31,7 +31,9 @@
             function activate() {
                 getNavRoutes();
                 if (vm.user.isAuthenticated()) {
-                    vm.user.loadRepositories();
+                    vm.user.loadRepositories().then(function() {
+                        vm.repo = userService.getCurrentRepository();
+                    });
                 }
             }
 

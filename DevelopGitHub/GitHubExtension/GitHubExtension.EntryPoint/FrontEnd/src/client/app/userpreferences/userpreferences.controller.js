@@ -34,7 +34,7 @@
 
         vm.changeVisibilityMail = function () {
             userData.changeVisibilityMail();
-        } 
+        };
 
         userData.getCheckboxValue()
             .then(function (data) { vm.isEmailPrivate = data; });

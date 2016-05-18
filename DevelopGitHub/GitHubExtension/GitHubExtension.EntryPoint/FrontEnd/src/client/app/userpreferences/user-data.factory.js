@@ -39,7 +39,7 @@
 
         function changeVisibilityMail() {
             $http.put(API_URL.CHANGEVISIBILITYMAIL);
-        }        
+        }
 
         return {
             postImage: postImage,

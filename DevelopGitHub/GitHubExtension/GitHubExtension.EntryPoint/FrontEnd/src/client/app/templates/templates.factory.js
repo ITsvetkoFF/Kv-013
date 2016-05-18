@@ -7,7 +7,6 @@
     githubTemplates.$inject = ['$http', 'API_URL'];
 
     function githubTemplates($http, API_URL) {
-           
         function getPullRequestTemplate() {
             return $http({
                 method: 'GET',
@@ -21,7 +20,7 @@
 
         function getIssueTemplate() {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'GET',
                 url: API_URL.ISSUE
             }).success(function (response) {
@@ -33,11 +32,11 @@
 
         function getPr() {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'GET',
                 url: API_URL.PR
             }).success(function (response) {
-                return  response.data;
+                return response.data;
             }).error(function (response) {
                 return '';
             });
@@ -45,10 +44,10 @@
 
         function createPrTemplate(prTemplate) {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'POST',
                 url: API_URL.PULL_REQUEST,
-                data : { message : prTemplate.comment, content : prTemplate.content}
+                data : {message : prTemplate.comment, content : prTemplate.content}
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
@@ -57,10 +56,10 @@
         }
         function createIssueTemplate(issueTemplate) {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'POST',
                 url: API_URL.ISSUE,
-                data: { message: issueTemplate.comments, content: issueTemplate.content }
+                data: {message: issueTemplate.comments, content: issueTemplate.content}
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
@@ -70,10 +69,10 @@
 
         function updatePrTemplate(prTemplate) {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'PUT',
                 url: API_URL.PULL_REQUEST,
-                data: { message: prTemplate.commentEdit, content: prTemplate.pullRequestTemplate }
+                data: {message: prTemplate.commentEdit, content: prTemplate.pullRequestTemplate}
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
@@ -83,10 +82,10 @@
 
         function updateIssueTemplate(issueTemplate) {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'PUT',
                 url: API_URL.ISSUE,
-                data: { message: issueTemplate.commentsEdit, content: issueTemplate.issueTemplate }
+                data: {message: issueTemplate.commentsEdit, content: issueTemplate.issueTemplate}
             }).success(function (response) {
                 return response.status;
             }).error(function (response) {
@@ -96,7 +95,7 @@
 
         function getIssueCategories() {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'GET',
                 url:API_URL.ISSUE_CATEGORIES
             }).success(function (response) {
@@ -108,9 +107,9 @@
 
         function getIssueTemplateByCategoryId(index) {
             return $http({
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 method: 'GET',
-                url: API_URL.ISSUE_CATEGORIES + '/' + index  
+                url: API_URL.ISSUE_CATEGORIES + '/' + index
             }).success(function (response) {
                 return response.data;
             }).error(function (response) {
