@@ -25,25 +25,41 @@ namespace GitHubExtension.LocalizationTool.Model
         public string Name
         {
             get { return _name; }
-            set { CheckPropertyChanged(ref _name, value, () => Name); }
+            set
+            {
+                _name = value;
+                CheckPropertyChanged(() => Name);
+            }
         }
 
         public string Uk
         {
             get { return _uk; }
-            set { CheckPropertyChanged(ref _uk, value, () => Uk); }
+            set
+            {
+                _uk = value;
+                CheckPropertyChanged(() => Uk);
+            }
         }
 
         public string En
         {
             get { return _en; }
-            set { CheckPropertyChanged(ref _en, value, () => En); }
+            set
+            {
+                _en = value;
+                CheckPropertyChanged(() => En);
+            }
         }
 
         public string Ru
         {
             get { return _ru; }
-            set { CheckPropertyChanged(ref _ru, value, () => Ru); }
+            set
+            {
+                _ru = value;
+                CheckPropertyChanged(() => Ru);
+            }
         }
 
         public bool IsRowEmpty
