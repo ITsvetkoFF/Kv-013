@@ -13,8 +13,8 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="collaborator in vmRoles.collaborators">
-                            <td>{{collaborator.login}}</td>
-                            <td>
+                            <td style="vertical-align: middle;">{{collaborator.login}}</td>
+                            <td ng-if="collaborator.userId !== null">
                                 <select ng-model="vmRoles.roleName[$index]"
                                         ng-options="role.name for role in vmRoles.roles.data"
                                         ng-change="vmRoles.assignRole(collaborator, vmRoles.roleName[$index])"
@@ -22,8 +22,17 @@
                                     <option value="">---Please select---</option>
                                 </select>
                             </td>
+                            <td ng-if="collaborator.userId === null">
+                                <form name="invitationForm"
+                                      ng-submit="invitationForm.$valid && vmRoles.sendInvitation(collaborator.email)"
+                                      style="margin:0px; margin-right: -100px;">
+                                    <input type="email" ng-model="collaborator.email" placeholder="Enter email" required
+                                           style="height: 32px;">
+                                    <button class="btn btn-primary" style="margin-top: -4px;">Send Invitation</button>
+                                </form>
+                            </td>
                             <td>
-                                <form name="noteForm"
+                                <form ng-hide="collaborator.userId === null" name="noteForm"
                                       ng-submit="noteForm.$valid && vmRoles.createPrivateNote(collaborator)"
                                       style="margin: 0px">
                                     <input type="text" name="newNote"
