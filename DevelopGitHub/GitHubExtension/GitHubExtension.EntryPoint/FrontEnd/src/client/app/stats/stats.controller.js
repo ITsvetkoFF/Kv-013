@@ -5,9 +5,9 @@
         .module('app.stats')
         .controller('StatsController', StatsController);
 
-    StatsController.$inject = ['$q', 'statsFactory', 'i18n', 'userService'];
+    StatsController.$inject = ['$q', '$state', 'statsFactory', 'i18n', 'userService', 'localStorageService' ];
 
-    function StatsController($q, statsFactory, i18n, userService) {
+    function StatsController($q, $state, statsFactory, i18n, userService, localStorage) {
         var vm = this;
         vm.i18n = i18n;
 
@@ -36,23 +36,36 @@
                     getRepositoriesNames(vm.repositories),
                     getRepositoriesCount(vm.repositories),
                     getCommitsRepositories(),
-                    getCommitsFromCurrent(userService.getCurrentRepository()),
-                    getGroupCommits());
+                    getCommitsFromCurrent(vm.repo),
+                    getGroupCommits(),
+                    getDate());
 
                 $q.all(promises);
             }
         }
 
         function getFollowers() {
-            return statsFactory.getFollowers().then(function(response) {
-                vm.followers = response.data;
-            });
+            if (localStorage.get('followers') !== null) {
+                vm.followers = localStorage.get('followers');
+            }
+            else {
+                return statsFactory.getFollowers().then(function (response) {
+                    vm.followers = response.data;
+                    localStorage.set('followers', vm.followers);
+                });
+            }
         }
 
         function getFollowing() {
-            return statsFactory.getFollowing().then(function (response) {
-                vm.following = response.data;
-            });
+            if (localStorage.get('following') !== null) {
+                vm.following = localStorage.get('following');
+            }
+            else {
+                return statsFactory.getFollowing().then(function (response) {
+                    vm.following = response.data;
+                    localStorage.set('following', vm.following);
+                });
+            }
         }
 
         function getRepositoriesCount(repositoryList) {
@@ -60,9 +73,15 @@
         }
 
         function getActivityMonths() {
-            return statsFactory.getActivityMonths().then(function (response) {
-                vm.labels = response.data;
-            });
+            if (!!localStorage.get('monthLabels')) {
+                vm.labels = localStorage.get('monthLabels');
+            }
+            else {
+                return statsFactory.getActivityMonths().then(function (response) {
+                    vm.labels = response.data;
+                    localStorage.set('monthLabels', vm.labels);
+                });
+            }
         }
 
         function getRepositories() {
@@ -74,21 +93,48 @@
         }
 
         function getCommitsRepositories() {
-            return statsFactory.getCommitsRepositories().then(function (response) {
-                vm.eachData = response.data;
-            });
+            if (!!localStorage.get('commitsRepositories')) {
+                vm.eachData = localStorage.get('commitsRepositories');
+            }
+            else {
+                return statsFactory.getCommitsRepositories().then(function (response) {
+                    vm.eachData = response.data;
+                    localStorage.set('commitsRepositories', vm.eachData);
+                });
+            }
         }
 
         function getGroupCommits() {
-            return statsFactory.getGroupCommits().then(function (response) {
-                vm.barData = response;
-            });
+            if (!!localStorage.get('groupCommits')) {
+                vm.barData = localStorage.get('groupCommits');
+            }
+            else {
+                return statsFactory.getGroupCommits().then(function (response) {
+                    vm.barData = response;
+                    localStorage.set('groupCommits', vm.barData);
+                });
+            }
         }
 
         function getCommitsFromCurrent(repository) {
             return statsFactory.getCommitsFromCurrentRepo(repository).then(function (response) {
                 vm.reposData = response;
             });
+        }
+
+        vm.refreshData = function() {
+            localStorage.clearAll();
+            activate();
+        }
+
+        function getDate() {
+            if (!!localStorage.get('lastUpdateDate')) {
+                vm.date = localStorage.get('lastUpdateDate');
+            }
+            else {
+                vm.date = Date.now();
+                localStorage.set('lastUpdateDate', vm.date);
+            }
         }
     }
 })();

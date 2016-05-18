@@ -19,7 +19,7 @@
                     url: '/stats',
                     templateUrl: 'FrontEnd/src/client/app/stats/stats.html',
                     controller: 'StatsController',
-                    controllerAs: 'vm',
+                    controllerAs: 'vmStats',
                     title: 'Stats',
                     settings: {
                         nav: 4,

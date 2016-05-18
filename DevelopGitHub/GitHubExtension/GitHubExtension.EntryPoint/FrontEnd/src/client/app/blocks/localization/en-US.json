@@ -74,7 +74,6 @@
         "ADD_ISSUE_BUTTON": "Add Issue Template",
         "EDIT_ISSUE": "Edit Issue Template",
         "EDIT_PR": "Edit Pull Request Template",
-
         "TYPE_PULL_REQUEST": "What kind of Pull Request do you accept?",
         "TYPE_ISSUE": "Please, choose the reasons of issue on your project?",
         "CHOISE": "Your choise",
@@ -84,7 +83,8 @@
         "NOTE_MIN_LENGTH": "Length must be greater than 5 characters",
         "NOTE_CREATED": "Note created",
         "NOTE_FAILED": "Note failed to be created",
-        "ADD_NEW_NOTE": "Add New Note"
-
+        "ADD_NEW_NOTE": "Add New Note",
+        "LAST_UPDATE": "Last update:",
+        "REFRESH": "Refresh"
     }
 }

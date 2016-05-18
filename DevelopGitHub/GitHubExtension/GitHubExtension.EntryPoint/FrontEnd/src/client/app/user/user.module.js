@@ -1,5 +1,7 @@
 ﻿(function() {
     'use strict';
-    angular.module('app.user', []);
+    angular.module('app.user', [
+        'LocalStorageModule'
+    ]);
 })();
 

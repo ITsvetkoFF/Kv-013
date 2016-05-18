@@ -3,6 +3,7 @@
 
     angular.module('app.stats', [
         'app.core',
-        'chart.js'
+        'chart.js',
+        'LocalStorageModule'
     ]);
 })();

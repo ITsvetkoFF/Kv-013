@@ -136,7 +136,6 @@
     <Compile Include="CommunicationModels\RepositoryCommitsModel.cs" />
     <Compile Include="CommunicationModels\GitHubUserModel.cs" />
     <Compile Include="CommunicationModels\RepositoryModel.cs" />
-    <Compile Include="Extensions\Cookie\CookieExtensions.cs" />
     <Compile Include="Mappers\GitHub\GitHubMapper.cs" />
     <Compile Include="Package\StatisticsPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
