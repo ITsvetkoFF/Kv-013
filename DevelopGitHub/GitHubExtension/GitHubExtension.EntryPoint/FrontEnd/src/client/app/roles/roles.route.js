@@ -25,9 +25,9 @@
                     nav: 3,
                     content: '<i class="fa fa-users"></i>' + i18n.message.COLLABORATORS,
                     show: userService.isAuthenticated()
-    }
                 }
             }
+        }
         ];
     }
 })();

@@ -6,14 +6,14 @@
     appRun.$inject = ['routerHelper', '$cookies', 'i18n', 'userService'];
 
     function appRun(routerHelper, $cookies, i18n, userService) {
-       routerHelper.configureStates(getStates(i18n, userService));
+        routerHelper.configureStates(getStates(i18n, userService));
     }
 
     function getStates(i18n, userService) {
         return [
-        {
-            state: 'templates',
-            config: {
+            {
+                state: 'templates',
+                config: {
                     url: '/templates',
                     templateUrl: './FrontEnd/src/client/app/templates/templates.html',
                     controller: 'TemplatesController',

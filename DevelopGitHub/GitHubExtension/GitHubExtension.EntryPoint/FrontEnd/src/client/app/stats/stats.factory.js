@@ -17,7 +17,7 @@
         }
 
         function getRepositoriesCount(repositoryList) {
-            return Object.keys(repositoryList).length;
+            return repositoryList.length;
         }
 
         function getActivityMonths() {

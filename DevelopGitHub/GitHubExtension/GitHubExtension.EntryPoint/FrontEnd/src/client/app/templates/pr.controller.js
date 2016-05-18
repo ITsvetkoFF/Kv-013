@@ -58,7 +58,7 @@
             logger.info(vm.i18n.message.ACTIVE_PR);
             githubTemplates.getPullRequestTemplate().success(onGetPullRequestTemplate, onError).
                 error(onGetPullRequestTemplate);
-                githubTemplates.getPr().success(function (data) {
+            githubTemplates.getPr().success(function (data) {
                     vm.pr = data;
                 });
         }
