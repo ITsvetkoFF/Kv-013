@@ -83,15 +83,11 @@
             <Label Content="Target language" Grid.Row="5" Grid.Column="0" Margin="6,6,3,6"/>
             <Button Name="TranslateButton" Content="{Binding TranslateButtonContent}" IsEnabled="{Binding TranslateButtonIsEnabled}" Margin="6" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0"
                     Command="{Binding TranslatingButtonCommand}"/>
-            <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding SourceLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <TextBlock>uk</TextBlock>
-                <TextBlock>en</TextBlock>
-                <TextBlock>ru</TextBlock>
+            <ComboBox Name="SourceLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="4" SelectedIndex="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    SelectedItem="{Binding SourceLanguage}" ItemsSource="{Binding LanguageEnumValues}">
             </ComboBox>
-            <ComboBox Name="TargetLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="5" SelectedIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding TargetLanguageText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                <TextBlock>uk</TextBlock>
-                <TextBlock>en</TextBlock>
-                <TextBlock>ru</TextBlock>
+            <ComboBox Name="TargetLanguage" Grid.Column="1" Margin="3,6,6,6" Grid.Row="5" SelectedIndex="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    SelectedItem="{Binding TargetLanguage}" ItemsSource="{Binding LanguageEnumValues}">
             </ComboBox>
             <Label Content="Text size" Margin="6" Grid.Row="7" Grid.ColumnSpan="2" Grid.Column="0"
                    HorizontalContentAlignment="Center"/>

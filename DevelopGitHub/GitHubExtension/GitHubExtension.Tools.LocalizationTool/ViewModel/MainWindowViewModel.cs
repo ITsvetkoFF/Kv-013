@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
@@ -16,19 +18,20 @@ using Newtonsoft.Json;
 
 namespace GitHubExtension.LocalizationTool.ViewModel
 {
+
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly ITranslationData _translationDataTable;
 
         private readonly Translator _translator;
 
-        private string _targetLanguageText;
-
-        private string _sourceLanguageText;
-
         private bool _translateButtonIsEnabled = true;
 
         private string _translateButtonContent = "Web Translate";
+
+        private Language _sourceLanguage;
+
+        private Language _targetLanguage;
 
         public MainWindowViewModel()
         {
@@ -41,7 +44,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
 
             _translator = new Translator(_translationDataTable);
 
-            OpenJson();
+            //OpenJson();
         }
 
         public ICommand CloseCommand { get; set; }
@@ -66,34 +69,6 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             set
             {
                 _translationDataTable.TranslationTable = value;
-            }
-        }
-
-        public string TargetLanguageText
-        {
-            get
-            {
-                return _targetLanguageText;
-            }
-
-            set
-            {
-                _targetLanguageText = value;
-                RaisePropertyChanged(() => TargetLanguageText);
-            }
-        }
-
-        public string SourceLanguageText
-        {
-            get
-            {
-                return _sourceLanguageText;
-            }
-
-            set
-            {
-                _sourceLanguageText = value;
-                RaisePropertyChanged(() => SourceLanguageText);
             }
         }
 
@@ -122,6 +97,49 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             {
                 _translateButtonIsEnabled = value;
                 RaisePropertyChanged(() => TranslateButtonIsEnabled);
+            }
+        }
+
+        public bool IsChecked
+        {
+            get;
+            set;
+        }
+
+        public Language SourceLanguage
+        {
+            get
+            {
+                return _sourceLanguage;
+            }
+
+            set
+            {
+                _sourceLanguage = value;
+                RaisePropertyChanged(() => SourceLanguage);
+            }
+        }
+
+        public Language TargetLanguage
+        {
+            get
+            {
+                return _targetLanguage;
+            }
+
+            set
+            {
+                _targetLanguage = value;
+                RaisePropertyChanged(() => TargetLanguage);
+            }
+        }
+
+        public IEnumerable<Language> LanguageEnumValues
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Language))
+                    .Cast<Language>();
             }
         }
 
@@ -203,7 +221,7 @@ namespace GitHubExtension.LocalizationTool.ViewModel
             TranslateButtonContent = "Translating...";
             try
             {
-                await _translator.PerformWebTranslation(SourceLanguageText, TargetLanguageText);
+                await _translator.PerformWebTranslation(_sourceLanguage, _targetLanguage);
             }
             catch (WebException exception)
             {

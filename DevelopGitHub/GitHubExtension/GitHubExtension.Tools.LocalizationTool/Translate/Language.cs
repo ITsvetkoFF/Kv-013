@@ -11,21 +11,6 @@ namespace GitHubExtension.LocalizationTool.Translate
 
     public static class LanguageExtension
     {
-        public static Language GetLanguageEnum(string language)
-        {
-            switch (language)
-            {
-                case "uk":
-                    return Language.Uk;
-                case "en":
-                    return Language.En;
-                case "ru":
-                    return Language.Ru;
-                default:
-                    throw new Exception("Incorrect Language in Method GetLanguage");
-            }
-        }
-
         public static string GetLanguageString(this Language language)
         {
             switch (language)

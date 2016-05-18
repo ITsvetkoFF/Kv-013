@@ -36,16 +36,14 @@ namespace GitHubExtension.LocalizationTool.Translate
             _translationDataTable = translationDataTable;
         }
 
-        public async Task PerformWebTranslation(string sourceLanguage, string targetLanguage)
+        public async Task PerformWebTranslation(Language sourceLanguage, Language targetLanguage)
         {
             if (sourceLanguage.Equals(targetLanguage))
             {
                 return;
             }
 
-            Language sourceLanguageEnum = LanguageExtension.GetLanguageEnum(sourceLanguage);
-            Language targetLanguageEnum = LanguageExtension.GetLanguageEnum(targetLanguage);
-            StringBuilder textToTranslate = GenerateTextParameter(sourceLanguageEnum);
+            StringBuilder textToTranslate = GenerateTextParameter(sourceLanguage);
             string result;
             using (var httpClient = new HttpClient())
             {
@@ -53,7 +51,7 @@ namespace GitHubExtension.LocalizationTool.Translate
                                 YandexTranslateApiUrl + sourceLanguage + Dash + targetLanguage + textToTranslate);
             }
 
-            SaveTranslationResult(result, targetLanguageEnum);
+            SaveTranslationResult(result, targetLanguage);
         }
 
         private void SaveTranslationResult(string result, Language language)
