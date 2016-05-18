@@ -1,7 +1,9 @@
 CREATE TABLE [dbo].[Users] (
     [Id]                   NVARCHAR (128) NOT NULL,
-    [ProviderId]           INT            NOT NULL,
     [GitHubUrl]            NVARCHAR (MAX) NULL,
+    [ProviderId]           INT            NOT NULL,
+    [AvatarUrl]            NVARCHAR (MAX) NULL,
+    [IsMailVisible]        BIT            NOT NULL,
     [Email]                NVARCHAR (MAX) NULL,
     [EmailConfirmed]       BIT            NOT NULL,
     [PasswordHash]         NVARCHAR (MAX) NULL,
@@ -13,6 +15,5 @@ CREATE TABLE [dbo].[Users] (
     [LockoutEnabled]       BIT            NOT NULL,
     [AccessFailedCount]    INT            NOT NULL,
     [UserName]             NVARCHAR (MAX) NULL,
-    [IsMailVisible] BIT NOT NULL, 
     CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
