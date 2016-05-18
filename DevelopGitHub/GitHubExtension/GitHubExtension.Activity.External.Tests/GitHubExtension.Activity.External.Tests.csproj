@@ -118,9 +118,8 @@
   <ItemGroup>
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestsForControllers\ActivityControllerGetActivityTests.cs" />
+    <Compile Include="TestsForControllers\ActivityControllerTests.cs" />
     <Compile Include="TestsForExtensions\GetPagesAmountExtensionTests.cs" />
-    <Compile Include="TestsForRoutes\Extensions\ExternalActivityRouteTestExtensions.cs" />
     <Compile Include="TestsForRoutes\ExternalActivityRouteTestConfig.cs" />
     <Compile Include="TestsForRoutes\ExternalActivityRouteTests.cs" />
   </ItemGroup>

@@ -17,7 +17,7 @@ using Xunit;
 
 namespace GitHubExtension.Activity.External.Tests.TestsForControllers
 {
-    public class ActivityControllerGetActivityTests
+    public class ActivityControllerTests
     {
         public const string TestToken = "token";
         public const string TestRepository = "repository";

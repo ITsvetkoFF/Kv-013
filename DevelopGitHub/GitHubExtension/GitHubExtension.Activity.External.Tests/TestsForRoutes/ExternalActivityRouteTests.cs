@@ -1,23 +1,22 @@
 ﻿using System.Net.Http;
-using GitHubExtension.Activity.External.Tests.TestsForRoutes.Extensions;
 using GitHubExtension.Activity.External.WebAPI.Controllers;
 using MvcRouteTester;
 using Xunit;
+using GitHubExtension.Activity.External.WebAPI;
 
 namespace GitHubExtension.Activity.External.Tests.TestsForRoutes
 {
     public class ExternalActivityRouteTests
     {
-        private string _url = "/";
-
-        [Fact]
-        public void TestGetGitHubActivityRoute()
+        [Theory]
+        [InlineData(1)]
+        public void TestGetGitHubActivityRoute(int page)
         {
-            string url = _url.ForGetGitHubActivityRoute();
+            string url = "/" + ExternalActivityRoutes.GetGitHubActivityRoute + "?page=" + page;
 
             ExternalActivityRouteTestConfig.GetWebApiConfiguration()
                 .ShouldMap(url)
-                .To<ActivityController>(HttpMethod.Get, x => x.GetGitHubActivity(1));
+                .To<ActivityController>(HttpMethod.Get, x => x.GetGitHubActivity(page));
         }
     }
 }
