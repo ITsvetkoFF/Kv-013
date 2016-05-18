@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 using NSubstitute;
 using Xunit;
 
-namespace GitHubExtension.Security.Tests.TestForControllers
+namespace GitHubExtension.Security.Test.TestForControllers
 {
     public class AccountControllerGetUserByIdTests
     {
