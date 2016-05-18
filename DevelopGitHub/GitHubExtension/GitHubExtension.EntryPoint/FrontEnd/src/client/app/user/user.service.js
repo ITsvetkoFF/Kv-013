@@ -44,6 +44,7 @@
             }).then(function(responce) {
                 RepositoryList = responce.data;
                 logger.info(i18n.message.REPOSITORIES_LOAD_MESSAGE);
+                getCurrentRepositoryFromCookie();
             });
         }
 
@@ -70,6 +71,17 @@
 
         function getRepositoryList() {
             return RepositoryList;
+        }
+
+        function getCurrentRepositoryFromCookie() {
+            var curRepoId = Number($cookies.get('CurrentProjectId'));
+            for (var i = 0; i < RepositoryList.length; i++) {
+                if (RepositoryList[i].id === curRepoId) {
+                    CurrentRepository = RepositoryList[i];
+                    break;
+                }
+            }
+            $state.reload();
         }
 
         return {
