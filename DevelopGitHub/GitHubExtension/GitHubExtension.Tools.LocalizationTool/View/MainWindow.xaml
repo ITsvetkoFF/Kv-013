@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModel="clr-namespace:GitHubExtension.LocalizationTool.ViewModel"
         Title="Localization Tool" Height="446.769" Width="900.615" FontSize="14" Icon="../icon.ico" MinHeight="400">
-    
     <Window.DataContext>
         <viewModel:MainWindowViewModel></viewModel:MainWindowViewModel>
     </Window.DataContext>
-
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Command="{Binding AddEmptyRowCommand}" Gesture="CTRL+R" />
         <KeyBinding Command="{Binding ClearTranslationDataCommand}" Gesture="CTRL+C" />
@@ -30,8 +31,8 @@
                 <MenuItem Header="Exit" HorizontalAlignment="Left" Width="200" Command="{Binding CloseCommand}" InputGestureText="Alt+F4"/>
             </MenuItem>
             <MenuItem Header="Table">
-                <MenuItem Header="_Add row" HorizontalAlignment="Left" Width="200" Command="{Binding AddEmptyRowCommand}" InputGestureText="Ctrl+R"/>
-                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Command="{Binding ClearTranslationDataCommand}" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Add row" HorizontalAlignment="Left" Width="200" Command="{Binding AddEmptyRowCommand}" InputGestureText="Ctrl+R"/>
+                <MenuItem Header="Clear table" HorizontalAlignment="Left" Width="200" Command="{Binding ClearTranslationDataCommand}" InputGestureText="Ctrl+С"/>
             </MenuItem>
             <MenuItem Header="Chose language" Visibility="Collapsed">
                 <MenuItem Header="UA" HorizontalAlignment="Left" Width="140"/>
@@ -50,9 +51,9 @@
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Uk" Visibility="{Binding ElementName=Uk, Path=IsChecked}" Binding="{Binding Uk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="En" Visibility="{Binding ElementName=En, Path=IsChecked}" Binding="{Binding En, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                <DataGridTextColumn Header="Ru" Visibility="{Binding ElementName=Ru, Path=IsChecked}" Binding="{Binding Ru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Uk" Visibility="{Binding Source={x:Reference CheckBoxUk}, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" Binding="{Binding Uk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="En" Visibility="{Binding Source={x:Reference CheckBoxEn}, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" Binding="{Binding En, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Ru" Visibility="{Binding Source={x:Reference CheckBoxRu}, Path=IsChecked, Converter={StaticResource BoolToVisConverter}}" Binding="{Binding Ru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Column="1" Margin="0" Grid.Row="1" Height="349" VerticalAlignment="Top">
@@ -71,12 +72,9 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Label Content="UK" Margin="6,6,3,6"/>
-            <CheckBox Name="Uk" Content="&#xA;" Grid.Row="0" Grid.Column="1" Margin="31,10,32,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Content="US" Margin="6,6,3,6" Grid.Row="1" Grid.Column="0" />
-            <CheckBox Name="Us" Content="&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Content="RU" Margin="6,6,3,6" Grid.Row="2" Grid.Column="0" />
-            <CheckBox Name="Ru" Content="&#xD;&#xA;" Grid.Column="1" Margin="31,10,32,10" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <CheckBox Name="CheckBoxUk" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="39" Width="250" Content="UK" Padding="0"/>
+            <CheckBox Name="CheckBoxEn" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="True" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="39" Width="250" Content="EN" Padding="0"/>
+            <CheckBox Name="CheckBoxRu" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsChecked="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="39" Width="250" Content="RU" Padding="0"/>
             <Label Content="TranslationDataRow" Margin="6" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0"
                    HorizontalContentAlignment="Center"/>
             <Label Content="Source language" Grid.Row="4" Grid.Column="0" Margin="6,6,3,6"/>
