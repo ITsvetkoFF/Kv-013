@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
-
 using FluentAssertions;
-
 using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Security.DAL.Context;
 using GitHubExtension.Security.DAL.Identity;
@@ -15,13 +12,9 @@ using GitHubExtension.Security.DAL.Interfaces;
 using GitHubExtension.Security.Tests.Extensions;
 using GitHubExtension.Security.Tests.Mocks;
 using GitHubExtension.Security.WebApi.Controllers;
-using GitHubExtension.Security.WebApi.Extensions.SecurityContext;
 using GitHubExtension.Security.WebApi.Queries.Interfaces;
-
 using Microsoft.AspNet.Identity;
-
 using NSubstitute;
-
 using Xunit;
 
 namespace GitHubExtension.Security.Tests.TestForControllers
