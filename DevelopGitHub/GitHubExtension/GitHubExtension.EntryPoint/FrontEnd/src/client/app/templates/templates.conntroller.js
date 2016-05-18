@@ -11,8 +11,9 @@
     function TemplatesController(githubTemplates, logger, i18n, userService) {
         var vm = this;
         vm.i18n = i18n;
-        vm.userService = userService;
         vm.title = 'Templates';
+
+        vm.isAuthenticated = userService.isAuthenticated();
 
         vm.editorOptions = {
             lineWrapping: true,
