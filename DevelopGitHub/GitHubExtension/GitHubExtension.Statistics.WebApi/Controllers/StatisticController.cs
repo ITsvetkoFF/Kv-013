@@ -46,7 +46,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetCommitsRepositories)]
         public async Task<ICollection<ICollection<int>>> GetCommitsRepositories()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             var commitsRepositories = await GetCommitsRepositories(userName, token);
@@ -58,7 +58,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetGroupCommits)]
         public async Task<ICollection<int>> GetGroupCommitsForYear()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             ICollection<ICollection<int>> commitsRepositories = await GetCommitsRepositories(userName, token);
@@ -71,7 +71,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetRepoByName)]
         public async Task<ICollection<int>> GetRepo([FromUri] string name)
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             ICollection<int> commitsRepository = await _statisticsQuery.GetCommitsRepository(userName, token, name);
@@ -83,7 +83,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetRepositories)]
         public async Task<ICollection<RepositoryModel>> GetRepositories()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
             ICollection<RepositoryModel> repositories = await _statisticsQuery.GetRepositories(userName, token);
 
@@ -94,7 +94,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetRepositoriesCount)]
         public async Task<int> GetRepositoriesCount()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             int repositoriesCount = await _statisticsQuery.GetRepositoriesCount(userName, token);
@@ -105,7 +105,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetFollowers)]
         public async Task<int> GetUserFollower()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             int follower = await _statisticsQuery.GetFollowerCount(userName, token);
@@ -116,7 +116,7 @@ namespace GitHubExtension.Statistics.WebApi.Controllers
         [Route(StatisticsRouteConstants.GetFollowing)]
         public async Task<int> GetUserFollowing()
         {
-            string token = User.Identity.GetExternalAccessToken();
+            string token = User.GetExternalAccessToken();
             string userName = User.Identity.GetUserName();
 
             int following = await _statisticsQuery.GetFollowingCount(userName, token);

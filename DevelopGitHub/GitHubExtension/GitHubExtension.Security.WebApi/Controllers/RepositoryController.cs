@@ -82,7 +82,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
         [Route(RouteConstants.GetCollaboratorsForRepository)]
         public async Task<IHttpActionResult> GetCollaboratorsForRepo(string repoName)
         {
-            var token = User.Identity.GetExternalAccessToken();
+            var token = User.GetExternalAccessToken();
             var userName = User.Identity.GetUserName();
 
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);

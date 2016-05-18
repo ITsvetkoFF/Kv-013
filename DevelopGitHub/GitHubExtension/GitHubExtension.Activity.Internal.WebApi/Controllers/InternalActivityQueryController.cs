@@ -8,6 +8,7 @@ using GitHubExtension.Activity.Internal.WebApi.Extensions;
 using GitHubExtension.Activity.Internal.WebApi.Mappers;
 using GitHubExtension.Activity.Internal.WebApi.Models;
 using GitHubExtension.Activity.Internal.WebApi.Queries;
+using GitHubExtension.Infrastructure.Extensions.Identity;
 
 namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
         [Route(ActivityRouteConstants.CurrentRepositoryActivityRoute)]
         public IHttpActionResult GetCurrentRepositoryUserActivities()
         {
-            Claim currProjectClaim = User.GetCurrentProjectClaim();
+            Claim currProjectClaim = User.GetCurrentProjectIdClaim();
             int currentRepositoryId;
 
             if (currProjectClaim == null || !int.TryParse(currProjectClaim.Value, out currentRepositoryId))

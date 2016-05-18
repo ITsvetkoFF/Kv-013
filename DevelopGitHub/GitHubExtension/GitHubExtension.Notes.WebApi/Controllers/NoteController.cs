@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Infrastructure.Constants;
-
+using GitHubExtension.Infrastructure.Extensions.Identity;
 using GitHubExtension.Notes.WebApi.Commands;
 using GitHubExtension.Notes.WebApi.Constants;
 using GitHubExtension.Notes.WebApi.Extensions;
