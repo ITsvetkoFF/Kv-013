@@ -89,7 +89,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
 
             var users = _securityContextQuery.GetAllUsers();
-            var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserIdToCollaboratorIfExists(users);
+            var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserDataToCollaboratorIfExists(users);
 
             return Ok(collaboratorsWithUserId);
         }

@@ -1,6 +1,6 @@
 namespace GitHubExtension.Security.WebApi.Models
 {
-    public class CollaboratorWithUserIdModel
+    public class CollaboratorWithUserDataModel
     {
         public string UserId { get; set; }
 
@@ -9,5 +9,7 @@ namespace GitHubExtension.Security.WebApi.Models
         public string Login { get; set; }
 
         public string Url { get; set; }
+
+        public string Mail { get; set; }
     }
 }

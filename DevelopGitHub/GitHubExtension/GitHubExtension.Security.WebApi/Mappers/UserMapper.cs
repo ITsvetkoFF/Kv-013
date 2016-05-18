@@ -31,9 +31,9 @@ namespace GitHubExtension.Security.WebApi.Mappers
             return userReturnModel;
         }
 
-        public static CollaboratorWithUserIdModel ToCollaboratorWithUserId(this CollaboratorModel collaborator, string userId)
+        public static CollaboratorWithUserDataModel ToCollaboratorWithUserData(this CollaboratorModel collaborator, string userId)
         {
-            var collaboratorWithUserIdModel = new CollaboratorWithUserIdModel
+            var collaboratorWithUserDataModel = new CollaboratorWithUserDataModel
             {
                 UserId = userId,
                 GitHubId = collaborator.Id,
@@ -41,7 +41,7 @@ namespace GitHubExtension.Security.WebApi.Mappers
                 Url = collaborator.Url
             };
 
-            return collaboratorWithUserIdModel;
+            return collaboratorWithUserDataModel;
         }
     }
 }
