@@ -62,9 +62,21 @@
             });
         };
 
+        vm.sendInvitation = function (email) {
+            githubCollaborators.sendInvitation(email).then(onInvitationSent, onInvitationError);
+        }
+
         vm.formError = function (reason) {
             logger.error(reason);
         };
+
+        function onInvitationSent() {
+            logger.info('Invitation Sent');
+        }
+
+        function onInvitationError() {
+            logger.error('Invitation failed to be sent');
+        }
 
         function onNoteCreated() {
             logger.info(vm.i18n.NOTE_CREATED);

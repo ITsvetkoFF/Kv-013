@@ -70,13 +70,25 @@
             });
         }
 
+        function sendInvitation(email) {
+            return $http({
+                method: 'POST',
+                url: API_URL.INVITATION,
+                data: {
+                    toEmail: email
+                }
+            });
+        }
+
         return {
             getCollaborators: getCollaborators,
             getRoles: getRoles,
             assignRole: assignRole,
             getPrivateNote: getPrivateNote,
             createPrivateNote: createPrivateNote,
-            deletePrivateNote: deletePrivateNote
-        };
+            deletePrivateNote: deletePrivateNote,
+            sendInvitation: sendInvitation
+
+    };
     }
 })();

@@ -88,6 +88,11 @@
     "ADD_NEW_NOTE": "Додати коментар",
     "LAST_UPDATE": "Останнє оновлення:",
     "REFRESH": "Оновити",
-	"AVATAR" :  "Аватар"
+	"AVATAR" :  "Аватар",
+    "PLEASE_SELECT": "---Оберіть роль---",
+    "ENTER_EMAIL": "Введіть email",
+    "SEND_INVITATION": "Відправити запрошення"
+
+
   }
 }
