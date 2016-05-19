@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GitHubExtension.SendEmail.WebApi")]
+[assembly: AssemblyTitle("GitHubExtension.Infrastructure.SendEmail")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GitHubExtension.SendEmail.WebApi")]
+[assembly: AssemblyProduct("GitHubExtension.Infrastructure.SendEmail")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0d157190-99ea-42cd-aaf1-d8f2deb1b620")]
+[assembly: Guid("43b28933-2126-4825-8737-23ea1fbd14c7")]
 
 // Version information for an assembly consists of the following four values:
 //

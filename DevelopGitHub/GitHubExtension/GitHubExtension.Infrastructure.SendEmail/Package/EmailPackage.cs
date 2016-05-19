@@ -1,8 +1,8 @@
-﻿using GitHubExtension.SendEmail.WebApi.Services;
+﻿using GitHubExtension.Infrastructure.SendEmail.Services;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
-namespace GitHubExtension.SendEmail.WebApi.Package
+namespace GitHubExtension.Infrastructure.SendEmail.Package
 {
     public class EmailPackage : IPackage
     {

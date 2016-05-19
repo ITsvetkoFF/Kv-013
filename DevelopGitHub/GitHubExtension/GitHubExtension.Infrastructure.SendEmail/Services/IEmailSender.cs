@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GitHubExtension.SendEmail.WebApi.Services
+namespace GitHubExtension.Infrastructure.SendEmail.Services
 {
     public interface IEmailSender
     {
