@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using GitHubExtension.Infrastructure.SendEmail.Services;
 using GitHubExtension.Invitation.WebApi.Constants;
+using GitHubExtension.Invitation.WebApi.Mappers;
 using GitHubExtension.Invitation.WebApi.ViewModels;
 
 namespace GitHubExtension.Invitation.WebApi.Controllers
@@ -20,9 +21,11 @@ namespace GitHubExtension.Invitation.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SendInvitation(SendEmailRequestModel emailModel)
         {
+            var invitationModel = emailModel.ToSendInvitationModel();
+
             try
             {
-                await _emailSender.SendEmail(emailModel.ToEmail, InvitationDetailsConstants.Subject, InvitationDetailsConstants.Body);
+                await _emailSender.SendEmail(invitationModel.ToEmail, invitationModel.Subject, invitationModel.Body);
 
                 return Ok();
             }
