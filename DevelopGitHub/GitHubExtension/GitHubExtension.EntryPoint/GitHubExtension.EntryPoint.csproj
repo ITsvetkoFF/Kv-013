@@ -181,7 +181,6 @@
     <Content Include="FrontEnd\src\client\app\dashboard\dashboard.route.spec.js" />
     <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.js" />
     <Content Include="FrontEnd\src\client\app\layout\ht-sidebar.directive.spec.js" />
-    <Content Include="FrontEnd\src\client\app\layout\ht-to-nav.controller.js" />
     <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.directive.js" />
     <Content Include="FrontEnd\src\client\app\layout\ht-top-nav.html" />
     <Content Include="FrontEnd\src\client\app\layout\layout.module.js" />
