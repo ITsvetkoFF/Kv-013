@@ -21,16 +21,17 @@
                                             ng-options="role.name as role.name for role in vmRoles.roles.data"
                                             ng-change="vmRoles.assignRole(collaborator, { name: vmRoles.collaborators[$index].role })"
                                             style="margin-top: 0px">
-                                        <option value="">---Please select---</option>
+                                        <option value="">{{vmRoles.i18n.PLEASE_SELECT}}</option>
                                     </select>
                                 </td>
                                 <td ng-if="collaborator.userId === null">
                                     <form name="invitationForm"
                                           ng-submit="invitationForm.$valid && vmRoles.sendInvitation(collaborator.email)"
                                           style="margin:0px; margin-right: -100px;">
-                                        <input type="email" ng-model="collaborator.email" placeholder="Enter email" required
-                                               style="height: 32px;">
-                                        <button class="btn btn-primary" style="margin-top: -4px;">Send Invitation</button>
+                                        <input type="email" ng-model="collaborator.email"
+                                               placeholder={{vmRoles.i18n.ENTER_EMAIL}} required style="height: 32px;">
+                                        <button class="btn btn-primary" style="margin-top: -4px;">
+                                            {{vmRoles.i18n.SEND_INVITATION}}</button>
                                     </form>
                                 </td>
                                 <td>

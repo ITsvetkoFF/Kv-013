@@ -88,6 +88,9 @@
         "ADD_NEW_NOTE": "Add New Note",
         "LAST_UPDATE": "Last update:",
         "REFRESH": "Refresh",
-        "AVATAR" :  "Avatar"
+        "AVATAR" :  "Avatar",
+        "PLEASE_SELECT": "---Please select---",
+        "ENTER_EMAIL": "Enter email",
+        "SEND_INVITATION": "Send Invitation"
     }
 }
