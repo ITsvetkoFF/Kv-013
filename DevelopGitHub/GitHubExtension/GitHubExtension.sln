@@ -73,6 +73,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Tests.Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Activity.Internal.Tests", "GitHubExtension.Activity.Internal.Tests\GitHubExtension.Activity.Internal.Tests.csproj", "{07C98A3E-352E-4DB6-B9E1-FE67080EA388}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4E5BCB58-0467-4312-9FAC-582423D624F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubExtension.Tools.LocalizationTool", "GitHubExtension.Tools.LocalizationTool\GitHubExtension.Tools.LocalizationTool.csproj", "{58FBD06F-B682-4BED-8A55-7A41B4140A65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +177,10 @@ Global
 		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07C98A3E-352E-4DB6-B9E1-FE67080EA388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58FBD06F-B682-4BED-8A55-7A41B4140A65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58FBD06F-B682-4BED-8A55-7A41B4140A65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58FBD06F-B682-4BED-8A55-7A41B4140A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58FBD06F-B682-4BED-8A55-7A41B4140A65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,5 +210,6 @@ Global
 		{A32113BC-F69A-4DBE-8790-DF1757B7D2E6} = {209E6B92-CFA7-42C1-A7D6-2BD7CB0CDD12}
 		{F9B50D1D-190F-4EB9-BFF1-31CCA79F1B56} = {1C5E1DBD-4A2A-498E-B1D1-6FB3C8B3839A}
 		{07C98A3E-352E-4DB6-B9E1-FE67080EA388} = {81F8C705-AC42-4E92-8877-606314287DC0}
+		{58FBD06F-B682-4BED-8A55-7A41B4140A65} = {4E5BCB58-0467-4312-9FAC-582423D624F1}
 	EndGlobalSection
 EndGlobal
