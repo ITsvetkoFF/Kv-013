@@ -12,6 +12,8 @@ namespace GitHubExtension.Activity.Internal.WebApi.Models
 
         public DateTime? InvokeTime { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public string Message { get; set; }
 
         public string UserId { get; set; }

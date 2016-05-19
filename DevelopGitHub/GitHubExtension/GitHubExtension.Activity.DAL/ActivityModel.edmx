@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GitHubExtensionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activities">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,6 +14,7 @@
           <Property Name="CurrentRepositoryId" Type="int" Nullable="false" />
           <Property Name="ActivityTypeId" Type="int" Nullable="false" />
           <Property Name="InvokeTime" Type="datetime" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="128" />
           <Property Name="Message" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ActivitiesTypes">
@@ -28,8 +29,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderId" Type="int" Nullable="false" />
           <Property Name="GitHubUrl" Type="nvarchar(max)" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="AvatarUrl" Type="nvarchar(max)" />
+          <Property Name="IsMailVisible" Type="bit" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
@@ -79,8 +82,7 @@
             <End Role="Activities" EntitySet="Activities" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GitHubExtensionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -96,6 +98,7 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ActivityType" Relationship="Self.FK_Activities_ActivitiesTypes" FromRole="Activities" ToRole="ActivitiesTypes" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Activities_Users" FromRole="Activities" ToRole="Users" />
+          <Property Name="ImageUrl" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ActivityType">
           <Key>
@@ -124,6 +127,8 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Activities" Relationship="Self.FK_Activities_Users" FromRole="Users" ToRole="Activities" />
+          <Property Name="AvatarUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsMailVisible" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Activities_ActivitiesTypes">
           <End Role="ActivitiesTypes" Type="GitHubExtensionModel.ActivityType" Multiplicity="1" />
@@ -171,6 +176,7 @@
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="GitHubExtensionModel.ActivityEvent">
               <MappingFragment StoreEntitySet="Activities">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CurrentRepositoryId" ColumnName="CurrentRepositoryId" />
@@ -191,6 +197,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GitHubExtensionModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsMailVisible" ColumnName="IsMailVisible" />
+                <ScalarProperty Name="AvatarUrl" ColumnName="AvatarUrl" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
                 <ScalarProperty Name="GitHubUrl" ColumnName="GitHubUrl" />

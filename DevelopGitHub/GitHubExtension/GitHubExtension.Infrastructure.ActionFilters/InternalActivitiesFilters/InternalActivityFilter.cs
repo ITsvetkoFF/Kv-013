@@ -42,6 +42,7 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
                 UserId = User.UserId,
                 ActivityTypeId = activityType.Id,
                 InvokeTime = DateTime.Now,
+                ImageUrl = User.ImageUrl,
                 Message = string.Format("{0} {1} {2}", User.UserName, ActivityTypeName, BuildActivityMessage())
             };
         }

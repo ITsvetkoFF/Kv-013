@@ -23,6 +23,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 
         [HttpGet]
         [Route(ActivityRouteConstants.CurrentRepositoryActivityRoute)]
+        [AllowAnonymous]
         public IHttpActionResult GetCurrentRepositoryUserActivities()
         {
             Claim currProjectClaim = User.GetCurrentProjectIdClaim();
@@ -49,6 +50,7 @@ namespace GitHubExtension.Activity.Internal.WebApi.Controllers
 
         [HttpGet]
         [Route(ActivityRouteConstants.CurrentUserActivityRoute)]
+        [AllowAnonymous]
         public IHttpActionResult GetUserActivities([FromUri] string userId)
         {
             IEnumerable<ActivityEvent> userActivities = _activityContextQuery.GetUserActivities(userId).ToList();

@@ -8,12 +8,14 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th>{{vm.i18n.AVATAR}}</th>
                             <th>{{vm.i18n.ACTIVITY_MESSAGE}}</th>
                             <th>{{vm.i18n.DATE_TIME}}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="activity in vm.internalActivities">
+                            <td><img class="media-object activity-avatar" ng-src="{{activity.imageUrl}}"></td>
                             <td>{{activity.message}}</td>
                             <td>{{activity.invokeTime | date:'H:mm:ss dd.MM.yyyy'}}</td>
                         </tr>
