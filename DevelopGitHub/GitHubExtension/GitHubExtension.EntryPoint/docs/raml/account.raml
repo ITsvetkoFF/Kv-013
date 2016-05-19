@@ -18,3 +18,18 @@
     description: Logout from the system
     responses:
       200:
+
+/mailvisibility:
+  get:
+    description: It provides information to display e-mail to other users or not
+    responses:
+      200:
+        body:
+          application/json:
+            example: false
+
+/changemail:
+  put:
+    description: Change visibility mail to another users
+    responses:
+      200:
