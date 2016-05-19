@@ -1,7 +1,7 @@
 <section id="dashboard-view" class="mainbar">
     <section class="matter">
         <div class="container">
-            
+
             <div class="row" ng-show="vm.userService.isAuthenticated() && vm.internalActivities && !!vm.userService.getCurrentRepository()">
                 <div class="col-md-12">
                     <h2>{{vm.i18n.SYSTEM_ACTIVITY}}</h2>
@@ -35,6 +35,60 @@
                                     ng-change="vm.pageChanged()"
                                     max-size="10" ng-disabled="vm.paginationDisabled">
                     </uib-pagination>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid" ng-hide="vm.userService.isAuthenticated()">
+            <div class=" row">
+            <div class="col-md-12">
+                <p class="lead">
+                    <h1> Extension tools for GitHub </h1>
+                    <br />
+                </p>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 style="color: green">
+                        Track your projects activities
+                    </h2>
+                    <img class="img-thumbnail" alt="Bootstrap Image Preview" src="./FrontEnd/src/client/images/Activity.PNG"/>
+                    <p>
+                        <h3>Be aware about activities from GitHub on projects where you are owner and track user actions in our system.</h3>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h2 style="color: green">
+                        Manage issues and pull requests templates
+                    </h2>
+                    <img class="img-thumbnail" alt="Bootstrap Image Preview" src="./FrontEnd/src/client/images/templates.PNG"/>
+                    <p>
+                        <h3>New feature from GitHub. Easy to create or update issues and pull requests templates. Chose from existing samples or create your own. </h3>
+                    </p>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 style="color: green">
+                        Analyze your statistics from GitHub
+                    </h2>
+                    <img class="img-thumbnail" alt="Bootstrap Image Preview" src="./FrontEnd/src/client/images/statistics.PNG"/>
+                    <p>
+                        <h3>The Repository Statistics based on GitHub API allows you to fetch the data that GitHub uses for visualizing different types of repository activity.</h3>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h2 style="color: green">
+                        Add roles and notes to your collaborators
+                    </h2>
+                    <img class="img-thumbnail" alt="Bootstrap Image Preview" src="./FrontEnd/src/client/images/Roles.PNG"/>
+                    <p>
+                        <h3>Assing roles and add notes to your collaborators that exists in system. Manage your collaborators using our systems.</h3>
+                    </p>
                 </div>
             </div>
         </div>
