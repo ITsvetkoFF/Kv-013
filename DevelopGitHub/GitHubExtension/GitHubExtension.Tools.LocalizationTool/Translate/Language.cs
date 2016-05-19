@@ -15,7 +15,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             switch (language)
             {
                 case Language.Uk:
-                    return "uk-UK";
+                    return "uk";
                 case Language.En:
                     return "en-US";
                 default:
@@ -28,7 +28,7 @@ namespace GitHubExtension.LocalizationTool.Translate
             switch (language)
             {
                 case Language.Uk:
-                    return "uk-UK.json";
+                    return "uk.json";
                 case Language.En:
                     return "en-US.json";
                 default:
