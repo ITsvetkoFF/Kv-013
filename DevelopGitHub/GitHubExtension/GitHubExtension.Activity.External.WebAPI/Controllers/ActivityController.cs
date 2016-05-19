@@ -4,6 +4,7 @@ using System.Web.Http;
 
 using GitHubExtension.Activity.External.WebAPI.Models;
 using GitHubExtension.Activity.External.WebAPI.Queries;
+using GitHubExtension.Infrastructure.Constants;
 using GitHubExtension.Infrastructure.Extensions.Identity;
 
 using Microsoft.AspNet.Identity;
@@ -12,9 +13,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
 {
     public class ActivityController : ApiController
     {
-        const string CurrentProjectNameClaimType = "CurrentProjectName";
-
-        const string YouHaveNoRepositorySelected = "You have no repository selected";
+        public const string YouHaveNoRepositorySelected = "You have no repository selected";
 
         private readonly IGitHubEventsQuery _eventsQuery;
 
@@ -28,7 +27,7 @@ namespace GitHubExtension.Activity.External.WebAPI.Controllers
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
-            string fullRepositoryName = claimsIdentity.FindFirstValue(CurrentProjectNameClaimType);
+            string fullRepositoryName = claimsIdentity.FindFirstValue(ClaimConstants.CurrentProjectName);
             if (fullRepositoryName == null)
             {
                 return BadRequest(YouHaveNoRepositorySelected);

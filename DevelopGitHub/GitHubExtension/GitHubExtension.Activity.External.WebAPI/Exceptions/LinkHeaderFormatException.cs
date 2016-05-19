@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace GitHubExtension.Activity.External.WebAPI.Exceptions
 {
-    class LinkHeaderFormatException : ApplicationException
+    public class LinkHeaderFormatException : ApplicationException
     {
         public LinkHeaderFormatException()
             : base()
