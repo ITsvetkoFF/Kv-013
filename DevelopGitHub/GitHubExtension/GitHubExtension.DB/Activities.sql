@@ -5,6 +5,7 @@
     [CurrentRepositoryId] INT NOT NULL, 
     [ActivityTypeId] INT NOT NULL, 
     [InvokeTime] DATETIME NULL,
+    [ImageUrl] NVARCHAR (128) NULL,
 
     [Message] NVARCHAR(MAX) NULL, 
     CONSTRAINT PK_Activities_Id PRIMARY KEY (Id),

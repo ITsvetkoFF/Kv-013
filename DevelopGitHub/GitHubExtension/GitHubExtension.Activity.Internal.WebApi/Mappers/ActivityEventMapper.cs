@@ -12,7 +12,8 @@ namespace GitHubExtension.Activity.Internal.WebApi.Mappers
                            UserId = activityEventModel.UserId, 
                            CurrentRepositoryId = activityEventModel.CurrentRepositoryId, 
                            ActivityTypeId = activityEventModel.ActivityTypeId, 
-                           InvokeTime = activityEventModel.InvokeTime, 
+                           InvokeTime = activityEventModel.InvokeTime,
+                           ImageUrl = activityEventModel.ImageUrl,
                            Message = activityEventModel.Message
                        };
         }
@@ -24,7 +25,8 @@ namespace GitHubExtension.Activity.Internal.WebApi.Mappers
                            UserId = activityEvent.UserId, 
                            CurrentRepositoryId = activityEvent.CurrentRepositoryId, 
                            ActivityTypeId = activityEvent.ActivityTypeId, 
-                           InvokeTime = activityEvent.InvokeTime, 
+                           InvokeTime = activityEvent.InvokeTime,
+                           ImageUrl = activityEvent.ImageUrl,
                            Message = activityEvent.Message
                        };
         }

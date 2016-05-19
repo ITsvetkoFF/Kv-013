@@ -37,7 +37,9 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
             string userId = actionExecutedContext.GetUserId();
             string userName = actionExecutedContext.GetUserName();
 
-            return new UserModel() { UserId = userId, UserName = userName };
+            string imageUrl = actionExecutedContext.GetUserImageUrl(userId);
+
+            return new UserModel() { UserId = userId, UserName = userName, ImageUrl = imageUrl };
         }
 
         public static RepositoryModel GetRepositoryModel(this HttpActionExecutedContext actionExecutedContext)
@@ -71,6 +73,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
         private static int GetCurrentRepositoryId(this HttpActionExecutedContext actionExecutedContext)
         {
             return int.Parse(actionExecutedContext.ActionContext.RequestContext.Principal.GetCurrentProjectId());
+        }
+
+        private static string GetUserImageUrl(this HttpActionExecutedContext actionExecutedContext, string userId)
+        {
+            return actionExecutedContext.GetApplicationUserManager().FindById(userId).AvatarUrl;
         }
 
         private static string GetCurrentRepositoryName(this HttpActionExecutedContext actionExecutedContext)
