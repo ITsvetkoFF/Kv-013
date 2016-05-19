@@ -9,3 +9,7 @@ i18n-messages.constant.js
 .tmp
 build/
 report/
+
+src/client/app/blocks/localization/*.xml
+src/client/app/blocks/localization/*.config
+src/client/app/blocks/localization/*.manifest
