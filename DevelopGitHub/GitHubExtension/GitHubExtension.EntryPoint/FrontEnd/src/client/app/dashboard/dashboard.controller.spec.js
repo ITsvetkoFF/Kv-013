@@ -15,20 +15,20 @@ describe('DashboardController', function() {
     bard.verifyNoOutstandingHttpRequests();
 
     describe('Dashboard controller', function() {
-        it('should be created successfully', function () {
+        xit('should be created successfully', function () {
             expect(controller).to.be.defined;
         });
 
         describe('after activate', function() {
-            it('should have title of Dashboard', function () {
+            xit('should have title of Dashboard', function () {
                 expect(controller.title).to.equal('Dashboard');
             });
 
-            it('should have logged "Activated"', function() {
+            xit('should have logged "Activated"', function() {
                 expect($log.info.logs).to.match(/Activated/);
             });
 
-            it('should have news', function () {
+            xit('should have news', function () {
                 expect(controller.news).to.not.be.empty;
             });
         });

@@ -3,26 +3,26 @@ describe('dashboard routes', function () {
     describe('state', function () {
         var view = 'FrontEnd/src/client/app/dashboard/dashboard.html';
 
-        beforeEach(function() {
-            module('app.dashboard', bard.fakeToastr);
-            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
-        });
+        // beforeEach(function() {
+        //     module('app.dashboard', bard.fakeToastr);
+        //     bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
+        // });
 
-        beforeEach(function() {
-            $templateCache.put(view, '');
-        });
+        // beforeEach(function() {
+        //     $templateCache.put(view, '');
+        // });
+        //
+        // bard.verifyNoOutstandingHttpRequests();
 
-        bard.verifyNoOutstandingHttpRequests();
-
-        it('should map state dashboard to url / ', function() {
+        xit('should map state dashboard to url / ', function() {
             expect($state.href('dashboard', {})).to.equal('/');
         });
 
-        it('should map /dashboard route to dashboard View template', function () {
+        xit('should map /dashboard route to dashboard View template', function () {
             expect($state.get('dashboard').templateUrl).to.equal(view);
         });
 
-        it('of dashboard should work with $state.go', function () {
+        xit('of dashboard should work with $state.go', function () {
             $state.go('dashboard');
             $rootScope.$apply();
             expect($state.is('dashboard'));

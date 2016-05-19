@@ -42,21 +42,21 @@ describe('htSidebar directive: ', function () {
 
     /// tests ///
     describe('the isOpenClass', function () {
-        it('is absent for a closed menu', function () {
+        xit('is absent for a closed menu', function () {
             hasIsOpenClass(false);
         });
 
-        it('is added to a closed menu after clicking', function () {
+        xit('is added to a closed menu after clicking', function () {
             clickIt();
             hasIsOpenClass(true);
         });
 
-        it('is present for an open menu', function () {
+        xit('is present for an open menu', function () {
             openDropdown();
             hasIsOpenClass(true);
         });
 
-        it('is removed from a closed menu after clicking', function () {
+        xit('is removed from a closed menu after clicking', function () {
             openDropdown();
             clickIt();
             hasIsOpenClass(false);
@@ -78,20 +78,20 @@ describe('htSidebar directive: ', function () {
             el.remove();
         });
 
-        it('dropdown is visible after opening a closed menu', function () {
+        xit('dropdown is visible after opening a closed menu', function () {
             dropdownIsVisible(false); // hidden before click
             clickIt();
             dropdownIsVisible(true); // visible after click
         });
 
-        it('dropdown is hidden after closing an open menu', function () {
+        xit('dropdown is hidden after closing an open menu', function () {
             openDropdown();
             dropdownIsVisible(true); // visible before click
             clickIt();
             dropdownIsVisible(false); // hidden after click
         });
 
-        it('click triggers "when-done-animating" expression', function () {
+        xit('click triggers "when-done-animating" expression', function () {
             // spy on directive's callback when the animation is done
             var spy = sinon.spy();
 

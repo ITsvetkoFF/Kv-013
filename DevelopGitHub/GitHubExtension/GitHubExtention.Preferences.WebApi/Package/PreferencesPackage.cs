@@ -20,13 +20,13 @@ namespace GitHubExtention.Preferences.WebApi.Package
                 var account = CloudStorageAccount.Parse(str);
                 var client = account.CreateCloudBlobClient();
                 var azureContainer = client.GetContainerReference(AvatarConstants.AzureContainer);
-                azureContainer.CreateIfNotExists();
+                /*azureContainer.CreateIfNotExists();
                 var permissions = azureContainer.GetPermissions();
                 if (permissions.PublicAccess == BlobContainerPublicAccessType.Off)
                 {
                     permissions.PublicAccess = BlobContainerPublicAccessType.Blob;
                     azureContainer.SetPermissions(permissions);
-                }
+                }*/
 
                 return azureContainer;
             },
