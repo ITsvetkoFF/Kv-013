@@ -39,7 +39,6 @@ namespace GitHubExtension.Infrastructure.ActionFilters.Extensions
 
             string imageUrl = actionExecutedContext.GetUserImageUrl(userId);
 
-
             return new UserModel() { UserId = userId, UserName = userName, ImageUrl = imageUrl };
         }
 

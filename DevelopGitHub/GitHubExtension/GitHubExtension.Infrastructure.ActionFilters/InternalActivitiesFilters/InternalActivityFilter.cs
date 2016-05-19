@@ -11,6 +11,14 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 {
     public abstract class InternalActivityFilter : ActionFilterAttribute
     {
+        public virtual string ActivityTypeName { get; set; }
+
+        private IActivityContextQuery ActivityContextQuery { get; set; }
+
+        private IActivityContextCommand ActivityContextCommand { get; set; }
+
+        private UserModel User { get; set; }
+
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             ActivityContextQuery = actionExecutedContext.GetIActivityContextQuery();
@@ -19,14 +27,6 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
 
             AddActivity();
         }
-
-        public virtual string ActivityTypeName { get; set; }
-
-        private IActivityContextQuery ActivityContextQuery { get; set; }
-
-        private IActivityContextCommand ActivityContextCommand { get; set; }
-
-        private UserModel User { get; set; }
 
         protected virtual string BuildActivityMessage()
         {

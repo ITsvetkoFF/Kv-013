@@ -12,6 +12,11 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
         private string _collaboratorName;
         private int _repoId;
 
+        public override string ActivityTypeName
+        {
+            get { return ActivityTypeNames.AddRole; }
+        }
+
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             _roleToAssign = actionExecutedContext.GetRoleToAssign();
@@ -19,11 +24,6 @@ namespace GitHubExtension.Infrastructure.ActionFilters.InternalActivitiesFilters
             _repoId = actionExecutedContext.GetRepositoryId();
 
             base.OnActionExecuted(actionExecutedContext);
-        }
-
-        public override string ActivityTypeName
-        {
-            get { return ActivityTypeNames.AddRole; }
         }
 
         protected override string BuildActivityMessage()
