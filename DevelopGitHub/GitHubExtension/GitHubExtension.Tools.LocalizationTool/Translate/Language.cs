@@ -5,8 +5,7 @@ namespace GitHubExtension.LocalizationTool.Translate
     public enum Language
     {
         Uk,
-        En,
-        Ru
+        En
     }
 
     public static class LanguageExtension
@@ -19,8 +18,6 @@ namespace GitHubExtension.LocalizationTool.Translate
                     return "uk-UK";
                 case Language.En:
                     return "en-US";
-                case Language.Ru:
-                    return "ru-RU";
                 default:
                     throw new Exception("Incorrect Language in Method GetLanguage");
             }
@@ -34,8 +31,6 @@ namespace GitHubExtension.LocalizationTool.Translate
                     return "uk-UK.json";
                 case Language.En:
                     return "en-US.json";
-                case Language.Ru:
-                    return "ru-RU.json";
                 default:
                     throw new Exception("Incorrect Language in Method GetFileName");
             }
