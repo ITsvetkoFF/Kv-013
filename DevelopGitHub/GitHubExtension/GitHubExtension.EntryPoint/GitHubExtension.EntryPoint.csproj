@@ -155,12 +155,6 @@
     <Content Include="FrontEnd\src\client\app\activity\PullRequestReviewCommentEvent-activity.html" />
     <Content Include="FrontEnd\src\client\app\activity\PushEvent-activity.html" />
     <Content Include="FrontEnd\src\client\app\activity\WatchEvent-activity.html" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.controller.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.controller.spec.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.html" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.module.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.route.js" />
-    <Content Include="FrontEnd\src\client\app\admin\admin.route.spec.js" />
     <Content Include="FrontEnd\src\client\app\app.module.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.js" />
     <Content Include="FrontEnd\src\client\app\blocks\exception\exception-handler.provider.spec.js" />
