@@ -2,6 +2,9 @@
   "name": "GitHubExtension",
   "description": "GitHubExtension Project Generated from HotTowel Angular",
   "version": "0.0.0",
+  "engines": {
+    "npm": "3.X.X"
+  },
   "scripts": {
     "init": "npm install",
     "install": "bower install",
