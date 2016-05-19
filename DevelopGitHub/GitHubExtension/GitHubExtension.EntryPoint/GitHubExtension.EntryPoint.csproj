@@ -295,6 +295,14 @@
       <Project>{D6C328E6-DB94-4FFF-A775-BD7C2F42C56F}</Project>
       <Name>GitHubExtension.Infrastructure.Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.SendEmail\GitHubExtension.Infrastructure.SendEmail.csproj">
+      <Project>{180684c1-7556-4f15-9190-3d1a713eba3b}</Project>
+      <Name>GitHubExtension.Infrastructure.SendEmail</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GitHubExtension.Invitation.WebApi\GitHubExtension.Invitation.WebApi.csproj">
+      <Project>{d09ac4f4-1635-40f2-9329-d05be7b59f07}</Project>
+      <Name>GitHubExtension.Invitation.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Notes.DAL\GitHubExtension.Notes.DAL.csproj">
       <Project>{72035E1A-FCFD-48F1-81DD-7DBC724DD8E9}</Project>
       <Name>GitHubExtension.Notes.DAL</Name>
@@ -310,10 +318,6 @@
     <ProjectReference Include="..\GitHubExtension.Security.WebApi\GitHubExtension.Security.WebApi.csproj">
       <Project>{7e05eaf8-b822-493d-81e7-50a054bd5ce4}</Project>
       <Name>GitHubExtension.Security.WebApi</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitHubExtension.SendEmail.WebApi\GitHubExtension.SendEmail.WebApi.csproj">
-      <Project>{d09ac4f4-1635-40f2-9329-d05be7b59f07}</Project>
-      <Name>GitHubExtension.SendEmail.WebApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Statistics.WebApi\GitHubExtension.Statistics.WebApi.csproj">
       <Project>{AC64CE56-A38A-4866-82F5-A3BE35EF2EA8}</Project>

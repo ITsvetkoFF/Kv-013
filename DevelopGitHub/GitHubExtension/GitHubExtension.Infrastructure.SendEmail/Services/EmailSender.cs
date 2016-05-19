@@ -1,8 +1,8 @@
 ﻿using System.Net.Mail;
 using System.Threading.Tasks;
-using GitHubExtension.SendEmail.WebApi.Extensions;
+using GitHubExtension.Infrastructure.SendEmail.Extensions;
 
-namespace GitHubExtension.SendEmail.WebApi.Services
+namespace GitHubExtension.Infrastructure.SendEmail.Services
 {
     public class EmailSender : IEmailSender
     {

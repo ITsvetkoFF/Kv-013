@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace GitHubExtension.SendEmail.WebApi.Extensions
+namespace GitHubExtension.Infrastructure.SendEmail.Extensions
 {
     public static class MailMessageExtensions
     {

@@ -1,8 +1,8 @@
 using GitHubExtension.Activity.External.WebAPI.Package;
 using GitHubExtension.Activity.Internal.WebApi.Package;
+using GitHubExtension.Infrastructure.SendEmail.Package;
 using GitHubExtension.Notes.WebApi.Package;
 using GitHubExtension.Security.WebApi.Package;
-using GitHubExtension.SendEmail.WebApi.Package;
 using GitHubExtension.Statistics.WebApi.Package;
 using GitHubExtension.Templates.Package;
 using GitHubExtention.Preferences.WebApi.Package;
