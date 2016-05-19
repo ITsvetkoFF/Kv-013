@@ -1,4 +1,7 @@
+echo I am working
+echo %DEPLOYMENT_TARGET%
 @if "%SCM_TRACE_LEVEL%" NEQ "4" @echo off
+
 
 :: ----------------------
 :: KUDU Deployment Script
