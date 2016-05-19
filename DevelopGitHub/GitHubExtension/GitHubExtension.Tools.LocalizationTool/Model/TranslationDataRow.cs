@@ -7,8 +7,6 @@ namespace GitHubExtension.LocalizationTool.Model
     {
         private string _name;
 
-        private string _ru;
-
         private string _uk;
 
         private string _en;
@@ -64,28 +62,13 @@ namespace GitHubExtension.LocalizationTool.Model
             }
         }
 
-        public string Ru
-        {
-            get
-            {
-                return _ru;
-            }
-
-            set
-            {
-                _ru = value;
-                CheckPropertyChanged(() => Ru);
-            }
-        }
-
         public bool IsRowEmpty
         {
             get
             {
                 return string.IsNullOrWhiteSpace(Name)
                     && string.IsNullOrWhiteSpace(Uk)
-                    && string.IsNullOrWhiteSpace(En)
-                    && string.IsNullOrWhiteSpace(Ru);
+                    && string.IsNullOrWhiteSpace(En);
             }
         }
 
@@ -99,8 +82,6 @@ namespace GitHubExtension.LocalizationTool.Model
                         return Uk;
                     case Language.En:
                         return En;
-                    case Language.Ru:
-                        return Ru;
                     default:
                         return string.Empty;
                 }
@@ -115,9 +96,6 @@ namespace GitHubExtension.LocalizationTool.Model
                         break;
                     case Language.En:
                         En = value;
-                        break;
-                    case Language.Ru:
-                        Ru = value;
                         break;
                 }
             }
