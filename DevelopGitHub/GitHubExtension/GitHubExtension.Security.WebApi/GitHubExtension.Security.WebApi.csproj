@@ -128,6 +128,7 @@
     <Compile Include="Extensions\Collaborators\CollaboratorsExtensions.cs" />
     <Compile Include="Extensions\Cookie\CookieExtension.cs" />
     <Compile Include="Extensions\OwinContext\OwinContextAuthentication.cs" />
+    <Compile Include="Extensions\SecurityContext\SecurityContextClaimExtension.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRepositoryExtension.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextRoleExtension.cs" />
     <Compile Include="Extensions\SecurityContext\SecurityContextUserExtension.cs" />
