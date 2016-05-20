@@ -27,6 +27,8 @@
                 DELETE_NOTE: resource + 'note/',
                 INVITATION: resource + 'invitation',
 
+                SEARCH_USERS: resource + 'users/search?username=',
+
                 GET_REPOBYNAME: baseUserStats + '/commits',
                 GET_FOLLOWERS: baseUserStatsInfo + '/followers',
                 GET_FOLLOWING: baseUserStatsInfo + '/following',

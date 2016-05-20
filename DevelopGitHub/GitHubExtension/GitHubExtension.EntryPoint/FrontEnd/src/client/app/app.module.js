@@ -8,6 +8,7 @@
         'app.layout',
         'app.roles',
         'app.user',
+        'app.search',
         'app.activity',
         'app.userpreferences',
         'app.stats',
