@@ -29,8 +29,8 @@ namespace GitHubExtension.Security.WebApi.Controllers
         private readonly ISecurityContextQuery _securityContextQuery;
 
         public RepositoryController(
-            IGitHubQuery gitHubQuery, 
-            ISecurityContextQuery securityContextQuery, 
+            IGitHubQuery gitHubQuery,
+            ISecurityContextQuery securityContextQuery,
             ApplicationUserManager userManager)
         {
             _gitHubQuery = gitHubQuery;
@@ -84,13 +84,27 @@ namespace GitHubExtension.Security.WebApi.Controllers
         {
             var token = User.GetExternalAccessToken();
             var userName = User.Identity.GetUserName();
-
             var gitHubCollaborators = await _gitHubQuery.GetCollaboratorsForRepo(userName, repoName, token);
-
             var gitHubCollaboratorsExceptUser = gitHubCollaborators.Where(collaborator => collaborator.Login != User.Identity.Name);
-
             var users = _securityContextQuery.GetAllUsers();
             var collaboratorsWithUserId = gitHubCollaboratorsExceptUser.AddUserDataToCollaboratorIfExists(users);
+
+            User currentUser = await _userManager.FindByNameAsync(userName);
+            string currentProgectId = currentUser.GetCurrentProgectId();
+
+            foreach (var item in collaboratorsWithUserId)
+            {
+                User user = _userManager.GetUserByUserId(item.UserId);
+
+                if (user != null)
+                {
+                    int securityRoleId = user.GetSecurityRoleId(currentProgectId);
+                    if (securityRoleId != 0)
+                    {
+                        item.Role = _securityContextQuery.GetRole(securityRoleId);
+                    }
+                }
+            }
 
             return Ok(collaboratorsWithUserId);
         }

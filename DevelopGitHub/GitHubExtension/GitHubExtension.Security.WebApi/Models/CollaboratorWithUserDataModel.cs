@@ -11,5 +11,7 @@ namespace GitHubExtension.Security.WebApi.Models
         public string Url { get; set; }
 
         public string Mail { get; set; }
+
+        public string Role { get; set; }
     }
 }
