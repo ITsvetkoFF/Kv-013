@@ -223,15 +223,19 @@ namespace GitHubExtension.Security.WebApi.Controllers
 
         private async Task SetCurrentProjectClaimsAndCookies(User user)
         {
-            Claim[] claims =
+            List<Claim> claims = new List<Claim>();
+            var claimsToAdd = _securityContextQuery.GetCurrentProjectIdClaim(user.Id);
+            if (claimsToAdd != null)
             {
-                new Claim(
-                    ClaimConstants.CurrentProjectId,
-                    _securityContextQuery.GetCurrentProjectIdClaim(user.Id).ClaimValue),
-                new Claim(
-                    ClaimConstants.CurrentProjectName,
-                    _securityContextQuery.GetCurrentProjectNameClaim(user.Id).ClaimValue)
-            };
+                claims.Add(new Claim(ClaimConstants.CurrentProjectId, claimsToAdd.ClaimValue));
+            }
+
+            claimsToAdd = _securityContextQuery.GetCurrentProjectNameClaim(user.Id);
+            if (claimsToAdd != null)
+            {
+                claims.Add(new Claim(ClaimConstants.CurrentProjectName, claimsToAdd.ClaimValue));
+            }
+
             foreach (var claim in claims)
             {
                 if (claim != null)
