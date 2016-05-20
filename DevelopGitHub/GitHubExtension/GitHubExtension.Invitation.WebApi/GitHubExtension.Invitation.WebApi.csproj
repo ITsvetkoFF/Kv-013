@@ -38,6 +38,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,6 +56,10 @@
     <Compile Include="ViewModels\SendInvitationModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GitHubExtension.Infrastructure.Constants\GitHubExtension.Infrastructure.Constants.csproj">
+      <Project>{642455c5-0a4b-4e25-a2c3-1f1304a0d7dd}</Project>
+      <Name>GitHubExtension.Infrastructure.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GitHubExtension.Infrastructure.SendEmail\GitHubExtension.Infrastructure.SendEmail.csproj">
       <Project>{180684c1-7556-4f15-9190-3d1a713eba3b}</Project>
       <Name>GitHubExtension.Infrastructure.SendEmail</Name>
