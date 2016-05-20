@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using GitHubExtension.Security.DAL.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GitHubExtension.Security.WebApi.Queries.Interfaces
 {
@@ -12,6 +13,8 @@ namespace GitHubExtension.Security.WebApi.Queries.Interfaces
 
         IQueryable<Repository> Repositories { get; }
 
-        IQueryable<User> Users { get; } 
+        IQueryable<User> Users { get; }
+
+        IQueryable<IdentityUserClaim> Claims { get; }  
     }
 }

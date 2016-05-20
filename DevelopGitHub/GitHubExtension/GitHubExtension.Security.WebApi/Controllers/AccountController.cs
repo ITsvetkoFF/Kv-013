@@ -76,6 +76,7 @@ namespace GitHubExtension.Security.WebApi.Controllers
             await UpdateClaims(user, tokenClaim);
 
             GetRequestContext.SetUserCookie(user.UserName);
+            await SetCurrentProjectClaimsAndCookies(user);
             string homeUri = ConfigurationManager.AppSettings[AppSettingConstants.Uri];
             return Redirect(homeUri);
         }
@@ -218,6 +219,27 @@ namespace GitHubExtension.Security.WebApi.Controllers
         private bool AddRoleToClaims(string userId, IEnumerable<GitHubRepositoryModel> repositories, SecurityRole role)
         {
             return repositories.All(r => _userManager.AddClaim(userId, new Claim(role.Name, r.GitHubId.ToString())).Succeeded);
+        }
+
+        private async Task SetCurrentProjectClaimsAndCookies(User user)
+        {
+            Claim[] claims =
+            {
+                new Claim(
+                    ClaimConstants.CurrentProjectId,
+                    _securityContextQuery.GetCurrentProjectIdClaim(user.Id).ClaimValue),
+                new Claim(
+                    ClaimConstants.CurrentProjectName,
+                    _securityContextQuery.GetCurrentProjectNameClaim(user.Id).ClaimValue)
+            };
+            foreach (var claim in claims)
+            {
+                if (claim != null)
+                {
+                    GetRequestContext.SetCookie(claim.Type, claim.Value);
+                    await UpdateClaims(user, claim);
+                }
+            }
         }
     }
 }
