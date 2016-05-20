@@ -91,6 +91,10 @@
         "AVATAR" :  "Avatar",
         "PLEASE_SELECT": "---Please select---",
         "ENTER_EMAIL": "Enter email",
-        "SEND_INVITATION": "Send Invitation"
+        "SEND_INVITATION": "Send Invitation",
+        "SEARCH": "Search",
+        "GITHUB_PROFILE": "GitHub profile",
+        "VIEW_PROFILE": "View",
+        "USERS_NOT_FOUND": "Sorry, nobody was found"
     }
 }

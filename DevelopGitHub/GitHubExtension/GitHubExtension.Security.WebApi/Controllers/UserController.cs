@@ -31,8 +31,20 @@ namespace GitHubExtension.Security.WebApi.Controllers
                 return NotFound();
             }
 
+            HideMailIfNotVisible(users);
             IEnumerable<UserReturnModel> userReturnModels = users.Select(user => user.ToUserReturnModel());
             return Ok(userReturnModels);
+        }
+
+        private void HideMailIfNotVisible(IEnumerable<User> users)
+        {
+            foreach (var user in users)
+            {
+                if (user.IsMailVisible == false)
+                {
+                    user.Email = null;
+                }
+            }
         }
     }
 }

@@ -91,8 +91,10 @@
 	"AVATAR" :  "Аватар",
     "PLEASE_SELECT": "---Оберіть роль---",
     "ENTER_EMAIL": "Введіть email",
-    "SEND_INVITATION": "Відправити запрошення"
-
-
+    "SEND_INVITATION": "Відправити запрошення",
+	"SEARCH": "Пошук",
+    "GITHUB_PROFILE": "Профіль на GitHub",
+    "VIEW_PROFILE": "Переглянути",
+    "USERS_NOT_FOUND": "Вибачте, нікого не знайдено"
   }
 }
