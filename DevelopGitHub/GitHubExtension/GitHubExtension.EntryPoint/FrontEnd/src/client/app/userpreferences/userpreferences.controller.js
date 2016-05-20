@@ -16,6 +16,7 @@
         activate();
 
         function activate() {
+            uploadPhoto();
             logger.info(vm.i18n.ACTIVATE_USER_PREFERENCES);
         }
 
